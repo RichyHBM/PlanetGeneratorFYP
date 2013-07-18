@@ -2,6 +2,8 @@
 
 #include "./Settings.hpp"
 
+#include "./Program.hpp"
+
 ///
 ///Set initial settings
 ///
@@ -31,27 +33,37 @@ int main(int argc, const char* argv[])
 
     bool vSynk = Settings::Initial.GetVSynk(), fullScreen = Settings::Initial.GetFullScreen();
 
+	GLFWwindow* window;
     //Set window parameters
-    glfwOpenWindowHint(GLFW_FSAA_SAMPLES, antiAliasing);  // Request 2 levels of antialiasing
-    glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, majorOGL);
-    glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, minorOGL);
-    glfwOpenWindowHint(GLFW_WINDOW_NO_RESIZE, GL_TRUE);
-
+    glfwWindowHint( GLFW_SAMPLES, antiAliasing);  // Request 2 levels of antialiasing
+    glfwWindowHint( GLFW_CONTEXT_VERSION_MAJOR, majorOGL);
+    glfwWindowHint( GLFW_CONTEXT_VERSION_MINOR, minorOGL);
+    glfwWindowHint( GLFW_RESIZABLE, GL_FALSE);
+	glfwWindowHint(GLFW_RED_BITS, 8);
+	glfwWindowHint(GLFW_GREEN_BITS, 8);       
+	glfwWindowHint(GLFW_BLUE_BITS, 8);
+	glfwWindowHint(GLFW_ALPHA_BITS, 8);      
+	glfwWindowHint(GLFW_DEPTH_BITS, depthBits);
+	glfwWindowHint(GLFW_STENCIL_BITS,  stencilBits);    
+	
     //Create the window using given parameters
-    int winSuccess = 0;
     if(fullScreen)
-        winSuccess = glfwOpenWindow( width, height, 8, 8, 8, 8, depthBits, stencilBits, GLFW_FULLSCREEN );
+       window = glfwCreateWindow(width, height, title.c_str(), glfwGetPrimaryMonitor(), NULL);
     else
-        winSuccess = glfwOpenWindow( width, height, 8, 8, 8, 8, depthBits, stencilBits, GLFW_WINDOW );
-    if(winSuccess == GL_FALSE) return -1;
-
-    glfwSetWindowTitle("PlanetGenFYP");
+       window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
+    if (!window)
+    {
+        glfwTerminate();
+        return -1;
+    }
+	glfwMakeContextCurrent(window);
 
     GLenum err = glewInit();
     if (GLEW_OK != err)
     {
         // Problem: glewInit failed, something is seriously wrong.
         std::cout << "Error: " << glewGetErrorString(err) << std::endl;
+		std::cin.get();
         return 32;
     }
     std::cout << "Using GLEW " << glewGetString(GLEW_VERSION) << std::endl;
@@ -69,13 +81,13 @@ int main(int argc, const char* argv[])
     glFrontFace(GL_CCW);
 
     //Get running settings
-    depthBits = glfwGetWindowParam(GLFW_DEPTH_BITS);
-    stencilBits = glfwGetWindowParam(GLFW_STENCIL_BITS);
-    antiAliasing = glfwGetWindowParam(GLFW_FSAA_SAMPLES);
-    majorOGL = glfwGetWindowParam(GLFW_OPENGL_VERSION_MAJOR);
-    minorOGL = glfwGetWindowParam(GLFW_OPENGL_VERSION_MINOR);
+    depthBits = glfwGetWindowAttrib( window,  GLFW_DEPTH_BITS);
+    stencilBits = glfwGetWindowAttrib(window, GLFW_STENCIL_BITS);
+    antiAliasing = glfwGetWindowAttrib(window, GLFW_SAMPLES);
+    majorOGL = glfwGetWindowAttrib(window, GLFW_CONTEXT_VERSION_MAJOR);
+    minorOGL = glfwGetWindowAttrib(window, GLFW_CONTEXT_VERSION_MINOR);
 
-    glfwGetWindowSize( &width, &height );
+    glfwGetWindowSize( window, &width, &height );
 
     //Set the running settings 
     Settings::Running.SetSettings(depthBits, stencilBits, antiAliasing, majorOGL, minorOGL, width, height, fps, vSynk, fullScreen);
@@ -83,9 +95,9 @@ int main(int argc, const char* argv[])
     //glfwSetKeyCallback(KeyBoard::SetCallBack);
 
     //Create and run a new game instance
-    Game *game = new Game();
-    game->Run();
-    delete game;
+	Program *program = new Program(window);
+    program->Run();
+    delete program;
 
     glfwTerminate();
 

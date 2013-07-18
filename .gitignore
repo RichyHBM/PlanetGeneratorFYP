@@ -37,6 +37,8 @@ build/
 *.exe
 *.o
 *.so
+!premake4.exe
+!./external/lib/*
 
 # Packages #
 ############

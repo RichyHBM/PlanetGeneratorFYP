@@ -1,7 +1,7 @@
 #ifndef KEYBOARD_HPP
 #define KEYBOARD_HPP
 
-#include <GL/glfw.h>
+#include <GLFW/glfw3.h>
 
 namespace KeyBoard {
 
@@ -26,7 +26,7 @@ public:
     ///
     ///Update the keyboard class variables
     ///
-    void Update();
+    void Update(GLFWwindow *window);
     ///
     ///Check if a key is pressed
     ///

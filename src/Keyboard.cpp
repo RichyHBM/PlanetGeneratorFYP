@@ -1,3 +1,5 @@
+
+
 #include "Keyboard.hpp"
 
 
@@ -45,12 +47,12 @@ bool KeyBoard::Keyboard::HasKeyBeenPressed(int pKey)
     return false;
 }
 
-void KeyBoard::Keyboard::Update()
+void KeyBoard::Keyboard::Update(GLFWwindow *window)
 {
     for(int i = 0; i < GLFW_KEY_LAST; i++)
     {
         mPrevK[i] = mKeys[i];
-        if(glfwGetKey(i) == GLFW_PRESS)
+        if(glfwGetKey(window, i) == GLFW_PRESS)
             mKeys[i] = true;
         else
             mKeys[i] = false;

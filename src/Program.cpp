@@ -1,12 +1,16 @@
+#include "Includes.hpp"
+
 #include "Program.hpp"
 
 #include "./Keyboard.hpp"
+#include "./Settings.hpp"
+#include "./Utilities.hpp"
 
-#include <GL/glfw.h>
+#include <GLFW/glfw3.h>
 
-Program::Program()
+Program::Program(GLFWwindow* window)
 {
-    
+    mWindow = window;
 }
 
 Program::~Program()
@@ -17,34 +21,31 @@ Program::~Program()
 void Program::Run()
 {
     bool focused = true;
-    mRunning = true;
 
     double upTime = 1.0 / Settings::Running.GetFPS();
+	
 
-    while(mRunning)
+    while(!glfwWindowShouldClose( mWindow ))
     {
-        KeyBoard::keyboard.Update();
+        KeyBoard::keyboard.Update(mWindow);
 
-        if(KeyBoard::keyboard.HasKeyBeenPressed(GLFW_KEY_ESC) )
+        if(KeyBoard::keyboard.HasKeyBeenPressed(GLFW_KEY_ESCAPE) )
 		{
             Close();
 		}
 		
-        if(glfwGetWindowParam(GLFW_OPENED) == GL_FALSE)
-		{
-			Close();
-		}
 
-        if(glfwGetWindowParam(GLFW_ACTIVE) == GL_TRUE)
+        if(glfwGetWindowAttrib( mWindow, GLFW_FOCUSED) == GL_TRUE)
         {
             focused = true;
-            glfwDisable( GLFW_MOUSE_CURSOR );
+			glfwMakeContextCurrent(mWindow);
+            glfwSetInputMode( mWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN  );
         }
 
-        if(glfwGetWindowParam(GLFW_ACTIVE) == GL_FALSE)
+        if(glfwGetWindowAttrib( mWindow, GLFW_FOCUSED) == GL_FALSE)
         {
             focused = false;
-            glfwEnable( GLFW_MOUSE_CURSOR );
+            glfwSetInputMode( mWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL  );
         }
 
         if(focused)
@@ -55,7 +56,7 @@ void Program::Run()
         if(focused)
         {
 
-            if(!mRunning){
+            if(glfwWindowShouldClose( mWindow )){
 				break;
 			}
 
@@ -63,21 +64,25 @@ void Program::Run()
 
             double delta = glfwGetTime();
             if(delta < 0.0) delta = 0.0;
-            glfwSleep(upTime - delta);
+            //glfwSleep(upTime - delta);
             mDelta = glfwGetTime();
             glfwSetTime( 0.0 );
 
             Draw();
 
-            glfwSwapBuffers();
+            glfwSwapBuffers(mWindow);
+			glfwPollEvents();
 
             PrintGLErrors();
         }
         else
         {
-            glfwSwapBuffers();
+            glfwSwapBuffers(mWindow);
+			glfwPollEvents();
         }
     }
+
+	glfwDestroyWindow(mWindow);
 
 }
 
@@ -94,7 +99,7 @@ void Program::Update()
 
 void Program::Draw()
 {
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
 	
@@ -107,5 +112,5 @@ const double Program::GetDelta()
 
 void Program::Close()
 {
-    mRunning = false;
+    glfwSetWindowShouldClose(mWindow, GL_TRUE);
 }

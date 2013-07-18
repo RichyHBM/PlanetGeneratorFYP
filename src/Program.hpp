@@ -1,6 +1,7 @@
 #ifndef PROGRAM_HPP
 #define PROGRAM_HPP
 
+#include "GLFW\glfw3.h"
 
 class Program
 {
@@ -8,7 +9,7 @@ public:
     ///
     ///Default constructor
     ///
-    Program();
+    Program(GLFWwindow* window);
     
     ///
     ///Default destructor
@@ -44,7 +45,7 @@ public:
     void Close();
 protected:
 	double mDelta;
-    bool mRunning;
+	GLFWwindow* mWindow;
 private:
 };
 
