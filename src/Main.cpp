@@ -44,8 +44,13 @@ int main(int argc, const char* argv[])
 	glfwWindowHint(GLFW_BLUE_BITS, 8);
 	glfwWindowHint(GLFW_ALPHA_BITS, 8);      
 	glfwWindowHint(GLFW_DEPTH_BITS, depthBits);
-	glfwWindowHint(GLFW_STENCIL_BITS,  stencilBits);    
-	
+	glfwWindowHint(GLFW_STENCIL_BITS,  stencilBits);  
+	glfwWindowHint (GLFW_REFRESH_RATE, fps);
+	if(vSynk){
+		glfwSwapInterval(1);
+	}else{
+		glfwSwapInterval(0);
+	}
     //Create the window using given parameters
     if(fullScreen)
        window = glfwCreateWindow(width, height, title.c_str(), glfwGetPrimaryMonitor(), NULL);
@@ -94,7 +99,7 @@ int main(int argc, const char* argv[])
 
     //glfwSetKeyCallback(KeyBoard::SetCallBack);
 
-    //Create and run a new game instance
+    //Create and run a new program instance
 	Program *program = new Program(window);
     program->Run();
     delete program;
@@ -117,7 +122,7 @@ void SetSettings()
     height = 600,
     fps = 60;
 
-    bool vSynk = false, fullScreen = false;
+    bool vSynk = true, fullScreen = false;
 
     Settings::Initial.SetSettings(depthBits, stencilBits, antiAliasing, majorOGL, minorOGL, width, height, fps, vSynk, fullScreen);
 

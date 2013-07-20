@@ -2,6 +2,7 @@
 #define PROGRAM_HPP
 
 #include "GLFW\glfw3.h"
+#include "GLHelp\BitmapText.hpp"
 
 class Program
 {
@@ -46,6 +47,7 @@ public:
 protected:
 	double mDelta;
 	GLFWwindow* mWindow;
+	BitmapText mBT;
 private:
 };
 

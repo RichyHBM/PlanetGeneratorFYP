@@ -11,6 +11,9 @@
 Program::Program(GLFWwindow* window)
 {
     mWindow = window;
+	mBT.LoadFile("./Resources/cBitmap.png", "./Resources/cInfo.h.txt");
+    mBT.SetPosition(glm::vec2(10,5));
+    mBT.SetColor(1.0f , 1.0f, 1.0f , 1.0f);
 }
 
 Program::~Program()
@@ -94,7 +97,8 @@ void Program::HandleEvents()
 
 void Program::Update()
 {
-    
+
+	mBT.SetText("Hello");
 }
 
 void Program::Draw()
@@ -103,6 +107,7 @@ void Program::Draw()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
 	
+    mBT.Draw();
 }
 
 const double Program::GetDelta()

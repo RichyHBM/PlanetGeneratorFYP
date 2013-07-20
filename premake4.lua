@@ -10,26 +10,36 @@ solution "PlanetGeneratorFYP"
       language "C++"
       files { "./src/**.cpp","./src/**.c","./src/**.hpp", "./src/**.h","./external/src/**.cpp","./external/src/**.c","./external/src/**.hpp", "./external/src/**.h" }
       includedirs { "./external/include/"}
-	  if _ACTION == "vs2010" then
-		libdirs { "./external/lib/vs" }
-		defines { "WIN32"}
-	  end
-	
+      if _ACTION == "vs2010" then
+         libdirs { "./external/lib/vs" }
+         defines { "WIN32"}
+      end
+      if _ACTION == "codeblocks" or _ACTION == "mingw" then
+         libdirs { "./external/lib/mingw" }
+         linkoptions { "-mwindows" }
+      end
+      
       configuration "Debug"
          --debugdir ("./")
          defines { "DEBUG", "GLEW_STATIC"}
          flags { "Symbols" }
-		 if os.get() == "windows" then
-			links { "glfw3d", "glu32", "opengl32", "freetype250_D" }
+         if _ACTION == "vs2010" then
+            links { "glfw3d", "glu32", "opengl32", "freetype250_D" }
+         end 
+         if _ACTION == "codeblocks" or _ACTION == "mingw" then
+            links { "libglfw3d", "libglu32", "libopengl32", "libfreetype" }
          end
-		 targetname ("Frameworkd")
+         targetname ("Frameworkd")
          targetdir "./bin/Debug"
  
       configuration "Release"
-	 --debugdir ("./")
+         --debugdir ("./")
          defines { "NDEBUG", "GLEW_STATIC" }
          flags { "OptimizeSpeed" }
-         if os.get() == "windows" then
-			links { "glfw3", "glu32", "opengl32", "freetype250" }
+         if _ACTION == "vs2010" then
+            links { "glfw3", "glu32", "opengl32", "freetype250" }
+         end
+         if _ACTION == "codeblocks" or _ACTION == "mingw" then
+            links { "libglfw3", "libglu32", "libopengl32", "libfreetype" }
          end
          targetdir "./bin/Release"

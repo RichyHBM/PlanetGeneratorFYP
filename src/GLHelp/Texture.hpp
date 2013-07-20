@@ -35,6 +35,10 @@ public:
     ///Unbind any texture
     ///
     static void Unbind();
+	///
+	///Generate mipmaps performing safety check
+	///
+	static bool GenMipmaps();
     ///
     ///Take a screenshot of the current openGL context
     ///

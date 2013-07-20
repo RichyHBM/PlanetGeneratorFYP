@@ -25,7 +25,7 @@ protected:
 
     void Rebuild();
     glm::mat4 mMVP;
-    glm::mat4 *mOrtho;
+    glm::mat4 mOrtho;
     glm::vec3 mPosition;
 
 public:

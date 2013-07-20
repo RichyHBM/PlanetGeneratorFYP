@@ -1,6 +1,8 @@
 
 #include "BitmapText.hpp"
 #include <glm/gtx/transform2.hpp>
+#include <glm/glm.hpp>
+#include "../Settings.hpp"
 
 BitmapText::BitmapText()
 {
@@ -35,7 +37,7 @@ BitmapText::BitmapText()
 
     mPosition = glm::vec3(0.0f);
     mMVP = glm::mat4(1.0f);
-    mOrtho = NULL;
+    mOrtho = glm::ortho( 0.f, (float)Settings::Running.GetWidth(), (float)Settings::Running.GetHeight(), 0.f, -5.f, 5.f );
 
     mColor = glm::vec4(1.0f);
 
@@ -59,7 +61,7 @@ void BitmapText::LoadFile(const std::string& pImageFile, const std::string& pUVF
     mBitmap.Bind();
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glGenerateMipmap(GL_TEXTURE_2D);
+    Texture::GenMipmaps();
     Texture::Unbind();
 
     std::ifstream myfile;
@@ -73,6 +75,11 @@ void BitmapText::LoadFile(const std::string& pImageFile, const std::string& pUVF
             {
                 std::string line;
                 std::getline (myfile,line);
+
+				//skip if reading empty/invalid line
+				if(line.length() != 19){
+					continue;
+				}
 
                 float x,y,z,w;
 
@@ -113,14 +120,14 @@ void BitmapText::SetText(const std::string& pText)
 void BitmapText::SetPosition(const glm::vec2& pPosition)
 {
     mPosition = glm::vec3(pPosition.x, pPosition.y, 0.0f);
-    if(mOrtho != NULL)
-        mMVP = (*mOrtho) * glm::translate(glm::mat4(1.0f), mPosition);
+    
+	mMVP = (mOrtho) * glm::translate(glm::mat4(1.0f), mPosition);
 }
 
 void BitmapText::SetOrtho(glm::mat4 &pOrtho)
 {
-    mOrtho = &pOrtho;
-    mMVP = (*mOrtho) * glm::translate(glm::mat4(1.0f), mPosition);
+    mOrtho = pOrtho;
+    mMVP = (mOrtho) * glm::translate(glm::mat4(1.0f), mPosition);
 }
 
 void BitmapText::Draw()
