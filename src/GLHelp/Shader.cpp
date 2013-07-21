@@ -59,7 +59,7 @@ GLuint Shader::GetUniform(const std::string &pUniName)
 bool Shader::linkShader()
 {
     GLint Result = GL_FALSE;
-    int InfoLogLength;
+    int InfoLogLength = 0;
 
     /// Link the program
     //fprintf(stdout, "Linking program ");
@@ -71,18 +71,17 @@ bool Shader::linkShader()
     glGetProgramiv(mShaderID, GL_LINK_STATUS, &Result);
     glGetProgramiv(mShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
     std::vector<char> ProgramErrorMessage( Util::MaxValue(InfoLogLength, 1) );
-    glGetProgramInfoLog(mShaderID, InfoLogLength, NULL, &ProgramErrorMessage[0]);
-    if(Result == GL_FALSE)
+	glGetProgramInfoLog(mShaderID, InfoLogLength, NULL, &ProgramErrorMessage[0]);
+    if(Result == GL_FALSE){
         fprintf(stdout, "%s\n", &ProgramErrorMessage[0]);
-
-    if(Result == GL_TRUE) return true;
-    else return false;
+		return false;
+	}
 }
 
 bool Shader::compileVertexShader(const std::string &pVertCode)
 {
     GLint Result = GL_FALSE;
-    int InfoLogLength;
+    int InfoLogLength = 0;
 
     /// Compile Vertex Shader
     //printf("Compiling shader : %s ", vertFileName.c_str());
@@ -93,19 +92,22 @@ bool Shader::compileVertexShader(const std::string &pVertCode)
     /// Check Vertex Shader
     glGetShaderiv(mVertexID, GL_COMPILE_STATUS, &Result);
     glGetShaderiv(mVertexID, GL_INFO_LOG_LENGTH, &InfoLogLength);
-    std::vector<char> VertexShaderErrorMessage(InfoLogLength);
-    glGetShaderInfoLog(mVertexID, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
-    if(Result == GL_FALSE)
-        fprintf(stdout, "%s\n", &VertexShaderErrorMessage[0]);
+    std::vector<char> VertexShaderErrorMessage(Util::MaxValue(InfoLogLength, 1));
 
-    if(Result == GL_TRUE) return true;
-    else return false;
+
+
+    glGetShaderInfoLog(mVertexID, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
+    if(Result == GL_FALSE){
+        fprintf(stdout, "%s\n", &VertexShaderErrorMessage[0]);
+		return false;
+	}
+    return true;
 }
 
 bool Shader::compileFragmentShader(const std::string &pFragCode)
 {
     GLint Result = GL_FALSE;
-    int InfoLogLength;
+    int InfoLogLength = 0;
 
     /// Compile Fragment Shader
     //printf("Compiling shader : %s ", fragFileName.c_str());
@@ -116,7 +118,7 @@ bool Shader::compileFragmentShader(const std::string &pFragCode)
     /// Check Fragment Shader
     glGetShaderiv(mFragmentID, GL_COMPILE_STATUS, &Result);
     glGetShaderiv(mFragmentID, GL_INFO_LOG_LENGTH, &InfoLogLength);
-    std::vector<char> FragmentShaderErrorMessage(InfoLogLength);
+    std::vector<char> FragmentShaderErrorMessage(Util::MaxValue(InfoLogLength, 1));
     glGetShaderInfoLog(mFragmentID, InfoLogLength, NULL, &FragmentShaderErrorMessage[0]);
     if(Result == GL_FALSE)
         fprintf(stdout, "%s\n", &FragmentShaderErrorMessage[0]);
@@ -151,8 +153,9 @@ bool Shader::LoadShaderFiles(const std::string &pVertFileName, const std::string
         if(VertexShaderStream.is_open())
         {
             std::string Line = "";
-            while(getline(VertexShaderStream, Line))
+			while(getline(VertexShaderStream, Line)){
                 VertexShaderCode += "\n" + Line;
+			}
             VertexShaderStream.close();
         }
     }
@@ -170,8 +173,9 @@ bool Shader::LoadShaderFiles(const std::string &pVertFileName, const std::string
         if(FragmentShaderStream.is_open())
         {
             std::string Line = "";
-            while(getline(FragmentShaderStream, Line))
-                FragmentShaderCode += "\n" + Line;
+            while(getline(FragmentShaderStream, Line)){
+				FragmentShaderCode += "\n" + Line;
+			}
             FragmentShaderStream.close();
         }
     }
