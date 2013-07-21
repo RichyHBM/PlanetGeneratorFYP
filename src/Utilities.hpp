@@ -2,11 +2,18 @@
 #define UTILITIES_HPP
 
 #include "./Includes.hpp"
+
+namespace Util{
+
 ///
 ///Prints all openGL errors since last call
 ///
 void PrintGLErrors();
 
+///
+///Returns a string in the desired format representing local date/time
+///
+std::string GetLocalDateTime(const std::string &format = "%Y-%m-%d %H:%M:%S");
 
 namespace Maths {
 ///
@@ -55,6 +62,8 @@ inline std::string ToString (const T& t)
     std::stringstream ss;
     ss << t;
     return ss.str();
+}
+
 }
 
 #endif // UTILITIES_HPP

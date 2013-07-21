@@ -1,7 +1,7 @@
 #include "Utilities.hpp"
+#include <ctime>
 
-
-void PrintGLErrors()
+void Util::PrintGLErrors()
 {
     GLuint ec = glGetError ();
     while(ec != GL_NO_ERROR) {
@@ -10,3 +10,15 @@ void PrintGLErrors()
     }
 }
 
+std::string Util::GetLocalDateTime(const std::string &format)
+{
+	const int bufferSize = 50;
+    char buffer[bufferSize];
+    time_t rawtime;
+    struct tm * timeinfo;
+
+    time (&rawtime);
+    timeinfo = localtime (&rawtime);
+    strftime (buffer, bufferSize, format.c_str() , timeinfo);
+    return std::string(buffer);
+}

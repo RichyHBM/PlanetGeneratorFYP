@@ -62,7 +62,7 @@ bool FBO::Create(int pWidth, int pHeight)
 
     glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, 0);
     glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
-    PrintGLErrors();
+    Util::PrintGLErrors();
     return true;
 }
 

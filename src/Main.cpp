@@ -1,7 +1,7 @@
 #include "Includes.hpp"
 
 #include "./Settings.hpp"
-
+#include "./Utilities.hpp"
 #include "./Program.hpp"
 
 ///
@@ -11,6 +11,10 @@ void SetSettings();
 
 int main(int argc, const char* argv[])
 {
+	std::cout << Util::GetLocalDateTime() << std::endl;
+
+
+    /*
     if( !glfwInit() )
     {
         return -1;
@@ -40,11 +44,11 @@ int main(int argc, const char* argv[])
     glfwWindowHint( GLFW_CONTEXT_VERSION_MINOR, minorOGL);
     glfwWindowHint( GLFW_RESIZABLE, GL_FALSE);
 	glfwWindowHint(GLFW_RED_BITS, 8);
-	glfwWindowHint(GLFW_GREEN_BITS, 8);       
+	glfwWindowHint(GLFW_GREEN_BITS, 8);
 	glfwWindowHint(GLFW_BLUE_BITS, 8);
-	glfwWindowHint(GLFW_ALPHA_BITS, 8);      
+	glfwWindowHint(GLFW_ALPHA_BITS, 8);
 	glfwWindowHint(GLFW_DEPTH_BITS, depthBits);
-	glfwWindowHint(GLFW_STENCIL_BITS,  stencilBits);  
+	glfwWindowHint(GLFW_STENCIL_BITS,  stencilBits);
 	glfwWindowHint (GLFW_REFRESH_RATE, fps);
 	if(vSynk){
 		glfwSwapInterval(1);
@@ -94,7 +98,7 @@ int main(int argc, const char* argv[])
 
     glfwGetWindowSize( window, &width, &height );
 
-    //Set the running settings 
+    //Set the running settings
     Settings::Running.SetSettings(depthBits, stencilBits, antiAliasing, majorOGL, minorOGL, width, height, fps, vSynk, fullScreen);
 
     //glfwSetKeyCallback(KeyBoard::SetCallBack);
@@ -106,7 +110,9 @@ int main(int argc, const char* argv[])
 
     glfwTerminate();
 
-
+    //*/
+	std::cout << "Please press any key to exit" << std::endl;
+	std::cin.get();
     return 0;
 }
 

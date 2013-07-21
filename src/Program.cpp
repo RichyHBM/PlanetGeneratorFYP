@@ -76,7 +76,7 @@ void Program::Run()
             glfwSwapBuffers(mWindow);
 			glfwPollEvents();
 
-            PrintGLErrors();
+            Util::PrintGLErrors();
         }
         else
         {

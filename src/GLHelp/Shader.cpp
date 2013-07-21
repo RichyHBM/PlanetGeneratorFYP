@@ -70,7 +70,7 @@ bool Shader::linkShader()
     /// Check the program
     glGetProgramiv(mShaderID, GL_LINK_STATUS, &Result);
     glGetProgramiv(mShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
-    std::vector<char> ProgramErrorMessage( MaxValue(InfoLogLength, 1) );
+    std::vector<char> ProgramErrorMessage( Util::MaxValue(InfoLogLength, 1) );
     glGetProgramInfoLog(mShaderID, InfoLogLength, NULL, &ProgramErrorMessage[0]);
     if(Result == GL_FALSE)
         fprintf(stdout, "%s\n", &ProgramErrorMessage[0]);
