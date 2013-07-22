@@ -29,7 +29,7 @@ solution "PlanetGeneratorFYP"
          if _ACTION == "codeblocks" or _ACTION == "mingw" then
             links { "libglfw3d", "libglu32", "libopengl32", "libfreetype" }
          end
-         targetname ("Frameworkd")
+         targetname ("PlanetGeneratorFYPd")
          targetdir "./bin/Debug"
  
       configuration "Release"

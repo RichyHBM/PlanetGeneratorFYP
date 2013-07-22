@@ -4,6 +4,8 @@
 #include "./Utilities.hpp"
 #include "./Program.hpp"
 
+//#define OUTPUTTOCOUT
+
 ///
 ///Set initial settings
 ///
@@ -11,10 +13,16 @@ void SetSettings();
 
 int main(int argc, const char* argv[])
 {
-	std::cout << Util::GetLocalDateTime() << std::endl;
+	
+#ifndef OUTPUTTOCOUT
+    std::streambuf *psbuf, *backup;
+    std::ofstream filestr;
+	filestr.open( Util::GetLocalDateTime("PlanetGen_log_%Y-%m-%d_%H-%M-%S.txt").c_str());
+    backup = std::cout.rdbuf();     // back up cout's streambuf
+    psbuf = filestr.rdbuf();   // get file's streambuf
+    std::cout.rdbuf(psbuf);
+#endif
 
-
-    /*
     if( !glfwInit() )
     {
         return -1;
@@ -110,7 +118,12 @@ int main(int argc, const char* argv[])
 
     glfwTerminate();
 
-    //*/
+    
+#ifndef OUTPUTTOCOUT
+    std::cout.rdbuf(backup);        // restore cout's original streambuf
+    filestr.close();
+#endif
+	//*/
 	std::cout << "Please press any key to exit" << std::endl;
 	std::cin.get();
     return 0;

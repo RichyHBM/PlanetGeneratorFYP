@@ -12,7 +12,7 @@ void Util::PrintGLErrors()
 
 std::string Util::GetLocalDateTime(const std::string &format)
 {
-	const int bufferSize = 50;
+	const int bufferSize = 80;
     char buffer[bufferSize];
     time_t rawtime;
     struct tm * timeinfo;

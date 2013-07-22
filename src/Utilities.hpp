@@ -13,7 +13,7 @@ void PrintGLErrors();
 ///
 ///Returns a string in the desired format representing local date/time
 ///
-std::string GetLocalDateTime(const std::string &format = "%Y-%m-%d %H:%M:%S");
+std::string GetLocalDateTime(const std::string &format = "%Y-%m-%d_%H-%M-%S");
 
 namespace Maths {
 ///
