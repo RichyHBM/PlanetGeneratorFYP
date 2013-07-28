@@ -10,9 +10,15 @@
 ///Set initial settings
 ///
 void SetSettings();
+void ProcessArgument(const std::string &arg);
 
 int main(int argc, const char* argv[])
 {
+
+	for(int i = 0; i < argc; i++){
+		ProcessArgument(argv[i]);
+	}
+
 
 #ifndef OUTPUTTOCOUT
     std::streambuf *psbuf, *backup;
@@ -69,3 +75,7 @@ void SetSettings()
 
 }
 
+void ProcessArgument(const std::string &arg)
+{
+
+}
