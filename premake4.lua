@@ -13,10 +13,12 @@ solution "PlanetGeneratorFYP"
       if _ACTION == "vs2010" then
          libdirs { "./external/lib/vs" }
          defines { "WIN32"}
+		 --postbuildcommands { "xcopy ./Resources ./build/Resources /e /i /h" }
       end
       if _ACTION == "codeblocks" or _ACTION == "mingw" then
          libdirs { "./external/lib/mingw" }
          linkoptions { "-mwindows" }
+		 --postbuildcommands { "xcopy \"../Resources\" \"../build/Resources\" /e /i /h" }
       end
       
       configuration "Debug"

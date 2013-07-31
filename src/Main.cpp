@@ -3,7 +3,7 @@
 #include "./Settings.hpp"
 #include "./Utilities.hpp"
 #include "./Program.hpp"
-#include "./WindowInit.hpp"
+#include "./Window.hpp"
 //#define OUTPUTTOCOUT
 
 ///
@@ -31,11 +31,10 @@ int main(int argc, const char* argv[])
 
 	SetSettings();
 
-	GLFWwindow* window = NULL;
 
-    window = InitializeGLFW();
+	Window window;
 
-    if(window == NULL){
+	if(window.GetGLFWWindow() == NULL){
         return -2;
     }
 
@@ -43,9 +42,6 @@ int main(int argc, const char* argv[])
 	Program *program = new Program(window);
     program->Run();
     delete program;
-
-    glfwTerminate();
-
 
 #ifndef OUTPUTTOCOUT
     std::cout.rdbuf(backup);        // restore cout's original streambuf

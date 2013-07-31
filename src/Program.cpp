@@ -8,9 +8,8 @@
 
 #include <GLFW/glfw3.h>
 
-Program::Program(GLFWwindow* window)
+Program::Program(Window& pWindow) : mWindow(pWindow)
 {
-    mWindow = window;
 	mBT.LoadFile("./Resources/cBitmap.png", "./Resources/cInfo.h.txt");
     mBT.SetPosition(glm::vec2(10,5));
     mBT.SetColor(1.0f , 1.0f, 1.0f , 1.0f);
@@ -24,70 +23,55 @@ Program::~Program()
 
 void Program::Run()
 {
-    bool focused = true;
-
-    double upTime = 1.0 / Settings::Running.GetFPS();
-	
-
-    while(!glfwWindowShouldClose( mWindow ))
+    
+	while(mWindow.IsOpen())
     {
-        KeyBoard::keyboard.Update(mWindow);
+		KeyBoard::keyboard.Update(mWindow.GetGLFWWindow());
 
         if(KeyBoard::keyboard.HasKeyBeenPressed(GLFW_KEY_ESCAPE) )
 		{
-            Close();
+            mWindow.Close();
 		}
 		
 
-        if(glfwGetWindowAttrib( mWindow, GLFW_FOCUSED) == GL_TRUE)
+		if(mWindow.IsFocused())
         {
-            focused = true;
-			glfwMakeContextCurrent(mWindow);
-            glfwSetInputMode( mWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN  );
+			mWindow.MakeContextCurrent();
+			mWindow.SetCursor(CursorState::Hidden);
         }
 
-        if(glfwGetWindowAttrib( mWindow, GLFW_FOCUSED) == GL_FALSE)
+        if(!mWindow.IsFocused())
         {
-            focused = false;
-            glfwSetInputMode( mWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL  );
+			mWindow.SetCursor(CursorState::Shown);
         }
 
-        if(focused)
+        if(mWindow.IsFocused())
 		{
             HandleEvents();
 		}
 		
-        if(focused)
+        if(mWindow.IsFocused())
         {
 
-            if(glfwWindowShouldClose( mWindow )){
+			if(!mWindow.IsOpen()){
 				break;
 			}
 
             Update();
 
-            double delta = glfwGetTime();
-            if(delta < 0.0) delta = 0.0;
-            //glfwSleep(upTime - delta);
-            mDelta = glfwGetTime();
-            glfwSetTime( 0.0 );
+            
 
             Draw();
 
-            glfwSwapBuffers(mWindow);
-			glfwPollEvents();
+            mWindow.SwapBuffersAndPollEvents();
 
             Util::PrintGLErrors();
         }
         else
         {
-            glfwSwapBuffers(mWindow);
-			glfwPollEvents();
+			mWindow.SwapBuffersAndPollEvents();
         }
     }
-
-	glfwDestroyWindow(mWindow);
-
 }
 
 void Program::HandleEvents()
@@ -112,9 +96,4 @@ void Program::Draw()
 const double Program::GetDelta()
 {
     return mDelta;
-}
-
-void Program::Close()
-{
-    glfwSetWindowShouldClose(mWindow, GL_TRUE);
 }

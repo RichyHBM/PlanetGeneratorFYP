@@ -3,6 +3,7 @@
 
 #include "GLFW\glfw3.h"
 #include "GLHelp\BitmapText.hpp"
+#include "Window.hpp"
 
 class Program
 {
@@ -10,7 +11,7 @@ public:
     ///
     ///Default constructor
     ///
-    Program(GLFWwindow* window);
+    Program(Window &pWindow);
     
     ///
     ///Default destructor
@@ -40,13 +41,9 @@ public:
     ///
     const double GetDelta();
 
-    ///
-    ///Eit the run method, and close the game
-    ///
-    void Close();
 protected:
 	double mDelta;
-	GLFWwindow* mWindow;
+	Window& mWindow;
 	BitmapText mBT;
 private:
 };
