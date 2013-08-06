@@ -76,6 +76,7 @@ bool Shader::linkShader()
         fprintf(stdout, "%s\n", &ProgramErrorMessage[0]);
 		return false;
 	}
+	return true;
 }
 
 bool Shader::compileVertexShader(const std::string &pVertCode)

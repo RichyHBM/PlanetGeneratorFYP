@@ -38,6 +38,7 @@ build/
 *.o
 *.so
 !premake4.exe
+!astyle.exe
 !./external/lib/*
 
 # Packages #

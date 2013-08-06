@@ -4,6 +4,7 @@
 #include "./Utilities.hpp"
 #include "./Program.hpp"
 #include "./Window.hpp"
+
 //#define OUTPUTTOCOUT
 
 ///
@@ -12,9 +13,11 @@
 void SetSettings();
 void ProcessArgument(const std::string &arg);
 
+
+
 int main(int argc, const char* argv[])
 {
-
+	
 	for(int i = 0; i < argc; i++){
 		ProcessArgument(argv[i]);
 	}

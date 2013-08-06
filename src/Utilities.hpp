@@ -1,14 +1,24 @@
 #ifndef UTILITIES_HPP
 #define UTILITIES_HPP
 
+//Macro define to be able to use PrintGLErrors without having to specify line numbers and filenames
+#define PrintGLErrors() PrintGLErrorsFromLine( __FILE__, __LINE__)
+
 #include "./Includes.hpp"
+#include <ctime>
+
 
 namespace Util{
 
 ///
 ///Prints all openGL errors since last call
 ///
-void PrintGLErrors();
+void PrintGLErrorsFromLine(const char* file, int line);
+
+///
+///Returns the modification time of a file
+///
+time_t GetModificationTime(const std::string &filename);
 
 ///
 ///Returns a string in the desired format representing local date/time
