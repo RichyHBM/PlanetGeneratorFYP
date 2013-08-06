@@ -29,7 +29,7 @@ public:
     ///
     ///Create an FBO of the given size
     ///
-    bool Create(int pWidth, int pHeight);
+    bool Create( int pWidth, int pHeight );
     ///
     ///Bind the FBO
     ///
@@ -41,7 +41,7 @@ public:
     ///
     ///Clear the FBO
     ///
-    void Clear(float pRed = 0.0f, float pGreen = 0.0f, float pBlue = 0.0f, float pAlpha = 1.0f);
+    void Clear( float pRed = 0.0f, float pGreen = 0.0f, float pBlue = 0.0f, float pAlpha = 1.0f );
 protected:
 private:
     GLuint mFBO;

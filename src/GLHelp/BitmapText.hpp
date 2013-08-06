@@ -40,15 +40,15 @@ public:
     ///
     ///Load text from files
     ///
-    void LoadFile(const std::string& pImageFile, const std::string& pUVFile );
+    void LoadFile( const std::string &pImageFile, const std::string &pUVFile );
     ///
     ///Set the text string
     ///
-    void SetText(const std::string& pText);
+    void SetText( const std::string &pText );
     ///
     ///Set the 2d position
     ///
-    void SetPosition(const glm::vec2 &pPosition);
+    void SetPosition( const glm::vec2 &pPosition );
     ///
     ///Draw to screen
     ///
@@ -56,11 +56,11 @@ public:
     ///
     ///Set the colour/tint
     ///
-    void SetColor(float pRed , float pGreen, float pBlue , float pAlpha);
+    void SetColor( float pRed , float pGreen, float pBlue , float pAlpha );
     ///
     ///Set the orhto/2d matrix
     ///
-    void SetOrtho(glm::mat4 &pOrtho);
+    void SetOrtho( glm::mat4 &pOrtho );
 };
 
 

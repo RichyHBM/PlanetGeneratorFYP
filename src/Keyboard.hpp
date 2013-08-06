@@ -3,49 +3,50 @@
 
 #include <GLFW/glfw3.h>
 
-namespace KeyBoard {
-
-enum KeyChange {
-    Pressed,
-    Released,
-    Nothing
-};
-
-class Keyboard
+namespace KeyBoard
 {
-public:
-    ///
-    ///Default constructor
-    ///
-    Keyboard();
-    ///
-    ///Default destructor
-    ///
-    ~Keyboard();
 
-    ///
-    ///Update the keyboard class variables
-    ///
-    void Update(GLFWwindow *window);
-    ///
-    ///Check if a key is pressed
-    ///
-    bool IsKeyPressed(int pKey);
-    ///
-    ///Check if the current state of a key has changed
-    ///
-    KeyChange HasKeyChanged(int pKey);
+    enum KeyChange {
+        Pressed,
+        Released,
+        Nothing
+    };
 
-    ///
-    ///Check if the key has changed state since last check
-    ///
-    bool HasKeyBeenPressed(int pKey);
-private:
-    bool mKeys[GLFW_KEY_LAST];
-    bool mPrevK[GLFW_KEY_LAST];
-};
+    class Keyboard
+    {
+    public:
+        ///
+        ///Default constructor
+        ///
+        Keyboard();
+        ///
+        ///Default destructor
+        ///
+        ~Keyboard();
 
-static Keyboard keyboard;
+        ///
+        ///Update the keyboard class variables
+        ///
+        void Update( GLFWwindow *window );
+        ///
+        ///Check if a key is pressed
+        ///
+        bool IsKeyPressed( int pKey );
+        ///
+        ///Check if the current state of a key has changed
+        ///
+        KeyChange HasKeyChanged( int pKey );
+
+        ///
+        ///Check if the key has changed state since last check
+        ///
+        bool HasKeyBeenPressed( int pKey );
+    private:
+        bool mKeys[GLFW_KEY_LAST];
+        bool mPrevK[GLFW_KEY_LAST];
+    };
+
+    static Keyboard keyboard;
 
 }
 

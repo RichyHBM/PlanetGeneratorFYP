@@ -11,8 +11,8 @@ public:
     ///
     ///Default constructor
     ///
-    Program(Window &pWindow);
-    
+    Program( Window &pWindow );
+
     ///
     ///Default destructor
     ///
@@ -30,8 +30,8 @@ public:
     ///Draw stuff
     ///
     void Draw();
-	
-	///
+
+    ///
     ///Run method, does input handling, update and draw
     ///
     void Run();
@@ -42,9 +42,9 @@ public:
     const double GetDelta();
 
 protected:
-	double mDelta;
-	Window& mWindow;
-	BitmapText mBT;
+    double mDelta;
+    Window &mWindow;
+    BitmapText mBT;
 private:
 };
 

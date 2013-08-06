@@ -10,7 +10,7 @@
 class DebugLines
 {
 public:
-    
+
     ///
     ///Default constructor
     ///
@@ -22,24 +22,24 @@ public:
     ///
     ///Set the camera matrix
     ///
-    void SetCameraMatrix(glm::mat4 &pCameraMatrix);
+    void SetCameraMatrix( glm::mat4 &pCameraMatrix );
     ///
     ///Set the perspective matrix
     ///
-    void SetPerspectiveMatrix(glm::mat4 &pPerspectiveMatrix);
+    void SetPerspectiveMatrix( glm::mat4 &pPerspectiveMatrix );
 
     ///
     ///Add a line to the drawer
     ///
-    void AddLines (const glm::vec3 &pVecA, const glm::vec3 &pVecB, const glm::vec3 &pColor);
+    void AddLines ( const glm::vec3 &pVecA, const glm::vec3 &pVecB, const glm::vec3 &pColor );
     ///
     ///Add a triangle, internally gets converted to 3 lines
     ///
-    void AddTriangle (const glm::vec3 &pVecA, const glm::vec3 &pVecB, const glm::vec3 &pVecC, const glm::vec3 &pColor);
+    void AddTriangle ( const glm::vec3 &pVecA, const glm::vec3 &pVecB, const glm::vec3 &pVecC, const glm::vec3 &pColor );
     ///
     ///Add a square, internally gets converted to 4 lines
     ///
-    void AddQuad (const glm::vec3 &pVecA, const glm::vec3 &pVecB, const glm::vec3 &pVecC, const glm::vec3 &pVecD, const glm::vec3 &pColor);
+    void AddQuad ( const glm::vec3 &pVecA, const glm::vec3 &pVecB, const glm::vec3 &pVecC, const glm::vec3 &pVecD, const glm::vec3 &pColor );
     ///
     ///Draw the lines
     ///

@@ -75,14 +75,14 @@ public:
         unsigned short pHeight,
         unsigned short pFPS,
         bool pVSynk,
-        bool pFullScreen);
+        bool pFullScreen );
 
     ///
     ///Seeter for the qidth and height
     ///
     void SetResolution(
         unsigned short pWidth,
-        unsigned short pHeight);
+        unsigned short pHeight );
 
 protected:
 private:

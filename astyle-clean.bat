@@ -36,8 +36,9 @@ if /i "%indir%" == "%outdir%" (
 )
 
 REM optional statement to run Artistic Style
-set progdir=./
-%progdir%\AStyle.exe --options=./astyle.conf -R  "%indir%\*.cpp"  "%indir%\*.hpp"  "%indir%\*.c"  "%indir%\*.h"
+set progdir=""
+:: %progdir%\
+AStyle.exe --options=./astyle.conf -R  "%indir%\*.cpp"  "%indir%\*.hpp"  "%indir%\*.c"  "%indir%\*.h"
 if errorlevel 1 pause
 
 REM set inlength to the length of indir

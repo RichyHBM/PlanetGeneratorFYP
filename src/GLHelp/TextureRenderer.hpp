@@ -38,11 +38,11 @@ public:
     ///
     ///Create a new render texture drawer of the given size
     ///
-    void Create(float pWidth, float pHeight, bool pInvert = false);
+    void Create( float pWidth, float pHeight, bool pInvert = false );
     ///
     ///Set the 2d position of hte render target
     ///
-    void SetPosition(const glm::vec2 &pPosition);
+    void SetPosition( const glm::vec2 &pPosition );
     ///
     ///Draw it to screen
     ///
@@ -50,15 +50,15 @@ public:
     ///
     ///Set the colour
     ///
-    void SetColor(float pRed , float pGreen, float pBlue , float pAlpha);
+    void SetColor( float pRed , float pGreen, float pBlue , float pAlpha );
     ///
     ///Set the 2d matrix
     ///
-    void SetOrtho(glm::mat4 &pOrtho);
+    void SetOrtho( glm::mat4 &pOrtho );
     ///
     ///Set the texture
     ///
-    void SetTexture(const GLuint &pTexture);
+    void SetTexture( const GLuint &pTexture );
 };
 
 #endif // TEXTURERENDERER_HPP_INCLUDED

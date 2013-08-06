@@ -22,7 +22,7 @@ public:
     ///
     ///Load texture from a file
     ///
-    bool LoadFromFile(const std::string &pFileName);
+    bool LoadFromFile( const std::string &pFileName );
     ///
     ///Get the textures size
     ///
@@ -35,14 +35,14 @@ public:
     ///Unbind any texture
     ///
     static void Unbind();
-	///
-	///Generate mipmaps performing safety check
-	///
-	static bool GenMipmaps();
+    ///
+    ///Generate mipmaps performing safety check
+    ///
+    static bool GenMipmaps();
     ///
     ///Take a screenshot of the current openGL context
     ///
-    static bool Screenshot(const std::string &filename, int x, int y, int w, int h );
+    static bool Screenshot( const std::string &filename, int x, int y, int w, int h );
 };
 
 #endif // TEXTURE_HPP_INCLUDED

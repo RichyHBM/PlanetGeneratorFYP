@@ -5,12 +5,10 @@ Settings Settings::Running;
 
 Settings::Settings()
 {
-
 }
 
 Settings::~Settings()
 {
-
 }
 
 void Settings::SetSettings(
@@ -23,7 +21,7 @@ void Settings::SetSettings(
     unsigned short pHeight,
     unsigned short pFPS,
     bool pVSynk,
-    bool pFullScreen)
+    bool pFullScreen )
 {
     mDepthBits = pDepthBits;
     mStencilBits = pStencilBits;
@@ -35,16 +33,16 @@ void Settings::SetSettings(
     mFPS = pFPS;
     mVSynk = pVSynk;
     mFullScreen = pFullScreen;
-    mAspectRatio = pWidth/(float)pHeight;
+    mAspectRatio = pWidth/( float )pHeight;
 }
 
 void Settings::SetResolution(
     unsigned short pWidth,
-    unsigned short pHeight)
+    unsigned short pHeight )
 {
     mWidth = pWidth;
     mHeight = pHeight;
-    mAspectRatio = pWidth/(float)pHeight;
+    mAspectRatio = pWidth/( float )pHeight;
 }
 
 unsigned short Settings::GetDepthBits()
