@@ -1,7 +1,6 @@
 #ifndef PROGRAM_HPP
 #define PROGRAM_HPP
 
-#include "GLFW\glfw3.h"
 #include "GLHelp\BitmapText.hpp"
 #include "Window.hpp"
 
@@ -11,7 +10,7 @@ public:
     ///
     ///Default constructor
     ///
-    Program( Window &pWindow );
+    Program( Window *pWindow );
 
     ///
     ///Default destructor
@@ -42,9 +41,7 @@ public:
     const double GetDelta();
 
 protected:
-    double mDelta;
-    Window &mWindow;
-    BitmapText mBT;
+    Window *mWindow;
 private:
 };
 

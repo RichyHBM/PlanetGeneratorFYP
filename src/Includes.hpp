@@ -11,7 +11,9 @@
 
 #include <GL/glew.h>
 
-#include <GLFW/glfw3.h>
+#include <SFML/OpenGL.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/System.hpp>
 
 #include <glm/glm.hpp>
 

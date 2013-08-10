@@ -12,24 +12,20 @@ enum CursorState {
 class Window
 {
 public:
-    Window();
-    ~Window();
+	Window(){}
+	virtual ~Window(){}
 
-    bool IsFocused();
-    bool IsOpen();
-    GLFWwindow *GetGLFWWindow();
-    void SetCursor( CursorState pState );
-    double GetDelta();
-    void SwapBuffersAndPollEvents();
-    bool IsWindowCreated();
-    void MakeContextCurrent();
-    void ResetDelta();
-    void Close();
-private:
-    GLFWwindow *mWindow;
-    static bool mGLFWInitialised;
-    static int mWindowCount;
+    virtual bool IsFocused() = 0;
+    virtual bool IsOpen() =0;
+    virtual void SetCursor( CursorState pState ) =0;
+	double GetDelta(){return mDelta;}
+	virtual void DoEvents()=0;
+    virtual void Display() =0;
+    virtual bool IsWindowCreated()=0;
+    virtual void MakeContextCurrent()=0;
+    virtual void ResetDelta()=0;
+    virtual void Close()=0;
+protected:
     double mDelta;
 };
-
 #endif // WINDOW_HPP
