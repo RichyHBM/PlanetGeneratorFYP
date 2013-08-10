@@ -16,7 +16,7 @@ public:
     bool IsOpen();
     GLFWwindow *GetGLFWWindow();
     void SetCursor( CursorState pState );
-	void DoEvents();
+    void DoEvents();
     void Display();
     bool IsWindowCreated();
     void MakeContextCurrent();

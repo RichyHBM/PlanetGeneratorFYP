@@ -15,15 +15,15 @@ public:
     bool IsOpen();
     void SetCursor( CursorState pState );
     void Display();
-	void DoEvents();
+    void DoEvents();
     bool IsWindowCreated();
     void MakeContextCurrent();
     void ResetDelta();
     void Close();
 protected:
-	sf::Window mWindow;
-	bool mIsFocused;
-	sf::Clock mDeltaClock;
+    sf::Window mWindow;
+    bool mIsFocused;
+    sf::Clock mDeltaClock;
 };
 
 #endif //SFML

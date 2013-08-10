@@ -42,6 +42,7 @@ public:
 
 protected:
     Window *mWindow;
+    BitmapText mBT;
 private:
 };
 

@@ -189,7 +189,7 @@ void WindowGLFW::Display()
 
 void WindowGLFW::DoEvents()
 {
-	glfwPollEvents();
+    glfwPollEvents();
 }
 
 void WindowGLFW::Close()

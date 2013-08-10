@@ -36,15 +36,13 @@ int main( int argc, const char *argv[] )
     std::cout.rdbuf( psbuf );
 #endif
     SetSettings();
-
 #ifdef SFML
-	Window *window = new WindowSFML();
+    Window *window = new WindowSFML();
 #elif defined GLFW
-	Window *window = new WindowGLFW();
+    Window *window = new WindowGLFW();
 #endif
-    
 
-	if( !window->IsWindowCreated() ) {
+    if( !window->IsWindowCreated() ) {
         return -2;
     }
 
@@ -52,16 +50,13 @@ int main( int argc, const char *argv[] )
     Program *program = new Program( window );
     program->Run();
     delete program;
-
-	delete window;
-
+    delete window;
 #ifndef OUTPUTTOCOUT
     std::cout.rdbuf( backup );      // restore cout's original streambuf
     filestr.close();
 #endif
     //*/
-    
-	std::cout << "Please press any key to exit" << std::endl;
+    std::cout << "Please press any key to exit" << std::endl;
     std::cin.get();
     return 0;
 }
@@ -71,13 +66,13 @@ void SetSettings()
     unsigned short
     depthBits = 24,
     stencilBits = 8,
-    antiAliasing = 4,
+    antiAliasing = 2,
     majorOGL = 2,
-    minorOGL = 0,
-    width = 800,
-    height = 600,
+    minorOGL = 1,
+    width = 1240,
+    height = 720,
     fps = 60;
-    bool vSynk = true, fullScreen = false;
+    bool vSynk = false, fullScreen = false;
     Settings::Initial.SetSettings( depthBits, stencilBits, antiAliasing, majorOGL, minorOGL, width, height, fps, vSynk, fullScreen );
 }
 

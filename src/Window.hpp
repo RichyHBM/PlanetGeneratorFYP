@@ -12,14 +12,16 @@ enum CursorState {
 class Window
 {
 public:
-	Window(){}
-	virtual ~Window(){}
+    Window() {}
+    virtual ~Window() {}
 
     virtual bool IsFocused() = 0;
     virtual bool IsOpen() =0;
     virtual void SetCursor( CursorState pState ) =0;
-	double GetDelta(){return mDelta;}
-	virtual void DoEvents()=0;
+    double GetDelta() {
+        return mDelta;
+    }
+    virtual void DoEvents()=0;
     virtual void Display() =0;
     virtual bool IsWindowCreated()=0;
     virtual void MakeContextCurrent()=0;
