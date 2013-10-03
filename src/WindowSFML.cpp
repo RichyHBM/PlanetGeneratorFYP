@@ -2,7 +2,7 @@
 
 #include "Includes.hpp"
 #include "WindowSFML.hpp"
-#include <GL/wglew.h>
+#include <GL/glew.h>
 #include "./Settings.hpp"
 #include <iostream>
 
@@ -47,12 +47,10 @@ WindowSFML::WindowSFML()
 
     if( vSynk ) {
         mWindow.setVerticalSyncEnabled( true );
-        wglSwapIntervalEXT( 1 );
         mWindow.setFramerateLimit( fps );
 
     } else {
         mWindow.setVerticalSyncEnabled( false );
-        wglSwapIntervalEXT( 0 );
         mWindow.setFramerateLimit( fps );
     }
 
@@ -118,15 +116,15 @@ bool WindowSFML::IsOpen()
 void WindowSFML::SetCursor( CursorState pState )
 {
     switch( pState ) {
-        case CursorState::Hidden:
+        case Hidden:
             mWindow.setMouseCursorVisible( false );
             break;
 
-        case CursorState::Shown:
+        case Shown:
             mWindow.setMouseCursorVisible( true );
             break;
 
-        case CursorState::Locked:
+        case Locked:
             break;
     }
 }

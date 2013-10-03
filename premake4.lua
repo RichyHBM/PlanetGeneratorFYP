@@ -29,7 +29,7 @@ solution "PlanetGeneratorFYP"
             links { "sfml-window-d", "sfml-system-d", "glu32", "opengl32" }
          end 
          if _ACTION == "gmake" then
-            links { "libsfml-window-d", "libsfml-system-d", "libGLU", "libGL" }
+            links { "sfml-window", "sfml-system", "GLU", "GL" }
          end
 		 
          targetname ("PlanetGeneratorFYPd")
@@ -43,7 +43,7 @@ solution "PlanetGeneratorFYP"
             links {  "sfml-window", "sfml-system", "glu32", "opengl32" }
          end
          if _ACTION == "gmake" then
-            links { "libsfml-window", "libsfml-system", "libGLU", "libGL" }
+            links { "sfml-window", "sfml-system", "GLU", "GL" }
          end
          
          targetdir "./bin/Release"

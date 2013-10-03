@@ -1,3 +1,4 @@
+#ifndef __linux__
 #include "./DebugOperators.hpp"
 #include <cstddef>
 #include <new>
@@ -19,7 +20,7 @@ struct MemoryChunk {
 
 
 //Overrides the new operator and adds the size of the variable to bytesUsed
-void *operator new ( const std::size_t size, MemoryType type )
+void *operator new ( const std::size_t size, MemoryType type ) throw (std::bad_alloc)
 {
     //create memory for the new object and the information header
     void *const p = std::malloc( sizeof( MemoryChunk ) + size );
@@ -59,22 +60,22 @@ void *operator new ( const std::size_t size, MemoryType type )
     return mc + 1;
 }
 
-void *operator new[] ( const std::size_t size, MemoryType type )
+void *operator new[] ( const std::size_t size, MemoryType type ) throw (std::bad_alloc)
 {
     return operator new( size, type );
 }
 
-void *operator new ( const std::size_t size )
+void *operator new ( const std::size_t size ) throw (std::bad_alloc)
 {
     return operator new( size, MemoryType::Unknown );
 }
 
-void *operator new[] ( const std::size_t size )
+void *operator new[] ( const std::size_t size ) throw (std::bad_alloc)
 {
     return operator new( size, MemoryType::Unknown );
 }
 
-void operator delete ( void *p )
+void operator delete ( void *p ) throw ()
 {
     if( !p ) {
         return;
@@ -114,7 +115,9 @@ void operator delete ( void *p )
     p = NULL;
 }
 
-void operator delete[] ( void *const p )
+void operator delete[] ( void *const p ) throw ()
 {
     delete( p );
 }
+
+#endif

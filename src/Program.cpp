@@ -26,11 +26,11 @@ void Program::Run()
 
         if( mWindow->IsFocused() ) {
             mWindow->MakeContextCurrent();
-            mWindow->SetCursor( CursorState::Hidden );
+            mWindow->SetCursor( Hidden );
         }
 
         if( !mWindow->IsFocused() ) {
-            mWindow->SetCursor( CursorState::Shown );
+            mWindow->SetCursor( Shown );
         }
 
         if( mWindow->IsFocused() ) {
