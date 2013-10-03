@@ -16,6 +16,10 @@ solution "PlanetGeneratorFYP"
          defines { "WIN32" }
 		   postbuildcommands { "call ..\\postbuild\\vs.bat" }
       end
+
+      if _ACTION == "gmake" then
+         libdirs { "./external/lib/linux" }
+      end
       
       configuration "Debug"
          --debugdir ("./")
@@ -24,6 +28,9 @@ solution "PlanetGeneratorFYP"
          if _ACTION == "vs2010" then
             links { "sfml-window-d", "sfml-system-d", "glu32", "opengl32" }
          end 
+         if _ACTION == "gmake" then
+            links { "libsfml-window-d", "libsfml-system-d", "libGLU", "libGL" }
+         end
 		 
          targetname ("PlanetGeneratorFYPd")
          targetdir "./bin/Debug"
@@ -34,6 +41,9 @@ solution "PlanetGeneratorFYP"
          flags { "OptimizeSpeed" }
          if _ACTION == "vs2010" then
             links {  "sfml-window", "sfml-system", "glu32", "opengl32" }
+         end
+         if _ACTION == "gmake" then
+            links { "libsfml-window", "libsfml-system", "libGLU", "libGL" }
          end
          
          targetdir "./bin/Release"
