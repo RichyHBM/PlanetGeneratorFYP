@@ -1,6 +1,6 @@
-#ifndef __linux__
 #include "./DebugOperators.hpp"
 #include <cstddef>
+#include <cstdlib>
 #include <new>
 #include <iostream>
 
@@ -14,13 +14,13 @@ static int magicNumber = 5551234;
 struct MemoryChunk {
     int myCreation;
     std::size_t size;
-    MemoryType type;
+    MemoryUse::MemoryType type;
 };
 
 
 
 //Overrides the new operator and adds the size of the variable to bytesUsed
-void *operator new ( const std::size_t size, MemoryType type ) throw (std::bad_alloc)
+void *operator new ( const std::size_t size, MemoryUse::MemoryType type ) throw (std::bad_alloc)
 {
     //create memory for the new object and the information header
     void *const p = std::malloc( sizeof( MemoryChunk ) + size );
@@ -33,19 +33,19 @@ void *operator new ( const std::size_t size, MemoryType type ) throw (std::bad_a
     MemoryUse::TotalBytesUsed += size;
 
     switch ( type ) {
-        case Normal:
+        case MemoryUse::Normal:
             MemoryUse::NormalBytesUsed += size;
             break;
 
-        case Graphics:
+        case MemoryUse::Graphics:
             MemoryUse::GraphicsBytesUsed += size;
             break;
 
-        case Assets:
+        case MemoryUse::Assets:
             MemoryUse::AssetsBytesUsed += size;
             break;
 
-        case Unknown:
+        case MemoryUse::Unknown:
         default:
             MemoryUse::UnknownBytesUsed += size;
             break;
@@ -60,19 +60,19 @@ void *operator new ( const std::size_t size, MemoryType type ) throw (std::bad_a
     return mc + 1;
 }
 
-void *operator new[] ( const std::size_t size, MemoryType type ) throw (std::bad_alloc)
+void *operator new[] ( const std::size_t size, MemoryUse::MemoryType type ) throw (std::bad_alloc)
 {
     return operator new( size, type );
 }
 
 void *operator new ( const std::size_t size ) throw (std::bad_alloc)
 {
-    return operator new( size, MemoryType::Unknown );
+    return operator new( size, MemoryUse::Unknown );
 }
 
 void *operator new[] ( const std::size_t size ) throw (std::bad_alloc)
 {
-    return operator new( size, MemoryType::Unknown );
+    return operator new( size, MemoryUse::Unknown );
 }
 
 void operator delete ( void *p ) throw ()
@@ -87,19 +87,19 @@ void operator delete ( void *p ) throw ()
         MemoryUse::TotalBytesUsed -= mc->size;
 
         switch ( mc->type ) {
-            case Normal:
+            case MemoryUse::Normal:
                 MemoryUse::NormalBytesUsed -= mc->size;
                 break;
 
-            case Graphics:
+            case MemoryUse::Graphics:
                 MemoryUse::GraphicsBytesUsed -= mc->size;
                 break;
 
-            case Assets:
+            case MemoryUse::Assets:
                 MemoryUse::AssetsBytesUsed -= mc->size;
                 break;
 
-            case Unknown:
+            case MemoryUse::Unknown:
             default:
                 MemoryUse::UnknownBytesUsed -= mc->size;
                 break;
@@ -117,7 +117,5 @@ void operator delete ( void *p ) throw ()
 
 void operator delete[] ( void *const p ) throw ()
 {
-    delete( p );
+    delete( reinterpret_cast<char *const>(p) );
 }
-
-#endif

@@ -1,18 +1,18 @@
 #ifndef DEBUG_OPERATORS_HPP
 #define DEBUG_OPERATORS_HPP
 
-#ifndef __linux__
 #include <cstddef>
+#include <new>
 
-enum MemoryType {
+namespace MemoryUse
+{
+	enum MemoryType {
     Normal,
     Graphics,
     Assets,
     Unknown
-};
+	};
 
-namespace MemoryUse
-{
     extern unsigned long long TotalBytesUsed;
     extern unsigned long long AssetsBytesUsed;
     extern unsigned long long GraphicsBytesUsed;
@@ -20,13 +20,12 @@ namespace MemoryUse
     extern unsigned long long UnknownBytesUsed;
 }
 
-void *operator new ( const std::size_t size );
-void *operator new ( const std::size_t size, const MemoryType type );
-void *operator new[] ( const std::size_t size );
-void *operator new[] ( const std::size_t size, const MemoryType type );
+void *operator new ( const std::size_t size ) throw (std::bad_alloc);
+void *operator new ( const std::size_t size, const MemoryUse::MemoryType type ) throw (std::bad_alloc);
+void *operator new[] ( const std::size_t size ) throw (std::bad_alloc);
+void *operator new[] ( const std::size_t size, const MemoryUse::MemoryType type ) throw (std::bad_alloc);
 
-void operator delete ( void *p );
-void operator delete[] ( void *p );
+void operator delete ( void *p ) throw ();
+void operator delete[] ( void *p ) throw ();
 
-#endif
 #endif //DEBUG_OPERATORS_HPP
