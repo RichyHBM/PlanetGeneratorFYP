@@ -5468,16 +5468,6 @@ void CTwBar::Draw(int _DrawPart)
 
 //  ---------------------------------------------------------------------------
 
-void TwBar::CheckScrollbar(int NbHierLinesDelta)
-{
-    if( m_FirstLine>m_NbHierLines+NbHierLinesDelta-m_NbDisplayedLines )
-        m_FirstLine = m_NbHierLines+NbHierLinesDelta-m_NbDisplayedLines;
-    if( m_FirstLine<0 )
-        m_FirstLine = 0;
-}
-
-//  ---------------------------------------------------------------------------
-
 bool CTwBar::MouseMotion(int _X, int _Y)
 {
     assert(g_TwMgr->m_Graph && g_TwMgr->m_WndHeight>0 && g_TwMgr->m_WndWidth>0);
@@ -6020,7 +6010,7 @@ static void ANT_CALL PopupCallback(void *_ClientData)
         {
             Var->ValueFromDouble(Enum);
             //Bar->UnHighlightLine();
-            Bar->SetFocus(true);
+            Bar->HaveFocus(true);
             Bar->NotUpToDate();
         }
         if( g_TwMgr->m_PopupBar!=NULL ) // check again because it might have been destroyed by an enum callback

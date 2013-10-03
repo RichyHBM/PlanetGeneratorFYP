@@ -197,7 +197,6 @@ CTexFont *g_DefaultSmallFont = NULL;
 CTexFont *g_DefaultNormalFont = NULL;
 CTexFont *g_DefaultLargeFont = NULL;
 CTexFont *g_DefaultFixed1Font = NULL;
-CTexFont *g_DefaultFixedRuFont = NULL;
 
 // Small font
 const int FONT0_BM_W = 211;
@@ -4869,7 +4868,6 @@ static const unsigned char s_FontFixed1[] = {
     127,0,127,127,127,127,127,127,127,0
 };
 
-#include "res/RuFont.txt"
 
 void TwGenerateDefaultFonts(float _Scaling)
 {
@@ -4881,8 +4879,6 @@ void TwGenerateDefaultFonts(float _Scaling)
     assert(g_DefaultLargeFont && g_DefaultLargeFont->m_NbCharRead==224);
     g_DefaultFixed1Font = TwGenerateFont(s_FontFixed1, FONTFIXED1_BM_W, FONTFIXED1_BM_H, _Scaling);
     assert(g_DefaultFixed1Font && g_DefaultFixed1Font->m_NbCharRead==224);
-    g_DefaultFixedRuFont = TwGenerateFont(s_FontFixedRU, FONTFIXEDRU_BM_W, FONTFIXEDRU_BM_H, _Scaling);
-    assert(g_DefaultFixedRuFont && g_DefaultFixedRuFont->m_NbCharRead==224);
 }
 
 //  ---------------------------------------------------------------------------
@@ -4897,8 +4893,6 @@ void TwDeleteDefaultFonts()
     g_DefaultLargeFont = NULL;
     delete g_DefaultFixed1Font;
     g_DefaultFixed1Font = NULL;
-    delete g_DefaultFixedRuFont;
-    g_DefaultFixedRuFont = NULL;
 }
 
 //  ---------------------------------------------------------------------------

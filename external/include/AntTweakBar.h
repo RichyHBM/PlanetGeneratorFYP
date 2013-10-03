@@ -95,7 +95,6 @@ TW_API int          TW_CALL TwGetBarCount();
 TW_API TwBar *      TW_CALL TwGetBarByIndex(int barIndex);
 TW_API TwBar *      TW_CALL TwGetBarByName(const char *barName);
 TW_API int          TW_CALL TwRefreshBar(TwBar *bar);
-TW_API TwBar *      TW_CALL TwGetActiveBar();
 
 // ----------------------------------------------------------------------------
 //  Var functions and definitions
