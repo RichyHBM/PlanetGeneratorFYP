@@ -8,7 +8,7 @@
 Program::Program( Window *pWindow )
 {
     mWindow = pWindow;
-    mBT.LoadFile( "./Resources/cBitmap.png" , "./Resources/cInfo.h.txt" );
+    mBT.LoadFile( "./Resources/fontBitmap.png" , "./Resources/bitmapMapping.txt" );
     mBT.SetPosition( glm::vec2( 50, 50 ) );
     mBT.SetText( "Hello" );
 }
