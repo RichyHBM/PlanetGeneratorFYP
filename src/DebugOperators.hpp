@@ -6,12 +6,12 @@
 
 namespace MemoryUse
 {
-	enum MemoryType {
-    Normal,
-    Graphics,
-    Assets,
-    Unknown
-	};
+    enum MemoryType {
+        Normal,
+        Graphics,
+        Assets,
+        Unknown
+    };
 
     extern unsigned long long TotalBytesUsed;
     extern unsigned long long AssetsBytesUsed;
@@ -20,10 +20,10 @@ namespace MemoryUse
     extern unsigned long long UnknownBytesUsed;
 }
 
-void *operator new ( const std::size_t size ) throw (std::bad_alloc);
-void *operator new ( const std::size_t size, const MemoryUse::MemoryType type ) throw (std::bad_alloc);
-void *operator new[] ( const std::size_t size ) throw (std::bad_alloc);
-void *operator new[] ( const std::size_t size, const MemoryUse::MemoryType type ) throw (std::bad_alloc);
+void *operator new ( const std::size_t size ) throw ( std::bad_alloc );
+void *operator new ( const std::size_t size, const MemoryUse::MemoryType type ) throw ( std::bad_alloc );
+void *operator new[] ( const std::size_t size ) throw ( std::bad_alloc );
+void *operator new[] ( const std::size_t size, const MemoryUse::MemoryType type ) throw ( std::bad_alloc );
 
 void operator delete ( void *p ) throw ();
 void operator delete[] ( void *p ) throw ();

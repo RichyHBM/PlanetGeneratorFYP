@@ -20,7 +20,7 @@ struct MemoryChunk {
 
 
 //Overrides the new operator and adds the size of the variable to bytesUsed
-void *operator new ( const std::size_t size, MemoryUse::MemoryType type ) throw (std::bad_alloc)
+void *operator new ( const std::size_t size, MemoryUse::MemoryType type ) throw ( std::bad_alloc )
 {
     //create memory for the new object and the information header
     void *const p = std::malloc( sizeof( MemoryChunk ) + size );
@@ -60,17 +60,17 @@ void *operator new ( const std::size_t size, MemoryUse::MemoryType type ) throw 
     return mc + 1;
 }
 
-void *operator new[] ( const std::size_t size, MemoryUse::MemoryType type ) throw (std::bad_alloc)
+void *operator new[] ( const std::size_t size, MemoryUse::MemoryType type ) throw ( std::bad_alloc )
 {
     return operator new( size, type );
 }
 
-void *operator new ( const std::size_t size ) throw (std::bad_alloc)
+void *operator new ( const std::size_t size ) throw ( std::bad_alloc )
 {
     return operator new( size, MemoryUse::Unknown );
 }
 
-void *operator new[] ( const std::size_t size ) throw (std::bad_alloc)
+void *operator new[] ( const std::size_t size ) throw ( std::bad_alloc )
 {
     return operator new( size, MemoryUse::Unknown );
 }
@@ -117,5 +117,5 @@ void operator delete ( void *p ) throw ()
 
 void operator delete[] ( void *const p ) throw ()
 {
-    delete( reinterpret_cast<char *const>(p) );
+    delete( reinterpret_cast<char *const>( p ) );
 }
