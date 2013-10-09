@@ -1,14 +1,14 @@
-#include "Includes.hpp"
+#include "../src/Includes.hpp"
 
-#include "./Settings.hpp"
-#include "./Utilities.hpp"
+#include "../src/Settings.hpp"
+#include "../src/Utilities.hpp"
 #include "./Program.hpp"
-#include "./Window.hpp"
+#include "../src/Window.hpp"
 
 #ifdef SFML
-#include "./WindowSFML.hpp"
+#include "../src/WindowSFML.hpp"
 #elif defined GLFW
-#include "./WindowGLFW.hpp"
+#include "../src/WindowGLFW.hpp"
 #endif
 
 #define OUTPUTTOCOUT
@@ -56,8 +56,6 @@ int main( int argc, const char *argv[] )
     filestr.close();
 #endif
     //*/
-    std::cout << "Please press any key to exit" << std::endl;
-    std::cin.get();
     return 0;
 }
 

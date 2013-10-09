@@ -1,8 +1,8 @@
-#include "Includes.hpp"
+#include "../src/Includes.hpp"
 
 #include "Program.hpp"
-#include "./Settings.hpp"
-#include "./Utilities.hpp"
+#include "../src/Settings.hpp"
+#include "../src/Utilities.hpp"
 
 
 Program::Program( Window *pWindow )

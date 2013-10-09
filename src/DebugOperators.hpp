@@ -1,6 +1,8 @@
 #ifndef DEBUG_OPERATORS_HPP
 #define DEBUG_OPERATORS_HPP
 
+#ifndef NO_CUSTON_NEW_DELETE
+
 #include <cstddef>
 #include <new>
 
@@ -27,5 +29,7 @@ void *operator new[] ( const std::size_t size, const MemoryUse::MemoryType type 
 
 void operator delete ( void *p ) throw ();
 void operator delete[] ( void *p ) throw ();
+
+#endif
 
 #endif //DEBUG_OPERATORS_HPP

@@ -1,4 +1,6 @@
 #include "./DebugOperators.hpp"
+#ifndef NO_CUSTON_NEW_DELETE
+
 #include <cstddef>
 #include <cstdlib>
 #include <new>
@@ -119,3 +121,5 @@ void operator delete[] ( void *const p ) throw ()
 {
     delete( reinterpret_cast<char *const>( p ) );
 }
+
+#endif

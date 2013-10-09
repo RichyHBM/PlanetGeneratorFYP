@@ -1,8 +1,8 @@
 #ifndef PROGRAM_HPP
 #define PROGRAM_HPP
 
-#include "GLHelp/BitmapText.hpp"
-#include "Window.hpp"
+#include "../src/GLHelp/BitmapText.hpp"
+#include "../src/Window.hpp"
 
 class Program
 {
