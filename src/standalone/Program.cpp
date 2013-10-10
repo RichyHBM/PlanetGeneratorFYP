@@ -1,8 +1,8 @@
-#include "../src/Includes.hpp"
+#include "framework/Includes.hpp"
 
 #include "Program.hpp"
-#include "../src/Settings.hpp"
-#include "../src/Utilities.hpp"
+#include "framework/Settings.hpp"
+#include "framework/Utilities.hpp"
 
 
 Program::Program( Window *pWindow )
@@ -52,6 +52,7 @@ void Program::Run()
 
 void Program::Update()
 {
+	mBT.SetText( Util::ToString( mWindow->GetDelta() ));
 }
 
 void Program::Draw()

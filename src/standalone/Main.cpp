@@ -1,14 +1,14 @@
-#include "../src/Includes.hpp"
+#include "framework/Includes.hpp"
 
-#include "../src/Settings.hpp"
-#include "../src/Utilities.hpp"
+#include "framework/Settings.hpp"
+#include "framework/Utilities.hpp"
 #include "./Program.hpp"
-#include "../src/Window.hpp"
+#include "framework/Window.hpp"
 
 #ifdef SFML
-#include "../src/WindowSFML.hpp"
+#include "framework/WindowSFML.hpp"
 #elif defined GLFW
-#include "../src/WindowGLFW.hpp"
+#include "framework/WindowGLFW.hpp"
 #endif
 
 #define OUTPUTTOCOUT
