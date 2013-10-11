@@ -93,11 +93,13 @@ void BitmapText::LoadFile( const std::string &pImageFile, const std::string &pUV
 void BitmapText::SetText( const std::string &pText )
 {
     //Cant use empty strings
-	if(pText == ""){
-		mText = " ";
-	}else{
-		mText = pText;
-	}
+    if( pText == "" ) {
+        mText = " ";
+
+    } else {
+        mText = pText;
+    }
+
     Rebuild();
 }
 

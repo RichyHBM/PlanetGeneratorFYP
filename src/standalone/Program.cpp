@@ -52,7 +52,7 @@ void Program::Run()
 
 void Program::Update()
 {
-	mBT.SetText( Util::ToString( mWindow->GetDelta() ));
+    mBT.SetText( Util::ToString( mWindow->GetDelta() ) );
 }
 
 void Program::Draw()
