@@ -33,15 +33,15 @@ public:
 
     //Create a new render texture drawer of the given size
     void Create( float pWidth, float pHeight, bool pInvert = false );
-    
-	//Set the position of the render target
-	void SetPosition( const glm::vec3 &pPosition );
+
+    //Set the position of the render target
+    void SetPosition( const glm::vec3 &pPosition );
     void SetPosition( const glm::vec2 &pPosition );
 
     void Draw();
     void SetColor( float pRed , float pGreen, float pBlue , float pAlpha );
-    
-	//Set the 2d matrix
+
+    //Set the 2d matrix
     void SetOrtho( glm::mat4 &pOrtho );
     void SetTexture( const GLuint &pTexture );
 };

@@ -57,6 +57,7 @@ void Texture::Unbind()
 bool Texture::GenMipmaps()
 {
     bool result = false;
+
     //If the graphics card doesnt support genMipMaps then try as an extension
     if( glGenerateMipmap ) {
         glGenerateMipmap( GL_TEXTURE_2D );

@@ -42,7 +42,7 @@ public:
 
 protected:
     Window *mWindow;
-    BitmapText mBT;
+    //BitmapText mBT;
 private:
 };
 

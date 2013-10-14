@@ -18,13 +18,13 @@ public:
 
     //Add a line to the drawer
     void AddLines ( const glm::vec3 &pVecA, const glm::vec3 &pVecB, const glm::vec3 &pColor );
-    
-	//Add a triangle, internally gets converted to 3 lines
+
+    //Add a triangle, internally gets converted to 3 lines
     void AddTriangle ( const glm::vec3 &pVecA, const glm::vec3 &pVecB, const glm::vec3 &pVecC, const glm::vec3 &pColor );
-    
-	//Add a square, internally gets converted to 4 lines
+
+    //Add a square, internally gets converted to 4 lines
     void AddQuad ( const glm::vec3 &pVecA, const glm::vec3 &pVecB, const glm::vec3 &pVecC, const glm::vec3 &pVecD, const glm::vec3 &pColor );
-    
+
     void Draw();
 
 protected:

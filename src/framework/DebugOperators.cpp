@@ -79,12 +79,12 @@ void *operator new[] ( const std::size_t size ) throw ( std::bad_alloc )
 
 void operator delete ( void *p ) throw ()
 {
-	//if p is null theres nothing to do
+    //if p is null theres nothing to do
     if( !p ) {
         return;
     }
 
-	//subtrack the size of memorychunk as p points to the start of the data type not including memory chunk
+    //subtrack the size of memorychunk as p points to the start of the data type not including memory chunk
     MemoryChunk *mc = ( MemoryChunk * )p - 1;
 
     if( mc->myCreation == magicNumber ) {

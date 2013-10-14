@@ -12,7 +12,7 @@ public:
 
     //Set the shader attribute index for the data
     void SetAttributeIndex( GLuint pAttribIndex );
-    
+
     void Bind( GLint pSize = 0, GLenum pType = GL_FLOAT , GLboolean pNormalized = false, GLsizei pStride = 0 );
     void Unbind();
 

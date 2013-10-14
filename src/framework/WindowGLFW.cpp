@@ -24,12 +24,12 @@ WindowGLFW::WindowGLFW()
     //Initialize local variables using settings
     std::string title = "PlanetGenFYP";
     unsigned short
-        depthBits = Settings::Initial.GetDepthBits(),
-        stencilBits = Settings::Initial.GetStencilBits(),
-        antiAliasing = Settings::Initial.GetAntiAliasing(),
-        majorOGL = Settings::Initial.GetMajorOGL(),
-        minorOGL = Settings::Initial.GetMinorOGL(),
-        fps = Settings::Initial.GetFPS();
+    depthBits = Settings::Initial.GetDepthBits(),
+    stencilBits = Settings::Initial.GetStencilBits(),
+    antiAliasing = Settings::Initial.GetAntiAliasing(),
+    majorOGL = Settings::Initial.GetMajorOGL(),
+    minorOGL = Settings::Initial.GetMinorOGL(),
+    fps = Settings::Initial.GetFPS();
     int width = Settings::Initial.GetWidth(),
         height = Settings::Initial.GetHeight();
     bool vSynk = Settings::Initial.GetVSynk(), fullScreen = Settings::Initial.GetFullScreen();
@@ -48,6 +48,7 @@ WindowGLFW::WindowGLFW()
 
     if( vSynk ) {
         glfwSwapInterval( 1 );
+
     } else {
         glfwSwapInterval( 0 );
     }

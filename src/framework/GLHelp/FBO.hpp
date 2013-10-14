@@ -11,16 +11,16 @@ public:
 
     //Get the FBO ID
     GLuint GetFBO();
-	
-	//Get the depth buffers ID
+
+    //Get the depth buffers ID
     GLuint GetDepthBuffer();
-    
-	//Get the textures ID
+
+    //Get the textures ID
     GLuint GetTexture();
-    
-	//Create an FBO of the given size
+
+    //Create an FBO of the given size
     bool Create( int pWidth, int pHeight );
-    
+
     void Bind();
     static void Unbind();
 

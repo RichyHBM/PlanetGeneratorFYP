@@ -9,7 +9,7 @@ TextureRenderer::TextureRenderer()
 
 void TextureRenderer::Create( float pWidth, float pHeight, bool pInvert )
 {
-	//Default basic shaders for drawing texture to screen
+    //Default basic shaders for drawing texture to screen
     std::string vertexShader =
         "#version 120\n"
         "uniform mat4 MVP;\n"

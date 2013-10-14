@@ -6,7 +6,7 @@
 
 BitmapText::BitmapText()
 {
-    //Basic shader for drawing 2d textures to screen 
+    //Basic shader for drawing 2d textures to screen
     std::string vertexShader =
         "#version 120\n"
         "uniform mat4 MVP;\n"

@@ -32,19 +32,19 @@ protected:
 public:
     BitmapText();
     ~BitmapText();
-    
-	//Load text from files
+
+    //Load text from files
     void LoadFile( const std::string &pImageFile, const std::string &pUVFile );
-    
+
     void SetText( const std::string &pText );
-	void SetPosition( const glm::vec3 &pPosition );
+    void SetPosition( const glm::vec3 &pPosition );
     void SetPosition( const glm::vec2 &pPosition );
     void Draw();
-	
-	//Set the color/tint
+
+    //Set the color/tint
     void SetColor( float pRed , float pGreen, float pBlue , float pAlpha );
-	
-	//Set the orhto/2d matrix
+
+    //Set the orhto/2d matrix
     void SetOrtho( glm::mat4 &pOrtho );
 };
 

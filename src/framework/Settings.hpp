@@ -9,7 +9,7 @@ public:
     static Settings Initial;
     //Real run time settings
     static Settings Running;
-    
+
 
     Settings();
     ~Settings();

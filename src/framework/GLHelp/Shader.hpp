@@ -16,11 +16,11 @@ public:
 
     void Bind();
     static void Unbind();
-    
+
     //Get a given attributes ID
     GLuint GetAttribute( const std::string &pAttName );
-    
-	//Get a given uniforms ID
+
+    //Get a given uniforms ID
     GLuint GetUniform( const std::string &pUniName );
 protected:
 private:

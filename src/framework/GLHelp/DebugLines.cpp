@@ -30,7 +30,6 @@ DebugLines::DebugLines()
 
 DebugLines::~DebugLines()
 {
-
 }
 
 void DebugLines::SetCameraMatrix( glm::mat4 &pCameraMatrix )
