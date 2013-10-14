@@ -25,8 +25,8 @@ solution "PlanetGeneratorFYP"
       defines { "NDEBUG" }
       flags { "OptimizeSpeed" }
 
-   dofile "./premakes/framework.lua"
    dofile "./premakes/standalone.lua"
+   dofile "./premakes/framework.lua"
    dofile "./premakes/test.lua"
    dofile "./premakes/server.lua"
    dofile "./premakes/client.lua"

@@ -11,37 +11,17 @@ protected:
     int mWidth, mHeight;
     GLuint mTextureID;
 public:
-    ///
-    ///Default constructor
-    ///
     Texture();
-    ///
-    ///Default destructor
-    ///
     ~Texture();
-    ///
-    ///Load texture from a file
-    ///
     bool LoadFromFile( const std::string &pFileName );
-    ///
-    ///Get the textures size
-    ///
     glm::vec2 GetSize();
-    ///
-    ///Bind the texture
-    ///
     void Bind();
-    ///
-    ///Unbind any texture
-    ///
     static void Unbind();
-    ///
-    ///Generate mipmaps performing safety check
-    ///
+
+    //Generate mipmaps performing safety check
     static bool GenMipmaps();
-    ///
-    ///Take a screenshot of the current openGL context
-    ///
+
+    //Take a screen shot of the current openGL context
     static bool Screenshot( const std::string &filename, int x, int y, int w, int h );
 };
 

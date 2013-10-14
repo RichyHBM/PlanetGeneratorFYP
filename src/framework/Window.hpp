@@ -3,6 +3,8 @@
 
 #include "Includes.hpp"
 
+// Window interface, any windowing library wrapper must implement these methods.
+
 enum CursorState {
     Hidden,
     Shown,
@@ -21,9 +23,11 @@ public:
     double GetDelta() {
         return mDelta;
     }
+    //Processes the events queue
     virtual void DoEvents()=0;
     virtual void Display() =0;
     virtual bool IsWindowCreated()=0;
+    //Sets this window to be the current OpenGL context
     virtual void MakeContextCurrent()=0;
     virtual void ResetDelta()=0;
     virtual void Close()=0;

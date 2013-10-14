@@ -21,15 +21,15 @@ WindowGLFW::WindowGLFW()
         WindowGLFW::mGLFWInitialised = true;
     }
 
-    //Initialize local variables using setings
+    //Initialize local variables using settings
     std::string title = "PlanetGenFYP";
     unsigned short
-    depthBits = Settings::Initial.GetDepthBits(),
-    stencilBits = Settings::Initial.GetStencilBits(),
-    antiAliasing = Settings::Initial.GetAntiAliasing(),
-    majorOGL = Settings::Initial.GetMajorOGL(),
-    minorOGL = Settings::Initial.GetMinorOGL(),
-    fps = Settings::Initial.GetFPS();
+        depthBits = Settings::Initial.GetDepthBits(),
+        stencilBits = Settings::Initial.GetStencilBits(),
+        antiAliasing = Settings::Initial.GetAntiAliasing(),
+        majorOGL = Settings::Initial.GetMajorOGL(),
+        minorOGL = Settings::Initial.GetMinorOGL(),
+        fps = Settings::Initial.GetFPS();
     int width = Settings::Initial.GetWidth(),
         height = Settings::Initial.GetHeight();
     bool vSynk = Settings::Initial.GetVSynk(), fullScreen = Settings::Initial.GetFullScreen();
@@ -48,7 +48,6 @@ WindowGLFW::WindowGLFW()
 
     if( vSynk ) {
         glfwSwapInterval( 1 );
-
     } else {
         glfwSwapInterval( 0 );
     }
@@ -63,6 +62,7 @@ WindowGLFW::WindowGLFW()
 
     if ( !mWindow ) {
         mWindow = NULL;
+        std::cout << "Error: GLFW could not open the window" << std::endl;
         return;
     }
 
@@ -79,11 +79,9 @@ WindowGLFW::WindowGLFW()
 
     if( vSynk ) {
         glfwSwapInterval( 1 );
-        wglSwapIntervalEXT( 1 );
 
     } else {
         glfwSwapInterval( 0 );
-        wglSwapIntervalEXT( 0 );
     }
 
     std::cout << "Using GLEW " << glewGetString( GLEW_VERSION ) << std::endl;
@@ -112,11 +110,13 @@ WindowGLFW::WindowGLFW()
 
 WindowGLFW::~WindowGLFW()
 {
+    //Close the window
     if( IsWindowCreated() ) {
         glfwDestroyWindow( mWindow );
         WindowGLFW::mWindowCount--;
     }
 
+    //if no more windows are open, close down glfw
     if( WindowGLFW::mWindowCount == 0 && WindowGLFW::mGLFWInitialised ) {
         WindowGLFW::mGLFWInitialised = false;
         glfwTerminate();

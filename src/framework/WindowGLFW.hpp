@@ -14,6 +14,7 @@ public:
 
     bool IsFocused();
     bool IsOpen();
+	//Returns the GLFW window pointer
     GLFWwindow *GetGLFWWindow();
     void SetCursor( CursorState pState );
     void DoEvents();

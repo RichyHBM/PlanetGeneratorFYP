@@ -1,6 +1,3 @@
-
-
-
 #include "DebugLines.hpp"
 
 DebugLines::DebugLines()
@@ -33,7 +30,7 @@ DebugLines::DebugLines()
 
 DebugLines::~DebugLines()
 {
-    //dtor
+
 }
 
 void DebugLines::SetCameraMatrix( glm::mat4 &pCameraMatrix )

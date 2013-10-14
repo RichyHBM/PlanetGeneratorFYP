@@ -3,7 +3,6 @@
 #include <sys/stat.h>
 
 
-
 time_t Util::GetModificationTime( const std::string &filename )
 {
     time_t elapsedSinceTimeStamp = 0;

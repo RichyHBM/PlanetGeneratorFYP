@@ -11,15 +11,15 @@ unsigned long long MemoryUse::AssetsBytesUsed = 0;
 unsigned long long MemoryUse::GraphicsBytesUsed = 0;
 unsigned long long MemoryUse::NormalBytesUsed = 0;
 unsigned long long MemoryUse::UnknownBytesUsed = 0;
-static int magicNumber = 5551234;
+//Random number to signify that we allocated it
+static int magicNumber = 13713;
 
+//Information on the allocated memory
 struct MemoryChunk {
     int myCreation;
     std::size_t size;
     MemoryUse::MemoryType type;
 };
-
-
 
 //Overrides the new operator and adds the size of the variable to bytesUsed
 void *operator new ( const std::size_t size, MemoryUse::MemoryType type ) throw ( std::bad_alloc )
@@ -79,10 +79,12 @@ void *operator new[] ( const std::size_t size ) throw ( std::bad_alloc )
 
 void operator delete ( void *p ) throw ()
 {
+	//if p is null theres nothing to do
     if( !p ) {
         return;
     }
 
+	//subtrack the size of memorychunk as p points to the start of the data type not including memory chunk
     MemoryChunk *mc = ( MemoryChunk * )p - 1;
 
     if( mc->myCreation == magicNumber ) {

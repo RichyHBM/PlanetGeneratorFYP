@@ -61,7 +61,6 @@ bool Shader::linkShader()
     GLint Result = GL_FALSE;
     int InfoLogLength = 0;
     /// Link the program
-    //fprintf(stdout, "Linking program ");
     glAttachShader( mShaderID, mVertexID );
     glAttachShader( mShaderID, mFragmentID );
     glLinkProgram( mShaderID );
@@ -72,7 +71,7 @@ bool Shader::linkShader()
     glGetProgramInfoLog( mShaderID, InfoLogLength, NULL, &ProgramErrorMessage[0] );
 
     if( Result == GL_FALSE ) {
-        fprintf( stdout, "%s\n", &ProgramErrorMessage[0] );
+        std::cout << &ProgramErrorMessage[0] << std::endl;
         return false;
     }
 
@@ -84,7 +83,6 @@ bool Shader::compileVertexShader( const std::string &pVertCode )
     GLint Result = GL_FALSE;
     int InfoLogLength = 0;
     /// Compile Vertex Shader
-    //printf("Compiling shader : %s ", vertFileName.c_str());
     char const *VertexSourcePointer = pVertCode.c_str();
     glShaderSource( mVertexID, 1, &VertexSourcePointer , NULL );
     glCompileShader( mVertexID );
@@ -95,7 +93,7 @@ bool Shader::compileVertexShader( const std::string &pVertCode )
     glGetShaderInfoLog( mVertexID, InfoLogLength, NULL, &VertexShaderErrorMessage[0] );
 
     if( Result == GL_FALSE ) {
-        fprintf( stdout, "%s\n", &VertexShaderErrorMessage[0] );
+        std::cout << &VertexShaderErrorMessage[0] << std::endl;
         return false;
     }
 
@@ -107,7 +105,6 @@ bool Shader::compileFragmentShader( const std::string &pFragCode )
     GLint Result = GL_FALSE;
     int InfoLogLength = 0;
     /// Compile Fragment Shader
-    //printf("Compiling shader : %s ", fragFileName.c_str());
     char const *FragmentSourcePointer = pFragCode.c_str();
     glShaderSource( mFragmentID, 1, &FragmentSourcePointer , NULL );
     glCompileShader( mFragmentID );
@@ -118,7 +115,7 @@ bool Shader::compileFragmentShader( const std::string &pFragCode )
     glGetShaderInfoLog( mFragmentID, InfoLogLength, NULL, &FragmentShaderErrorMessage[0] );
 
     if( Result == GL_FALSE ) {
-        fprintf( stdout, "%s\n", &FragmentShaderErrorMessage[0] );
+        std::cout <<  &FragmentShaderErrorMessage[0] << std::endl;
     }
 
     if( Result == GL_TRUE ) {

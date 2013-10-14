@@ -5,61 +5,23 @@
 class Settings
 {
 public:
-    ///
-    ///Initial settings
-    ///
+    //Startup settings
     static Settings Initial;
-    ///
-    ///Running settings
-    ///
+    //Real run time settings
     static Settings Running;
-    ///
-    ///Default constructor
-    ///
+    
+
     Settings();
-    ///
-    ///Default destructor
-    ///
     ~Settings();
-    ///
-    ///Getter for the depth bits
-    ///
     unsigned short GetDepthBits();
-    ///
-    ///Getter for the stencil bits
-    ///
     unsigned short GetStencilBits();
-    ///
-    ///Getter for the antialiasing level
-    ///
     unsigned short GetAntiAliasing();
-    ///
-    ///Getter for the openGL major version
-    ///
     unsigned short GetMajorOGL();
-    ///
-    ///Getter for the openGL minor version
-    ///
     unsigned short GetMinorOGL();
-    ///
-    ///Getter for the window width
-    ///
     unsigned short GetWidth();
-    ///
-    ///Getter for the window height
-    ///
     unsigned short GetHeight();
-    ///
-    ///Getter for the target fps
-    ///
     unsigned short GetFPS();
-    ///
-    ///Getter for the vsynk boolean
-    ///
     bool GetVSynk();
-    ///
-    ///Getter for the fullscreen boolean
-    ///
     bool GetFullScreen();
 
     ///
@@ -78,7 +40,7 @@ public:
         bool pFullScreen );
 
     ///
-    ///Seeter for the qidth and height
+    ///Setter for the width and height
     ///
     void SetResolution(
         unsigned short pWidth,

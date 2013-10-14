@@ -33,8 +33,11 @@ bool Texture::LoadFromFile( const std::string &pFileName )
 
     glGenTextures( 1, &mTextureID );
     glBindTexture( GL_TEXTURE_2D, mTextureID );
+    //Load the image data
     unsigned char *image = SOIL_load_image( pFileName.c_str(), &mWidth, &mHeight, 0, SOIL_LOAD_RGBA );
+    //Convert the data to a texture
     glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, mWidth, mHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image );
+    //Free the data
     SOIL_free_image_data( image );
     Texture::GenMipmaps();
     Texture::Unbind();
@@ -54,7 +57,7 @@ void Texture::Unbind()
 bool Texture::GenMipmaps()
 {
     bool result = false;
-
+    //If the graphics card doesnt support genMipMaps then try as an extension
     if( glGenerateMipmap ) {
         glGenerateMipmap( GL_TEXTURE_2D );
         result = true;

@@ -1,5 +1,3 @@
-
-
 #include "TextureRenderer.hpp"
 
 #include <glm/gtx/transform2.hpp>
@@ -11,6 +9,7 @@ TextureRenderer::TextureRenderer()
 
 void TextureRenderer::Create( float pWidth, float pHeight, bool pInvert )
 {
+	//Default basic shaders for drawing texture to screen
     std::string vertexShader =
         "#version 120\n"
         "uniform mat4 MVP;\n"
@@ -68,6 +67,14 @@ TextureRenderer::~TextureRenderer()
 {
 }
 
+void TextureRenderer::SetPosition( const glm::vec3 &pPosition )
+{
+    mPosition = glm::vec3( pPosition.x, pPosition.y, pPosition.z );
+
+    if( mOrtho != NULL ) {
+        mMVP = ( *mOrtho ) * glm::translate( glm::mat4( 1.0f ), mPosition );
+    }
+}
 
 void TextureRenderer::SetPosition( const glm::vec2 &pPosition )
 {

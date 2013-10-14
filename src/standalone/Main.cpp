@@ -67,8 +67,8 @@ void SetSettings()
     antiAliasing = 2,
     majorOGL = 2,
     minorOGL = 1,
-    width = 1240,
-    height = 720,
+    width = 800,
+    height = 600,
     fps = 60;
     bool vSynk = false, fullScreen = false;
     Settings::Initial.SetSettings( depthBits, stencilBits, antiAliasing, majorOGL, minorOGL, width, height, fps, vSynk, fullScreen );

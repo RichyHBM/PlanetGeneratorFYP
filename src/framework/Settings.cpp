@@ -42,6 +42,7 @@ void Settings::SetResolution(
 {
     mWidth = pWidth;
     mHeight = pHeight;
+    //Recompute aspect ratio
     mAspectRatio = pWidth/( float )pHeight;
 }
 

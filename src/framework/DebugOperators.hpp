@@ -3,6 +3,8 @@
 
 #ifndef NO_CUSTON_NEW_DELETE
 
+//Custom new and delete to view memory usage
+
 #include <cstddef>
 #include <new>
 

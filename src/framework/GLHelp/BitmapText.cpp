@@ -6,6 +6,7 @@
 
 BitmapText::BitmapText()
 {
+    //Basic shader for drawing 2d textures to screen 
     std::string vertexShader =
         "#version 120\n"
         "uniform mat4 MVP;\n"
@@ -106,6 +107,12 @@ void BitmapText::SetText( const std::string &pText )
 void BitmapText::SetPosition( const glm::vec2 &pPosition )
 {
     mPosition = glm::vec3( pPosition.x, pPosition.y, 0.0f );
+    mMVP = ( mOrtho ) * glm::translate( glm::mat4( 1.0f ), mPosition );
+}
+
+void BitmapText::SetPosition( const glm::vec3 &pPosition )
+{
+    mPosition = glm::vec3( pPosition.x, pPosition.y, pPosition.z );
     mMVP = ( mOrtho ) * glm::translate( glm::mat4( 1.0f ), mPosition );
 }
 
