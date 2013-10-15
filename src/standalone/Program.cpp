@@ -8,9 +8,9 @@
 Program::Program( Window *pWindow )
 {
     mWindow = pWindow;
-    //mBT.LoadFile( "./Resources/fontBitmap.png" , "./Resources/bitmapMapping.txt" );
-    //mBT.SetPosition( glm::vec2( 50, 50 ) );
-    //mBT.SetText( "Hello" );
+    mBT.LoadFile( "./Resources/fontBitmap.png" , "./Resources/bitmapMapping.txt" );
+    mBT.SetPosition( glm::vec2( 50, 50 ) );
+    mBT.SetText( "Hello" );
 }
 
 Program::~Program()
@@ -21,7 +21,8 @@ Program::~Program()
 
 void Program::Run()
 {
-    while( mWindow->IsOpen() ) {
+
+    while( !mWindow->NeedsToClose() ) {
         mWindow->DoEvents();
 
         if( mWindow->IsFocused() ) {
@@ -34,7 +35,7 @@ void Program::Run()
         }
 
         if( mWindow->IsFocused() ) {
-            if( !mWindow->IsOpen() ) {
+            if( mWindow->NeedsToClose() ) {
                 break;
             }
 
@@ -52,14 +53,14 @@ void Program::Run()
 
 void Program::Update()
 {
-    //mBT.SetText( Util::ToString( mWindow->GetDelta() ) );
+    mBT.SetText( Util::ToString( mWindow->GetDelta() ) );
 }
 
 void Program::Draw()
 {
     glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-    //mBT.Draw();
+    mBT.Draw();
 }
 
 const double Program::GetDelta()

@@ -76,6 +76,7 @@ WindowSFML::WindowSFML()
     //Set the running settings
     Settings::Running.SetSettings( depthBits, stencilBits, antiAliasing, majorOGL, minorOGL, width, height, fps, vSynk, fullScreen );
     mIsFocused = true;
+	mNeedsClose = false;
 }
 
 WindowSFML::~WindowSFML()
@@ -88,7 +89,7 @@ void WindowSFML::DoEvents()
 
     while ( mWindow.pollEvent( event ) ) {
         if ( event.type == sf::Event::Closed ) {
-            mWindow.close();
+            mNeedsClose = true;
 
         } else if ( event.type == sf::Event::Resized ) {
             // adjust the viewport when the window is resized

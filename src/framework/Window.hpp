@@ -23,6 +23,9 @@ public:
     double GetDelta() {
         return mDelta;
     }
+	bool NeedsToClose(){
+		return mNeedsClose;
+	}
     //Processes the events queue
     virtual void DoEvents()=0;
     virtual void Display() =0;
@@ -33,5 +36,6 @@ public:
     virtual void Close()=0;
 protected:
     double mDelta;
+	bool mNeedsClose;
 };
 #endif // WINDOW_HPP

@@ -50,6 +50,7 @@ int main( int argc, const char *argv[] )
     Program *program = new Program( window );
     program->Run();
     delete program;
+	window->Close();
     delete window;
 #ifndef OUTPUTTOCOUT
     std::cout.rdbuf( backup );      // restore cout's original streambuf

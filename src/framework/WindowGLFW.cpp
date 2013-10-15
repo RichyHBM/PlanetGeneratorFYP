@@ -107,6 +107,7 @@ WindowGLFW::WindowGLFW()
     Settings::Running.SetSettings( depthBits, stencilBits, antiAliasing, majorOGL, minorOGL, width, height, fps, vSynk, fullScreen );
     //glfwSetKeyCallback(KeyBoard::SetCallBack);
     WindowGLFW::mWindowCount++;
+	mNeedsClose = false;
 }
 
 WindowGLFW::~WindowGLFW()
@@ -142,7 +143,7 @@ void WindowGLFW::MakeContextCurrent()
 bool WindowGLFW::IsOpen()
 {
     if( glfwWindowShouldClose( mWindow ) ) {
-        Close();
+		mNeedsClose = true;
         return false;
     }
 
