@@ -57,8 +57,8 @@ void TextureRenderer::Create( float pWidth, float pHeight, bool pInvert )
         mUVList.push_back( glm::vec2( 1.0f , 1.0f ) );
     }
 
-    mVertexBuffer.AddData( mVertexList, sizeof( glm::vec3 ) );
-    mUVBuffer.AddData( mUVList, sizeof( glm::vec2 ) );
+    mVertexBuffer.AddVectorData( mVertexList, sizeof( glm::vec3 ) );
+    mUVBuffer.AddVectorData( mUVList, sizeof( glm::vec2 ) );
     mVertexBuffer.SetAttributeIndex( mShader.GetAttribute( "Position" ) );
     mUVBuffer.SetAttributeIndex( mShader.GetAttribute( "UV" ) );
 }

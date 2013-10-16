@@ -5,12 +5,9 @@
 #include "framework/Utilities.hpp"
 
 
-Program::Program( Window *pWindow )
+Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
 {
     mWindow = pWindow;
-    mBT.LoadFile( "./Resources/fontBitmap.png" , "./Resources/bitmapMapping.txt" );
-    mBT.SetPosition( glm::vec2( 50, 50 ) );
-    mBT.SetText( "Hello" );
 }
 
 Program::~Program()
@@ -21,7 +18,6 @@ Program::~Program()
 
 void Program::Run()
 {
-
     while( !mWindow->NeedsToClose() ) {
         mWindow->DoEvents();
 
@@ -53,14 +49,20 @@ void Program::Run()
 
 void Program::Update()
 {
-    mBT.SetText( Util::ToString( mWindow->GetDelta() ) );
+    if( sf::Keyboard::isKeyPressed( sf::Keyboard::F10 ) ) {
+        mDebugInfo.SetDraw( true );
+    }
+
+    if( sf::Keyboard::isKeyPressed( sf::Keyboard::F11 ) ) {
+        mDebugInfo.SetDraw( false );
+    }
 }
 
 void Program::Draw()
 {
     glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-    mBT.Draw();
+    mDebugInfo.Draw();
 }
 
 const double Program::GetDelta()

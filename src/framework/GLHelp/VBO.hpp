@@ -21,7 +21,7 @@ public:
 
     //Add the data using a vector
     template <class T>
-    void AddData( std::vector<T> &pData, GLuint pSize, GLenum pTarget = GL_ARRAY_BUFFER, GLenum mUsageHint = GL_STATIC_DRAW ) {
+    void AddVectorData( std::vector<T> &pData, GLuint pSize, GLenum pTarget = GL_ARRAY_BUFFER, GLenum mUsageHint = GL_STATIC_DRAW ) {
         if( !mHasTarget ) {
             mHasTarget = true;
             mTarget = pTarget;
@@ -33,7 +33,7 @@ public:
 
     //Set the data using an array
     template <class T>
-    void AddData( T &pData, int pAmount, GLuint pSize, GLenum pTarget = GL_ARRAY_BUFFER, GLenum mUsageHint = GL_STATIC_DRAW ) {
+    void AddArrayData( T &pData, int pAmount, GLuint pSize, GLenum pTarget = GL_ARRAY_BUFFER, GLenum mUsageHint = GL_STATIC_DRAW ) {
         if( !mHasTarget ) {
             mHasTarget = true;
             mTarget = pTarget;

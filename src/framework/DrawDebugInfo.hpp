@@ -3,15 +3,25 @@
 
 #include "Includes.hpp"
 #include "GLHelp/BitmapText.hpp"
+#include "Window.hpp"
 
 class DrawDebugInfo
 {
 public:
-    DrawDebugInfo();
+    DrawDebugInfo( Window *window );
     ~DrawDebugInfo();
+    void SetDraw( bool draw );
+    void Draw();
 
 protected:
-
+    bool mDraw;
+    Window *mWindow;
+    BitmapText mDelta;
+    BitmapText mMemoryTotal;
+    BitmapText mMemoryAssets;
+    BitmapText mMemoryGraphics;
+    BitmapText mMemoryNormal;
+    BitmapText mMemoryUnknown;
 };
 
 #endif

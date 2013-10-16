@@ -186,8 +186,8 @@ void BitmapText::Rebuild()
         disp += charRect.z;
     }
 
-    mVertexBuffer.AddData( mVertexList, sizeof( GLfloat ), GL_ARRAY_BUFFER, GL_STREAM_DRAW );
-    mUVBuffer.AddData( mUVList, sizeof( GLfloat ), GL_ARRAY_BUFFER, GL_STREAM_DRAW );
+    mVertexBuffer.AddVectorData( mVertexList, sizeof( GLfloat ), GL_ARRAY_BUFFER, GL_STREAM_DRAW );
+    mUVBuffer.AddVectorData( mUVList, sizeof( GLfloat ), GL_ARRAY_BUFFER, GL_STREAM_DRAW );
 }
 
 void BitmapText::SetColor( float pRed , float pGreen, float pBlue , float pAlpha )

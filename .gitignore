@@ -40,6 +40,7 @@ build/
 !premake4.exe
 !astyle.exe
 !./external/lib/*
+!./external/*
 
 # Packages #
 ############

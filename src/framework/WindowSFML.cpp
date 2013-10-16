@@ -76,7 +76,7 @@ WindowSFML::WindowSFML()
     //Set the running settings
     Settings::Running.SetSettings( depthBits, stencilBits, antiAliasing, majorOGL, minorOGL, width, height, fps, vSynk, fullScreen );
     mIsFocused = true;
-	mNeedsClose = false;
+    mNeedsClose = false;
 }
 
 WindowSFML::~WindowSFML()

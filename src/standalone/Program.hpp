@@ -1,7 +1,7 @@
 #ifndef PROGRAM_HPP
 #define PROGRAM_HPP
 
-#include "framework/GLHelp/BitmapText.hpp"
+#include "framework/DrawDebugInfo.hpp"
 #include "framework/Window.hpp"
 
 class Program
@@ -42,7 +42,7 @@ public:
 
 protected:
     Window *mWindow;
-    BitmapText mBT;
+    DrawDebugInfo mDebugInfo;
 private:
 };
 
