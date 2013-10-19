@@ -40,8 +40,7 @@ WindowSFML::WindowSFML()
     if ( GLEW_OK != err ) {
         // Problem: glewInit failed, something is seriously wrong.
         mWindow.close();
-        std::cout << "Error: " << glewGetErrorString( err ) << std::endl;
-        std::cin.get();
+        Log.Error( Util::ToString(glewGetErrorString( err ) ) );
         return;
     }
 
@@ -54,11 +53,11 @@ WindowSFML::WindowSFML()
         mWindow.setFramerateLimit( fps );
     }
 
-    std::cout << "Using GLEW " << glewGetString( GLEW_VERSION ) << std::endl;
+    Log.Info( "Using GLEW " + Util::ToString( glewGetString( GLEW_VERSION ) ) );
     //Retrieve GL version
     sf::ContextSettings runtimeContextSettings;
     runtimeContextSettings = mWindow.getSettings();
-    std::cout << "Using GLFW " << runtimeContextSettings.majorVersion << "." << runtimeContextSettings.minorVersion << std::endl;
+    Log.Info( "Using OpenGL " + Util::ToString( runtimeContextSettings.majorVersion) + "." + Util::ToString( runtimeContextSettings.minorVersion) );
     //Enable GL features
     glEnable( GL_CULL_FACE );
     glEnable( GL_DEPTH_TEST );

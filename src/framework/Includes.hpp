@@ -21,4 +21,7 @@
 //GLMaths headers
 #include <glm/glm.hpp>
 
+#include "Utilities.hpp"
+#include "LogManager.hpp"
+
 #endif // INCLUDES_HPP_INCLUDED

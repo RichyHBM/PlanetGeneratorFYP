@@ -69,3 +69,6 @@ build/
 ehthumbs.db
 Icon?
 Thumbs.db
+
+# Other
+log.txt

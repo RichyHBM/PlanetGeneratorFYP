@@ -48,7 +48,7 @@ bool FBO::Create( int pWidth, int pHeight )
     GLenum status = glCheckFramebufferStatusEXT( GL_FRAMEBUFFER_EXT );
 
     if ( status != GL_FRAMEBUFFER_COMPLETE_EXT ) {
-        std::cout << "Couldn't create frame buffer" << std::endl;
+        Log.Error( "Couldn't create frame buffer" );
         glBindFramebufferEXT( GL_FRAMEBUFFER_EXT, 0 );
         return false;
     }

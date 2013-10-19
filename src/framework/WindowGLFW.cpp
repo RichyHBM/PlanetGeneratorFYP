@@ -63,7 +63,7 @@ WindowGLFW::WindowGLFW()
 
     if ( !mWindow ) {
         mWindow = NULL;
-        std::cout << "Error: GLFW could not open the window" << std::endl;
+        Log.Error( "GLFW could not open the window" );
         return;
     }
 
@@ -73,7 +73,7 @@ WindowGLFW::WindowGLFW()
     if ( GLEW_OK != err ) {
         // Problem: glewInit failed, something is seriously wrong.
         glfwDestroyWindow( mWindow );
-        std::cout << "Error: " << glewGetErrorString( err ) << std::endl;
+        Log.Error( Util::ToString( glewGetErrorString( err ) ) );
         std::cin.get();
         return;
     }
@@ -85,11 +85,11 @@ WindowGLFW::WindowGLFW()
         glfwSwapInterval( 0 );
     }
 
-    std::cout << "Using GLEW " << glewGetString( GLEW_VERSION ) << std::endl;
+    Log.Info( "Using GLEW " + Util::ToString( glewGetString( GLEW_VERSION ) ) );
     //Retrieve GL version
     int glfwMajor = 0, glfwMinor = 0, glfwRev = 0;
     glfwGetVersion( &glfwMajor, &glfwMinor, &glfwRev );
-    std::cout << "Using GLFW " << glfwMajor << "." << glfwMinor << "." << glfwRev << std::endl;
+	Log.Info( "Using OpenGL " + Util::ToString( glfwMajor) + "." + Util::ToString( glfwMinor ) + "." + Util::ToString( glfwRev ) );
     //Enable GL features
     glEnable( GL_CULL_FACE );
     glEnable( GL_DEPTH_TEST );

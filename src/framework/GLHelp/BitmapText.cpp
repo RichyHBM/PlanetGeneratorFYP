@@ -54,41 +54,42 @@ void BitmapText::LoadFile( const std::string &pImageFile, const std::string &pUV
     Texture::Unbind();
     std::ifstream myfile;
 
-    try {
-        myfile.open( pUVFile.c_str() );
+    myfile.open( pUVFile.c_str() );
 
-        if ( myfile.is_open() ) {
-            while ( myfile.good() ) {
-                std::string line;
-                std::getline ( myfile,line );
+    if ( myfile.is_open() ) {
+        while ( myfile.good() ) {
+            std::string line;
+            std::getline ( myfile,line );
 
-                //skip if reading empty/invalid line
-                if( line.length() != 19 ) {
-                    continue;
-                }
-
-                float x,y,z,w;
-                std::stringstream strx, stry, strz, strw;
-                strx << line[0]     << line[1]  << line[2]  << line[3];
-                stry << line[5]     << line[6]  << line[7]  << line[8];
-                strz << line[10]    << line[11] << line[12] << line[13];
-                strw << line[15]    << line[16] << line[17] << line[18];
-                strx  >> x;
-                stry  >> y;
-                strz  >> z;
-                strw  >> w;
-                mPositions.push_back( glm::vec4( x, y, z, w ) );
+            //skip if reading empty/invalid line
+            if( line.length() != 19 ) {
+                continue;
             }
 
-            myfile.close();
+            float x,y,z,w;
+            std::stringstream strx, stry, strz, strw;
+            strx << line[0]     << line[1]  << line[2]  << line[3];
+            stry << line[5]     << line[6]  << line[7]  << line[8];
+            strz << line[10]    << line[11] << line[12] << line[13];
+            strw << line[15]    << line[16] << line[17] << line[18];
+            strx  >> x;
+            stry  >> y;
+            strz  >> z;
+            strw  >> w;
+            mPositions.push_back( glm::vec4( x, y, z, w ) );
         }
 
-        Rebuild();
+        myfile.close();
+	}else{
+		Log.Error( "Failed to load: " + pUVFile );
+		//ASCII supports up to 256 characters
+		for(int i = 0; i < 256; i++)
+		{
+			mPositions.push_back( glm::vec4( 0, 0, 0, 0 ) );
+		}
+	}
 
-    } catch( const std::exception &exc ) {
-        std::cout << "Failed to load: " << pUVFile << std::endl;
-        std::cerr << exc.what();
-    }
+	Rebuild();
 }
 
 void BitmapText::SetText( const std::string &pText )

@@ -10,7 +10,11 @@
                "../external/src/**.hpp",
                "../external/src/**.h" }
 
-      includedirs { "../external/include/"}      
+      includedirs { "../external/include/"} 
+
+	  if _ACTION == "vs2010" then
+        postbuildcommands { "call ..\\postbuild\\vs.bat" }
+      end
       
       configuration "Debug"         
          if _ACTION == "vs2010" then

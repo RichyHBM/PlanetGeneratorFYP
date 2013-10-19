@@ -8,7 +8,7 @@ solution "PlanetGeneratorFYP"
    if _ACTION == "vs2010" then
       libdirs { "./external/lib/vs2010" }
       defines { "WIN32" }
-      postbuildcommands { "call ..\\postbuild\\vs.bat" }
+	  buildoptions { "/wd4290" }
    end
 
    if _ACTION == "gmake" then

@@ -5,13 +5,13 @@
 #include "./Program.hpp"
 #include "framework/Window.hpp"
 
+#include "framework/DebugOperators.hpp"
+
 #ifdef SFML
 #include "framework/WindowSFML.hpp"
 #elif defined GLFW
 #include "framework/WindowGLFW.hpp"
 #endif
-
-#define OUTPUTTOCOUT
 
 ///
 ///Set initial settings
@@ -23,18 +23,11 @@ void ProcessArgument( const std::string &arg );
 
 int main( int argc, const char *argv[] )
 {
+
     for( int i = 0; i < argc; i++ ) {
         ProcessArgument( argv[i] );
     }
 
-#ifndef OUTPUTTOCOUT
-    std::streambuf *psbuf, *backup;
-    std::ofstream filestr;
-    filestr.open( Util::GetLocalDateTime( "PlanetGen_log_%Y-%m-%d_%H-%M-%S.txt" ).c_str() );
-    backup = std::cout.rdbuf();     // back up cout's streambuf
-    psbuf = filestr.rdbuf();   // get file's streambuf
-    std::cout.rdbuf( psbuf );
-#endif
     SetSettings();
 #ifdef SFML
     Window *window = new WindowSFML();
@@ -47,16 +40,14 @@ int main( int argc, const char *argv[] )
     }
 
     //Create and run a new program instance
-    Program *program = new Program( window );
+    Program *program = new(MemoryUse::Normal) Program( window );
     program->Run();
     delete program;
     window->Close();
     delete window;
-#ifndef OUTPUTTOCOUT
-    std::cout.rdbuf( backup );      // restore cout's original streambuf
-    filestr.close();
-#endif
+    
     //*/
+    std::cin.get();
     return 0;
 }
 
@@ -68,8 +59,8 @@ void SetSettings()
     antiAliasing = 2,
     majorOGL = 2,
     minorOGL = 1,
-    width = 800,
-    height = 600,
+    width = 1280,
+    height = 720,
     fps = 60;
     bool vSynk = false, fullScreen = false;
     Settings::Initial.SetSettings( depthBits, stencilBits, antiAliasing, majorOGL, minorOGL, width, height, fps, vSynk, fullScreen );

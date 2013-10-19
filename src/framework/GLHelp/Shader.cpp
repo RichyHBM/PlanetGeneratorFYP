@@ -71,7 +71,7 @@ bool Shader::linkShader()
     glGetProgramInfoLog( mShaderID, InfoLogLength, NULL, &ProgramErrorMessage[0] );
 
     if( Result == GL_FALSE ) {
-        std::cout << &ProgramErrorMessage[0] << std::endl;
+        Log.Error( &ProgramErrorMessage[0] );
         return false;
     }
 
@@ -93,7 +93,7 @@ bool Shader::compileVertexShader( const std::string &pVertCode )
     glGetShaderInfoLog( mVertexID, InfoLogLength, NULL, &VertexShaderErrorMessage[0] );
 
     if( Result == GL_FALSE ) {
-        std::cout << &VertexShaderErrorMessage[0] << std::endl;
+        Log.Error( &VertexShaderErrorMessage[0] );
         return false;
     }
 
@@ -114,16 +114,12 @@ bool Shader::compileFragmentShader( const std::string &pFragCode )
     std::vector<char> FragmentShaderErrorMessage( Util::MaxValue( InfoLogLength, 1 ) );
     glGetShaderInfoLog( mFragmentID, InfoLogLength, NULL, &FragmentShaderErrorMessage[0] );
 
-    if( Result == GL_FALSE ) {
-        std::cout <<  &FragmentShaderErrorMessage[0] << std::endl;
-    }
-
     if( Result == GL_TRUE ) {
         return true;
-
-    } else {
-        return false;
     }
+
+    Log.Error(  &FragmentShaderErrorMessage[0] );
+    return false;
 }
 
 bool Shader::LoadShaderCode( const std::string &pVertCode, const std::string &pFragCode )
@@ -168,7 +164,7 @@ bool Shader::LoadShaderFiles( const std::string &pVertFileName, const std::strin
         }
 
     } catch( int e ) {
-        std::cout << "Error opening: " << pVertFileName << " : " << e << std::endl;
+        Log.Error( " Failed to load: " + pVertFileName );
         filesWork = false;
     }
 
@@ -187,7 +183,7 @@ bool Shader::LoadShaderFiles( const std::string &pVertFileName, const std::strin
         }
 
     } catch( int e ) {
-        std::cout << "Error opening: " << pFragFileName << " : " << e << std::endl;
+        Log.Error( " Failed to load: " + pFragFileName );
         filesWork=false;
     }
 
