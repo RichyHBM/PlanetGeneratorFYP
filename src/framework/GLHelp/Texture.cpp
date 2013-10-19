@@ -4,7 +4,7 @@
 
 bool Texture::Screenshot( const std::string &filename, int x, int y, int w, int h )
 {
-    std::cout<<"Taking screenshot: " << filename << std::endl;
+    Log.Info( "Taking screenshot: " + filename );
     return 0 != SOIL_save_screenshot (
                filename.c_str(),
                SOIL_SAVE_TYPE_BMP,
@@ -37,7 +37,7 @@ bool Texture::LoadFromFile( const std::string &pFileName )
     unsigned char *image = SOIL_load_image( pFileName.c_str(), &mWidth, &mHeight, 0, SOIL_LOAD_RGBA );
 
     if( image == NULL ) {
-        Log.Error( pFileName + " failed to load" );
+        Log.Error( "Failed to load: " + pFileName );
     }
 
     //Convert the data to a texture

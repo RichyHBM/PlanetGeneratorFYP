@@ -7,6 +7,9 @@
 
 #include "framework/DebugOperators.hpp"
 
+
+#include "framework/Noise/AccidentalNoise.hpp"
+
 #ifdef SFML
 #include "framework/WindowSFML.hpp"
 #elif defined GLFW
@@ -27,6 +30,8 @@ int main( int argc, const char *argv[] )
         ProcessArgument( argv[i] );
     }
 
+	noise = new(MemoryUse::Normal) AccidentalNoise(1234);
+
     SetSettings();
 #ifdef SFML
     Window *window = new WindowSFML();
@@ -44,6 +49,8 @@ int main( int argc, const char *argv[] )
     delete program;
     window->Close();
     delete window;
+	delete noise;
+
     //*/
     std::cin.get();
     return 0;
