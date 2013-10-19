@@ -53,7 +53,6 @@ void BitmapText::LoadFile( const std::string &pImageFile, const std::string &pUV
     Texture::GenMipmaps();
     Texture::Unbind();
     std::ifstream myfile;
-
     myfile.open( pUVFile.c_str() );
 
     if ( myfile.is_open() ) {
@@ -80,16 +79,17 @@ void BitmapText::LoadFile( const std::string &pImageFile, const std::string &pUV
         }
 
         myfile.close();
-	}else{
-		Log.Error( "Failed to load: " + pUVFile );
-		//ASCII supports up to 256 characters
-		for(int i = 0; i < 256; i++)
-		{
-			mPositions.push_back( glm::vec4( 0, 0, 0, 0 ) );
-		}
-	}
 
-	Rebuild();
+    } else {
+        Log.Error( "Failed to load: " + pUVFile );
+
+        //ASCII supports up to 256 characters
+        for( int i = 0; i < 256; i++ ) {
+            mPositions.push_back( glm::vec4( 0, 0, 0, 0 ) );
+        }
+    }
+
+    Rebuild();
 }
 
 void BitmapText::SetText( const std::string &pText )

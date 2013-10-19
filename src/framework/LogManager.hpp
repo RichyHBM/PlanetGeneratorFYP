@@ -8,52 +8,47 @@
 
 class LogManager
 {
-public:	
+public:
     template <class T>
-    void Info(const T& t)
-    {
-        LogToBoth(t, LIGHTCYAN, "[INFO]");
+    void Info( const T &t ) {
+        LogToBoth( t, LIGHTCYAN, "[INFO]" );
     }
-    
+
     template <class T>
-    void Success(const T& t)
-    {
-        LogToBoth(t, LIGHTGREEN, "[SUCCESS]");
+    void Success( const T &t ) {
+        LogToBoth( t, LIGHTGREEN, "[SUCCESS]" );
     }
-    
+
     template <class T>
-    void Warning(const T& t)
-    {
-        LogToBoth(t, YELLOW, "[WARNING]");
+    void Warning( const T &t ) {
+        LogToBoth( t, YELLOW, "[WARNING]" );
     }
-    
+
     template <class T>
-    void Error(const T& t)
-    {
-        LogToBoth(t, LIGHTRED, "[ERROR]");
+    void Error( const T &t ) {
+        LogToBoth( t, LIGHTRED, "[ERROR]" );
     }
-       
+
     LogManager();
     ~LogManager();
 
 protected:
     std::ofstream mFileStream;
-    void ChangeColor(int color);
+    void ChangeColor( int color );
     int mTagWidth;
 
     template <class T>
-    void LogToBoth(const T& t, int color, const std::string &s)
-    {
-        ChangeColor(color);
-        std::cout << std::left << std::setw(mTagWidth) << s << t << std::endl;
-        ChangeColor(WHITE);
-        if(mFileStream.is_open())
-        {
-            mFileStream << std::left << std::setw(mTagWidth) << s << t << std::endl;
+    void LogToBoth( const T &t, int color, const std::string &s ) {
+        ChangeColor( color );
+        std::cout << std::left << std::setw( mTagWidth ) << s << t << std::endl;
+        ChangeColor( WHITE );
+
+        if( mFileStream.is_open() ) {
+            mFileStream << std::left << std::setw( mTagWidth ) << s << t << std::endl;
         }
     }
 
-    enum Color{
+    enum Color {
         BLACK,
         BLUE,
         GREEN,

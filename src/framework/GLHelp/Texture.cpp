@@ -35,9 +35,11 @@ bool Texture::LoadFromFile( const std::string &pFileName )
     glBindTexture( GL_TEXTURE_2D, mTextureID );
     //Load the image data
     unsigned char *image = SOIL_load_image( pFileName.c_str(), &mWidth, &mHeight, 0, SOIL_LOAD_RGBA );
-	if(image == NULL){
-		Log.Error( pFileName + " failed to load");
-	}
+
+    if( image == NULL ) {
+        Log.Error( pFileName + " failed to load" );
+    }
+
     //Convert the data to a texture
     glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, mWidth, mHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image );
     //Free the data

@@ -20,7 +20,7 @@ void Util::PrintGLErrorsFromLine( const char *file, int line = 0 )
     while( ec != GL_NO_ERROR ) {
         switch( ec ) {
             case GL_INVALID_ENUM:
-				Log.Warning( "OpenGL Error: GL_INVALID_ENUM from line " + Util::ToString( line ) + " in file" + Util::ToString( file ) );
+                Log.Warning( "OpenGL Error: GL_INVALID_ENUM from line " + Util::ToString( line ) + " in file" + Util::ToString( file ) );
                 break;
 
             case GL_INVALID_VALUE:

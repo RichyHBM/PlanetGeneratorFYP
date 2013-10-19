@@ -23,7 +23,6 @@ void ProcessArgument( const std::string &arg );
 
 int main( int argc, const char *argv[] )
 {
-
     for( int i = 0; i < argc; i++ ) {
         ProcessArgument( argv[i] );
     }
@@ -40,12 +39,11 @@ int main( int argc, const char *argv[] )
     }
 
     //Create and run a new program instance
-    Program *program = new(MemoryUse::Normal) Program( window );
+    Program *program = new( MemoryUse::Normal ) Program( window );
     program->Run();
     delete program;
     window->Close();
     delete window;
-    
     //*/
     std::cin.get();
     return 0;

@@ -52,6 +52,33 @@ namespace Util
         }
     }
 
+    //Returns the smallest of 2 values
+    template <class T>
+    T MinValue( T pA, T pB )
+    {
+        if( pA > pB ) {
+            return pB;
+
+        } else {
+            return pA;
+        }
+    }
+
+    //Clamps input to a given value
+    template <class T>
+    T Clamp( T val, T min, T max )
+    {
+        if( val > max ) {
+            return max;
+
+        } else if( val < min ) {
+            return min;
+
+        } else {
+            return val;
+        }
+    }
+
     //Convert a given variable into a string
     template <class T>
     inline std::string ToString ( const T &t )

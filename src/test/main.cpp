@@ -3,17 +3,17 @@
 #include "catch.hpp"
 #include <iostream>
 
-#include "UtilitiesTests.hpp"
+#include "UtilsTests.hpp"
 
-int main( int argc, char* const argv[] )
+int main( int argc, char *const argv[] )
 {
-	Catch::Session session;
-	Catch::ConfigData config;
-
-	config.reporterName = "junit";
-
-	session.useConfigData(config);
-	int s = session.run();
-
-	return s;
+    Catch::Session session;
+    Catch::ConfigData config;
+    config.showDurations = Catch::ShowDurations::DefaultForReporter;
+    config.showSuccessfulTests = true;
+    config.reporterName = "junit";
+    config.outputFilename = "testreport.xml";
+    session.useConfigData( config );
+    int s = session.run();
+    return s;
 }

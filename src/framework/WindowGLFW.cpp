@@ -89,7 +89,7 @@ WindowGLFW::WindowGLFW()
     //Retrieve GL version
     int glfwMajor = 0, glfwMinor = 0, glfwRev = 0;
     glfwGetVersion( &glfwMajor, &glfwMinor, &glfwRev );
-	Log.Info( "Using OpenGL " + Util::ToString( glfwMajor) + "." + Util::ToString( glfwMinor ) + "." + Util::ToString( glfwRev ) );
+    Log.Info( "Using OpenGL " + Util::ToString( glfwMajor ) + "." + Util::ToString( glfwMinor ) + "." + Util::ToString( glfwRev ) );
     //Enable GL features
     glEnable( GL_CULL_FACE );
     glEnable( GL_DEPTH_TEST );

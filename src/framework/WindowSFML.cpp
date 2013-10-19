@@ -40,7 +40,7 @@ WindowSFML::WindowSFML()
     if ( GLEW_OK != err ) {
         // Problem: glewInit failed, something is seriously wrong.
         mWindow.close();
-        Log.Error( Util::ToString(glewGetErrorString( err ) ) );
+        Log.Error( Util::ToString( glewGetErrorString( err ) ) );
         return;
     }
 
@@ -57,7 +57,7 @@ WindowSFML::WindowSFML()
     //Retrieve GL version
     sf::ContextSettings runtimeContextSettings;
     runtimeContextSettings = mWindow.getSettings();
-    Log.Info( "Using OpenGL " + Util::ToString( runtimeContextSettings.majorVersion) + "." + Util::ToString( runtimeContextSettings.minorVersion) );
+    Log.Info( "Using OpenGL " + Util::ToString( runtimeContextSettings.majorVersion ) + "." + Util::ToString( runtimeContextSettings.minorVersion ) );
     //Enable GL features
     glEnable( GL_CULL_FACE );
     glEnable( GL_DEPTH_TEST );
