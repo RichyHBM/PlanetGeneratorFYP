@@ -11,6 +11,15 @@ TEST_CASE( "Testing Utilities ToString" )
     REQUIRE( "0.432" == Util::ToString( 0.432f ) );
 }
 
+TEST_CASE( "Testing Utilities ToString with precision" )
+{
+    REQUIRE( "5.00" == Util::ToString( 5.0f, 2 ) );
+    REQUIRE( "24323.43" == Util::ToString( 24323.432423141f, 2 ) );
+    REQUIRE( "0" == Util::ToString( 0, 0 ) );
+    REQUIRE( "0.432" == Util::ToString( 0.432f, 3 ) );
+    REQUIRE( "0.4" == Util::ToString( 0.4322123123f, 1 ) );
+}
+
 TEST_CASE( "Testing Utilities MaxValue" )
 {
     REQUIRE( 23 == Util::MaxValue( 5, 23 ) );

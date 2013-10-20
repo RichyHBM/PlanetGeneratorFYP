@@ -4,6 +4,8 @@
 #include "framework/DrawDebugInfo.hpp"
 #include "framework/Window.hpp"
 
+#include "framework/GLHelp/GLHelp.hpp"
+
 class Program
 {
 public:
@@ -43,6 +45,11 @@ public:
 protected:
     Window *mWindow;
     DrawDebugInfo mDebugInfo;
+
+    VBO mVertexBuffer;
+    std::vector<glm::vec3> mVertexList;
+    Shader mShader;
+    glm::mat4 mMVP;
 private:
 };
 

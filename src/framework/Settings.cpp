@@ -81,6 +81,11 @@ unsigned short Settings::GetHeight()
     return mHeight;
 }
 
+float Settings::GetAspectRatio()
+{
+    return mAspectRatio;
+}
+
 unsigned short Settings::GetFPS()
 {
     return mFPS;

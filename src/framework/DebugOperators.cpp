@@ -7,7 +7,6 @@
 #include <iostream>
 
 unsigned long long MemoryUse::TotalBytesUsed = 0;
-unsigned long long MemoryUse::AssetsBytesUsed = 0;
 unsigned long long MemoryUse::GraphicsBytesUsed = 0;
 unsigned long long MemoryUse::NormalBytesUsed = 0;
 unsigned long long MemoryUse::UnknownBytesUsed = 0;
@@ -41,10 +40,6 @@ void *operator new ( const std::size_t size, MemoryUse::MemoryType type ) throw 
 
         case MemoryUse::Graphics:
             MemoryUse::GraphicsBytesUsed += size;
-            break;
-
-        case MemoryUse::Assets:
-            MemoryUse::AssetsBytesUsed += size;
             break;
 
         case MemoryUse::Unknown:
@@ -97,10 +92,6 @@ void operator delete ( void *p ) throw ()
 
             case MemoryUse::Graphics:
                 MemoryUse::GraphicsBytesUsed -= mc->size;
-                break;
-
-            case MemoryUse::Assets:
-                MemoryUse::AssetsBytesUsed -= mc->size;
                 break;
 
             case MemoryUse::Unknown:

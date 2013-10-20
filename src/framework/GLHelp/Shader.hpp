@@ -3,6 +3,8 @@
 
 #include "../Includes.hpp"
 
+#define GLSL(src) "#version 120\n" #src
+
 class Shader
 {
 public:

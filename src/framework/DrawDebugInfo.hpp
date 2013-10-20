@@ -14,12 +14,11 @@ public:
     void Draw();
 
 protected:
+    float mKBDivisor;
     bool mDraw;
     Window *mWindow;
     BitmapText mDelta;
     BitmapText mMemoryTotal;
-    BitmapText mMemoryAssets;
-    BitmapText mMemoryGraphics;
     BitmapText mMemoryNormal;
     BitmapText mMemoryUnknown;
 };

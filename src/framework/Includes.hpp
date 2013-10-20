@@ -1,6 +1,8 @@
 #ifndef INCLUDES_HPP
 #define INCLUDES_HPP
 
+#include "DebugOperators.hpp"
+
 //Standard C++ headers
 #include <string>
 #include <sstream>
@@ -20,8 +22,10 @@
 
 //GLMaths headers
 #include <glm/glm.hpp>
+#include <glm/gtx/transform2.hpp>
 
 #include "Utilities.hpp"
 #include "LogManager.hpp"
+
 
 #endif // INCLUDES_HPP_INCLUDED

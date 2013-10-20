@@ -7,7 +7,6 @@
 
 #include "framework/DebugOperators.hpp"
 
-
 #include "framework/Noise/AccidentalNoise.hpp"
 
 #ifdef SFML
@@ -16,13 +15,9 @@
 #include "framework/WindowGLFW.hpp"
 #endif
 
-///
-///Set initial settings
-///
+//Set initial settings
 void SetSettings();
 void ProcessArgument( const std::string &arg );
-
-
 
 int main( int argc, const char *argv[] )
 {
@@ -30,13 +25,12 @@ int main( int argc, const char *argv[] )
         ProcessArgument( argv[i] );
     }
 
-	noise = new(MemoryUse::Normal) AccidentalNoise(1234);
-
+    noise = new( MemoryUse::Normal ) AccidentalNoise( 1234 );
     SetSettings();
 #ifdef SFML
-    Window *window = new WindowSFML();
+    Window *window = new( MemoryUse::Normal ) WindowSFML();
 #elif defined GLFW
-    Window *window = new WindowGLFW();
+    Window *window = new( MemoryUse::Normal ) WindowGLFW();
 #endif
 
     if( !window->IsWindowCreated() ) {
@@ -49,8 +43,7 @@ int main( int argc, const char *argv[] )
     delete program;
     window->Close();
     delete window;
-	delete noise;
-
+    delete noise;
     //*/
     std::cin.get();
     return 0;
@@ -64,8 +57,8 @@ void SetSettings()
     antiAliasing = 2,
     majorOGL = 2,
     minorOGL = 1,
-    width = 1280,
-    height = 720,
+    width = 800,
+    height = 600,
     fps = 60;
     bool vSynk = false, fullScreen = false;
     Settings::Initial.SetSettings( depthBits, stencilBits, antiAliasing, majorOGL, minorOGL, width, height, fps, vSynk, fullScreen );

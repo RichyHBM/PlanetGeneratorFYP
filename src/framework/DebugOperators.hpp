@@ -13,12 +13,10 @@ namespace MemoryUse
     enum MemoryType {
         Normal,
         Graphics,
-        Assets,
         Unknown
     };
 
     extern unsigned long long TotalBytesUsed;
-    extern unsigned long long AssetsBytesUsed;
     extern unsigned long long GraphicsBytesUsed;
     extern unsigned long long NormalBytesUsed;
     extern unsigned long long UnknownBytesUsed;

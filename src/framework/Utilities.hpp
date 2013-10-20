@@ -6,7 +6,7 @@
 
 #include "./Includes.hpp"
 #include <ctime>
-
+#include <iomanip>
 
 namespace Util
 {
@@ -85,6 +85,13 @@ namespace Util
     {
         std::stringstream ss;
         ss << t;
+        return ss.str();
+    }
+
+    inline std::string ToString ( float f, int precision )
+    {
+        std::stringstream ss;
+        ss << std::fixed << std::setprecision( precision ) << f;
         return ss.str();
     }
 

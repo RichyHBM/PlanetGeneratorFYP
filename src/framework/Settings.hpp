@@ -20,6 +20,7 @@ public:
     unsigned short GetMinorOGL();
     unsigned short GetWidth();
     unsigned short GetHeight();
+    float GetAspectRatio();
     unsigned short GetFPS();
     bool GetVSynk();
     bool GetFullScreen();
