@@ -14,20 +14,4 @@
 
 	  if _ACTION == "vs2010" then
         postbuildcommands { "call ..\\postbuild\\vs.bat" }
-      end
-      
-      configuration "Debug"         
-         if _ACTION == "vs2010" then
-            links { "sfml-window-d", "sfml-system-d", "glu32", "opengl32" }
-         end 
-         if _ACTION == "gmake" then
-            links { "sfml-window", "sfml-system", "GLU", "GL" }
-         end
- 
-      configuration "Release"         
-         if _ACTION == "vs2010" then
-            links {  "sfml-window", "sfml-system", "glu32", "opengl32" }
-         end
-         if _ACTION == "gmake" then
-            links { "sfml-window", "sfml-system", "GLU", "GL" }
-         end
+      end    

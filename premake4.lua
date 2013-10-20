@@ -8,7 +8,7 @@ solution "PlanetGeneratorFYP"
    if _ACTION == "vs2010" then
       libdirs { "./external/lib/vs2010" }
       defines { "WIN32" }
-	  buildoptions { "/wd4290" }
+	   buildoptions { "/wd4290" }
    end
 
    if _ACTION == "gmake" then
@@ -20,10 +20,26 @@ solution "PlanetGeneratorFYP"
       defines { "DEBUG" }
       flags { "Symbols" }
 
+      if _ACTION == "vs2010" then
+         links { "sfml-window-d", "sfml-system-d", "glu32", "opengl32", "noisepp-d" }
+      end 
+      if _ACTION == "gmake" then
+         links { "sfml-window", "sfml-system", "GLU", "GL", "noisepp-d" }
+      end
+
+
    configuration "Release"
       targetdir "./bin/Release"
       defines { "NDEBUG" }
       flags { "OptimizeSpeed" }
+
+      if _ACTION == "vs2010" then
+         links {  "sfml-window", "sfml-system", "glu32", "opengl32", "noisepp" }
+      end
+      if _ACTION == "gmake" then
+         links { "sfml-window", "sfml-system", "GLU", "GL", "noisepp" }
+      end
+
 
    dofile "./premakes/standalone.lua"
    dofile "./premakes/framework.lua"
