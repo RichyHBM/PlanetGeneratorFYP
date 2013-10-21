@@ -34,6 +34,7 @@ int main( int argc, const char *argv[] )
 #endif
 
     if( !window->IsWindowCreated() ) {
+        Log.Error( "Failed to create window" );
         return -2;
     }
 
