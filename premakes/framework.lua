@@ -20,7 +20,7 @@
       if _ACTION == "vs2010" then
          links { "sfml-window-d", "sfml-system-d", "glu32", "opengl32", "noisepp-d" }
       end 
-      if _ACTION == "gmake" then
+      if _ACTION == "gmake" or _ACTION == "codeblocks" then
          links { "sfml-window", "sfml-system", "GLU", "GL", "noisepp-d" }
       end
 
@@ -29,6 +29,6 @@
       if _ACTION == "vs2010" then
          links { "sfml-window", "sfml-system", "glu32", "opengl32", "noisepp" }
       end
-      if _ACTION == "gmake" then
+      if _ACTION == "gmake" or _ACTION == "codeblocks" then
          links { "sfml-window", "sfml-system", "GLU", "GL", "noisepp" }
       end
