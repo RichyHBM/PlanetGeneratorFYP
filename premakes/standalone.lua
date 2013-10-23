@@ -7,4 +7,6 @@ project "StandAlone"
 		"../src/standalone/**.h", }
 
 	includedirs { "../external/include/", "../src/"}
-	links { "Framework" }
+	if _ACTION == "vs2010" then
+			links {  "Framework" }
+		end 

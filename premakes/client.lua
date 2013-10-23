@@ -6,5 +6,7 @@ project "Client"
 		"../src/client/**.hpp", 
 		"../src/client/**.h" }      
 
-	includedirs { "../external/include/", "../src/"}    
-	links { "Framework" }
+	includedirs { "../external/include/", "../src/"}
+	if _ACTION == "vs2010" then
+			links {  "Framework" }
+		end 

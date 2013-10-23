@@ -18,3 +18,13 @@ project "Framework"
       if _ACTION == "gmake" or _ACTION == "codeblocks" then
          postbuildcommands { "sh ../postbuild/linux.sh" }
       end
+
+      configuration "Debug"
+         if _ACTION == "gmake" or _ACTION == "codeblocks" then
+            links { "AntTweakBar", "sfml-network", "sfml-window", "sfml-system", "GLU", "GL", "noisepp-d" }
+         end
+
+      configuration "Release"
+         if _ACTION == "gmake" or _ACTION == "codeblocks" then
+            links { "AntTweakBar", "sfml-network", "sfml-window", "sfml-system", "GLU", "GL", "noisepp" }
+         end
