@@ -26,9 +26,9 @@
 #ifndef NOISEBUILDERS_H
 #define NOISEBUILDERS_H
 
-#include "NoisePrerequisites.h"
-#include "NoisePipelineJobs.h"
-#include "NoiseModule.h"
+#include "noisepp/core/NoisePrerequisites.h"
+#include "noisepp/core/NoisePipelineJobs.h"
+#include "noisepp/core/NoiseModule.h"
 
 namespace noisepp
 {

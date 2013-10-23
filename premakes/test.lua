@@ -7,3 +7,4 @@ project "TestProject"
 		"../src/test/**.h" }
 
 	includedirs { "../external/include/", "../src/"}
+	links { "Framework" }

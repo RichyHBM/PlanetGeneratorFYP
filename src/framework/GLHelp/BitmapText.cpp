@@ -56,6 +56,7 @@ void BitmapText::LoadFile( const std::string &pImageFile, const std::string &pUV
     myfile.open( pUVFile.c_str() );
 
     if ( myfile.is_open() ) {
+		Log.Success( "Loaded: " + pUVFile );
         while ( myfile.good() ) {
             std::string line;
             std::getline ( myfile,line );

@@ -26,7 +26,7 @@
 #ifndef GRADIENTRENDERER_H
 #define GRADIENTRENDERER_H
 
-#include "NoisePrerequisites.h"
+#include "noisepp/core/NoisePrerequisites.h"
 #include "NoiseColourValue.h"
 #include "NoiseImage.h"
 #include "NoiseBuilders.h"

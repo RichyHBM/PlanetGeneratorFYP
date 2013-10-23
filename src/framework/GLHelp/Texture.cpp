@@ -39,7 +39,7 @@ bool Texture::LoadFromFile( const std::string &pFileName )
     if( image == NULL ) {
         Log.Error( "Failed to load: " + pFileName );
     }
-
+	Log.Success( "Loaded: " + pFileName );
     //Convert the data to a texture
     glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, mWidth, mHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image );
     //Free the data

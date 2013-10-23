@@ -29,7 +29,7 @@
 #include <vector>
 #include <map>
 
-#include "NoiseModule.h"
+#include "noisepp/core/NoiseModule.h"
 #include "NoiseOutStream.h"
 
 namespace noisepp

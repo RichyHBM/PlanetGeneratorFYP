@@ -26,7 +26,7 @@
 #ifndef NOISEJOBQUEUE_H
 #define NOISEJOBQUEUE_H
 
-#include "NoisePrerequisites.h"
+#include "noisepp/core/NoisePrerequisites.h"
 
 namespace noisepp
 {

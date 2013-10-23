@@ -26,7 +26,7 @@
 #ifndef NOISEENDIANUTILS_H
 #define NOISEENDIANUTILS_H
 
-#include "NoisePrerequisites.h"
+#include "noisepp/core/NoisePrerequisites.h"
 
 namespace noisepp
 {

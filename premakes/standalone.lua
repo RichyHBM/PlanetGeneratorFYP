@@ -7,3 +7,4 @@ project "StandAlone"
 		"../src/standalone/**.h", }
 
 	includedirs { "../external/include/", "../src/"}
+	links { "Framework" }

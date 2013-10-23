@@ -43,7 +43,7 @@
 #include <limits>
 
 #if NOISEPP_ENABLE_THREADS
-#include "Thread.h"
+#include "noisepp/threadpp/Thread.h"
 #endif
 
 #endif

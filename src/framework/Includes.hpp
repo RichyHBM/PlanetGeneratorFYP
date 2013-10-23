@@ -24,8 +24,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/transform2.hpp>
 
+#include "Noise/NoiseppNoise.hpp"
 #include "Utilities.hpp"
 #include "LogManager.hpp"
-
 
 #endif // INCLUDES_HPP_INCLUDED

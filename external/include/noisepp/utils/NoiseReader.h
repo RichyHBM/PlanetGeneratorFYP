@@ -28,7 +28,7 @@
 
 #include <vector>
 
-#include "NoiseModule.h"
+#include "noisepp/core/NoiseModule.h"
 #include "NoiseInStream.h"
 
 namespace noisepp

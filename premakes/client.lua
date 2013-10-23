@@ -7,3 +7,4 @@ project "Client"
 		"../src/client/**.h" }      
 
 	includedirs { "../external/include/", "../src/"}    
+	links { "Framework" }

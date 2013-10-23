@@ -7,3 +7,4 @@ project "Server"
 		"../src/server/**.h" }
 
 	includedirs { "../external/include/", "../src/"}
+	links { "Framework" }

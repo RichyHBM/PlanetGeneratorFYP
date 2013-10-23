@@ -26,7 +26,7 @@
 #ifndef NOISESYSTEM_H
 #define NOISESYSTEM_H
 
-#include "NoisePipeline.h"
+#include "noisepp/core/NoisePipeline.h"
 #include "NoiseJobQueue.h"
 
 namespace noisepp
