@@ -36,12 +36,13 @@ void generate(int size)
     }
 }
 
-#define THREADSCOUNT 3
+#define THREADSCOUNT 2
 
 void test2dArrayThread( int size )
 {
     std::ofstream file;
-    file.open( "array2DThr" + Util::ToString( size ) + ".txt" );
+	std::string filename = "array2DThr" + Util::ToString( size ) + ".txt";
+    file.open( filename.c_str() );
     double timeT = 0.0;
 
     for( int i = 0; i < RUNS; i++ ) {

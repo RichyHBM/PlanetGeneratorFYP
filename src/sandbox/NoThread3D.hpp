@@ -14,7 +14,8 @@
 void test3dArrayNoThread( const int size )
 {
     std::ofstream file;
-    file.open( "array3DNT" + Util::ToString( size ) + ".txt" );
+	std::string filename = "array3DNT" + Util::ToString( size ) + ".txt";
+    file.open( filename.c_str() );
     double timeT = 0.0;
 
     for( int i = 0; i < RUNS; i++ ) {

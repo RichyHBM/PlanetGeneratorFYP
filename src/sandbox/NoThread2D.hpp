@@ -14,7 +14,8 @@
 void test2dArrayNoThread( const int size )
 {
     std::ofstream file;
-    file.open( "array2DNT" + Util::ToString( size ) + ".txt" );
+	std::string filename = "array2DNT" + Util::ToString( size ) + ".txt";
+    file.open( filename.c_str() );
     double timeT = 0.0;
 
     for( int i = 0; i < RUNS; i++ ) {
