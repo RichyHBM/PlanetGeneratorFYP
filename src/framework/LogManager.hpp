@@ -15,8 +15,8 @@ public:
     }
 
     template <class T>
-	void Success( const T &t ) {
-		ChangeColor( LIGHTGREEN );
+    void Success( const T &t ) {
+        ChangeColor( LIGHTGREEN );
         std::cout << std::left << std::setw( mTagWidth ) << "[SUCCESS]" << t << std::endl;
         ChangeColor( WHITE );
     }

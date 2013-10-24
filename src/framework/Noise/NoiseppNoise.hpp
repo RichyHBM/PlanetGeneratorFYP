@@ -7,20 +7,20 @@
 class NoiseppNoise : public Noise
 {
 protected:
-	noisepp::PerlinModule mPerlin;
-	noisepp::ThreadedPipeline1D mPipeline1d;
-	noisepp::ThreadedPipeline2D mPipeline2d;
-	noisepp::ThreadedPipeline3D mPipeline3d;
+    noisepp::PerlinModule mPerlin;
+    noisepp::ThreadedPipeline1D mPipeline1d;
+    noisepp::ThreadedPipeline2D mPipeline2d;
+    noisepp::ThreadedPipeline3D mPipeline3d;
 
-	noisepp::ElementID mNoiseID1D;
-	noisepp::ElementID mNoiseID2D;
-	noisepp::ElementID mNoiseID3D;
+    noisepp::ElementID mNoiseID1D;
+    noisepp::ElementID mNoiseID2D;
+    noisepp::ElementID mNoiseID3D;
 
-	noisepp::Cache *mCache1d;
-	noisepp::Cache *mCache2d;
-	noisepp::Cache *mCache3d;
+    noisepp::Cache *mCache1d;
+    noisepp::Cache *mCache2d;
+    noisepp::Cache *mCache3d;
 
-	int mThreadCount;
+    int mThreadCount;
 public:
     NoiseppNoise( );
     virtual ~NoiseppNoise();
