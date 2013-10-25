@@ -9,8 +9,7 @@
 #include "framework/Includes.hpp"
 #include "framework/Noise/NoiseppNoise.hpp"
 
-#define RUNS 1000
-
+#define RUNS 10
 
 bool finished = false;
 
@@ -39,47 +38,52 @@ void generate( int size )
 
 #define THREADSCOUNT 2
 
-void test2dArrayThread( int size )
+void test2dArrayThread( int maxSize )
 {
     std::ofstream file;
-    std::string filename = "array2DThr" + Util::ToString( size ) + ".txt";
+    std::string filename = "array2DThr.txt";
     file.open( filename.c_str() );
-    double timeT = 0.0;
+    file << "#Up to " << maxSize << " in increments of 10" << std::endl;
 
-    for( int i = 0; i < RUNS; i++ ) {
-        finished = false;
-        sf::Thread *threads[THREADSCOUNT];
+    for( int gr = 10; gr <= maxSize; gr += 10 ) {
+        double timeT = 0.0;
 
-        for( int h = 0; h < THREADSCOUNT; h++ ) {
-            threads[h] = new sf::Thread( &generate, size );
-        }
+        for( int i = 0; i < RUNS; i++ ) {
+            finished = false;
+            col = 0;
+            sf::Thread *threads[THREADSCOUNT];
 
-        sf::Clock clock;
-
-        while( !finished ) {
             for( int h = 0; h < THREADSCOUNT; h++ ) {
-                threads[h]->launch();
+                threads[h] = new sf::Thread( &generate, gr );
             }
+
+            sf::Clock clock;
+
+            while( !finished ) {
+                for( int h = 0; h < THREADSCOUNT; h++ ) {
+                    threads[h]->launch();
+                }
+
+                for( int h = 0; h < THREADSCOUNT; h++ ) {
+                    threads[h]->wait();
+                    delete threads[h];
+                    threads[h] = new sf::Thread( &generate, gr );
+                }
+            }
+
+            double d = clock.getElapsedTime().asSeconds();
+            timeT += d;
 
             for( int h = 0; h < THREADSCOUNT; h++ ) {
                 threads[h]->wait();
                 delete threads[h];
-                threads[h] = new sf::Thread( &generate, size );
             }
         }
 
-        double d = clock.getElapsedTime().asSeconds();
-        timeT += d;
-
-        for( int h = 0; h < THREADSCOUNT; h++ ) {
-            delete threads[h];
-        }
-
-        file << d << std::endl;
+        std::cout << "Avg 2d Thr " << gr << ": " << timeT/RUNS << std::endl;
+        file << gr << ":" << timeT/RUNS << std::endl;
     }
 
-    std::cout << "Avg 2d Thr " << size << ": " << timeT/RUNS << std::endl;
-    file << "Avg: " << timeT/RUNS << std::endl;
     file.close();
 }
 

@@ -9,33 +9,37 @@
 #include "framework/Includes.hpp"
 #include "framework/Noise/NoiseppNoise.hpp"
 
-#define RUNS 1000
+#define RUNS 10
 
-void test3dArrayNoThread( const int size )
+void test3dArrayNoThread( const int maxSize )
 {
     std::ofstream file;
-    std::string filename = "array3DNT" + Util::ToString( size ) + ".txt";
+    std::string filename = "array3DNT.txt";
     file.open( filename.c_str() );
-    double timeT = 0.0;
+    file << "#Up to " << maxSize << " in increments of 10" << std::endl;
 
-    for( int i = 0; i < RUNS; i++ ) {
-        sf::Clock clock;
+    for( int gr = 10; gr <= maxSize; gr += 10 ) {
+        double timeT = 0.0;
 
-        for( int x = 0; x < size; x++ ) {
-            for( int y = 0; y < size; y++ ) {
-                for( int z = 0; z < size; z++ ) {
-                    double d = NoisePP.Generate( x, y, z );
+        for( int i = 0; i < RUNS; i++ ) {
+            sf::Clock clock;
+
+            for( int x = 0; x < gr; x++ ) {
+                for( int y = 0; y < gr; y++ ) {
+                    for( int z = 0; z < gr; z++ ) {
+                        double d = NoisePP.Generate( x, y, z );
+                    }
                 }
             }
+
+            double d = clock.getElapsedTime().asSeconds();
+            timeT += d;
         }
 
-        double d = clock.getElapsedTime().asSeconds();
-        timeT += d;
-        file << d << std::endl;
+        std::cout << "Avg 3d No Thr " << gr << ": " << timeT/RUNS << std::endl;
+        file << gr << ":" << timeT/RUNS << std::endl;
     }
 
-    std::cout << "Avg 3d NT " << size << ": " << timeT/RUNS << std::endl;
-    file << "Avg: " << timeT/RUNS << std::endl;
     file.close();
 }
 
