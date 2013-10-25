@@ -3,8 +3,6 @@
 
 class Noise
 {
-protected:
-    int mSeed;
 public:
     Noise() {
     }

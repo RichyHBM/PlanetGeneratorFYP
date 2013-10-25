@@ -5,36 +5,18 @@
 #include "Thread2D.hpp"
 #include "Thread3D.hpp"
 
+#include "SOIL.h"
 
 int main()
 {
-    //Warm up the CPU
-    for ( int n=0; n<100; ++n ) {
-        for ( int i=0; i<1000000; ++i ) {
-            double d = sqrt( ( double )rand()/RAND_MAX );
+    for( int x = 0; x < 10; x++ ) {
+        for( int y = 0; y < 10; y++ ) {
+            std::cout << std::setw( 10 ) << Util::ToString( NoisePP.Generate( x*0.01,y*0.01 ), 2 );
         }
+
+        std::cout << std::endl;
     }
 
-    test2dArrayNoThread( 100 );
-    test2dArrayNoThread(1000);
-    test2dArrayNoThread(10000);
-    test2dArrayNoThread(100000);
-
-    test3dArrayNoThread(100);
-    test3dArrayNoThread(1000);
-    test3dArrayNoThread(10000);
-    test3dArrayNoThread(100000);
-    
-	test2dArrayThread(100);
-	test2dArrayThread(1000);
-    test2dArrayThread(10000);
-    test2dArrayThread(100000);
-
-	Threaded3D::test3dArrayThread(100);
-	Threaded3D::test3dArrayThread(1000);
-    Threaded3D::test3dArrayThread(10000);
-    Threaded3D::test3dArrayThread(100000);
-    
-	std::cin.get();
+    std::cin.get();
     return 0;
 }

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <noisepp/utils/NoiseUtils.h>
 
+NoiseppNoise NoisePP;
 //
 // Defaults are
 // Frequency	=	1
@@ -13,9 +14,6 @@
 // Persistence	=	0.5
 // Scale		=	2.12
 //
-
-NoiseppNoise NoisePP = NoiseppNoise();
-
 NoiseppNoise::NoiseppNoise( ) : mPipeline1d( 2 ), mPipeline2d( 2 ), mPipeline3d( 2 )
 {
     mThreadCount = noisepp::utils::System::getNumberOfCPUs ();
@@ -26,6 +24,9 @@ NoiseppNoise::NoiseppNoise( ) : mPipeline1d( 2 ), mPipeline2d( 2 ), mPipeline3d(
         mPipeline3d = noisepp::ThreadedPipeline3D( mThreadCount );
     }
 
+    mPerlin.setSeed( 31775 );
+    mPerlin.setOctaveCount( 11 );
+    mPerlin.setPersistence( 2.15310 );
     mNoiseID1D = mPerlin.addToPipe ( mPipeline1d );
     mNoiseID2D = mPerlin.addToPipe ( mPipeline2d );
     mNoiseID3D = mPerlin.addToPipe ( mPipeline3d );
@@ -39,6 +40,9 @@ NoiseppNoise::~NoiseppNoise()
     mPipeline1d.freeCache( mCache1d );
     mPipeline2d.freeCache( mCache2d );
     mPipeline3d.freeCache( mCache3d );
+    mCache1d = NULL;
+    mCache2d = NULL;
+    mCache3d = NULL;
 }
 
 double NoiseppNoise::Generate( double x )
@@ -48,7 +52,9 @@ double NoiseppNoise::Generate( double x )
 
 double NoiseppNoise::Generate( double x, double y )
 {
-    return mPipeline2d.getElement( mNoiseID2D )->getValue ( x, y, mCache2d );
+    noisepp::Real r = mPipeline2d.getElement( mNoiseID2D )->getValue ( x, y, mCache2d );
+    mPipeline2d.cleanCache( mCache2d );
+    return r;
 }
 
 double NoiseppNoise::Generate( double x, double y, double z )
