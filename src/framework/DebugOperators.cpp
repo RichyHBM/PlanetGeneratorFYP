@@ -37,11 +37,9 @@ void *operator new ( const std::size_t size, MemoryUse::MemoryType type ) throw 
         case MemoryUse::Normal:
             MemoryUse::NormalBytesUsed += size;
             break;
-
         case MemoryUse::Graphics:
             MemoryUse::GraphicsBytesUsed += size;
             break;
-
         case MemoryUse::Unknown:
         default:
             MemoryUse::UnknownBytesUsed += size;
@@ -89,11 +87,9 @@ void operator delete ( void *p ) throw ()
             case MemoryUse::Normal:
                 MemoryUse::NormalBytesUsed -= mc->size;
                 break;
-
             case MemoryUse::Graphics:
                 MemoryUse::GraphicsBytesUsed -= mc->size;
                 break;
-
             case MemoryUse::Unknown:
             default:
                 MemoryUse::UnknownBytesUsed -= mc->size;

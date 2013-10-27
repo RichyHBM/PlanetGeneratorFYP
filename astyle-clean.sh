@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # copy or move Artistic Style backup files to a backup directory
 
 # CHANGE THE FOLLOWING 4 VARIABLES
@@ -35,7 +35,7 @@ if [ "$indir" == "$outdir" ]; then
 fi
 
 # optional statement to run Artistic Style
-astyle --options="./astyle.conf" -R  "%indir%/*.cpp"  "%indir%/*.hpp"  "%indir%/*.c"  "%indir%/*.h"
+astyle --options="./astyle.conf" -R  "$indir/*.cpp"  "$indir/*.hpp"  "$indir/*.c"  "$indir/*.h"
 if [ $? -ne 0 ] ; then  read -sn1 -p "Error executing astyle!"; fi
 
 # variables for fle processing

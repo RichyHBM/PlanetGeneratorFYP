@@ -119,11 +119,9 @@ void WindowSFML::SetCursor( CursorState pState )
         case Hidden:
             mWindow.setMouseCursorVisible( false );
             break;
-
         case Shown:
             mWindow.setMouseCursorVisible( true );
             break;
-
         case Locked:
             break;
     }

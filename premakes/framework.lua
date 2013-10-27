@@ -21,10 +21,10 @@ project "Framework"
 
       configuration "Debug"
          if _ACTION == "gmake" or _ACTION == "codeblocks" then
-            links { "AntTweakBar", "sfml-network", "sfml-window", "sfml-system", "GLU", "GL", "noisepp-d" }
+            links { "pthread", "AntTweakBar", "sfml-network", "sfml-window", "sfml-system", "GLU", "GL", "noisepp-d" }
          end
 
       configuration "Release"
          if _ACTION == "gmake" or _ACTION == "codeblocks" then
-            links { "AntTweakBar", "sfml-network", "sfml-window", "sfml-system", "GLU", "GL", "noisepp" }
+            links { "pthread", "AntTweakBar", "sfml-network", "sfml-window", "sfml-system", "GLU", "GL", "noisepp" }
          end
