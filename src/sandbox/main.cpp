@@ -1,6 +1,6 @@
 #include <iostream>
 #include <iomanip>
-#include <cmath>
+#include <algorithm>
 #include <string>
 #include <vector>
 #include <sstream>
@@ -10,6 +10,8 @@
 
 double distortion = 0.01;
 std::string file = "new_terrain.bmp";
+
+using namespace std;
 
 double toD(std::string s)
 {
