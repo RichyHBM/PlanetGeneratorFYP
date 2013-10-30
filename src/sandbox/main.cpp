@@ -77,7 +77,7 @@ int main( int argc, const char *argv[])
 
 	for( int j = 0; j < mHeight; j++ ) {
 		for( int i = 0; i < mWidth; i++ ) {
-			image[i + j * mWidth] = min( NoisePP.Generate( i*distortion, j*distortion ) * 127 , 255);
+			image[i + j * mWidth] = (unsigned char) min( NoisePP.Generate( i*distortion, j*distortion ) * 127.5 , 255.0);
 		}
     }
 
