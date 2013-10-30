@@ -1,10 +1,9 @@
 #ifndef NOISEPP_NOISE_HPP
 #define NOISEPP_NOISE_HPP
 
-#include "Noise.hpp"
 #include <noisepp/core/Noise.h>
 
-class NoiseppNoise : public Noise
+class NoiseppNoise
 {
 protected:
     noisepp::PerlinModule mPerlin;
@@ -23,11 +22,19 @@ protected:
     int mThreadCount;
 public:
     NoiseppNoise( );
-    virtual ~NoiseppNoise();
+    ~NoiseppNoise();
+	
+	void SetSeed(double seed);
+	void SetOctaveCount(int oct);
+	void SetPersistence(double pers);
+	void SetFrequency(double freq);
+	void SetQuality(int qual);
+	void SetScale(double scale);
+	void SetLacunarity(double lacun);
 
-    virtual double Generate( double x );
-    virtual double Generate( double x, double y );
-    virtual double Generate( double x, double y, double z );
+    double Generate( double x );
+    double Generate( double x, double y );
+    double Generate( double x, double y, double z );
 };
 
 extern NoiseppNoise NoisePP;
