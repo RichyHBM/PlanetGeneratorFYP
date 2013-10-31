@@ -2,7 +2,6 @@
 
 test -d ../build || mkdir -p ../build
 cp -a ../Resources ../build/Resources
-
 test -d ../bin || mkdir -p ../bin
 test -d ../bin/Debug || mkdir -p ../bin/Debug
 test -d ../bin/Release || mkdir -p ../bin/Release
@@ -24,3 +23,5 @@ touch ../bin/Release/runStandalone.sh
 echo '#!/bin/sh' > ../bin/Release/runStandalone.sh
 echo 'export LD_LIBRARY_PATH=.' >> ../bin/Release/runStandalone.sh
 echo './StandAlone' >> ../bin/Release/runStandalone.sh
+
+
