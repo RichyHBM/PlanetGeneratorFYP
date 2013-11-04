@@ -5,6 +5,7 @@
 #include <GL/glew.h>
 #include "./Settings.hpp"
 #include <iostream>
+#include "GLHelp/Texture.hpp"
 
 WindowSFML::WindowSFML()
 {
@@ -99,6 +100,8 @@ void WindowSFML::DoEvents()
 
         } else if( event.type == sf::Event::LostFocus ) {
             mIsFocused = false;
+        } else if( event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::F4 ) {
+            Texture::Screenshot( "Screenshot.bmp", 0, 0, Settings::Running.GetWidth(), Settings::Running.GetHeight() );
         }
     }
 }
