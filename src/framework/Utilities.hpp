@@ -7,6 +7,7 @@
 #include "./Includes.hpp"
 #include <ctime>
 #include <iomanip>
+#include <string>
 
 namespace Util
 {
@@ -51,6 +52,19 @@ namespace Util
             return pB;
         }
     }
+
+	//Convert string to other type
+	template <typename T>
+	T StrTo(const std::string& sVal)
+	{
+			T val;
+			std::stringstream ss;
+			ss << sVal;
+			ss >> val;
+			if(ss.fail())
+					return (T) 0;
+			return val;
+	}
 
     //Returns the smallest of 2 values
     template <class T>

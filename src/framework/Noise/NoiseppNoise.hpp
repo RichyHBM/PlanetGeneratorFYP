@@ -20,6 +20,7 @@ protected:
     noisepp::Cache *mCache3d;
 
     int mThreadCount;
+	double mDistortion;
 public:
     NoiseppNoise( );
     ~NoiseppNoise();
@@ -31,6 +32,9 @@ public:
 	void SetQuality(int qual);
 	void SetScale(double scale);
 	void SetLacunarity(double lacun);
+	void SetDistortion(double distortion);
+
+	void ParseArguments( int argc, const char *argv[] );
 
     double Generate( double x );
     double Generate( double x, double y );

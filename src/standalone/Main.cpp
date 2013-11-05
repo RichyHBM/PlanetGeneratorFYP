@@ -6,7 +6,7 @@
 #include "framework/Window.hpp"
 
 #include "framework/DebugOperators.hpp"
-
+#include "framework/Noise/NoiseppNoise.hpp"
 #ifdef SFML
 #include "framework/WindowSFML.hpp"
 #elif defined GLFW
@@ -15,13 +15,11 @@
 
 //Set initial settings
 void SetSettings();
-void ProcessArgument( const std::string &arg );
 
 int main( int argc, const char *argv[] )
 {
-    for( int i = 0; i < argc; i++ ) {
-        ProcessArgument( argv[i] );
-    }
+	NoisePP.ParseArguments(argc, argv);
+	Settings::ParseArguments(argc, argv);
 
     SetSettings();
 #ifdef SFML
@@ -61,6 +59,3 @@ void SetSettings()
     Settings::Initial.SetSettings( depthBits, stencilBits, antiAliasing, majorOGL, minorOGL, width, height, fps, vSynk, fullScreen );
 }
 
-void ProcessArgument( const std::string &arg )
-{
-}
