@@ -2,6 +2,7 @@
 #define VBO_HPP
 
 #include "../Includes.hpp"
+#include "../Utilities.hpp"
 
 class VBO
 {
@@ -28,7 +29,9 @@ public:
         }
 
         glBindBuffer( mTarget, mBufferID );
+		Util::PrintGLErrors();
         glBufferData( mTarget, pData.size() * pSize , &pData[0] , mUsageHint );
+		Util::PrintGLErrors();
     }
 
     //Set the data using an array
@@ -40,7 +43,9 @@ public:
         }
 
         glBindBuffer( mTarget, mBufferID );
+		Util::PrintGLErrors();
         glBufferData( mTarget, pAmount * pSize , &pData , mUsageHint );
+		Util::PrintGLErrors();
     }
 
 protected:

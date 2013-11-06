@@ -25,7 +25,7 @@ public:
     NoiseppNoise( );
     ~NoiseppNoise();
 	
-	void SetSeed(double seed);
+	void SetSeed(int seed);
 	void SetOctaveCount(int oct);
 	void SetPersistence(double pers);
 	void SetFrequency(double freq);

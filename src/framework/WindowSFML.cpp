@@ -6,6 +6,7 @@
 #include "./Settings.hpp"
 #include <iostream>
 #include "GLHelp/Texture.hpp"
+#include "Utilities.hpp"
 
 WindowSFML::WindowSFML()
 {
@@ -59,12 +60,18 @@ WindowSFML::WindowSFML()
     sf::ContextSettings runtimeContextSettings;
     runtimeContextSettings = mWindow.getSettings();
     Log.Info( "Using OpenGL " + Util::ToString( runtimeContextSettings.majorVersion ) + "." + Util::ToString( runtimeContextSettings.minorVersion ) );
-    //Enable GL features
+    Util::PrintGLErrors();
+	//Enable GL features
     glEnable( GL_CULL_FACE );
+	Util::PrintGLErrors();
     glEnable( GL_DEPTH_TEST );
+	Util::PrintGLErrors();
     glEnable ( GL_BLEND );
+	Util::PrintGLErrors();
     glBlendFunc ( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+	Util::PrintGLErrors();
     glFrontFace( GL_CCW );
+	Util::PrintGLErrors();
     //Get running settings
     int depthBits =runtimeContextSettings.depthBits;
     int stencilBits = runtimeContextSettings.stencilBits;

@@ -115,7 +115,7 @@ void NoiseppNoise::SetDistortion(double distortion)
 	mDistortion = distortion;
 }
 
-void NoiseppNoise::SetSeed(double seed)
+void NoiseppNoise::SetSeed(int seed)
 {
 	mPerlin.setSeed(seed);
 	mPipeline1d.setSeed(seed);
