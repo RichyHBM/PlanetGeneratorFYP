@@ -80,18 +80,21 @@ namespace Util
         }
     }
 
-	//Convert string to other type
-	template <typename T>
-	T StrTo(const std::string& sVal)
-	{
-			T val;
-			std::stringstream ss;
-			ss << sVal;
-			ss >> val;
-			if(ss.fail())
-					return (T) 0;
-			return val;
-	}
+    //Convert string to other type
+    template <typename T>
+    T StrTo( const std::string &sVal )
+    {
+        T val;
+        std::stringstream ss;
+        ss << sVal;
+        ss >> val;
+
+        if( ss.fail() ) {
+            return ( T ) 0;
+        }
+
+        return val;
+    }
 
     //Convert a given variable into a string
     template <class T>
@@ -101,7 +104,7 @@ namespace Util
         ss << t;
         return ss.str();
     }
-	template <class T>
+    template <class T>
     inline std::string ToString ( T t, int precision )
     {
         std::stringstream ss;

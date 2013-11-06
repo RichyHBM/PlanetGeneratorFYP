@@ -29,9 +29,9 @@ public:
         }
 
         glBindBuffer( mTarget, mBufferID );
-		Util::PrintGLErrors();
+        Util::PrintGLErrors();
         glBufferData( mTarget, pData.size() * pSize , &pData[0] , mUsageHint );
-		Util::PrintGLErrors();
+        Util::PrintGLErrors();
     }
 
     //Set the data using an array
@@ -43,9 +43,9 @@ public:
         }
 
         glBindBuffer( mTarget, mBufferID );
-		Util::PrintGLErrors();
+        Util::PrintGLErrors();
         glBufferData( mTarget, pAmount * pSize , &pData , mUsageHint );
-		Util::PrintGLErrors();
+        Util::PrintGLErrors();
     }
 
 protected:

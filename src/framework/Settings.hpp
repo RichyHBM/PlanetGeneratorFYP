@@ -10,7 +10,7 @@ public:
     //Real run time settings
     static Settings Running;
 
-	static void ParseArguments( int argc, const char *argv[] );
+    static void ParseArguments( int argc, const char *argv[] );
 
     Settings();
     ~Settings();

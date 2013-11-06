@@ -4,21 +4,21 @@
 Shader::Shader()
 {
     mShaderID = glCreateProgram();
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     mVertexID = glCreateShader( GL_VERTEX_SHADER );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     mFragmentID = glCreateShader( GL_FRAGMENT_SHADER );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
 }
 
 Shader::~Shader()
 {
     glDeleteShader( mVertexID );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     glDeleteShader( mFragmentID );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     glDeleteProgram( mShaderID );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
 }
 
 GLuint Shader::GetShaderID()
@@ -29,13 +29,13 @@ GLuint Shader::GetShaderID()
 void Shader::Bind()
 {
     glUseProgram( mShaderID );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
 }
 
 void Shader::Unbind()
 {
     glUseProgram( 0 );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
 }
 
 GLuint Shader::GetAttribute( const std::string &pAttName )
@@ -47,7 +47,7 @@ GLuint Shader::GetAttribute( const std::string &pAttName )
     }
 
     GLuint attribute = glGetAttribLocation( mShaderID, pAttName.c_str() );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     mAttributeVariableIDList[pAttName] = attribute;
     return attribute;
 }
@@ -61,7 +61,7 @@ GLuint Shader::GetUniform( const std::string &pUniName )
     }
 
     GLuint uniform = glGetUniformLocation( mShaderID, pUniName.c_str() );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     mUniformVariableIDList[pUniName] = uniform;
     return uniform;
 }
@@ -72,19 +72,19 @@ bool Shader::linkShader()
     int InfoLogLength = 0;
     /// Link the program
     glAttachShader( mShaderID, mVertexID );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     glAttachShader( mShaderID, mFragmentID );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     glLinkProgram( mShaderID );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     /// Check the program
     glGetProgramiv( mShaderID, GL_LINK_STATUS, &Result );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     glGetProgramiv( mShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     std::vector<char> ProgramErrorMessage( Util::MaxValue( InfoLogLength, 1 ) );
     glGetProgramInfoLog( mShaderID, InfoLogLength, NULL, &ProgramErrorMessage[0] );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
 
     if( Result == GL_FALSE ) {
         Log.Error( &ProgramErrorMessage[0] );
@@ -101,17 +101,17 @@ bool Shader::compileVertexShader( const std::string &pVertCode )
     /// Compile Vertex Shader
     char const *VertexSourcePointer = pVertCode.c_str();
     glShaderSource( mVertexID, 1, &VertexSourcePointer , NULL );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     glCompileShader( mVertexID );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     /// Check Vertex Shader
     glGetShaderiv( mVertexID, GL_COMPILE_STATUS, &Result );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     glGetShaderiv( mVertexID, GL_INFO_LOG_LENGTH, &InfoLogLength );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     std::vector<char> VertexShaderErrorMessage( Util::MaxValue( InfoLogLength, 1 ) );
     glGetShaderInfoLog( mVertexID, InfoLogLength, NULL, &VertexShaderErrorMessage[0] );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
 
     if( Result == GL_FALSE ) {
         Log.Error( &VertexShaderErrorMessage[0] );
@@ -128,17 +128,18 @@ bool Shader::compileFragmentShader( const std::string &pFragCode )
     /// Compile Fragment Shader
     char const *FragmentSourcePointer = pFragCode.c_str();
     glShaderSource( mFragmentID, 1, &FragmentSourcePointer , NULL );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     glCompileShader( mFragmentID );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     /// Check Fragment Shader
     glGetShaderiv( mFragmentID, GL_COMPILE_STATUS, &Result );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     glGetShaderiv( mFragmentID, GL_INFO_LOG_LENGTH, &InfoLogLength );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     std::vector<char> FragmentShaderErrorMessage( Util::MaxValue( InfoLogLength, 1 ) );
     glGetShaderInfoLog( mFragmentID, InfoLogLength, NULL, &FragmentShaderErrorMessage[0] );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
+
     if( Result == GL_TRUE ) {
         return true;
     }

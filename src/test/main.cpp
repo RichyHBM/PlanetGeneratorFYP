@@ -8,17 +8,17 @@
 int main( int argc, char *const argv[] )
 {
     Catch::Session session;
-	Catch::ConfigData config;
+    Catch::ConfigData config;
     config.showDurations = Catch::ShowDurations::DefaultForReporter;
 #ifndef WIN32
     config.showSuccessfulTests = true;
     config.reporterName = "junit";
     config.outputFilename = "testreport.xml";
 #endif
-	session.useConfigData( config );
+    session.useConfigData( config );
     int s = session.run();
 #ifdef	WIN32
-	std::cin.get();
+    std::cin.get();
 #endif
     return s;
 }

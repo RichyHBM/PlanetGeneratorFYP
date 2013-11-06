@@ -95,26 +95,27 @@ void TextureRenderer::Draw()
 {
     mShader.Bind();
     glUniformMatrix4fv( mShader.GetUniform( "MVP" ), 1, GL_FALSE, &mMVP[0][0] );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
+
     if( mTexture != 0 ) {
         glActiveTexture( GL_TEXTURE0 );
-		Util::PrintGLErrors();
+        Util::PrintGLErrors();
         glBindTexture( GL_TEXTURE_2D, mTexture );
-		Util::PrintGLErrors();
+        Util::PrintGLErrors();
         glUniform1i( mShader.GetUniform( "Texture" ), 0 );
-		Util::PrintGLErrors();
+        Util::PrintGLErrors();
     }
 
     glUniform4fv( mShader.GetUniform( "Color" ),1 , &mColor[0] );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     mVertexBuffer.Bind( 3 );
     mUVBuffer.Bind( 2 );
     glDrawArrays( GL_TRIANGLES, 0, mVertexList.size() );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     mUVBuffer.Unbind();
     mVertexBuffer.Unbind();
     glBindTexture( GL_TEXTURE_2D, 0 );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     Shader::Unbind();
 }
 

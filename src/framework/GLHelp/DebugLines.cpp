@@ -88,13 +88,13 @@ void DebugLines::Draw()
 {
     mLineShader.Bind ();
     glUniformMatrix4fv( mLineShader.GetUniform ( "MVP" ), 1, GL_FALSE, &mMVP[0][0] );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     mPositionBuffer.Bind ( 3 );
     mPositionBuffer.AddVectorData ( mPositionsList, sizeof( float ), GL_ARRAY_BUFFER, GL_STREAM_DRAW );
     mColorBuffer.Bind ( 3 );
     mColorBuffer.AddVectorData ( mColorsList, sizeof( float ), GL_ARRAY_BUFFER, GL_STREAM_DRAW );
     glDrawArrays ( GL_LINES, 0, mVerticieAmount );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     mColorBuffer.Unbind ();
     mPositionBuffer.Unbind ();
     Shader::Unbind ();

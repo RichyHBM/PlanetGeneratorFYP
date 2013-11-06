@@ -49,9 +49,9 @@ void BitmapText::LoadFile( const std::string &pImageFile, const std::string &pUV
     mBitmap.LoadFromFile( pImageFile.c_str() );
     mBitmap.Bind();
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     Texture::GenMipmaps();
     Texture::Unbind();
     std::ifstream myfile;
@@ -80,16 +80,17 @@ void BitmapText::LoadFile( const std::string &pImageFile, const std::string &pUV
             strz  >> z;
             strw  >> w;
 
-			if(strx.fail() || stry.fail() || strz.fail() || strw.fail() )
-			{
-				Log.Error( "Failed to load: " + pUVFile );
-				mPositions.clear();
-				//ASCII supports up to 256 characters
-				for( int i = 0; i < 256; i++ ) {
-					mPositions.push_back( glm::vec4( 0, 0, 0, 0 ) );
-				}
-				break;
-			}
+            if( strx.fail() || stry.fail() || strz.fail() || strw.fail() ) {
+                Log.Error( "Failed to load: " + pUVFile );
+                mPositions.clear();
+
+                //ASCII supports up to 256 characters
+                for( int i = 0; i < 256; i++ ) {
+                    mPositions.push_back( glm::vec4( 0, 0, 0, 0 ) );
+                }
+
+                break;
+            }
 
             mPositions.push_back( glm::vec4( x, y, z, w ) );
         }
@@ -143,18 +144,18 @@ void BitmapText::Draw()
 {
     mShader.Bind();
     glUniformMatrix4fv( mShader.GetUniform ( "MVP" ), 1, GL_FALSE, &mMVP[0][0] );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     glActiveTexture( GL_TEXTURE0 );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     mBitmap.Bind();
     glUniform1i( mShader.GetUniform ( "Texture" ), 0 );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     glUniform4fv( mShader.GetUniform ( "Color" ),1 , &mColor[0] );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     mVertexBuffer.Bind( 3 );
     mUVBuffer.Bind( 2 );
     glDrawArrays( GL_TRIANGLES, 0, mText.size() * 6 );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     mUVBuffer.Unbind();
     mVertexBuffer.Unbind();
     Texture::Unbind();

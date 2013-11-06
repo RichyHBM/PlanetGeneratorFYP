@@ -18,9 +18,8 @@ void SetSettings();
 
 int main( int argc, const char *argv[] )
 {
-	NoisePP.ParseArguments(argc, argv);
-	Settings::ParseArguments(argc, argv);
-
+    NoisePP.ParseArguments( argc, argv );
+    Settings::ParseArguments( argc, argv );
     SetSettings();
 #ifdef SFML
     Window *window = new( MemoryUse::Normal ) WindowSFML();

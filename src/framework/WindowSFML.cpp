@@ -61,17 +61,17 @@ WindowSFML::WindowSFML()
     runtimeContextSettings = mWindow.getSettings();
     Log.Info( "Using OpenGL " + Util::ToString( runtimeContextSettings.majorVersion ) + "." + Util::ToString( runtimeContextSettings.minorVersion ) );
     Util::PrintGLErrors();
-	//Enable GL features
+    //Enable GL features
     glEnable( GL_CULL_FACE );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     glEnable( GL_DEPTH_TEST );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     glEnable ( GL_BLEND );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     glBlendFunc ( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     glFrontFace( GL_CCW );
-	Util::PrintGLErrors();
+    Util::PrintGLErrors();
     //Get running settings
     int depthBits =runtimeContextSettings.depthBits;
     int stencilBits = runtimeContextSettings.stencilBits;
@@ -107,6 +107,7 @@ void WindowSFML::DoEvents()
 
         } else if( event.type == sf::Event::LostFocus ) {
             mIsFocused = false;
+
         } else if( event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::F4 ) {
             Texture::Screenshot( "Screenshot.bmp", 0, 0, Settings::Running.GetWidth(), Settings::Running.GetHeight() );
         }
@@ -129,9 +130,11 @@ void WindowSFML::SetCursor( CursorState pState )
         case Hidden:
             mWindow.setMouseCursorVisible( false );
             break;
+
         case Shown:
             mWindow.setMouseCursorVisible( true );
             break;
+
         case Locked:
             break;
     }

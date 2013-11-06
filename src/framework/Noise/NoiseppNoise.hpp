@@ -20,21 +20,21 @@ protected:
     noisepp::Cache *mCache3d;
 
     int mThreadCount;
-	double mDistortion;
+    double mDistortion;
 public:
     NoiseppNoise( );
     ~NoiseppNoise();
-	
-	void SetSeed(int seed);
-	void SetOctaveCount(int oct);
-	void SetPersistence(double pers);
-	void SetFrequency(double freq);
-	void SetQuality(int qual);
-	void SetScale(double scale);
-	void SetLacunarity(double lacun);
-	void SetDistortion(double distortion);
 
-	void ParseArguments( int argc, const char *argv[] );
+    void SetSeed( int seed );
+    void SetOctaveCount( int oct );
+    void SetPersistence( double pers );
+    void SetFrequency( double freq );
+    void SetQuality( int qual );
+    void SetScale( double scale );
+    void SetLacunarity( double lacun );
+    void SetDistortion( double distortion );
+
+    void ParseArguments( int argc, const char *argv[] );
 
     double Generate( double x );
     double Generate( double x, double y );
