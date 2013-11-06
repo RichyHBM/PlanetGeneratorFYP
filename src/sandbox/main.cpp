@@ -7,24 +7,17 @@
 
 #include "SOIL.h"
 #include "framework/Noise/NoiseppNoise.hpp"
+#include "framework/Utilities.hpp"
 
 double distortion = 0.01;
 std::string file = "new_terrain.bmp";
 
 using namespace std;
 
-double toD(std::string s)
-{
-	std::istringstream os(s);
-    double d;
-    os >> d;
-	return d;
-}
-
 int main( int argc, const char *argv[])
 {
 	if(argc < 10){
-		std::cout << "Nope"<< std::endl;
+		std::cout << "Not enought arguments"<< std::endl;
 		std::cin.get();
 		return 1;
 	}
@@ -32,31 +25,31 @@ int main( int argc, const char *argv[])
 	std::vector<std::string> params(argv+1, argv+argc);
 
 
-	if( toD(params[0]) != 0.0)
-		NoisePP.SetSeed(toD(params[0]));
+	if( Util::StrTo<int>(params[0]) != 0)
+		NoisePP.SetSeed(Util::StrTo<int>(params[0]));
 
-	if( toD(params[1]) != 0.0)
-		NoisePP.SetOctaveCount(toD(params[1]));
+	if( Util::StrTo<int>(params[1]) != 0)
+		NoisePP.SetOctaveCount(Util::StrTo<int>(params[1]));
 
-	if( toD(params[2]) != 0.0)
-		NoisePP.SetPersistence(toD(params[2]));
+	if( Util::StrTo<double>(params[2]) != 0.0)
+		NoisePP.SetPersistence(Util::StrTo<double>(params[2]));
 
-	if( toD(params[3]) != 0.0)
-		NoisePP.SetFrequency(toD(params[3]));
+	if( Util::StrTo<double>(params[3]) != 0.0)
+		NoisePP.SetFrequency(Util::StrTo<double>(params[3]));
 
-	if( toD(params[4]) != 0.0)
-		NoisePP.SetQuality(toD(params[4]));
+	if( Util::StrTo<int>(params[4]) != 0)
+		NoisePP.SetQuality(Util::StrTo<int>(params[4]));
 
-	if( toD(params[5]) != 0.0)
-		NoisePP.SetScale(toD(params[5]));
+	if( Util::StrTo<double>(params[5]) != 0.0)
+		NoisePP.SetScale(Util::StrTo<double>(params[5]));
 
-	if( toD(params[6]) != 0.0)
-		NoisePP.SetLacunarity(toD(params[6]));
+	if( Util::StrTo<double>(params[6]) != 0.0)
+		NoisePP.SetLacunarity(Util::StrTo<double>(params[6]));
 
-	if( toD(params[7]) != 0.0)
-		distortion = toD(params[7]);
+	if( Util::StrTo<double>(params[7]) != 0.0)
+		distortion = Util::StrTo<double>(params[7]);
 
-	if( params[8] != " ")
+	if( params[8] != " " || params[8] != "")
 		file = params[8];
 
 	// Frequency	=	1

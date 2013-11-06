@@ -335,8 +335,8 @@ static stbi_uc *dds_load(stbi *s, int *x, int *y, int *comp, int req_comp)
 			{
 				//	where are we?
 				int bx, by, bw=4, bh=4;
-				int ref_x = 4 * (i % block_pitch);
-				int ref_y = 4 * (i / block_pitch);
+				unsigned int ref_x = 4 * (i % block_pitch);
+				unsigned int ref_y = 4 * (i / block_pitch);
 				//	get the next block's worth of compressed data, and decompress it
 				if( DXT_family == 1 )
 				{

@@ -7,7 +7,7 @@ solution "PlanetGeneratorFYP"
 
 	if _ACTION == "vs2010" then
 		libdirs { "./external/lib/vs2010" }
-		defines { "WIN32" }
+		defines { "WIN32", "_CRT_SECURE_NO_WARNINGS" }
 		buildoptions { "/wd4290" }
 	end
 
