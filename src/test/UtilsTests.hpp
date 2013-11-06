@@ -1,6 +1,16 @@
 #include "framework/Utilities.hpp"
 #include "catch.hpp"
 
+TEST_CASE( "Testing Utilities StrTo" )
+{
+    REQUIRE( 5 == Util::StrTo<int>( "5" ) );
+    REQUIRE( 2423141 == Util::StrTo<unsigned long>( "2423141" ) );
+    REQUIRE( 3.44 == Util::StrTo<double>( "3.44" ) );
+    REQUIRE( 3.44f == Util::StrTo<float>( "3.44" ) );
+    REQUIRE( true == Util::StrTo<bool>( "1" ) );
+    REQUIRE( 0.432 == Util::StrTo<double>( "0.432" ) );
+}
+
 TEST_CASE( "Testing Utilities ToString" )
 {
     REQUIRE( "5" == Util::ToString( 5 ) );

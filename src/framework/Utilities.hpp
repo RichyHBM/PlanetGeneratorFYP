@@ -53,19 +53,6 @@ namespace Util
         }
     }
 
-	//Convert string to other type
-	template <typename T>
-	T StrTo(const std::string& sVal)
-	{
-			T val;
-			std::stringstream ss;
-			ss << sVal;
-			ss >> val;
-			if(ss.fail())
-					return (T) 0;
-			return val;
-	}
-
     //Returns the smallest of 2 values
     template <class T>
     T MinValue( T pA, T pB )
@@ -93,6 +80,19 @@ namespace Util
         }
     }
 
+	//Convert string to other type
+	template <typename T>
+	T StrTo(const std::string& sVal)
+	{
+			T val;
+			std::stringstream ss;
+			ss << sVal;
+			ss >> val;
+			if(ss.fail())
+					return (T) 0;
+			return val;
+	}
+
     //Convert a given variable into a string
     template <class T>
     inline std::string ToString ( const T &t )
@@ -101,11 +101,11 @@ namespace Util
         ss << t;
         return ss.str();
     }
-
-    inline std::string ToString ( float f, int precision )
+	template <class T>
+    inline std::string ToString ( T t, int precision )
     {
         std::stringstream ss;
-        ss << std::fixed << std::setprecision( precision ) << f;
+        ss << std::fixed << std::setprecision( precision ) << t;
         return ss.str();
     }
 
