@@ -7,6 +7,8 @@
 
 #include "framework/DebugOperators.hpp"
 #include "framework/Noise/NoiseppNoise.hpp"
+#include "framework/MatrixManager.hpp"
+
 #ifdef SFML
 #include "framework/WindowSFML.hpp"
 #elif defined GLFW
@@ -15,12 +17,22 @@
 
 //Set initial settings
 void SetSettings();
+void ProcessArgument( const std::string &arg, const std::string &arg2 );
 
 int main( int argc, const char *argv[] )
 {
+	SetSettings();
+	MatrixControl.Init();
+
     NoisePP.ParseArguments( argc, argv );
     Settings::ParseArguments( argc, argv );
-    SetSettings();
+
+	for( int i = 0; i < argc; i++ ) {
+		if(argc > i+1){
+			ProcessArgument( argv[i], argv[i+1] );
+		}
+    }
+
 #ifdef SFML
     Window *window = new( MemoryUse::Normal ) WindowSFML();
 #elif defined GLFW
@@ -57,4 +69,13 @@ void SetSettings()
     bool vSynk = false, fullScreen = false;
     Settings::Initial.SetSettings( depthBits, stencilBits, antiAliasing, majorOGL, minorOGL, width, height, fps, vSynk, fullScreen );
 }
+
+void ProcessArgument( const std::string &arg, const std::string &arg2 )
+{
+	if( arg == "-viewDisp" ) {
+		float displacement = Util::StrTo<float> (arg2);
+        MatrixControl.SetDisplacement( displacement );
+	}
+}
+
 

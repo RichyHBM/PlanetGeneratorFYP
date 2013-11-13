@@ -3,7 +3,7 @@
 #include "Program.hpp"
 #include "framework/Settings.hpp"
 #include "framework/Utilities.hpp"
-
+#include "framework/MatrixManager.hpp"
 
 Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
 {
@@ -24,14 +24,9 @@ Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
     mVertexList.push_back( glm::vec3( -0.5f, -0.5f, 0.0f ) );
     mVertexBuffer.AddVectorData( mVertexList, sizeof( glm::vec3 ) );
     mVertexBuffer.SetAttributeIndex( mShader.GetAttribute( "Position" ) );
-    glm::mat4 Projection = glm::perspective( 75.0f, Settings::Running.GetAspectRatio(), 0.1f, 100.0f );
-    glm::mat4 View       = glm::lookAt(
-                               glm::vec3( 0,0,-2 ),
-                               glm::vec3( 0,0,0 ),
-                               glm::vec3( 0,1,0 )
-                           );
+    
     glm::mat4 Model      = glm::mat4( 1.0f );
-    mMVP        = Projection * View * Model;
+	mMVP        = MatrixControl.PerspectiveView() * Model;
 }
 
 Program::~Program()
