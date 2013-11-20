@@ -15,31 +15,37 @@ NoiseppNoise NoisePP;
 // Persistence	=	0.5
 // Scale		=	2.12
 //
-NoiseppNoise::NoiseppNoise( ) : mPipeline1d( 2 ), mPipeline2d( 2 ), mPipeline3d( 2 )
+NoiseppNoise::NoiseppNoise( )
 {
-    mThreadCount = noisepp::utils::System::getNumberOfCPUs ();
+    
+}
 
-    if ( mThreadCount > 2 ) {
-        mPipeline1d = noisepp::ThreadedPipeline1D( mThreadCount );
-        mPipeline2d = noisepp::ThreadedPipeline2D( mThreadCount );
-        mPipeline3d = noisepp::ThreadedPipeline3D( mThreadCount );
-    }
+void NoiseppNoise::Init()
+{
+	mThreadCount = noisepp::utils::System::getNumberOfCPUs ();
 
-    mNoiseID1D = mPerlin.addToPipe ( mPipeline1d );
-    mNoiseID2D = mPerlin.addToPipe ( mPipeline2d );
-    mNoiseID3D = mPerlin.addToPipe ( mPipeline3d );
-    mCache1d = mPipeline1d.createCache();
-    mCache2d = mPipeline2d.createCache();
-    mCache3d = mPipeline3d.createCache();
+    mPipeline1d = new noisepp::ThreadedPipeline1D( mThreadCount );
+    mPipeline2d = new noisepp::ThreadedPipeline2D( mThreadCount );
+    mPipeline3d = new noisepp::ThreadedPipeline3D( mThreadCount );
+    
+    mNoiseID1D = mPerlin.addToPipe ( *mPipeline1d );
+    mNoiseID2D = mPerlin.addToPipe ( *mPipeline2d );
+    mNoiseID3D = mPerlin.addToPipe ( *mPipeline3d );
+    mCache1d = mPipeline1d->createCache();
+    mCache2d = mPipeline2d->createCache();
+    mCache3d = mPipeline3d->createCache();
     mDistortion = 1.0;
 }
 
 NoiseppNoise::~NoiseppNoise()
 {
-    mPipeline1d.freeCache( mCache1d );
-    mPipeline2d.freeCache( mCache2d );
-    mPipeline3d.freeCache( mCache3d );
-    mCache1d = NULL;
+    mPipeline1d->freeCache( mCache1d );
+    mPipeline2d->freeCache( mCache2d );
+    mPipeline3d->freeCache( mCache3d );
+	delete mPipeline1d;
+	delete mPipeline2d;
+	delete mPipeline3d;
+	mCache1d = NULL;
     mCache2d = NULL;
     mCache3d = NULL;
 }
@@ -108,25 +114,22 @@ void NoiseppNoise::SetDistortion( double distortion )
 void NoiseppNoise::SetSeed( int seed )
 {
     mPerlin.setSeed( seed );
-    mPipeline1d.setSeed( seed );
-    mPipeline2d.setSeed( seed );
-    mPipeline3d.setSeed( seed );
 }
 
 double NoiseppNoise::Generate( double x )
 {
-    mPipeline1d.cleanCache( mCache1d );
-    return mPipeline1d.getElement( mNoiseID1D )->getValue ( x * mDistortion, mCache1d );
+    mPipeline1d->cleanCache( mCache1d );
+    return mPipeline1d->getElement( mNoiseID1D )->getValue ( x * mDistortion, mCache1d );
 }
 
 double NoiseppNoise::Generate( double x, double y )
 {
-    mPipeline2d.cleanCache( mCache2d );
-    return mPipeline2d.getElement( mNoiseID2D )->getValue ( x * mDistortion, y * mDistortion, mCache2d );
+    mPipeline2d->cleanCache( mCache2d );
+    return mPipeline2d->getElement( mNoiseID2D )->getValue ( x * mDistortion, y * mDistortion, mCache2d );
 }
 
 double NoiseppNoise::Generate( double x, double y, double z )
 {
-    mPipeline3d.cleanCache( mCache3d );
-    return mPipeline3d.getElement( mNoiseID3D )->getValue ( x * mDistortion, y * mDistortion, z * mDistortion, mCache3d );
+    mPipeline3d->cleanCache( mCache3d );
+    return mPipeline3d->getElement( mNoiseID3D )->getValue ( x * mDistortion, y * mDistortion, z * mDistortion, mCache3d );
 }

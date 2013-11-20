@@ -7,9 +7,9 @@ class NoiseppNoise
 {
 protected:
     noisepp::PerlinModule mPerlin;
-    noisepp::ThreadedPipeline1D mPipeline1d;
-    noisepp::ThreadedPipeline2D mPipeline2d;
-    noisepp::ThreadedPipeline3D mPipeline3d;
+    noisepp::ThreadedPipeline1D *mPipeline1d;
+    noisepp::ThreadedPipeline2D *mPipeline2d;
+    noisepp::ThreadedPipeline3D *mPipeline3d;
 
     noisepp::ElementID mNoiseID1D;
     noisepp::ElementID mNoiseID2D;
@@ -24,7 +24,7 @@ protected:
 public:
     NoiseppNoise( );
     ~NoiseppNoise();
-
+	void Init();
     void SetSeed( int seed );
     void SetOctaveCount( int oct );
     void SetPersistence( double pers );

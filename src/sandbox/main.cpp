@@ -71,13 +71,19 @@ int main( int argc, const char *argv[] )
     const int mHeight = 512;
     unsigned char *image = new unsigned char[mHeight * mWidth];
 
+	NoisePP.Init();
+
     for( int j = 0; j < mHeight; j++ ) {
         for( int i = 0; i < mWidth; i++ ) {
-            image[i + j * mWidth] = ( unsigned char ) min( NoisePP.Generate( i*distortion, j*distortion ) * 127.5 , 255.0 );
+			double d = NoisePP.Generate( i*distortion, j*distortion );
+			image[i + j * mWidth] = static_cast<unsigned char>( Util::Clamp( (d + 1) * 127.5, 0.0, 255.0 ));
+			std::cout << d << std::endl;
         }
     }
 
     SOIL_save_image	( file.c_str(),	SOIL_SAVE_TYPE_BMP,	mWidth, mHeight, 1,	image );
     delete[] image;
+
+	std::cin.get();
     return 0;
 }
