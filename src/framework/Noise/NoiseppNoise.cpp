@@ -34,7 +34,7 @@ void NoiseppNoise::Init()
     mCache1d = mPipeline1d->createCache();
     mCache2d = mPipeline2d->createCache();
     mCache3d = mPipeline3d->createCache();
-    mDistortion = 1.0;
+    mDistortion = 0.01;
 }
 
 NoiseppNoise::~NoiseppNoise()

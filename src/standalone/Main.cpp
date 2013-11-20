@@ -26,6 +26,8 @@ int main( int argc, const char *argv[] )
 
     NoisePP.ParseArguments( argc, argv );
     Settings::ParseArguments( argc, argv );
+	NoisePP.SetSeed(54321);
+	NoisePP.Init();
 
 	for( int i = 0; i < argc; i++ ) {
 		if(argc > i+1){

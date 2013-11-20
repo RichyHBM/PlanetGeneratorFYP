@@ -77,7 +77,6 @@ int main( int argc, const char *argv[] )
         for( int i = 0; i < mWidth; i++ ) {
 			double d = NoisePP.Generate( i*distortion, j*distortion );
 			image[i + j * mWidth] = static_cast<unsigned char>( Util::Clamp( (d + 1) * 127.5, 0.0, 255.0 ));
-			std::cout << d << std::endl;
         }
     }
 

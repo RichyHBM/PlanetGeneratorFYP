@@ -48,6 +48,9 @@ protected:
 
     VBO mVertexBuffer;
     std::vector<glm::vec3> mVertexList;
+	VBO mNormalBuffer;
+    std::vector<glm::vec3> mNormalList;
+
     Shader mShader;
     glm::mat4 mMVP;
 private:
