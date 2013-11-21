@@ -28,38 +28,26 @@ Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
 
     mShader.LoadShaderCode( vertexShader ,fragmentShader );
 
-    for(int y = 0; y < 99; y++)
+    for(int y = 0; y < 100; y++)
+	{
+		for(int x = 0; x < 100; x++)
+		{
+			glm::vec3 p1( x, NoisePP.Generate(x, y) * 50, y );
+			mVertexList.push_back(p1);
+		}
+	}
+
+	for(int y = 0; y < 99; y++)
 	{
 		for(int x = 0; x < 99; x++)
 		{
-			glm::vec3 p1( x, NoisePP.Generate(x, y) * 50, y );
-			glm::vec3 p2( x, NoisePP.Generate(x, y + 1) * 50, y+1 );
-			glm::vec3 p3( x+1, NoisePP.Generate(x + 1, y) * 50, y );
-			glm::vec3 p4( x+1, NoisePP.Generate(x + 1, y + 1) * 50, y+1 );
-				
-			mVertexList.push_back(p1);
-			mVertexList.push_back(p2);
-			mVertexList.push_back(p3);
-			//Using http://www.opengl.org/wiki/Calculating_a_Surface_Normal
-			glm::vec3 U(p2 - p1 );
-            glm::vec3 V(p3 - p1 );
-			glm::vec3 normal = glm::cross(U, V);
+			mIndexList.push_back(x + y*100);
+			mIndexList.push_back(x + (y+1)*100 );
+			mIndexList.push_back(x+1 + y*100);
 
-			mNormalList.push_back(normal);
-			mNormalList.push_back(normal);
-			mNormalList.push_back(normal);
-
-			mVertexList.push_back(p3);
-			mVertexList.push_back(p2);
-			mVertexList.push_back(p4);
-
-			U = glm::vec3(p2 - p3);
-            V = glm::vec3(p4 - p3);
-			normal = glm::cross(U, V);
-
-			mNormalList.push_back(normal);
-			mNormalList.push_back(normal);
-			mNormalList.push_back(normal);
+			mIndexList.push_back(x+1 + y*100);
+			mIndexList.push_back(x + (y+1)*100);
+			mIndexList.push_back(x+1 + (y+1)*100);
 		}
 	}
 
@@ -67,8 +55,11 @@ Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
     mVertexBuffer.AddVectorData( mVertexList, sizeof( glm::vec3 ) );
     mVertexBuffer.SetAttributeIndex( mShader.GetAttribute( "Position" ) );
     
-	mNormalBuffer.AddVectorData( mNormalList, sizeof( glm::vec3 ) );
-    mNormalBuffer.SetAttributeIndex( mShader.GetAttribute( "Normal" ) );
+//	mNormalBuffer.AddVectorData( mNormalList, sizeof( glm::vec3 ) );
+//    mNormalBuffer.SetAttributeIndex( mShader.GetAttribute( "Normal" ) );
+
+	mIndexBuffer.AddVectorData( mIndexList, sizeof( unsigned int ) );
+	mIndexBuffer.SetTarget(GL_ELEMENT_ARRAY_BUFFER);
 
 	glm::mat4 Model = glm::translate(glm::vec3(-50, 0, -50));
 	mMVP = MatrixControl.PerspectiveView() * Model;
@@ -129,9 +120,11 @@ void Program::Draw()
     mShader.Bind();
     glUniformMatrix4fv( mShader.GetUniform( "MVP" ), 1, GL_FALSE, &mMVP[0][0] );
     mVertexBuffer.Bind( 3 );
-	mNormalBuffer.Bind( 3 );
-    glDrawArrays( GL_TRIANGLES, 0, mVertexList.size() );
-	mNormalBuffer.Unbind();
+//	mNormalBuffer.Bind( 3 );
+	mIndexBuffer.Bind();
+    glDrawElements( GL_TRIANGLES, mIndexList.size(), GL_UNSIGNED_INT, (void*)0 );
+	mIndexBuffer.Unbind();
+//	mNormalBuffer.Unbind();
     mVertexBuffer.Unbind();
     Shader::Unbind();
     mDebugInfo.Draw();

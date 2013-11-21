@@ -51,6 +51,9 @@ protected:
 	VBO mNormalBuffer;
     std::vector<glm::vec3> mNormalList;
 
+	VBO mIndexBuffer;
+    std::vector<unsigned int> mIndexList;
+
     Shader mShader;
     glm::mat4 mMVP;
 private:
