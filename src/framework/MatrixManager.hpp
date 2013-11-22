@@ -42,6 +42,10 @@ public:
     const glm::mat4 &OrthographicView() {
         return mOrthographicView;
     }
+
+	const glm::vec3 &Position() {
+        return mPosition;
+    }
 };
 
 extern MatrixManager MatrixControl;

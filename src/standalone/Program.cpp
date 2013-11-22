@@ -5,6 +5,8 @@
 #include "framework/Utilities.hpp"
 #include "framework/MatrixManager.hpp"
 
+#include "framework/Input/Mouse.hpp"
+
 Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
 {
     mWindow = pWindow;
@@ -22,7 +24,7 @@ Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
     std::string fragmentShader = GLSL(
 								varying vec3 normal;
 								void main() {
-									gl_FragColor = vec4( normal.xyz, 1.0 );
+									gl_FragColor = vec4( 1.0, 1.0, 0.0, 1.0 );
 								} 
 	);
 
@@ -90,7 +92,9 @@ void Program::Run()
                 break;
             }
 
+			
             Update();
+			Mouse::Set(Settings::Running.GetWidth()/2.0f, Settings::Running.GetHeight()/2.0f);
             mWindow->ResetDelta();
             Draw();
             mWindow->Display();
@@ -104,6 +108,8 @@ void Program::Run()
 
 void Program::Update()
 {
+	Input::Manager.Update();
+
     if( sf::Keyboard::isKeyPressed( sf::Keyboard::F10 ) ) {
         mDebugInfo.SetDraw( true );
     }
@@ -111,6 +117,10 @@ void Program::Update()
     if( sf::Keyboard::isKeyPressed( sf::Keyboard::F11 ) ) {
         mDebugInfo.SetDraw( false );
     }
+	glm::mat4 Model = glm::translate(glm::vec3(-50, 0, -50));
+	
+	mMVP = MatrixControl.PerspectiveView() * Model;
+
 }
 
 void Program::Draw()

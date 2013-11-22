@@ -29,6 +29,8 @@ int main( int argc, const char *argv[] )
 	NoisePP.SetSeed(54321);
 	NoisePP.Init();
 
+	Input::Manager.SetType(Input::KEYBOARD);
+
 	for( int i = 0; i < argc; i++ ) {
 		if(argc > i+1){
 			ProcessArgument( argv[i], argv[i+1] );

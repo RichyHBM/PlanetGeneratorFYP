@@ -27,5 +27,6 @@
 #include "Noise/NoiseppNoise.hpp"
 #include "Utilities.hpp"
 #include "LogManager.hpp"
+#include "./Input/Input.hpp"
 
 #endif // INCLUDES_HPP_INCLUDED

@@ -42,6 +42,7 @@ public:
     ///
     const double GetDelta();
 
+
 protected:
     Window *mWindow;
     DrawDebugInfo mDebugInfo;
