@@ -27,8 +27,6 @@ void Keyboard::Update()
 	mHorizontalAngle -= mouseSpeed * delta * ( mPos.x );
     mVerticalAngle   -= mouseSpeed * delta * ( mPos.y );
 
-	std::cout <<mHorizontalAngle<< "::"<< mVerticalAngle << std::endl;
-
     double Pim1 = Util::Maths::dPIo2 * 0.99999;
     mVerticalAngle = glm::clamp(mVerticalAngle, -Pim1, Pim1);
 
