@@ -49,10 +49,10 @@ protected:
 
     VBO mVertexBuffer;
     std::vector<glm::vec3> mVertexList;
-	VBO mNormalBuffer;
+    VBO mNormalBuffer;
     std::vector<glm::vec3> mNormalList;
 
-	VBO mIndexBuffer;
+    VBO mIndexBuffer;
     std::vector<unsigned int> mIndexList;
 
     Shader mShader;

@@ -24,7 +24,7 @@ protected:
 public:
     NoiseppNoise( );
     ~NoiseppNoise();
-	void Init();
+    void Init();
     void SetSeed( int seed );
     void SetOctaveCount( int oct );
     void SetPersistence( double pers );

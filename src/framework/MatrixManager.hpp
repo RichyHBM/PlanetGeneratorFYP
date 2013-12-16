@@ -8,7 +8,7 @@ class MatrixManager
     int mWidth, mHeight;
     float mNearPlane, mFarPlane;
     float fieldOfView;
-	float mDisplacement;
+    float mDisplacement;
     glm::vec3 mPosition, mLookAt, mUp;
     glm::mat4 mOrthogonal;
     glm::mat4 mPerspective;
@@ -19,11 +19,11 @@ class MatrixManager
 public:
     MatrixManager();
     ~MatrixManager();
-	void Init();
+    void Init();
 
     void SetWidthHeight( int width, int height );
     void SetPosition( const glm::vec3 &position );
-	void SetDisplacement( float displacement );
+    void SetDisplacement( float displacement );
     void SetLookAt( const glm::vec3 &lookAt );
     void SetUp( const glm::vec3 &up );
 
@@ -43,7 +43,7 @@ public:
         return mOrthographicView;
     }
 
-	const glm::vec3 &Position() {
+    const glm::vec3 &Position() {
         return mPosition;
     }
 };

@@ -110,10 +110,10 @@ void WindowSFML::DoEvents()
 
         } else if( event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::F4 ) {
             Texture::Screenshot( "Screenshot.bmp", 0, 0, Settings::Running.GetWidth(), Settings::Running.GetHeight() );
-		} else if( event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape ) {
+
+        } else if( event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape ) {
             mNeedsClose = true;
         }
-
     }
 }
 

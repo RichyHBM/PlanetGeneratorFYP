@@ -17,17 +17,14 @@ NoiseppNoise NoisePP;
 //
 NoiseppNoise::NoiseppNoise( )
 {
-    
 }
 
 void NoiseppNoise::Init()
 {
-	mThreadCount = noisepp::utils::System::getNumberOfCPUs ();
-
+    mThreadCount = noisepp::utils::System::getNumberOfCPUs ();
     mPipeline1d = new noisepp::ThreadedPipeline1D( mThreadCount );
     mPipeline2d = new noisepp::ThreadedPipeline2D( mThreadCount );
     mPipeline3d = new noisepp::ThreadedPipeline3D( mThreadCount );
-    
     mNoiseID1D = mPerlin.addToPipe ( *mPipeline1d );
     mNoiseID2D = mPerlin.addToPipe ( *mPipeline2d );
     mNoiseID3D = mPerlin.addToPipe ( *mPipeline3d );
@@ -42,10 +39,10 @@ NoiseppNoise::~NoiseppNoise()
     mPipeline1d->freeCache( mCache1d );
     mPipeline2d->freeCache( mCache2d );
     mPipeline3d->freeCache( mCache3d );
-	delete mPipeline1d;
-	delete mPipeline2d;
-	delete mPipeline3d;
-	mCache1d = NULL;
+    delete mPipeline1d;
+    delete mPipeline2d;
+    delete mPipeline3d;
+    mCache1d = NULL;
     mCache2d = NULL;
     mCache3d = NULL;
 }

@@ -21,20 +21,18 @@ void ProcessArgument( const std::string &arg, const std::string &arg2 );
 
 int main( int argc, const char *argv[] )
 {
-	SetSettings();
-	MatrixControl.Init();
-
+    SetSettings();
+    MatrixControl.Init();
     NoisePP.ParseArguments( argc, argv );
     Settings::ParseArguments( argc, argv );
-	NoisePP.SetSeed(54321);
-	NoisePP.Init();
+    NoisePP.SetSeed( 54321 );
+    NoisePP.Init();
+    Input::Manager.SetType( Input::KEYBOARD );
 
-	Input::Manager.SetType(Input::KEYBOARD);
-
-	for( int i = 0; i < argc; i++ ) {
-		if(argc > i+1){
-			ProcessArgument( argv[i], argv[i+1] );
-		}
+    for( int i = 0; i < argc; i++ ) {
+        if( argc > i+1 ) {
+            ProcessArgument( argv[i], argv[i+1] );
+        }
     }
 
 #ifdef SFML
@@ -76,10 +74,10 @@ void SetSettings()
 
 void ProcessArgument( const std::string &arg, const std::string &arg2 )
 {
-	if( arg == "-viewDisp" ) {
-		float displacement = Util::StrTo<float> (arg2);
+    if( arg == "-viewDisp" ) {
+        float displacement = Util::StrTo<float> ( arg2 );
         MatrixControl.SetDisplacement( displacement );
-	}
+    }
 }
 
 

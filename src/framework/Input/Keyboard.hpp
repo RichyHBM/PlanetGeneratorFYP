@@ -3,13 +3,13 @@
 
 class Keyboard
 {
-	double mHorizontalAngle;
+    double mHorizontalAngle;
     double mVerticalAngle;
 public:
-	Keyboard();
-	~Keyboard();
+    Keyboard();
+    ~Keyboard();
 
-	void Update();
+    void Update();
 };
 
 #endif //KEYBOARD_HPP

@@ -5,30 +5,30 @@ Input Input::Manager;
 
 Input::Input()
 {
-
 }
 Input::~Input()
 {
-
 }
 
-void Input::SetType(Type t)
+void Input::SetType( Type t )
 {
-	mType = t;
+    mType = t;
 }
 
 void Input::Update()
 {
-	switch(mType)
-	{
-	case KEYBOARD:
-		mKeyboard.Update();
-		break;
-	case GAMEPAD:
-		break;
-	case NETWORK:
-		break;
-	default:
-		Log.Warning("No Input Selected");
-	}
+    switch( mType ) {
+        case KEYBOARD:
+            mKeyboard.Update();
+            break;
+
+        case GAMEPAD:
+            break;
+
+        case NETWORK:
+            break;
+
+        default:
+            Log.Warning( "No Input Selected" );
+    }
 }

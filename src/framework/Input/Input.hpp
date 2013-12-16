@@ -6,22 +6,22 @@
 class Input
 {
 public:
-	Input();
-	~Input();
+    Input();
+    ~Input();
 
-	enum Type{
-		KEYBOARD,
-		GAMEPAD,
-		NETWORK
-	};
+    enum Type {
+        KEYBOARD,
+        GAMEPAD,
+        NETWORK
+    };
 
-	void SetType(Type t);
-	void Update();
+    void SetType( Type t );
+    void Update();
 
-	static Input Manager;
+    static Input Manager;
 protected:
-	Type mType;
-	Keyboard mKeyboard;
+    Type mType;
+    Keyboard mKeyboard;
 };
 
 #endif //INPUT_HPP

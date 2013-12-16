@@ -15,64 +15,55 @@ Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
     std::string vertexShader = GLSL(
                                    uniform mat4 MVP;
                                    attribute vec4 Position;
-								   attribute vec3 Normal;
-								   varying vec3 normal;
-									void main() {
-										normal = Normal;
-										gl_Position =  MVP * Position;
-									} 
-	);
-
+                                   attribute vec3 Normal;
+                                   varying vec3 normal;
+    void main() {
+        normal = Normal;
+        gl_Position =  MVP * Position;
+    }
+                               );
     std::string fragmentShader = GLSL(
-								varying vec3 normal;
-								void main() {
-									gl_FragColor = vec4( normal.xyz, 1.0 );
-								} 
-	);
-
+                                     varying vec3 normal;
+    void main() {
+        gl_FragColor = vec4( normal.xyz, 1.0 );
+    }
+                                 );
     mShader.LoadShaderCode( vertexShader ,fragmentShader );
 
-    for(int y = 0; y < PLANESIZE; y++)
-	{
-		for(int x = 0; x < PLANESIZE; x++)
-		{
-			glm::vec3 p1( x, NoisePP.Generate(x, y) * 50, y );
-			mVertexList.push_back(p1);
+    for( int y = 0; y < PLANESIZE; y++ ) {
+        for( int x = 0; x < PLANESIZE; x++ ) {
+            glm::vec3 p1( x, NoisePP.Generate( x, y ) * 50, y );
+            mVertexList.push_back( p1 );
 
-			if(p1.x != 0 || p1.y != 0 || p1.z != 0)
-				mNormalList.push_back(glm::normalize(p1));
-			else
-				mNormalList.push_back(p1);
+            if( p1.x != 0 || p1.y != 0 || p1.z != 0 ) {
+                mNormalList.push_back( glm::normalize( p1 ) );
 
-		}
-	}
+            } else {
+                mNormalList.push_back( p1 );
+            }
+        }
+    }
 
-	for(int y = 0; y < PLANESIZE - 1; y++)
-	{
-		for(int x = 0; x < PLANESIZE - 1; x++)
-		{
-			mIndexList.push_back(x + y*PLANESIZE);
-			mIndexList.push_back(x + (y+1)*PLANESIZE );
-			mIndexList.push_back(x+1 + y*PLANESIZE);
+    for( int y = 0; y < PLANESIZE - 1; y++ ) {
+        for( int x = 0; x < PLANESIZE - 1; x++ ) {
+            mIndexList.push_back( x + y*PLANESIZE );
+            mIndexList.push_back( x + ( y+1 )*PLANESIZE );
+            mIndexList.push_back( x+1 + y*PLANESIZE );
+            mIndexList.push_back( x+1 + y*PLANESIZE );
+            mIndexList.push_back( x + ( y+1 )*PLANESIZE );
+            mIndexList.push_back( x+1 + ( y+1 )*PLANESIZE );
+        }
+    }
 
-			mIndexList.push_back(x+1 + y*PLANESIZE);
-			mIndexList.push_back(x + (y+1)*PLANESIZE);
-			mIndexList.push_back(x+1 + (y+1)*PLANESIZE);
-		}
-	}
-
-	MatrixControl.SetPosition(glm::vec3(25, 100, 25));
+    MatrixControl.SetPosition( glm::vec3( 25, 100, 25 ) );
     mVertexBuffer.AddVectorData( mVertexList, sizeof( glm::vec3 ) );
     mVertexBuffer.SetAttributeIndex( mShader.GetAttribute( "Position" ) );
-    
-	mNormalBuffer.AddVectorData( mNormalList, sizeof( glm::vec3 ) );
+    mNormalBuffer.AddVectorData( mNormalList, sizeof( glm::vec3 ) );
     mNormalBuffer.SetAttributeIndex( mShader.GetAttribute( "Normal" ) );
-
-	mIndexBuffer.AddVectorData( mIndexList, sizeof( unsigned int ) );
-	mIndexBuffer.SetTarget(GL_ELEMENT_ARRAY_BUFFER);
-
-	glm::mat4 Model = glm::translate(glm::vec3(-(PLANESIZE/2.0f), 0, -(PLANESIZE/2.0f)));
-	mMVP = MatrixControl.PerspectiveView() * Model;
+    mIndexBuffer.AddVectorData( mIndexList, sizeof( unsigned int ) );
+    mIndexBuffer.SetTarget( GL_ELEMENT_ARRAY_BUFFER );
+    glm::mat4 Model = glm::translate( glm::vec3( -( PLANESIZE/2.0f ), 0, -( PLANESIZE/2.0f ) ) );
+    mMVP = MatrixControl.PerspectiveView() * Model;
 }
 
 Program::~Program()
@@ -100,9 +91,8 @@ void Program::Run()
                 break;
             }
 
-			
             Update();
-			Mouse::Set(Settings::Running.GetWidth()/2.0f, Settings::Running.GetHeight()/2.0f);
+            Mouse::Set( Settings::Running.GetWidth()/2.0f, Settings::Running.GetHeight()/2.0f );
             mWindow->ResetDelta();
             Draw();
             mWindow->Display();
@@ -116,7 +106,7 @@ void Program::Run()
 
 void Program::Update()
 {
-	Input::Manager.Update();
+    Input::Manager.Update();
 
     if( sf::Keyboard::isKeyPressed( sf::Keyboard::F10 ) ) {
         mDebugInfo.SetDraw( true );
@@ -125,10 +115,9 @@ void Program::Update()
     if( sf::Keyboard::isKeyPressed( sf::Keyboard::F11 ) ) {
         mDebugInfo.SetDraw( false );
     }
-	glm::mat4 Model = glm::translate(glm::vec3(-50, 0, -50));
-	
-	mMVP = MatrixControl.PerspectiveView() * Model;
 
+    glm::mat4 Model = glm::translate( glm::vec3( -50, 0, -50 ) );
+    mMVP = MatrixControl.PerspectiveView() * Model;
 }
 
 void Program::Draw()
@@ -138,11 +127,11 @@ void Program::Draw()
     mShader.Bind();
     glUniformMatrix4fv( mShader.GetUniform( "MVP" ), 1, GL_FALSE, &mMVP[0][0] );
     mVertexBuffer.Bind( 3 );
-	mNormalBuffer.Bind( 3 );
-	mIndexBuffer.Bind();
-    glDrawElements( GL_TRIANGLES, mIndexList.size(), GL_UNSIGNED_INT, (void*)0 );
-	mIndexBuffer.Unbind();
-	mNormalBuffer.Unbind();
+    mNormalBuffer.Bind( 3 );
+    mIndexBuffer.Bind();
+    glDrawElements( GL_TRIANGLES, mIndexList.size(), GL_UNSIGNED_INT, ( void * )0 );
+    mIndexBuffer.Unbind();
+    mNormalBuffer.Unbind();
     mVertexBuffer.Unbind();
     Shader::Unbind();
     mDebugInfo.Draw();

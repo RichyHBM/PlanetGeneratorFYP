@@ -6,8 +6,8 @@
 class Mouse
 {
 public:
-	static void Set(float x, float y);
-	static glm::vec2 GetDisplacement();
+    static void Set( float x, float y );
+    static glm::vec2 GetDisplacement();
 };
 
 #endif
