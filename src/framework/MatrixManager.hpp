@@ -46,6 +46,10 @@ public:
     const glm::vec3 &Position() {
         return mPosition;
     }
+
+    const glm::vec3 &Up() {
+        return mUp;
+    }
 };
 
 extern MatrixManager MatrixControl;

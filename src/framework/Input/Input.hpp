@@ -1,7 +1,9 @@
 #ifndef INPUT_HPP
 #define INPUT_HPP
 
-#include "Keyboard.hpp"
+#include "./Keyboard.hpp"
+#include "./Gamepad.hpp"
+#include "./Network.hpp"
 
 class Input
 {
@@ -22,6 +24,8 @@ public:
 protected:
     Type mType;
     Keyboard mKeyboard;
+    Gamepad mGamepad;
+    NetworkInput mNetworked;
 };
 
 #endif //INPUT_HPP

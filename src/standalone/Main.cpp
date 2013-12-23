@@ -27,7 +27,7 @@ int main( int argc, const char *argv[] )
     Settings::ParseArguments( argc, argv );
     NoisePP.SetSeed( 54321 );
     NoisePP.Init();
-    Input::Manager.SetType( Input::KEYBOARD );
+    Input::Manager.SetType( Input::GAMEPAD );
 
     for( int i = 0; i < argc; i++ ) {
         if( argc > i+1 ) {
@@ -77,10 +77,10 @@ void ProcessArgument( const std::string &arg, const std::string &arg2 )
     if( arg == "-viewDisp" ) {
         float displacement = Util::StrTo<float> ( arg2 );
         MatrixControl.SetDisplacement( displacement );
-    }else if( arg == "-asServer" )
-	{
-		Settings::Initial.SetSettings( 24, 8, 8, 2, 1, 4096, 2400, 60, false, true ); 
-	}
+
+    } else if( arg == "-asServer" ) {
+        Settings::Initial.SetSettings( 24, 8, 8, 2, 1, 4096, 2400, 60, false, true );
+    }
 }
 
 

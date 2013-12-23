@@ -23,9 +23,11 @@ void Input::Update()
             break;
 
         case GAMEPAD:
+            mGamepad.Update();
             break;
 
         case NETWORK:
+            mNetworked.Update();
             break;
 
         default:
