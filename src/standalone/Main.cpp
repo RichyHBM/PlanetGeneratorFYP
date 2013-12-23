@@ -77,7 +77,10 @@ void ProcessArgument( const std::string &arg, const std::string &arg2 )
     if( arg == "-viewDisp" ) {
         float displacement = Util::StrTo<float> ( arg2 );
         MatrixControl.SetDisplacement( displacement );
-    }
+    }else if( arg == "-asServer" )
+	{
+		Settings::Initial.SetSettings( 24, 8, 8, 2, 1, 4096, 2400, 60, false, true ); 
+	}
 }
 
 
