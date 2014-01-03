@@ -8,14 +8,14 @@
 class Input
 {
 public:
-    Input();
-    ~Input();
-
-    enum Type {
+	enum Type {
         KEYBOARD,
         GAMEPAD,
         NETWORK
     };
+
+    Input();
+    ~Input();
 
     void SetType( Type t );
     void Update();
