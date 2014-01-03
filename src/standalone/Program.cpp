@@ -7,28 +7,13 @@
 
 #include "framework/Input/Mouse.hpp"
 
-#define PLANESIZE 200
+#define PLANESIZE 100
 
 Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
 {
     mWindow = pWindow;
-    std::string vertexShader = GLSL(
-                                   uniform mat4 MVP;
-                                   attribute vec4 Position;
-                                   attribute vec3 Normal;
-                                   varying vec3 normal;
-    void main() {
-        normal = Normal;
-        gl_Position =  MVP * Position;
-    }
-                               );
-    std::string fragmentShader = GLSL(
-                                     varying vec3 normal;
-    void main() {
-        gl_FragColor = vec4( normal.xyz, 1.0 );
-    }
-                                 );
-    mShader.LoadShaderCode( vertexShader ,fragmentShader );
+
+    mShader.LoadShaderFiles( "./Resources/Terrain.vert" ,"./Resources/Terrain.frag" );
 
     for( int y = 0; y < PLANESIZE; y++ ) {
         for( int x = 0; x < PLANESIZE; x++ ) {

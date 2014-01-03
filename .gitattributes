@@ -1,0 +1,5 @@
+*/Resources/*.txt eol=lf
+*/Resources/*.vert eol=lf
+*/Resources/*.frag eol=lf
+*.sh eol=lf
+./external/lib/* binary

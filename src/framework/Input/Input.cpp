@@ -3,7 +3,7 @@
 
 Input Input::Manager;
 
-Input::Input()
+Input::Input() : mType(Type::KEYBOARD)
 {
 }
 Input::~Input()
@@ -12,6 +12,10 @@ Input::~Input()
 
 void Input::SetType( Type t )
 {
+	if(t == Type::GAMEPAD && !Gamepad::IsAnyGamepadConnected())
+	{
+		return;
+	}
     mType = t;
 }
 

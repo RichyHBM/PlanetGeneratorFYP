@@ -16,7 +16,7 @@ Gamepad::~Gamepad()
 {
 }
 
-bool isAnyGamepadConnected()
+bool Gamepad::IsAnyGamepadConnected()
 {
     return ( sf::Joystick::isConnected( 0 ) || sf::Joystick::isConnected( 1 ) || sf::Joystick::isConnected( 2 ) || sf::Joystick::isConnected( 3 ) );
 }
