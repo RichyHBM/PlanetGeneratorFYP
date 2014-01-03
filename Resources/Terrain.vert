@@ -7,5 +7,10 @@ varying vec3 normal;
 void main() 
 {
     normal = Normal;
-    gl_Position =  MVP * Position;
+
+    vec4 origin = vec4(0,0,0,1);
+	float radius = 100.0;
+	vec4 delta = Position - origin;
+	vec4 mappedPos = origin + (normalize(delta) * radius);
+	gl_Position = MVP * mappedPos;
 }
