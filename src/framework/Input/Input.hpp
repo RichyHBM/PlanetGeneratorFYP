@@ -8,7 +8,7 @@
 class Input
 {
 public:
-	enum Type {
+    enum Type {
         KEYBOARD,
         GAMEPAD,
         NETWORK

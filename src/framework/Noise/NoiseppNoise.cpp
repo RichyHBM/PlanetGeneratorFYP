@@ -49,31 +49,30 @@ NoiseppNoise::~NoiseppNoise()
 
 void NoiseppNoise::ParseArguments( const std::string &arg, const std::string &arg2 )
 {
-        if( arg == "-seed" ) {
-            SetSeed( Util::StrTo<int>( arg2 ) );
+    if( arg == "-seed" ) {
+        SetSeed( Util::StrTo<int>( arg2 ) );
 
-        } else if( arg == "-persistance" ) {
-            SetPersistence( Util::StrTo<double>( arg2 ) );
+    } else if( arg == "-persistance" ) {
+        SetPersistence( Util::StrTo<double>( arg2 ) );
 
-        } else if( arg == "-octave" ) {
-            SetOctaveCount( Util::StrTo<int>( arg2 ) );
+    } else if( arg == "-octave" ) {
+        SetOctaveCount( Util::StrTo<int>( arg2 ) );
 
-        } else if( arg == "-frequency" ) {
-            SetFrequency( Util::StrTo<double>( arg2 ) );
+    } else if( arg == "-frequency" ) {
+        SetFrequency( Util::StrTo<double>( arg2 ) );
 
-        } else if( arg == "-quality" ) {
-            SetQuality( Util::StrTo<int>( arg2 ) );
+    } else if( arg == "-quality" ) {
+        SetQuality( Util::StrTo<int>( arg2 ) );
 
-        } else if( arg == "-scale" ) {
-            SetScale( Util::StrTo<double>( arg2 ) );
+    } else if( arg == "-scale" ) {
+        SetScale( Util::StrTo<double>( arg2 ) );
 
-        } else if( arg == "-lacunarity" ) {
-            SetLacunarity( Util::StrTo<double>( arg2 ) );
+    } else if( arg == "-lacunarity" ) {
+        SetLacunarity( Util::StrTo<double>( arg2 ) );
 
-        } else if( arg == "-distortion" ) {
-            SetDistortion( Util::StrTo<double>( arg2 ) );
-        }
-    
+    } else if( arg == "-distortion" ) {
+        SetDistortion( Util::StrTo<double>( arg2 ) );
+    }
 }
 
 void NoiseppNoise::SetOctaveCount( int oct )

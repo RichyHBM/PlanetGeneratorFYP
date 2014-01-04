@@ -6,44 +6,42 @@ Settings Settings::Running;
 
 void Settings::ParseArguments( const std::string &arg, const std::string &arg2 )
 {
-    
-        if( arg == "-depth" ) {
-            Initial.mDepthBits = Util::StrTo<short>( arg2 );
+    if( arg == "-depth" ) {
+        Initial.mDepthBits = Util::StrTo<short>( arg2 );
 
-        } else if( arg == "-stencil" ) {
-            Initial.mStencilBits = Util::StrTo<short>( arg2 );
+    } else if( arg == "-stencil" ) {
+        Initial.mStencilBits = Util::StrTo<short>( arg2 );
 
-        } else if( arg == "-antialiasing" ) {
-            Initial.mAntiAliasing = Util::StrTo<short>( arg2 );
+    } else if( arg == "-antialiasing" ) {
+        Initial.mAntiAliasing = Util::StrTo<short>( arg2 );
 
-        } else if( arg == "-width" ) {
-            Initial.mWidth = Util::StrTo<short>( arg2 );
-            Initial.mAspectRatio = Initial.mWidth/( float )Initial.mHeight;
+    } else if( arg == "-width" ) {
+        Initial.mWidth = Util::StrTo<short>( arg2 );
+        Initial.mAspectRatio = Initial.mWidth/( float )Initial.mHeight;
 
-        } else if( arg == "-height" ) {
-            Initial.mHeight = Util::StrTo<short>( arg2 );
-            Initial.mAspectRatio = Initial.mWidth/( float )Initial.mHeight;
+    } else if( arg == "-height" ) {
+        Initial.mHeight = Util::StrTo<short>( arg2 );
+        Initial.mAspectRatio = Initial.mWidth/( float )Initial.mHeight;
 
-        } else if( arg == "-vsynk" ) {
-            if( Util::StrTo<short>( arg2 ) == 1 ) {
-                Initial.mVSynk = true;
+    } else if( arg == "-vsynk" ) {
+        if( Util::StrTo<short>( arg2 ) == 1 ) {
+            Initial.mVSynk = true;
 
-            } else {
-                Initial.mVSynk = false;
-            }
-
-        } else if( arg == "-fullsceen" ) {
-            if( Util::StrTo<short>( arg2 ) == 1 ) {
-                Initial.mFullScreen = true;
-
-            } else {
-                Initial.mFullScreen = false;
-            }
-
-        } else if( arg == "-fps" ) {
-            Initial.mFPS = Util::StrTo<short>( arg2 );
+        } else {
+            Initial.mVSynk = false;
         }
-    
+
+    } else if( arg == "-fullsceen" ) {
+        if( Util::StrTo<short>( arg2 ) == 1 ) {
+            Initial.mFullScreen = true;
+
+        } else {
+            Initial.mFullScreen = false;
+        }
+
+    } else if( arg == "-fps" ) {
+        Initial.mFPS = Util::StrTo<short>( arg2 );
+    }
 }
 
 Settings::Settings()

@@ -188,7 +188,9 @@ bool Shader::LoadShaderFiles( const std::string &pVertFileName, const std::strin
 
             VertexShaderStream.close();
         }
-		Log.Success( "Loaded: " + pVertFileName);
+
+        Log.Success( "Loaded: " + pVertFileName );
+
     } catch( int ) {
         Log.Error( " Failed to load: " + pVertFileName );
         filesWork = false;
@@ -207,7 +209,9 @@ bool Shader::LoadShaderFiles( const std::string &pVertFileName, const std::strin
 
             FragmentShaderStream.close();
         }
-		Log.Success( "Loaded: " + pFragFileName);
+
+        Log.Success( "Loaded: " + pFragFileName );
+
     } catch( int ) {
         Log.Error( " Failed to load: " + pFragFileName );
         filesWork=false;
@@ -224,6 +228,7 @@ bool Shader::LoadShaderFiles( const std::string &pVertFileName, const std::strin
                              "void main(){\n"
                              "gl_FragColor = vec4(1.0f, 1.0f, 1.0f, 1.0f);\n"
                              "}";
-	}
+    }
+
     return LoadShaderCode( VertexShaderCode, FragmentShaderCode );
 }

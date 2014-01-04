@@ -3,7 +3,7 @@
 
 Input Input::Manager;
 
-Input::Input() : mType(KEYBOARD)
+Input::Input() : mType( KEYBOARD )
 {
 }
 Input::~Input()
@@ -12,7 +12,7 @@ Input::~Input()
 
 void Input::SetType( Type t )
 {
-	mType = t;
+    mType = t;
 }
 
 void Input::Update()
