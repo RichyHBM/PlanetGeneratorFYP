@@ -10,7 +10,7 @@ public:
     ~Gamepad();
 
     void Update();
-    static bool IsAnyGamepadConnected();
+    static bool IsGamepadConnected(int i);
 };
 
 #endif //GAMEPAD_HPP

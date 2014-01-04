@@ -12,11 +12,7 @@ Input::~Input()
 
 void Input::SetType( Type t )
 {
-	if(t == GAMEPAD && !Gamepad::IsAnyGamepadConnected())
-	{
-		return;
-	}
-    mType = t;
+	mType = t;
 }
 
 void Input::Update()
