@@ -9,6 +9,8 @@
 class Program
 {
 public:
+	
+
     ///
     ///Default constructor
     ///
@@ -54,6 +56,9 @@ protected:
 
     VBO mIndexBuffer;
     std::vector<unsigned int> mIndexList;
+
+	VBO mHeightBuffer;
+    std::vector<glm::vec4> mHeightList;
 
     Shader mShader;
     glm::mat4 mMVP;
