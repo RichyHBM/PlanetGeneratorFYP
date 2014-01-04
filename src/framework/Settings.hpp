@@ -1,6 +1,7 @@
 #ifndef SETTINGS_HPP
 #define SETTINGS_HPP
 
+#include <string>
 
 class Settings
 {
@@ -10,7 +11,7 @@ public:
     //Real run time settings
     static Settings Running;
 
-    static void ParseArguments( int argc, const char *argv[] );
+    static void ParseArguments( const std::string &arg, const std::string &arg2 );
 
     Settings();
     ~Settings();

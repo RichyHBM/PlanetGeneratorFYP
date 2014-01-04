@@ -23,17 +23,15 @@ int main( int argc, const char *argv[] )
 {
     SetSettings();
     MatrixControl.Init();
-    NoisePP.ParseArguments( argc, argv );
-    Settings::ParseArguments( argc, argv );
-    NoisePP.SetSeed( 54321 );
-    NoisePP.Init();
-    Input::Manager.SetType( Input::GAMEPAD );
-
     for( int i = 0; i < argc; i++ ) {
         if( argc > i+1 ) {
             ProcessArgument( argv[i], argv[i+1] );
+			NoisePP.ParseArguments( argv[i], argv[i+1] );
+			Settings::ParseArguments( argv[i], argv[i+1] );
         }
     }
+    NoisePP.Init();
+    
 
 #ifdef SFML
     Window *window = new( MemoryUse::Normal ) WindowSFML();
@@ -78,7 +76,18 @@ void ProcessArgument( const std::string &arg, const std::string &arg2 )
         float displacement = Util::StrTo<float> ( arg2 );
         MatrixControl.SetDisplacement( displacement );
 
-    } else if( arg == "-asServer" ) {
+    } else if( arg == "-controls" ) {
+		if( Util::StrTo<int> ( arg2 ) == 0)
+		{
+			Input::Manager.SetType( Input::KEYBOARD );
+		}else if( Util::StrTo<int> ( arg2 ) == 1)
+		{
+			Input::Manager.SetType( Input::GAMEPAD );
+		}if( Util::StrTo<int> ( arg2 ) == 2)
+		{
+			Input::Manager.SetType( Input::NETWORK );
+		}
+	} else if( arg == "-asServer" ) {
         Settings::Initial.SetSettings( 24, 8, 8, 2, 1, 4096, 2400, 60, false, true );
     }
 }

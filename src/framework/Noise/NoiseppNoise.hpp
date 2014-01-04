@@ -2,6 +2,7 @@
 #define NOISEPP_NOISE_HPP
 
 #include <noisepp/core/Noise.h>
+#include <string>
 
 class NoiseppNoise
 {
@@ -34,7 +35,7 @@ public:
     void SetLacunarity( double lacun );
     void SetDistortion( double distortion );
 
-    void ParseArguments( int argc, const char *argv[] );
+    void ParseArguments( const std::string &arg, const std::string &arg2 );
 
     double Generate( double x );
     double Generate( double x, double y );

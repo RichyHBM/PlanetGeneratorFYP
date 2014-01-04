@@ -47,34 +47,33 @@ NoiseppNoise::~NoiseppNoise()
     mCache3d = NULL;
 }
 
-void NoiseppNoise::ParseArguments( int argc, const char *argv[] )
+void NoiseppNoise::ParseArguments( const std::string &arg, const std::string &arg2 )
 {
-    for( int i = 1; i < argc; i++ ) {
-        if( argv[i] == "-seed" && argc > i+1 ) {
-            SetSeed( Util::StrTo<int>( argv[i+1] ) );
+        if( arg == "-seed" ) {
+            SetSeed( Util::StrTo<int>( arg2 ) );
 
-        } else if( argv[i] == "-persistance" && argc > i+1 ) {
-            SetPersistence( Util::StrTo<double>( argv[i+1] ) );
+        } else if( arg == "-persistance" ) {
+            SetPersistence( Util::StrTo<double>( arg2 ) );
 
-        } else if( argv[i] == "-octave" && argc > i+1 ) {
-            SetOctaveCount( Util::StrTo<int>( argv[i+1] ) );
+        } else if( arg == "-octave" ) {
+            SetOctaveCount( Util::StrTo<int>( arg2 ) );
 
-        } else if( argv[i] == "-frequency" && argc > i+1 ) {
-            SetFrequency( Util::StrTo<double>( argv[i+1] ) );
+        } else if( arg == "-frequency" ) {
+            SetFrequency( Util::StrTo<double>( arg2 ) );
 
-        } else if( argv[i] == "-quality" && argc > i+1 ) {
-            SetQuality( Util::StrTo<int>( argv[i+1] ) );
+        } else if( arg == "-quality" ) {
+            SetQuality( Util::StrTo<int>( arg2 ) );
 
-        } else if( argv[i] == "-scale" && argc > i+1 ) {
-            SetScale( Util::StrTo<double>( argv[i+1] ) );
+        } else if( arg == "-scale" ) {
+            SetScale( Util::StrTo<double>( arg2 ) );
 
-        } else if( argv[i] == "-lacunarity" && argc > i+1 ) {
-            SetLacunarity( Util::StrTo<double>( argv[i+1] ) );
+        } else if( arg == "-lacunarity" ) {
+            SetLacunarity( Util::StrTo<double>( arg2 ) );
 
-        } else if( argv[i] == "-distortion" && argc > i+1 ) {
-            SetDistortion( Util::StrTo<double>( argv[i+1] ) );
+        } else if( arg == "-distortion" ) {
+            SetDistortion( Util::StrTo<double>( arg2 ) );
         }
-    }
+    
 }
 
 void NoiseppNoise::SetOctaveCount( int oct )
