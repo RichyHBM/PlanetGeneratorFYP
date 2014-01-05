@@ -7,49 +7,58 @@
 
 #include "framework/Input/Mouse.hpp"
 
-#define PLANESIZE 200
-#define HEIGHTAMOUNT 50
+#define PLANESIZE 50
 
 Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
 {
     mWindow = pWindow;
     mShader.LoadShaderFiles( "./Resources/Terrain.vert" ,"./Resources/Terrain.frag" );
+    mTerrainTexture.LoadFromFile( "./Resources/Textures.png" );
     int halfPlanet = PLANESIZE/2;
 
     for( int y = -halfPlanet; y < halfPlanet; y++ ) {
         for( int x = -halfPlanet; x < halfPlanet; x++ ) {
-            glm::vec3 p1( x, halfPlanet , y );
+            float heightA = NoisePP.Generate( x, y ),
+                  heightB = NoisePP.Generate( x + 1, y ),
+                  heightC = NoisePP.Generate( x, y + 1 ),
+                  heightD = NoisePP.Generate( x + 1, y + 1 );
+            glm::vec3 p1( x, 0, y ),
+                p2( x + 1, 0, y ),
+                p3( x, 0, y + 1 ),
+                p4( x + 1, 0, y + 1 );
+            glm::vec2 tl( 0,0 ),
+                tr( 1,0 ),
+                bl( 0,1 ),
+                br( 1,1 );
+            mHeightList.push_back( heightA );
+            mHeightList.push_back( heightB );
+            mHeightList.push_back( heightC );
+            mHeightList.push_back( heightD );
             mVertexList.push_back( p1 );
-            glm::vec4 noiseVec( 0.0, 0.0, 0.0, NoisePP.Generate( x*0.3, y*0.3 ) );
-            mHeightList.push_back( noiseVec );
-
-            if( p1.x != 0 || p1.y != 0 || p1.z != 0 ) {
-                mNormalList.push_back( glm::normalize( p1 ) );
-
-            } else {
-                mNormalList.push_back( p1 );
-            }
+            mVertexList.push_back( p2 );
+            mVertexList.push_back( p3 );
+            mVertexList.push_back( p4 );
+            mNormalList.push_back( tl );
+            mNormalList.push_back( tr );
+            mNormalList.push_back( bl );
+            mNormalList.push_back( br );
+            int size = mVertexList.size();
+            mIndexList.push_back( size - 4 );
+            mIndexList.push_back( size - 2 );
+            mIndexList.push_back( size - 3 );
+            mIndexList.push_back( size - 3 );
+            mIndexList.push_back( size - 2 );
+            mIndexList.push_back( size - 1 );
         }
     }
 
-    for( int y = 0; y < PLANESIZE - 1; y++ ) {
-        for( int x = 0; x < PLANESIZE - 1; x++ ) {
-            mIndexList.push_back( x + y*PLANESIZE );
-            mIndexList.push_back( x + ( y+1 )*PLANESIZE );
-            mIndexList.push_back( x+1 + y*PLANESIZE );
-            mIndexList.push_back( x+1 + y*PLANESIZE );
-            mIndexList.push_back( x + ( y+1 )*PLANESIZE );
-            mIndexList.push_back( x+1 + ( y+1 )*PLANESIZE );
-        }
-    }
-
-    MatrixControl.SetPosition( glm::vec3( 25, 100, 25 ) );
+    MatrixControl.SetPosition( glm::vec3( 25, PLANESIZE, 25 ) );
     mVertexBuffer.AddVectorData( mVertexList, sizeof( glm::vec3 ) );
     mVertexBuffer.SetAttributeIndex( mShader.GetAttribute( "Position" ) );
-    mNormalBuffer.AddVectorData( mNormalList, sizeof( glm::vec3 ) );
-    mNormalBuffer.SetAttributeIndex( mShader.GetAttribute( "Normal" ) );
-    mHeightBuffer.AddVectorData( mHeightList, sizeof( glm::vec4 ) );
+    mHeightBuffer.AddVectorData( mHeightList, sizeof( float ) );
     mHeightBuffer.SetAttributeIndex( mShader.GetAttribute( "Height" ) );
+    mNormalBuffer.AddVectorData( mNormalList, sizeof( glm::vec2 ) );
+    mNormalBuffer.SetAttributeIndex( mShader.GetAttribute( "UV" ) );
     mIndexBuffer.AddVectorData( mIndexList, sizeof( unsigned int ) );
     mIndexBuffer.SetTarget( GL_ELEMENT_ARRAY_BUFFER );
     glm::mat4 Model = glm::mat4( 1.0f );
@@ -116,17 +125,18 @@ void Program::Draw()
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     mShader.Bind();
     glUniformMatrix4fv( mShader.GetUniform( "MVP" ), 1, GL_FALSE, &mMVP[0][0] );
-    glUniform1f( mShader.GetUniform( "Radius" ), PLANESIZE/2.0 );
-    glUniform1f( mShader.GetUniform( "HeightTimes" ), HEIGHTAMOUNT );
+    mTerrainTexture.Bind();
+    glUniform1i( mShader.GetUniform ( "TerrainTexture" ), 0 );
     mVertexBuffer.Bind( 3 );
-    mNormalBuffer.Bind( 3 );
-    mHeightBuffer.Bind( 4 );
+    mNormalBuffer.Bind( 2 );
+    mHeightBuffer.Bind( 1 );
     mIndexBuffer.Bind();
     glDrawElements( GL_TRIANGLES, mIndexList.size(), GL_UNSIGNED_INT, ( void * )0 );
     mIndexBuffer.Unbind();
     mHeightBuffer.Unbind();
     mNormalBuffer.Unbind();
     mVertexBuffer.Unbind();
+    Texture::Unbind();
     Shader::Unbind();
     mDebugInfo.Draw();
 }

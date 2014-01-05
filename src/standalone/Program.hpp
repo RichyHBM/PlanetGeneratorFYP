@@ -51,14 +51,17 @@ protected:
 
     VBO mVertexBuffer;
     std::vector<glm::vec3> mVertexList;
+
     VBO mNormalBuffer;
-    std::vector<glm::vec3> mNormalList;
+    std::vector<glm::vec2> mNormalList;
 
     VBO mIndexBuffer;
     std::vector<unsigned int> mIndexList;
 
     VBO mHeightBuffer;
-    std::vector<glm::vec4> mHeightList;
+    std::vector<float> mHeightList;
+
+    Texture mTerrainTexture;
 
     Shader mShader;
     glm::mat4 mMVP;
