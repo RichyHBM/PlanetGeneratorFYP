@@ -61,9 +61,9 @@ protected:
     VBO mHeightBuffer;
     std::vector<float> mHeightList;
 
-    Texture mTerrainTexture;
+    Texture *mTerrainTexture;
 
-    Shader mShader;
+    Shader *mShader;
     glm::mat4 mMVP;
 private:
 };

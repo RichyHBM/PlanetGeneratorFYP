@@ -18,10 +18,10 @@ protected:
     float mKBDivisor;
     bool mDraw;
     Window *mWindow;
-    BitmapText mDelta;
-    BitmapText mMemoryTotal;
-    BitmapText mMemoryNormal;
-    BitmapText mMemoryUnknown;
+    BitmapText *mDelta;
+    BitmapText *mMemoryTotal;
+    BitmapText *mMemoryNormal;
+    BitmapText *mMemoryUnknown;
 };
 
 #endif

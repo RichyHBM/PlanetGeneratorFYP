@@ -8,6 +8,7 @@
 #include "framework/DebugOperators.hpp"
 #include "framework/Noise/NoiseppNoise.hpp"
 #include "framework/MatrixManager.hpp"
+#include "framework/ResourceManager.hpp"
 
 #ifdef SFML
 #include "framework/WindowSFML.hpp"
@@ -48,6 +49,7 @@ int main( int argc, const char *argv[] )
     Program *program = new( MemoryUse::Normal ) Program( window );
     program->Run();
     delete program;
+    ResourceManager::Destroy();
     window->Close();
     delete window;
     //*/

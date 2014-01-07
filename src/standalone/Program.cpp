@@ -4,6 +4,7 @@
 #include "framework/Settings.hpp"
 #include "framework/Utilities.hpp"
 #include "framework/MatrixManager.hpp"
+#include "framework/ResourceManager.hpp"
 
 #include "framework/Input/Mouse.hpp"
 
@@ -12,8 +13,8 @@
 Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
 {
     mWindow = pWindow;
-    mShader.LoadShaderFiles( "./Resources/Terrain.vert" ,"./Resources/Terrain.frag" );
-    mTerrainTexture.LoadFromFile( "./Resources/Textures.png" );
+    mShader = ResourceManager::GetShader( "Terrain", "./Resources/Terrain.vert" ,"./Resources/Terrain.frag" );
+    mTerrainTexture = ResourceManager::GetTexture( "TerrainTextures", "./Resources/Textures.png" );
     int halfPlanet = PLANESIZE/2;
 
     for( int y = -halfPlanet; y < halfPlanet; y++ ) {
@@ -54,11 +55,11 @@ Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
 
     MatrixControl.SetPosition( glm::vec3( 25, PLANESIZE, 25 ) );
     mVertexBuffer.AddVectorData( mVertexList, sizeof( glm::vec3 ) );
-    mVertexBuffer.SetAttributeIndex( mShader.GetAttribute( "Position" ) );
+    mVertexBuffer.SetAttributeIndex( mShader->GetAttribute( "Position" ) );
     mHeightBuffer.AddVectorData( mHeightList, sizeof( float ) );
-    mHeightBuffer.SetAttributeIndex( mShader.GetAttribute( "Height" ) );
+    mHeightBuffer.SetAttributeIndex( mShader->GetAttribute( "Height" ) );
     mNormalBuffer.AddVectorData( mNormalList, sizeof( glm::vec2 ) );
-    mNormalBuffer.SetAttributeIndex( mShader.GetAttribute( "UV" ) );
+    mNormalBuffer.SetAttributeIndex( mShader->GetAttribute( "UV" ) );
     mIndexBuffer.AddVectorData( mIndexList, sizeof( unsigned int ) );
     mIndexBuffer.SetTarget( GL_ELEMENT_ARRAY_BUFFER );
     glm::mat4 Model = glm::mat4( 1.0f );
@@ -123,10 +124,10 @@ void Program::Draw()
 {
     glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-    mShader.Bind();
-    glUniformMatrix4fv( mShader.GetUniform( "MVP" ), 1, GL_FALSE, &mMVP[0][0] );
-    mTerrainTexture.Bind();
-    glUniform1i( mShader.GetUniform ( "TerrainTexture" ), 0 );
+    mShader->Bind();
+    glUniformMatrix4fv( mShader->GetUniform( "MVP" ), 1, GL_FALSE, &mMVP[0][0] );
+    mTerrainTexture->Bind();
+    glUniform1i( mShader->GetUniform ( "TerrainTexture" ), 0 );
     mVertexBuffer.Bind( 3 );
     mNormalBuffer.Bind( 2 );
     mHeightBuffer.Bind( 1 );
