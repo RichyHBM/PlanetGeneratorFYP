@@ -16,6 +16,8 @@ public:
 
     bool LoadShaderCode( const std::string &pVertCode, const std::string &pFragCode );
 
+    std::string LoadFile( const std::string &pFile );
+
     void Bind();
     static void Unbind();
 

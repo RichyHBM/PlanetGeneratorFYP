@@ -183,7 +183,13 @@ bool Shader::LoadShaderFiles( const std::string &pVertFileName, const std::strin
             std::string Line = "";
 
             while( getline( VertexShaderStream, Line ) ) {
-                VertexShaderCode += "\n" + Line;
+                if( Line.size() > 9 && Line.compare( 0, 8, "#include" ) == 0 ) {
+                    std::string fileLocation = Line.substr( 9, Line.size() - 9 );
+                    VertexShaderCode += "\n" + LoadFile( fileLocation );
+
+                } else {
+                    VertexShaderCode += "\n" + Line;
+                }
             }
 
             VertexShaderStream.close();
@@ -204,7 +210,13 @@ bool Shader::LoadShaderFiles( const std::string &pVertFileName, const std::strin
             std::string Line = "";
 
             while( getline( FragmentShaderStream, Line ) ) {
-                FragmentShaderCode += "\n" + Line;
+                if( Line.size() > 9 && Line.compare( 0, 8, "#include" ) == 0 ) {
+                    std::string fileLocation = Line.substr( 9, Line.size() - 9 );
+                    FragmentShaderCode += "\n" + LoadFile( fileLocation );
+
+                } else {
+                    FragmentShaderCode += "\n" + Line;
+                }
             }
 
             FragmentShaderStream.close();
@@ -231,4 +243,37 @@ bool Shader::LoadShaderFiles( const std::string &pVertFileName, const std::strin
     }
 
     return LoadShaderCode( VertexShaderCode, FragmentShaderCode );
+}
+
+std::string Shader::LoadFile( const std::string &pFile )
+{
+    std::string contents = "";
+
+    try {
+        std::ifstream fileStream( pFile.c_str(), std::ios::in );
+
+        if( fileStream.is_open() ) {
+            std::string Line = "";
+
+            while( getline( fileStream, Line ) ) {
+                if( Line.size() > 9 && Line.compare( 0, 8, "#include" ) == 0 ) {
+                    std::string fileLocation = Line.substr( 9, Line.size() - 9 );
+                    contents += "\n" + LoadFile( fileLocation );
+
+                } else {
+                    contents += "\n" + Line;
+                }
+            }
+
+            fileStream.close();
+        }
+
+        Log.Success( "Loaded: " + pFile );
+
+    } catch( int ) {
+        Log.Error( " Failed to load: " + pFile );
+        contents = "";
+    }
+
+    return contents;
 }

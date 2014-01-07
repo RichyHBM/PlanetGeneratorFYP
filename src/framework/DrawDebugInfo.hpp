@@ -12,7 +12,7 @@ public:
     ~DrawDebugInfo();
     void SetDraw( bool draw );
     void Draw();
-	void ToggleDraw();
+    void ToggleDraw();
 
 protected:
     float mKBDivisor;

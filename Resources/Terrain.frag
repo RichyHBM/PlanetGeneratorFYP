@@ -3,27 +3,21 @@
 #define TEXTURE_SIZE 64.0
 #define TEXTURES_PER_IMAGE 4.0
 
-varying vec3 normal;
+#include ./Resources/noise2D.glsl
+
 uniform sampler2D TerrainTexture;
+
+varying vec3 normal;
 varying vec2 uv;
 varying float height;
 varying vec3 position;
 
-float rand(vec2 co)
-{
-    float a = 12.9898;
-    float b = 78.233;
-    float c = 43758.5453;
-    float dt = dot(co.xy ,vec2(a,b));
-    float sn = mod(dt,3.14);
-    return fract(sin(sn) * c);
-}
 
 void main() 
 {
 
 	float SNOW_ALT = 5.0;
-    float SAND_ALT = -0.2 + rand(position.xz) * 0.05;
+    float SAND_ALT = -0.2 + snoise(position.xz) * 0.05;
     float DIRT_ALT = 3.0;
 
 

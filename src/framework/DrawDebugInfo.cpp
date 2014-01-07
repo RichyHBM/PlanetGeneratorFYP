@@ -35,7 +35,7 @@ void DrawDebugInfo::SetDraw( bool draw )
 
 void DrawDebugInfo::ToggleDraw()
 {
-	mDraw = !mDraw;
+    mDraw = !mDraw;
 }
 
 void DrawDebugInfo::Draw()
