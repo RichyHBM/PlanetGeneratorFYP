@@ -33,6 +33,11 @@ void DrawDebugInfo::SetDraw( bool draw )
     mDraw = draw;
 }
 
+void DrawDebugInfo::ToggleDraw()
+{
+	mDraw = !mDraw;
+}
+
 void DrawDebugInfo::Draw()
 {
     if( !mDraw ) {
