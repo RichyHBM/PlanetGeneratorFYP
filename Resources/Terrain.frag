@@ -20,8 +20,6 @@ void main()
     float SAND_ALT = -0.2 + snoise(position.xz) * 0.05;
     float DIRT_ALT = 3.0;
 
-
-
 	vec2 actualUV = uv;
 	actualUV.y = ((uv.y * TEXTURE_SIZE) / IMG_SIZE);
 
@@ -37,8 +35,6 @@ void main()
 	else{//grass
 		actualUV.x = 0.25 + ((uv.x * TEXTURE_SIZE) / IMG_SIZE);
 	}
-
-
 
 	gl_FragColor = texture2D(TerrainTexture, actualUV);
 }

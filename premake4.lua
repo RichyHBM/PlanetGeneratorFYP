@@ -9,10 +9,12 @@ solution "PlanetGeneratorFYP"
 		libdirs { "./external/lib/vs2010" }
 		defines { "WIN32", "_CRT_SECURE_NO_WARNINGS" }
 		buildoptions { "/wd4290" }
+		postbuildcommands { "call ..\\postbuild\\vs.bat" }
 	end
 
 	if _ACTION == "gmake" then
 		libdirs { "./external/lib/linux" }
+		postbuildcommands { "sh ../postbuild/linux.sh" }
 	end
 
 	configuration "Debug"

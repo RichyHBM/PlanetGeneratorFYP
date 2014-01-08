@@ -12,13 +12,6 @@ project "Framework"
 
       includedirs { "../external/include/"} 
 	  
-      if _ACTION == "vs2010" then
-         postbuildcommands { "call ..\\postbuild\\vs.bat" }
-      end   
-      if _ACTION == "gmake" or _ACTION == "codeblocks" then
-         postbuildcommands { "sh ../postbuild/linux.sh" }
-      end
-
       configuration "Debug"
          if _ACTION == "gmake" or _ACTION == "codeblocks" then
             links { "pthread", "AntTweakBar", "sfml-network", "sfml-window", "sfml-system", "GLU", "GL", "noisepp-d" }

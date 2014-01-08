@@ -6,6 +6,8 @@
 
 #include "framework/GLHelp/GLHelp.hpp"
 
+#include "Geomap.hpp"
+
 class Program
 {
 public:
@@ -48,23 +50,7 @@ public:
 protected:
     Window *mWindow;
     DrawDebugInfo mDebugInfo;
-
-    VBO mVertexBuffer;
-    std::vector<glm::vec3> mVertexList;
-
-    VBO mNormalBuffer;
-    std::vector<glm::vec2> mNormalList;
-
-    VBO mIndexBuffer;
-    std::vector<unsigned int> mIndexList;
-
-    VBO mHeightBuffer;
-    std::vector<float> mHeightList;
-
-    Texture *mTerrainTexture;
-
-    Shader *mShader;
-    glm::mat4 mMVP;
+    Geomap mGeomap;
 private:
 };
 
