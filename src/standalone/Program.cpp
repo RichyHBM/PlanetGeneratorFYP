@@ -10,7 +10,8 @@
 Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
 {
     mWindow = pWindow;
-    MatrixControl.SetPosition( glm::vec3( 0, 50, 0 ) );
+    MatrixControl.SetPosition( glm::vec3( 1, 50, 1 ) );
+    //glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
 }
 
 Program::~Program()
@@ -32,6 +33,7 @@ void Program::Run()
         if( !mWindow->IsFocused() ) {
             mWindow->SetCursor( Shown );
         }
+
 
         if( mWindow->IsFocused() ) {
             if( mWindow->NeedsToClose() ) {

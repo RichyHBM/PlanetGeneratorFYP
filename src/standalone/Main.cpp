@@ -53,7 +53,6 @@ int main( int argc, const char *argv[] )
     window->Close();
     delete window;
     //*/
-    std::cin.get();
     return 0;
 }
 

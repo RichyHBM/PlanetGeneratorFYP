@@ -15,6 +15,7 @@ public:
 protected:
     std::vector<Plane *> mPlanes;
 
+    glm::mat4 mModel;
     glm::mat4 mMVP;
 };
 

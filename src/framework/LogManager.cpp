@@ -18,5 +18,6 @@ LogManager::~LogManager()
 
 void LogManager::ChangeColor( int color )
 {
-    rlutil::setColor( color );
+	//Dont change color for now
+    //rlutil::setColor( color );
 }

@@ -10,7 +10,7 @@ public:
     ~Plane();
 
     void Update();
-    void Draw( const glm::mat4 &MVP );
+    void Draw( const glm::mat4 &MVP, const glm::mat4 &Model );
 protected:
     VBO mVertexBuffer;
     std::vector<glm::vec3> mVertexList;
@@ -20,9 +20,6 @@ protected:
 
     VBO mIndexBuffer;
     std::vector<unsigned int> mIndexList;
-
-    VBO mHeightBuffer;
-    std::vector<float> mHeightList;
 
     Texture *mTerrainTexture;
     Shader *mShader;
