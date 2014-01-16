@@ -7,6 +7,9 @@ uniform sampler2D TerrainTexture;
 
 varying vec2 uv;
 varying float height;
+varying vec3 position;
+
+#include ./Resources/noise2D.glsl
 
 void main() 
 {
@@ -16,17 +19,18 @@ void main()
     float DIRT_ALT = 3.0;
 
 	vec2 actualUV = uv;
+	//actualUV.y = ((uv.y * TEXTURE_SIZE) / IMG_SIZE);
 
-	if(height < SAND_ALT){
+	if(height < SAND_ALT){ //sand
 		actualUV.x = 0.75 + ((uv.x * TEXTURE_SIZE) / IMG_SIZE);
 	}
-	else if(height > SNOW_ALT){
+	else if(height > SNOW_ALT){ //snow
 		actualUV.x = 0.5 + ((uv.x * TEXTURE_SIZE) / IMG_SIZE);
 	}
-	else if(height > DIRT_ALT){
+	else if(height > DIRT_ALT){ //dirt
 		actualUV.x = ((uv.x * TEXTURE_SIZE) / IMG_SIZE);
 	}
-	else{
+	else{ //grass
 		actualUV.x = 0.25 + ((uv.x * TEXTURE_SIZE) / IMG_SIZE);
 	}
 

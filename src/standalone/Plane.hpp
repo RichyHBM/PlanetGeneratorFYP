@@ -7,10 +7,10 @@ class Plane
 {
 public:
     Plane( const glm::vec3 &center, const glm::vec2 &size, int spacing = 1 );
-    ~Plane();
+    virtual ~Plane();
 
-    void Update();
-    void Draw( const glm::mat4 &MVP, const glm::mat4 &Model );
+    virtual void Update();
+    virtual void Draw( const glm::mat4 &MVP, const glm::mat4 &Model );
 protected:
     VBO mVertexBuffer;
     std::vector<glm::vec3> mVertexList;

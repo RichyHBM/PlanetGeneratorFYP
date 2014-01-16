@@ -6,7 +6,7 @@
 
 #include "framework/GLHelp/GLHelp.hpp"
 
-#include "Geomap.hpp"
+#include "HeightPlane.hpp"
 
 class Program
 {
@@ -50,7 +50,7 @@ public:
 protected:
     Window *mWindow;
     DrawDebugInfo mDebugInfo;
-    Geomap mGeomap;
+    HeightPlane *mPlane;
 private:
 };
 
