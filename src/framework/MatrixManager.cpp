@@ -15,7 +15,7 @@ MatrixManager::~MatrixManager()
 void MatrixManager::Init()
 {
     mWidth = Settings::Initial.GetWidth(), mHeight = Settings::Initial.GetHeight();
-    mNearPlane = 0.1f, mFarPlane = 500.0f;
+    mNearPlane = 0.1f, mFarPlane = 1000.0f;
     fieldOfView = 75.0f;
     //Use negative displacement to simulate left eye
     mDisplacement = 0.0f;

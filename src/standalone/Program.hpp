@@ -6,7 +6,7 @@
 
 #include "framework/GLHelp/GLHelp.hpp"
 
-#include "HeightPlane.hpp"
+#include "Icosahedron.hpp"
 
 class Program
 {
@@ -50,7 +50,7 @@ public:
 protected:
     Window *mWindow;
     DrawDebugInfo mDebugInfo;
-    HeightPlane *mPlane;
+    Icosahedron mIcosphere;
 private:
 };
 

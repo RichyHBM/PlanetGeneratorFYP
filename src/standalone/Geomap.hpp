@@ -1,7 +1,7 @@
 #ifndef GEOMAP_HPP
 #define GEOMAP_HPP
 
-#include "Plane.hpp"
+#include "common/Plane.hpp"
 #include <vector>
 
 class Geomap

@@ -31,6 +31,9 @@ namespace Util
         //Quater of Pi in float form
         const static float fPIo4 = 3.14159265358979323846f / 4.0f;
 
+        //One over Pi in float form
+        const static double f1oPI = 1.0f / 3.14159265358979323846f;
+
         //Pi in double form
         const static double dPI = 3.14159265358979323846;
 
@@ -39,6 +42,9 @@ namespace Util
 
         //Quater of Pi in double form
         const static double dPIo4 = 3.14159265358979323846 / 4.0;
+
+        //One over Pi in double form
+        const static double d1oPI = 1.0 / 3.14159265358979323846;
     }
 
     //Returns the largest of 2 values
