@@ -17,8 +17,9 @@ public:
     void Normalize();
     void Draw(const glm::mat4 &MVP);
     void AddTriangle(const Triangle& t);
-
+    void GiveHeight(glm::vec3 &v, float pHeight);
     void BindData();
+    void Distort(const glm::vec3& origin, const glm::vec3& direction);
 protected:
     void NormalizeVert(glm::vec3 &v);
 

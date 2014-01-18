@@ -93,7 +93,38 @@ void TriangleManager::Subdivide()
     Normalize();
 }
 
+void TriangleManager::Distort(const glm::vec3& origin, const glm::vec3& direction)
+{
+    glm::vec3 n = direction - origin;
 
+    float diff = 0.001f;
+    glm::mat4 min = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f - diff));
+    glm::mat4 max = glm::scale(glm::mat4(1.0f),glm::vec3(1.0f + diff));
+
+    for(int i = 0; i < mPositionsList.size(); i++)
+    {
+        glm::vec3 toOrigin = mPositionsList[i] - origin;
+        float d = glm::dot(n, toOrigin);
+
+        if(d > 0.0f)
+        {
+            mPositionsList[i] = glm::vec3(
+                min * 
+                glm::vec4(mPositionsList[i].x, mPositionsList[i].y, mPositionsList[i].z, 1.0f)
+                );
+        }
+        else
+        {
+            mPositionsList[i] = glm::vec3(
+                max * 
+                glm::vec4(mPositionsList[i].x, mPositionsList[i].y, mPositionsList[i].z, 1.0f)
+                );
+        }
+    }
+
+    mPositionBuffer.AddVectorData( mPositionsList, sizeof( glm::vec3 ) );
+    mPositionBuffer.SetAttributeIndex( mShader->GetAttribute( "Position" ) );
+}
 
 void TriangleManager::BindData()
 {
