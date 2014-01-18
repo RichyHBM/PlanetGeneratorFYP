@@ -1,6 +1,6 @@
 #include "Triangle.hpp"
 
-Triangle::Triangle(const glm::vec3 &pA, const glm::vec3 &pB, const glm::vec3 &pC)
+Triangle::Triangle( const glm::vec3 &pA, const glm::vec3 &pB, const glm::vec3 &pC )
 {
     mA = pA;
     mB = pB;
