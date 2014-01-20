@@ -1,26 +1,26 @@
 #include <glm/gtx/transform2.hpp>
 
-#include "TriangleManager.hpp"
+#include "PolygonManager.hpp"
 
 #include "framework/ResourceManager.hpp"
 
-TriangleManager::TriangleManager()
+PolygonManager::PolygonManager()
 {
     mShader = ResourceManager::GetShader( "Icosphere", "./Resources/Icosphere.vert" ,"./Resources/Icosphere.frag" );
     mPositionBuffer.SetAttributeIndex( mShader->GetAttribute( "Position" ) );
 }
 
-TriangleManager::~TriangleManager()
+PolygonManager::~PolygonManager()
 {
     mShader = NULL;
 }
 
-void TriangleManager::AddTriangle( const Triangle &t )
+void PolygonManager::AddQuad(const Quad& q)
 {
-    mTriangles.push_back( t );
+    mQuads.push_back(q);
 }
 
-/*void TriangleManager::Undivide()
+/*void PolygonManager::Undivide()
 {
     std::vector<Triangle> tempTriangles;
     for(int i = 0; i < mTriangles.size(); i+= 4)
@@ -35,7 +35,7 @@ void TriangleManager::AddTriangle( const Triangle &t )
 }
 */
 
-void TriangleManager::NormalizeVert( glm::vec3 &v )
+void PolygonManager::NormalizeVert(glm::vec3 &v)
 {
     float length = PLANETRADIUS * 2;
     float dist = glm::length( v );
@@ -44,47 +44,57 @@ void TriangleManager::NormalizeVert( glm::vec3 &v )
     v.z = v.z * length / dist;
 }
 
-void TriangleManager::Normalize()
+void PolygonManager::Normalize()
 {
-    for( int i = 0; i < mTriangles.size(); i++ ) {
-        glm::vec3 &A = mTriangles[i].GetVerticeA(),
-                   &B = mTriangles[i].GetVerticeB(),
-                    &C = mTriangles[i].GetVerticeC();
-        NormalizeVert( A );
-        NormalizeVert( B );
-        NormalizeVert( C );
+    for(int i = 0; i < mQuads.size(); i++)
+    {
+        glm::vec3 &A = mQuads[i].GetVerticeA(), 
+            &B = mQuads[i].GetVerticeB(), 
+            &C = mQuads[i].GetVerticeC(),
+            &D = mQuads[i].GetVerticeD();
+
+        NormalizeVert(A);
+        NormalizeVert(B);
+        NormalizeVert(C);
+        NormalizeVert(D);
     }
 }
 
-void TriangleManager::GiveHeight( glm::vec3 &v, float pHeight )
+void PolygonManager::GiveHeight(glm::vec3 &v, float pHeight)
 {
     float len = glm::length( v );
     glm::vec3 tmp = ( len + pHeight ) * glm::normalize( v );
     v = tmp;
 }
 
-void TriangleManager::Subdivide()
+void PolygonManager::Subdivide()
 {
-    std::vector<Triangle> tempTriangles;
+    std::vector<Quad> tempQuads;
+    for(int i = 0; i < mQuads.size(); i++)
+    {
+        glm::vec3 A = mQuads[i].GetVerticeA(), 
+            B = mQuads[i].GetVerticeB(), 
+            C = mQuads[i].GetVerticeC(),
+            D = mQuads[i].GetVerticeD();
 
-    for( int i = 0; i < mTriangles.size(); i++ ) {
-        glm::vec3 A = mTriangles[i].GetVerticeA(),
-                  B = mTriangles[i].GetVerticeB(),
-                  C = mTriangles[i].GetVerticeC();
-        glm::vec3 AB = ( A + B ) / glm::vec3( 2.0 );
-        glm::vec3 BC = ( B + C ) / glm::vec3( 2.0 );
-        glm::vec3 CA = ( C + A ) / glm::vec3( 2.0 );
-        tempTriangles.push_back( Triangle( AB,BC,A ) );
-        tempTriangles.push_back( Triangle( CA,A,BC ) );
-        tempTriangles.push_back( Triangle( CA,BC,C ) );
-        tempTriangles.push_back( Triangle( AB,B,BC ) );
+        glm::vec3 AB = (A + B) / glm::vec3(2.0);
+        glm::vec3 BC = (B + C) / glm::vec3(2.0);
+        glm::vec3 CD = (C + D) / glm::vec3(2.0);
+        glm::vec3 DA = (D + A) / glm::vec3(2.0);
+        glm::vec3 Middle = (A + C) / glm::vec3(2.0);
+
+
+        tempQuads.push_back(Quad(A, AB, Middle, DA));
+        tempQuads.push_back(Quad(AB, B, BC, Middle));
+        tempQuads.push_back(Quad(Middle, BC, C, CD));
+        tempQuads.push_back(Quad(DA, Middle, CD, D));
     }
+    mQuads = tempQuads;
 
-    mTriangles = tempTriangles;
     Normalize();
 }
 
-void TriangleManager::Distort( const glm::vec3 &origin, const glm::vec3 &direction )
+void PolygonManager::Distort(const glm::vec3& origin, const glm::vec3& direction)
 {
     glm::vec3 n = direction - origin;
     float diff = 0.001f;
@@ -113,22 +123,35 @@ void TriangleManager::Distort( const glm::vec3 &origin, const glm::vec3 &directi
     mPositionBuffer.SetAttributeIndex( mShader->GetAttribute( "Position" ) );
 }
 
-void TriangleManager::BindData()
+void PolygonManager::BindData()
 {
     mPositionsList.clear();
+    for(int i = 0; i < mQuads.size(); i++)
+    {
+        glm::vec3 A = mQuads[i].GetVerticeA(), 
+            B = mQuads[i].GetVerticeB(), 
+            C = mQuads[i].GetVerticeC(),
+            D = mQuads[i].GetVerticeD();
 
-    for( int i = 0; i < mTriangles.size(); i++ ) {
-        glm::vec3 A = mTriangles[i].GetVerticeA(), B = mTriangles[i].GetVerticeB(), C = mTriangles[i].GetVerticeC();
-        mPositionsList.push_back( mTriangles[i].GetVerticeA() );
-        mPositionsList.push_back( mTriangles[i].GetVerticeB() );
-        mPositionsList.push_back( mTriangles[i].GetVerticeC() );
+        mPositionsList.push_back(A);
+        mPositionsList.push_back(B);
+        mPositionsList.push_back(D);
+
+        mPositionsList.push_back(D);
+        mPositionsList.push_back(B);
+        mPositionsList.push_back(C);
     }
 
     mPositionBuffer.AddVectorData( mPositionsList, sizeof( glm::vec3 ) );
     mPositionBuffer.SetAttributeIndex( mShader->GetAttribute( "Position" ) );
 }
 
-void TriangleManager::Draw( const glm::mat4 &MVP )
+void PolygonManager::Update()
+{
+
+}
+
+void PolygonManager::Draw(const glm::mat4 &MVP)
 {
     mShader->Bind();
     glUniformMatrix4fv( mShader->GetUniform( "MVP" ), 1, GL_FALSE, &MVP[0][0] );

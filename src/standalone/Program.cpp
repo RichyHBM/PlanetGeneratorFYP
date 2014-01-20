@@ -10,7 +10,7 @@
 Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
 {
     mWindow = pWindow;
-    MatrixControl.SetPosition( glm::vec3( 1, 50, 1 ) );
+    MatrixControl.SetPosition( glm::vec3( 1, 1, 50 ) );
     //glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
 }
 
@@ -73,7 +73,9 @@ void Program::Draw()
     glm::mat4 mMVP = MatrixControl.PerspectiveView() * model;
     glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+    //glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
     mIcosphere.Draw();
+    glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
     mDebugInfo.Draw();
 }
 

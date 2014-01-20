@@ -2,7 +2,7 @@
 #define ICOSAHEDRON_HPP
 
 #include "framework/GLHelp/GLHelp.hpp"
-#include "common/TriangleManager.hpp"
+#include "common/PolygonManager.hpp"
 
 class Icosahedron
 {
@@ -13,8 +13,8 @@ public:
     void Update();
     void Draw();
 protected:
-    TriangleManager mTriangMan;
-    glm::vec2 UV( glm::vec3 pos );
+	PolygonManager mPolMan;
+	glm::vec2 UV(glm::vec3 pos);
 
     glm::mat4 mMVP;
 };
