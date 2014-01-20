@@ -7,15 +7,28 @@
 #include "framework/MatrixManager.hpp"
 
 #include "framework/Input/Mouse.hpp"
+#include <AntTweakBar.h>
 
 Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
 {
     mWindow = pWindow;
     MatrixControl.SetPosition( glm::vec3( 1, 1, 50 ) );
+    TwInit(TW_OPENGL, NULL);
+    TwWindowSize(WindowSettings::Running.GetWidth(), WindowSettings::Running.GetHeight());
+
+    TwBar *myBar;
+    myBar = TwNewBar("Controls");
+    TwSetParam(myBar, NULL, "position", TW_PARAM_CSTRING, 1, "20 60");
+
+    TwAddVarRW(myBar, "DrawLines", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.DrawLines, NULL);
+    TwAddVarRW(myBar, "Subdivisions", TW_TYPE_INT32, &RuntimeSettings::Settings.Subdivisions, NULL);
+    TwAddVarRW(myBar, "Distortions", TW_TYPE_INT32, &RuntimeSettings::Settings.Distortions, NULL);
+    TwAddVarRW(myBar, "PlanetRadius", TW_TYPE_FLOAT, &RuntimeSettings::Settings.PlanetRadius, NULL);
 }
 
 Program::~Program()
 {
+    TwTerminate();
     mWindow = NULL;
     //dtor
 }
@@ -27,7 +40,7 @@ void Program::Run()
 
         if( mWindow->IsFocused() ) {
             mWindow->MakeContextCurrent();
-            mWindow->SetCursor( Hidden );
+            mWindow->SetCursor( RuntimeSettings::Settings.LockMouse ? Hidden : Shown );
         }
 
         if( !mWindow->IsFocused() ) {
@@ -40,7 +53,11 @@ void Program::Run()
             }
 
             Update();
-            Mouse::Set( WindowSettings::Running.GetWidth()/2.0f, WindowSettings::Running.GetHeight()/2.0f );
+            if(RuntimeSettings::Settings.LockMouse)
+            {
+                Mouse::Set( WindowSettings::Running.GetWidth()/2.0f, WindowSettings::Running.GetHeight()/2.0f );
+            }
+            
             mWindow->ResetDelta();
             Draw();
             mWindow->Display();
@@ -64,14 +81,9 @@ void Program::Update()
         mDebugInfo.SetDraw( false );
     }
 
-    if( sf::Keyboard::isKeyPressed( sf::Keyboard::F5 ) ) {
-        RuntimeSettings::Settings.DrawLines = true;
-    }else{
-        RuntimeSettings::Settings.DrawLines = false;
-    }
-
-
     mIcosphere.Update();
+
+    mDebugInfo.SetVertices(mIcosphere.GetVertexCount());
 }
 
 void Program::Draw()
@@ -85,6 +97,9 @@ void Program::Draw()
     mIcosphere.Draw();
     glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
     mDebugInfo.Draw();
+    mWindow->SaveGLStates();
+    TwDraw();
+    mWindow->RestoreGLStates();
 }
 
 const double Program::GetDelta()

@@ -12,11 +12,10 @@ DrawDebugInfo::DrawDebugInfo( Window *window )
     mDelta->SetText( "" );
     mMemoryTotal = ResourceManager::GetFont( "Default", "./Resources/fontBitmap.png" , "./Resources/bitmapMapping.txt" );
     mMemoryTotal->SetText( "" );
-    mMemoryNormal = ResourceManager::GetFont( "Default", "./Resources/fontBitmap.png" , "./Resources/bitmapMapping.txt" );
-    mMemoryNormal->SetText( "" );
-    mMemoryUnknown = ResourceManager::GetFont( "Default", "./Resources/fontBitmap.png" , "./Resources/bitmapMapping.txt" );
-    mMemoryUnknown->SetText( "" );
+    mTotalVertices = ResourceManager::GetFont( "Default", "./Resources/fontBitmap.png" , "./Resources/bitmapMapping.txt" );
+    mTotalVertices->SetText( "" );
     mDraw = true;
+    mVertices =0;
 }
 
 DrawDebugInfo::~DrawDebugInfo()
@@ -33,6 +32,11 @@ void DrawDebugInfo::ToggleDraw()
     mDraw = !mDraw;
 }
 
+void DrawDebugInfo::SetVertices(int v)
+{
+    mVertices = v;
+}
+
 void DrawDebugInfo::Draw()
 {
     if( !mDraw ) {
@@ -47,10 +51,7 @@ void DrawDebugInfo::Draw()
     mMemoryTotal->SetPosition( glm::vec2( startPos, startPos + displacement*1 ) );
     mMemoryTotal->SetText( "Total kb used: " + Util::ToString( MemoryUse::TotalBytesUsed * mKBDivisor, 2 ) );
     mMemoryTotal->Draw();
-    mMemoryNormal->SetPosition( glm::vec2( startPos, startPos + displacement*2 ) );
-    mMemoryNormal->SetText(  "Normal kb used: " + Util::ToString( MemoryUse::NormalBytesUsed * mKBDivisor, 2 ) );
-    mMemoryNormal->Draw();
-    mMemoryUnknown->SetPosition( glm::vec2( startPos, startPos + displacement*3 ) );
-    mMemoryUnknown->SetText(  "Unknown kb used: " + Util::ToString( MemoryUse::UnknownBytesUsed * mKBDivisor, 2 ) );
-    mMemoryUnknown->Draw();
+    mTotalVertices->SetPosition( glm::vec2( startPos, startPos + displacement*2 ) );
+    mTotalVertices->SetText(  "Total Vertices: " + Util::ToString( mVertices ) );
+    mTotalVertices->Draw();
 }

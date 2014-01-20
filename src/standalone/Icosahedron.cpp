@@ -4,47 +4,52 @@
 
 #include "framework/MatrixManager.hpp"
 #include "framework/Utilities.hpp"
+#include "framework/RuntimeSettings.hpp"
+
 
 Icosahedron::Icosahedron()
 {
-    mPolMan.AddQuad( Quad(
-                         glm::vec3( -PLANETRADIUS,  PLANETRADIUS, PLANETRADIUS ),
-                         glm::vec3( -PLANETRADIUS, -PLANETRADIUS, PLANETRADIUS ),
-                         glm::vec3(  PLANETRADIUS, -PLANETRADIUS, PLANETRADIUS ),
-                         glm::vec3(  PLANETRADIUS,  PLANETRADIUS, PLANETRADIUS ) ) );
-    mPolMan.AddQuad( Quad(
-                         glm::vec3( PLANETRADIUS,  PLANETRADIUS, PLANETRADIUS ),
-                         glm::vec3( PLANETRADIUS, -PLANETRADIUS, PLANETRADIUS ),
-                         glm::vec3( PLANETRADIUS, -PLANETRADIUS,-PLANETRADIUS ),
-                         glm::vec3( PLANETRADIUS,  PLANETRADIUS,-PLANETRADIUS ) ) );
-    mPolMan.AddQuad( Quad(
-                         glm::vec3( PLANETRADIUS,  PLANETRADIUS, -PLANETRADIUS ),
-                         glm::vec3( PLANETRADIUS, -PLANETRADIUS, -PLANETRADIUS ),
-                         glm::vec3( -PLANETRADIUS, -PLANETRADIUS, -PLANETRADIUS ),
-                         glm::vec3( -PLANETRADIUS,  PLANETRADIUS, -PLANETRADIUS ) ) );
-    mPolMan.AddQuad( Quad(
-                         glm::vec3( -PLANETRADIUS,  PLANETRADIUS, -PLANETRADIUS ),
-                         glm::vec3( -PLANETRADIUS, -PLANETRADIUS, -PLANETRADIUS ),
-                         glm::vec3( -PLANETRADIUS, -PLANETRADIUS,  PLANETRADIUS ),
-                         glm::vec3( -PLANETRADIUS,  PLANETRADIUS,  PLANETRADIUS ) ) );
-    mPolMan.AddQuad( Quad(
-                         glm::vec3( -PLANETRADIUS,  PLANETRADIUS, -PLANETRADIUS ),
-                         glm::vec3( -PLANETRADIUS,  PLANETRADIUS,  PLANETRADIUS ),
-                         glm::vec3(  PLANETRADIUS,  PLANETRADIUS, PLANETRADIUS ),
-                         glm::vec3(  PLANETRADIUS,  PLANETRADIUS,  -PLANETRADIUS ) ) );
-    mPolMan.AddQuad( Quad(
-                         glm::vec3( -PLANETRADIUS, -PLANETRADIUS,  PLANETRADIUS ),
-                         glm::vec3( -PLANETRADIUS, -PLANETRADIUS, -PLANETRADIUS ),
-                         glm::vec3(  PLANETRADIUS, -PLANETRADIUS, -PLANETRADIUS ),
-                         glm::vec3(  PLANETRADIUS, -PLANETRADIUS,  PLANETRADIUS ) ) );
+float PlanetRadius = RuntimeSettings::Settings.PlanetRadius;
 
-    for( int i = 0; i < 5; i++ ) {
+    mPolMan.AddQuad( Quad(
+                         glm::vec3( -PlanetRadius,  PlanetRadius, PlanetRadius ),
+                         glm::vec3( -PlanetRadius, -PlanetRadius, PlanetRadius ),
+                         glm::vec3(  PlanetRadius, -PlanetRadius, PlanetRadius ),
+                         glm::vec3(  PlanetRadius,  PlanetRadius, PlanetRadius ) ) );
+    mPolMan.AddQuad( Quad(
+                         glm::vec3( PlanetRadius,  PlanetRadius, PlanetRadius ),
+                         glm::vec3( PlanetRadius, -PlanetRadius, PlanetRadius ),
+                         glm::vec3( PlanetRadius, -PlanetRadius,-PlanetRadius ),
+                         glm::vec3( PlanetRadius,  PlanetRadius,-PlanetRadius ) ) );
+    mPolMan.AddQuad( Quad(
+                         glm::vec3( PlanetRadius,  PlanetRadius, -PlanetRadius ),
+                         glm::vec3( PlanetRadius, -PlanetRadius, -PlanetRadius ),
+                         glm::vec3( -PlanetRadius, -PlanetRadius, -PlanetRadius ),
+                         glm::vec3( -PlanetRadius,  PlanetRadius, -PlanetRadius ) ) );
+    mPolMan.AddQuad( Quad(
+                         glm::vec3( -PlanetRadius,  PlanetRadius, -PlanetRadius ),
+                         glm::vec3( -PlanetRadius, -PlanetRadius, -PlanetRadius ),
+                         glm::vec3( -PlanetRadius, -PlanetRadius,  PlanetRadius ),
+                         glm::vec3( -PlanetRadius,  PlanetRadius,  PlanetRadius ) ) );
+    mPolMan.AddQuad( Quad(
+                         glm::vec3( -PlanetRadius,  PlanetRadius, -PlanetRadius ),
+                         glm::vec3( -PlanetRadius,  PlanetRadius,  PlanetRadius ),
+                         glm::vec3(  PlanetRadius,  PlanetRadius, PlanetRadius ),
+                         glm::vec3(  PlanetRadius,  PlanetRadius,  -PlanetRadius ) ) );
+    mPolMan.AddQuad( Quad(
+                         glm::vec3( -PlanetRadius, -PlanetRadius,  PlanetRadius ),
+                         glm::vec3( -PlanetRadius, -PlanetRadius, -PlanetRadius ),
+                         glm::vec3(  PlanetRadius, -PlanetRadius, -PlanetRadius ),
+                         glm::vec3(  PlanetRadius, -PlanetRadius,  PlanetRadius ) ) );
+
+    for( int i = 0; i < RuntimeSettings::Settings.Subdivisions; i++ ) {
         mPolMan.Subdivide();
     }
 
     mPolMan.Spherify();
 
-    for( int i = 0; i < 200; i++ ) {
+    for( int i = 0; i < RuntimeSettings::Settings.Distortions; i++ ) {
+
         float a = ( ( std::rand() % 2001 ) - 1000 ) / 1000.0f ,
               b = ( ( std::rand() % 2001 ) - 1000 ) / 1000.0f,
               c = ( ( std::rand() % 2001 ) - 1000 ) / 1000.0f;
@@ -57,6 +62,11 @@ Icosahedron::Icosahedron()
 
 Icosahedron::~Icosahedron()
 {
+}
+
+int Icosahedron::GetVertexCount()
+{
+    return mPolMan.GetVertexCount();
 }
 
 void Icosahedron::Update()

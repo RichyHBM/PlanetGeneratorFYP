@@ -4,8 +4,7 @@
 #include "Quad.hpp"
 #include <vector>
 #include "framework/GLHelp/GLHelp.hpp"
-
-#define PLANETRADIUS 5.0f
+#include "framework/RuntimeSettings.hpp"
 
 class PolygonManager
 {
@@ -21,6 +20,7 @@ public:
     void BindData();
     void Distort( const glm::vec3 &origin, const glm::vec3 &direction );
     void Spherify();
+    int GetVertexCount();
 protected:
     void NormalizeVert( glm::vec3 &v );
 

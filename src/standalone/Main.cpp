@@ -67,8 +67,8 @@ void SetSettings()
     width = 800,
     height = 600,
     fps = 60;
-    bool vSynk = false, fullScreen = false;
-    WindowSettings::Initial.SetSettings( depthBits, stencilBits, antiAliasing, majorOGL, minorOGL, width, height, fps, vSynk, fullScreen );
+    bool vSynk = false, fullScreen = false, useTweakBar = true;
+    WindowSettings::Initial.SetSettings( depthBits, stencilBits, antiAliasing, majorOGL, minorOGL, width, height, fps, vSynk, fullScreen, useTweakBar );
 }
 
 void ProcessArgument( const std::string &arg, const std::string &arg2 )
@@ -90,7 +90,7 @@ void ProcessArgument( const std::string &arg, const std::string &arg2 )
         }
 
     } else if( arg == "-asServer" ) {
-        WindowSettings::Initial.SetSettings( 24, 8, 8, 2, 1, 4096, 2400, 60, false, true );
+        WindowSettings::Initial.SetSettings( 24, 8, 8, 2, 1, 4096, 2400, 60, false, true, false );
     }
 }
 

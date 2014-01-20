@@ -14,14 +14,14 @@ project "Framework"
 	  
       configuration "Debug"
          if _ACTION == "gmake" or _ACTION == "codeblocks" then
-            links { "pthread", "AntTweakBar", "sfml-network", "sfml-window", "sfml-system", "GLU", "GL", "noisepp-d" }
+            links { "pthread", "AntTweakBar", "sfml-window", "sfml-system", "GLU", "GL", "noisepp-d" }
          end
 
       configuration "Release"
          if _ACTION == "gmake" or _ACTION == "codeblocks" then
-            links { "pthread", "AntTweakBar", "sfml-network", "sfml-window", "sfml-system", "GLU", "GL", "noisepp" }
+            links { "pthread", "AntTweakBar", "sfml-window", "sfml-system", "GLU", "GL", "noisepp" }
          end
 		
 	configuration "Linux64"
-		links { "pthread", "sfml-network64", "sfml-window64", "sfml-system64", "GLU", "GL", "noisepp64" }
+		links { "pthread", "AntTweakBar", "sfml-window64", "sfml-system64", "GLU", "GL", "noisepp64" }
 	

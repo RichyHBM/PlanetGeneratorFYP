@@ -41,6 +41,8 @@ void WindowSettings::ParseArguments( const std::string &arg, const std::string &
 
     } else if( arg == "-fps" ) {
         Initial.mFPS = Util::StrTo<short>( arg2 );
+    } else if( arg == "-notweakbar" ) {
+        Initial.mUseTweakBar = false;
     }
 }
 
@@ -62,7 +64,8 @@ void WindowSettings::SetSettings(
     unsigned short pHeight,
     unsigned short pFPS,
     bool pVSynk,
-    bool pFullScreen )
+    bool pFullScreen,
+    bool pUseTweakBar )
 {
     mDepthBits = pDepthBits;
     mStencilBits = pStencilBits;
@@ -75,6 +78,7 @@ void WindowSettings::SetSettings(
     mVSynk = pVSynk;
     mFullScreen = pFullScreen;
     mAspectRatio = pWidth/( float )pHeight;
+    mUseTweakBar = pUseTweakBar;
 }
 
 void WindowSettings::SetResolution(
@@ -141,3 +145,9 @@ bool WindowSettings::GetFullScreen()
 {
     return mFullScreen;
 }
+
+bool WindowSettings::UseTweakBar()
+{
+    return mUseTweakBar;
+}
+

@@ -10,9 +10,11 @@ cp -a ../Resources ../bin/Release/Resources
 
 cp ../external/lib/linux/libsfml-system.so ../bin/Debug/libsfml-system.so.2
 cp ../external/lib/linux/libsfml-window.so ../bin/Debug/libsfml-window.so.2
+cp ../external/lib/linux/libAntTweakBar.so ../bin/Debug/libAntTweakBar.so.1
 
 cp ../external/lib/linux/libsfml-system.so ../bin/Release/libsfml-system.so.2
 cp ../external/lib/linux/libsfml-window.so ../bin/Release/libsfml-window.so.2
+cp ../external/lib/linux/libAntTweakBar.so ../bin/Release/libAntTweakBar.so.1
 
 touch ../bin/Debug/runStandalone.sh
 echo '#!/bin/sh' > ../bin/Debug/runStandalone.sh

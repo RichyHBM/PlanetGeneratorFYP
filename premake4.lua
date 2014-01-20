@@ -23,10 +23,10 @@ solution "PlanetGeneratorFYP"
 		flags { "Symbols" }
 
 		if _ACTION == "vs2010" then
-			links { "sfml-network-d", "sfml-window-d", "sfml-system-d", "glu32", "opengl32", "noisepp-d" }
+			links { "AntTweakBar", "sfml-window-d", "sfml-system-d", "glu32", "opengl32", "noisepp-d" }
 		end 
 		if _ACTION == "gmake" or _ACTION == "codeblocks" then
-			links {  "Framework", "pthread", "sfml-network", "sfml-window", "sfml-system", "GLU", "GL", "noisepp-d" }
+			links {  "Framework", "pthread", "AntTweakBar", "sfml-window", "sfml-system", "GLU", "GL", "noisepp-d" }
 		end
 
 	configuration "Release"
@@ -35,17 +35,17 @@ solution "PlanetGeneratorFYP"
 		flags { "OptimizeSpeed" }
 
 		if _ACTION == "vs2010" then
-			links { "sfml-network", "sfml-window", "sfml-system", "glu32", "opengl32", "noisepp" }
+			links { "AntTweakBar", "sfml-window", "sfml-system", "glu32", "opengl32", "noisepp" }
 		end
 		if _ACTION == "gmake" or _ACTION == "codeblocks" then
-			links {  "Framework", "pthread", "sfml-network", "sfml-window", "sfml-system", "GLU", "GL", "noisepp" }
+			links {  "Framework", "pthread", "AntTweakBar", "sfml-window", "sfml-system", "GLU", "GL", "noisepp" }
 		end
 		
 	configuration "Linux64"
 		targetdir "./bin/Release64"
 		defines { "NDEBUG" }
 		flags { "OptimizeSpeed" }
-		links {  "Framework", "pthread", "sfml-network64", "sfml-window64", "sfml-system64", "GLU", "GL", "noisepp64" }
+		links {  "Framework", "pthread", "AntTweakBar", "sfml-window64", "sfml-system64", "GLU", "GL", "noisepp64" }
 	
 	dofile "./premakes/standalone.lua"
 	dofile "./premakes/test.lua"

@@ -12,6 +12,8 @@ public:
 
     void Update();
     void Draw();
+
+    int GetVertexCount();
 protected:
     PolygonManager mPolMan;
     glm::vec2 UV( glm::vec3 pos );

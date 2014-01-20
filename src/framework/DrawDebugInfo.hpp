@@ -13,6 +13,7 @@ public:
     void SetDraw( bool draw );
     void Draw();
     void ToggleDraw();
+    void SetVertices(int v);
 
 protected:
     float mKBDivisor;
@@ -20,8 +21,8 @@ protected:
     Window *mWindow;
     BitmapText *mDelta;
     BitmapText *mMemoryTotal;
-    BitmapText *mMemoryNormal;
-    BitmapText *mMemoryUnknown;
+    BitmapText *mTotalVertices;
+    int mVertices;
 };
 
 #endif

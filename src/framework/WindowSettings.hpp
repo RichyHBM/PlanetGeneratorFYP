@@ -26,7 +26,8 @@ public:
     unsigned short GetFPS();
     bool GetVSynk();
     bool GetFullScreen();
-
+    bool UseTweakBar();
+    
     ///
     ///Set all parameters of the settings instance
     ///
@@ -40,7 +41,8 @@ public:
         unsigned short pHeight,
         unsigned short pFPS,
         bool pVSynk,
-        bool pFullScreen );
+        bool pFullScreen,
+        bool pUseTweakBar );
 
     ///
     ///Setter for the width and height
@@ -62,6 +64,7 @@ private:
     float mAspectRatio;
     bool mVSynk;
     bool mFullScreen;
+    bool mUseTweakBar;
 };
 
 #endif // WINDOWSETTINGS_HPP

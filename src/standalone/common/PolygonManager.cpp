@@ -37,11 +37,16 @@ void PolygonManager::AddQuad( const Quad &q )
 
 void PolygonManager::NormalizeVert( glm::vec3 &v )
 {
-    float length = PLANETRADIUS * 2;
+    float length = RuntimeSettings::Settings.PlanetRadius * 2;
     float dist = glm::length( v );
     v.x = v.x * length / dist;
     v.y = v.y * length / dist;
     v.z = v.z * length / dist;
+}
+
+int PolygonManager::GetVertexCount()
+{
+    return mQuads.size() * 2;
 }
 
 void PolygonManager::GiveHeight( glm::vec3 &v, float pHeight )

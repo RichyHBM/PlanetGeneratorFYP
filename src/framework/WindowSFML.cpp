@@ -7,6 +7,8 @@
 #include <iostream>
 #include "GLHelp/Texture.hpp"
 #include "Utilities.hpp"
+#include "TweakSFML.hpp"
+#include "./RuntimeSettings.hpp"
 
 WindowSFML::WindowSFML()
 {
@@ -81,7 +83,7 @@ WindowSFML::WindowSFML()
     width = mWindow.getSize().x;
     height = mWindow.getSize().y;
     //Set the running settings
-    WindowSettings::Running.SetSettings( depthBits, stencilBits, antiAliasing, majorOGL, minorOGL, width, height, fps, vSynk, fullScreen );
+    WindowSettings::Running.SetSettings( depthBits, stencilBits, antiAliasing, majorOGL, minorOGL, width, height, fps, vSynk, fullScreen, WindowSettings::Initial.UseTweakBar() );
     mIsFocused = true;
     mNeedsClose = false;
 }
@@ -95,13 +97,20 @@ void WindowSFML::DoEvents()
     sf::Event event;
 
     while ( mWindow.pollEvent( event ) ) {
+
+        if(WindowSettings::Running.UseTweakBar())
+        {
+            if( TweakEventSFML(event) != 0 )
+                continue;
+        }
+        
         if ( event.type == sf::Event::Closed ) {
             mNeedsClose = true;
 
         } else if ( event.type == sf::Event::Resized ) {
             // adjust the viewport when the window is resized
             glViewport( 0, 0, event.size.width, event.size.height );
-
+            WindowSettings::Running.SetResolution(event.size.width, event.size.height);
         } else if( event.type == sf::Event::GainedFocus ) {
             mIsFocused = true;
 
@@ -113,6 +122,10 @@ void WindowSFML::DoEvents()
 
         } else if( event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape ) {
             mNeedsClose = true;
+        } else if( event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::M ) {
+            RuntimeSettings::Settings.LockMouse = !RuntimeSettings::Settings.LockMouse;
+            sf::Mouse::setPosition( sf::Vector2i( WindowSettings::Running.GetWidth()/2.0f, WindowSettings::Running.GetHeight()/2.0f ) );
+            mWindow.setMouseCursorVisible( RuntimeSettings::Settings.LockMouse );
         }
     }
 }
