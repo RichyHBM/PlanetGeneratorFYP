@@ -8,7 +8,7 @@
 
 #include "Mouse.hpp"
 
-Keyboard::Keyboard() : mHorizontalAngle( 4 ), mVerticalAngle( -Util::Maths::fPIo2 )
+Keyboard::Keyboard() : mHorizontalAngle( Util::Maths::fPI ), mVerticalAngle(0 )
 {
 }
 Keyboard::~Keyboard()

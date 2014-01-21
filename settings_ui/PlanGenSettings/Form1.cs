@@ -105,46 +105,5 @@ namespace PlanGenSettings
         {
             settings.Controls = ControlsComboBox.SelectedIndex;
         }
-
-        private void SeedSpinner_ValueChanged(object sender, EventArgs e)
-        {
-            settings.Seed = Convert.ToInt32(SeedSpinner.Value);
-        }
-
-        private void PersistanceSpinner_ValueChanged(object sender, EventArgs e)
-        {
-            settings.Persistance = Convert.ToDouble(PersistanceSpinner.Value);
-        }
-
-        private void OctavesSpinner_ValueChanged(object sender, EventArgs e)
-        {
-            settings.Octaves = Convert.ToInt32(OctavesSpinner.Value);
-        }
-
-        private void FrequencySpinner_ValueChanged(object sender, EventArgs e)
-        {
-            settings.Frequency = Convert.ToDouble(FrequencySpinner.Value);
-        }
-
-        private void QualitySpinner_ValueChanged(object sender, EventArgs e)
-        {
-            settings.Quality = Convert.ToInt32(QualitySpinner.Value);
-        }
-
-        private void ScaleSpinner_ValueChanged(object sender, EventArgs e)
-        {
-            settings.Scale = Convert.ToDouble(ScaleSpinner.Value);
-        }
-
-        private void LacunaritySpinner_ValueChanged(object sender, EventArgs e)
-        {
-            settings.Lacunarity = Convert.ToDouble(LacunaritySpinner.Value);
-        }
-
-        private void DistortionSpinner_ValueChanged(object sender, EventArgs e)
-        {
-            settings.Distortion = Convert.ToDouble(DistortionSpinner.Value);
-        }
-
     }
 }

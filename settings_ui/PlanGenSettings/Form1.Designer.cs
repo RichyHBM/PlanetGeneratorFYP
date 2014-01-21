@@ -45,23 +45,6 @@
             this.WidthSpinner = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.DistortionSpinner = new System.Windows.Forms.NumericUpDown();
-            this.LacunaritySpinner = new System.Windows.Forms.NumericUpDown();
-            this.ScaleSpinner = new System.Windows.Forms.NumericUpDown();
-            this.QualitySpinner = new System.Windows.Forms.NumericUpDown();
-            this.FrequencySpinner = new System.Windows.Forms.NumericUpDown();
-            this.OctavesSpinner = new System.Windows.Forms.NumericUpDown();
-            this.PersistanceSpinner = new System.Windows.Forms.NumericUpDown();
-            this.SeedSpinner = new System.Windows.Forms.NumericUpDown();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -74,15 +57,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.DepthSpinner)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HeightSpinner)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WidthSpinner)).BeginInit();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DistortionSpinner)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LacunaritySpinner)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ScaleSpinner)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.QualitySpinner)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FrequencySpinner)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OctavesSpinner)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PersistanceSpinner)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SeedSpinner)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ViewDisplacementSpinner)).BeginInit();
             this.SuspendLayout();
             // 
@@ -106,7 +80,7 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(283, 237);
+            this.groupBox1.Size = new System.Drawing.Size(566, 128);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Window Settings";
@@ -114,7 +88,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(7, 201);
+            this.label10.Location = new System.Drawing.Point(6, 98);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(57, 13);
             this.label10.TabIndex = 15;
@@ -123,7 +97,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(7, 177);
+            this.label9.Location = new System.Drawing.Point(299, 99);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(38, 13);
             this.label9.TabIndex = 14;
@@ -132,7 +106,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(7, 151);
+            this.label8.Location = new System.Drawing.Point(7, 73);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(75, 13);
             this.label8.TabIndex = 13;
@@ -141,7 +115,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(7, 125);
+            this.label7.Location = new System.Drawing.Point(299, 73);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(59, 13);
             this.label7.TabIndex = 12;
@@ -150,7 +124,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 99);
+            this.label6.Location = new System.Drawing.Point(299, 47);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(56, 13);
             this.label6.TabIndex = 11;
@@ -159,7 +133,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 73);
+            this.label5.Location = new System.Drawing.Point(299, 21);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(61, 13);
             this.label5.TabIndex = 10;
@@ -168,7 +142,7 @@
             // FullScreenCheckBox
             // 
             this.FullScreenCheckBox.AutoSize = true;
-            this.FullScreenCheckBox.Location = new System.Drawing.Point(156, 200);
+            this.FullScreenCheckBox.Location = new System.Drawing.Point(157, 97);
             this.FullScreenCheckBox.Name = "FullScreenCheckBox";
             this.FullScreenCheckBox.Size = new System.Drawing.Size(77, 17);
             this.FullScreenCheckBox.TabIndex = 9;
@@ -179,7 +153,7 @@
             // VSyncCheckBox
             // 
             this.VSyncCheckBox.AutoSize = true;
-            this.VSyncCheckBox.Location = new System.Drawing.Point(156, 176);
+            this.VSyncCheckBox.Location = new System.Drawing.Point(440, 98);
             this.VSyncCheckBox.Name = "VSyncCheckBox";
             this.VSyncCheckBox.Size = new System.Drawing.Size(40, 17);
             this.VSyncCheckBox.TabIndex = 8;
@@ -189,7 +163,7 @@
             // 
             // FramesSpinner
             // 
-            this.FramesSpinner.Location = new System.Drawing.Point(157, 149);
+            this.FramesSpinner.Location = new System.Drawing.Point(157, 71);
             this.FramesSpinner.Maximum = new decimal(new int[] {
             300,
             0,
@@ -207,7 +181,7 @@
             // 
             // StencilSpinner
             // 
-            this.StencilSpinner.Location = new System.Drawing.Point(156, 123);
+            this.StencilSpinner.Location = new System.Drawing.Point(440, 71);
             this.StencilSpinner.Name = "StencilSpinner";
             this.StencilSpinner.Size = new System.Drawing.Size(120, 20);
             this.StencilSpinner.TabIndex = 6;
@@ -220,7 +194,7 @@
             // 
             // DepthSpinner
             // 
-            this.DepthSpinner.Location = new System.Drawing.Point(156, 97);
+            this.DepthSpinner.Location = new System.Drawing.Point(439, 45);
             this.DepthSpinner.Name = "DepthSpinner";
             this.DepthSpinner.Size = new System.Drawing.Size(120, 20);
             this.DepthSpinner.TabIndex = 5;
@@ -240,7 +214,7 @@
             "x4",
             "x8",
             "x12"});
-            this.AAComboBox.Location = new System.Drawing.Point(156, 70);
+            this.AAComboBox.Location = new System.Drawing.Point(439, 18);
             this.AAComboBox.Name = "AAComboBox";
             this.AAComboBox.Size = new System.Drawing.Size(121, 21);
             this.AAComboBox.TabIndex = 4;
@@ -301,230 +275,9 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Window Width";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.label18);
-            this.groupBox2.Controls.Add(this.label17);
-            this.groupBox2.Controls.Add(this.label16);
-            this.groupBox2.Controls.Add(this.label15);
-            this.groupBox2.Controls.Add(this.label14);
-            this.groupBox2.Controls.Add(this.label13);
-            this.groupBox2.Controls.Add(this.label12);
-            this.groupBox2.Controls.Add(this.label11);
-            this.groupBox2.Controls.Add(this.DistortionSpinner);
-            this.groupBox2.Controls.Add(this.LacunaritySpinner);
-            this.groupBox2.Controls.Add(this.ScaleSpinner);
-            this.groupBox2.Controls.Add(this.QualitySpinner);
-            this.groupBox2.Controls.Add(this.FrequencySpinner);
-            this.groupBox2.Controls.Add(this.OctavesSpinner);
-            this.groupBox2.Controls.Add(this.PersistanceSpinner);
-            this.groupBox2.Controls.Add(this.SeedSpinner);
-            this.groupBox2.Location = new System.Drawing.Point(302, 12);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(283, 237);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Noise Settings";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(6, 201);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(51, 13);
-            this.label18.TabIndex = 15;
-            this.label18.Text = "Distortion";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(6, 177);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(56, 13);
-            this.label17.TabIndex = 14;
-            this.label17.Text = "Lacunarity";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(6, 151);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(34, 13);
-            this.label16.TabIndex = 13;
-            this.label16.Text = "Scale";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(6, 125);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(39, 13);
-            this.label15.TabIndex = 12;
-            this.label15.Text = "Quality";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(6, 99);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(57, 13);
-            this.label14.TabIndex = 11;
-            this.label14.Text = "Frequency";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 73);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(47, 13);
-            this.label13.TabIndex = 10;
-            this.label13.Text = "Octaves";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 46);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(62, 13);
-            this.label12.TabIndex = 9;
-            this.label12.Text = "Persistance";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 20);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(32, 13);
-            this.label11.TabIndex = 8;
-            this.label11.Text = "Seed";
-            // 
-            // DistortionSpinner
-            // 
-            this.DistortionSpinner.DecimalPlaces = 3;
-            this.DistortionSpinner.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.DistortionSpinner.Location = new System.Drawing.Point(156, 199);
-            this.DistortionSpinner.Name = "DistortionSpinner";
-            this.DistortionSpinner.Size = new System.Drawing.Size(120, 20);
-            this.DistortionSpinner.TabIndex = 7;
-            this.DistortionSpinner.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            131072});
-            this.DistortionSpinner.ValueChanged += new System.EventHandler(this.DistortionSpinner_ValueChanged);
-            // 
-            // LacunaritySpinner
-            // 
-            this.LacunaritySpinner.DecimalPlaces = 2;
-            this.LacunaritySpinner.Location = new System.Drawing.Point(156, 175);
-            this.LacunaritySpinner.Name = "LacunaritySpinner";
-            this.LacunaritySpinner.Size = new System.Drawing.Size(120, 20);
-            this.LacunaritySpinner.TabIndex = 6;
-            this.LacunaritySpinner.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.LacunaritySpinner.ValueChanged += new System.EventHandler(this.LacunaritySpinner_ValueChanged);
-            // 
-            // ScaleSpinner
-            // 
-            this.ScaleSpinner.DecimalPlaces = 3;
-            this.ScaleSpinner.Location = new System.Drawing.Point(156, 149);
-            this.ScaleSpinner.Name = "ScaleSpinner";
-            this.ScaleSpinner.Size = new System.Drawing.Size(120, 20);
-            this.ScaleSpinner.TabIndex = 5;
-            this.ScaleSpinner.Value = new decimal(new int[] {
-            212,
-            0,
-            0,
-            131072});
-            this.ScaleSpinner.ValueChanged += new System.EventHandler(this.ScaleSpinner_ValueChanged);
-            // 
-            // QualitySpinner
-            // 
-            this.QualitySpinner.Location = new System.Drawing.Point(156, 123);
-            this.QualitySpinner.Name = "QualitySpinner";
-            this.QualitySpinner.Size = new System.Drawing.Size(120, 20);
-            this.QualitySpinner.TabIndex = 4;
-            this.QualitySpinner.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.QualitySpinner.ValueChanged += new System.EventHandler(this.QualitySpinner_ValueChanged);
-            // 
-            // FrequencySpinner
-            // 
-            this.FrequencySpinner.DecimalPlaces = 2;
-            this.FrequencySpinner.Location = new System.Drawing.Point(156, 97);
-            this.FrequencySpinner.Name = "FrequencySpinner";
-            this.FrequencySpinner.Size = new System.Drawing.Size(120, 20);
-            this.FrequencySpinner.TabIndex = 3;
-            this.FrequencySpinner.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.FrequencySpinner.ValueChanged += new System.EventHandler(this.FrequencySpinner_ValueChanged);
-            // 
-            // OctavesSpinner
-            // 
-            this.OctavesSpinner.Location = new System.Drawing.Point(156, 71);
-            this.OctavesSpinner.Name = "OctavesSpinner";
-            this.OctavesSpinner.Size = new System.Drawing.Size(120, 20);
-            this.OctavesSpinner.TabIndex = 2;
-            this.OctavesSpinner.Value = new decimal(new int[] {
-            6,
-            0,
-            0,
-            0});
-            this.OctavesSpinner.ValueChanged += new System.EventHandler(this.OctavesSpinner_ValueChanged);
-            // 
-            // PersistanceSpinner
-            // 
-            this.PersistanceSpinner.DecimalPlaces = 3;
-            this.PersistanceSpinner.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.PersistanceSpinner.Location = new System.Drawing.Point(156, 44);
-            this.PersistanceSpinner.Name = "PersistanceSpinner";
-            this.PersistanceSpinner.Size = new System.Drawing.Size(120, 20);
-            this.PersistanceSpinner.TabIndex = 1;
-            this.PersistanceSpinner.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            65536});
-            this.PersistanceSpinner.ValueChanged += new System.EventHandler(this.PersistanceSpinner_ValueChanged);
-            // 
-            // SeedSpinner
-            // 
-            this.SeedSpinner.Location = new System.Drawing.Point(156, 18);
-            this.SeedSpinner.Maximum = new decimal(new int[] {
-            1410065407,
-            2,
-            0,
-            0});
-            this.SeedSpinner.Name = "SeedSpinner";
-            this.SeedSpinner.Size = new System.Drawing.Size(120, 20);
-            this.SeedSpinner.TabIndex = 0;
-            this.SeedSpinner.Value = new decimal(new int[] {
-            12345,
-            0,
-            0,
-            0});
-            this.SeedSpinner.ValueChanged += new System.EventHandler(this.SeedSpinner_ValueChanged);
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(503, 255);
+            this.button1.Location = new System.Drawing.Point(503, 150);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -534,7 +287,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(422, 255);
+            this.button2.Location = new System.Drawing.Point(417, 150);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 3;
@@ -545,7 +298,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 260);
+            this.label1.Location = new System.Drawing.Point(12, 153);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(97, 13);
             this.label1.TabIndex = 4;
@@ -559,7 +312,7 @@
             0,
             0,
             131072});
-            this.ViewDisplacementSpinner.Location = new System.Drawing.Point(115, 258);
+            this.ViewDisplacementSpinner.Location = new System.Drawing.Point(115, 151);
             this.ViewDisplacementSpinner.Name = "ViewDisplacementSpinner";
             this.ViewDisplacementSpinner.Size = new System.Drawing.Size(79, 20);
             this.ViewDisplacementSpinner.TabIndex = 5;
@@ -568,7 +321,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(200, 260);
+            this.label2.Location = new System.Drawing.Point(201, 153);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(45, 13);
             this.label2.TabIndex = 6;
@@ -581,7 +334,7 @@
             "Keyboard",
             "Gamepad",
             "Network"});
-            this.ControlsComboBox.Location = new System.Drawing.Point(251, 257);
+            this.ControlsComboBox.Location = new System.Drawing.Point(252, 150);
             this.ControlsComboBox.Name = "ControlsComboBox";
             this.ControlsComboBox.Size = new System.Drawing.Size(121, 21);
             this.ControlsComboBox.TabIndex = 0;
@@ -592,14 +345,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(590, 290);
+            this.ClientSize = new System.Drawing.Size(590, 181);
             this.Controls.Add(this.ControlsComboBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.ViewDisplacementSpinner);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Settings Control";
@@ -610,16 +362,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.DepthSpinner)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.HeightSpinner)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WidthSpinner)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DistortionSpinner)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LacunaritySpinner)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ScaleSpinner)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.QualitySpinner)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FrequencySpinner)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.OctavesSpinner)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PersistanceSpinner)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SeedSpinner)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ViewDisplacementSpinner)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -629,7 +371,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label1;
@@ -652,22 +393,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.NumericUpDown DistortionSpinner;
-        private System.Windows.Forms.NumericUpDown LacunaritySpinner;
-        private System.Windows.Forms.NumericUpDown ScaleSpinner;
-        private System.Windows.Forms.NumericUpDown QualitySpinner;
-        private System.Windows.Forms.NumericUpDown FrequencySpinner;
-        private System.Windows.Forms.NumericUpDown OctavesSpinner;
-        private System.Windows.Forms.NumericUpDown PersistanceSpinner;
-        private System.Windows.Forms.NumericUpDown SeedSpinner;
     }
 }
 

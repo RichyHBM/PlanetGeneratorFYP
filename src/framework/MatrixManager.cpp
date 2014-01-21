@@ -19,7 +19,7 @@ void MatrixManager::Init()
     fieldOfView = 75.0f;
     //Use negative displacement to simulate left eye
     mDisplacement = 0.0f;
-    mPosition = glm::vec3( 0,0,-2 );
+    mPosition = glm::vec3( 1,1,2 );
     mLookAt = glm::vec3( 0,0,0 );
     mUp = glm::vec3( 0,1,0 );
     mOrthogonal = glm::ortho<float>( 0.0f, ( float )mWidth, ( float )mHeight, 0.0f, mNearPlane, mFarPlane );

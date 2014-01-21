@@ -33,6 +33,7 @@ Program::~Program()
 
 void Program::Run()
 {
+	Mouse::Set( WindowSettings::Running.GetWidth()/2.0f, WindowSettings::Running.GetHeight()/2.0f );
     while( !mWindow->NeedsToClose() ) {
         mWindow->DoEvents();
 
