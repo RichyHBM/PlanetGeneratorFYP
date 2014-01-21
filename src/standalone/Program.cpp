@@ -81,6 +81,13 @@ void Program::Update()
         mDebugInfo.SetDraw( false );
     }
 
+    if( sf::Keyboard::isKeyPressed( sf::Keyboard::F5 ) ) {
+        RuntimeSettings::Settings.DrawLines = true;
+    }else{
+        RuntimeSettings::Settings.DrawLines = false;
+    }
+
+
     mIcosphere.Update();
 
     mDebugInfo.SetVertices(mIcosphere.GetVertexCount());
