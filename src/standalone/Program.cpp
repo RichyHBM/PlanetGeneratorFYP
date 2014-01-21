@@ -13,17 +13,15 @@ Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
 {
     mWindow = pWindow;
     MatrixControl.SetPosition( glm::vec3( 1, 1, 50 ) );
-    TwInit(TW_OPENGL, NULL);
-    TwWindowSize(WindowSettings::Running.GetWidth(), WindowSettings::Running.GetHeight());
-
+    TwInit( TW_OPENGL, NULL );
+    TwWindowSize( WindowSettings::Running.GetWidth(), WindowSettings::Running.GetHeight() );
     TwBar *myBar;
-    myBar = TwNewBar("Controls");
-    TwSetParam(myBar, NULL, "position", TW_PARAM_CSTRING, 1, "20 60");
-
-    TwAddVarRW(myBar, "DrawLines", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.DrawLines, NULL);
-    TwAddVarRW(myBar, "Subdivisions", TW_TYPE_INT32, &RuntimeSettings::Settings.Subdivisions, NULL);
-    TwAddVarRW(myBar, "Distortions", TW_TYPE_INT32, &RuntimeSettings::Settings.Distortions, NULL);
-    TwAddVarRW(myBar, "PlanetRadius", TW_TYPE_FLOAT, &RuntimeSettings::Settings.PlanetRadius, NULL);
+    myBar = TwNewBar( "Controls" );
+    TwSetParam( myBar, NULL, "position", TW_PARAM_CSTRING, 1, "20 60" );
+    TwAddVarRW( myBar, "DrawLines", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.DrawLines, NULL );
+    TwAddVarRW( myBar, "Subdivisions", TW_TYPE_INT32, &RuntimeSettings::Settings.Subdivisions, NULL );
+    TwAddVarRW( myBar, "Distortions", TW_TYPE_INT32, &RuntimeSettings::Settings.Distortions, NULL );
+    TwAddVarRW( myBar, "PlanetRadius", TW_TYPE_FLOAT, &RuntimeSettings::Settings.PlanetRadius, NULL );
 }
 
 Program::~Program()
@@ -53,11 +51,11 @@ void Program::Run()
             }
 
             Update();
-            if(RuntimeSettings::Settings.LockMouse)
-            {
+
+            if( RuntimeSettings::Settings.LockMouse ) {
                 Mouse::Set( WindowSettings::Running.GetWidth()/2.0f, WindowSettings::Running.GetHeight()/2.0f );
             }
-            
+
             mWindow->ResetDelta();
             Draw();
             mWindow->Display();
@@ -83,14 +81,13 @@ void Program::Update()
 
     if( sf::Keyboard::isKeyPressed( sf::Keyboard::F5 ) ) {
         RuntimeSettings::Settings.DrawLines = true;
-    }else{
+
+    } else {
         RuntimeSettings::Settings.DrawLines = false;
     }
 
-
     mIcosphere.Update();
-
-    mDebugInfo.SetVertices(mIcosphere.GetVertexCount());
+    mDebugInfo.SetVertices( mIcosphere.GetVertexCount() );
 }
 
 void Program::Draw()
@@ -99,8 +96,11 @@ void Program::Draw()
     glm::mat4 mMVP = MatrixControl.PerspectiveView() * model;
     glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-    if(RuntimeSettings::Settings.DrawLines)
+
+    if( RuntimeSettings::Settings.DrawLines ) {
         glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+    }
+
     mIcosphere.Draw();
     glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
     mDebugInfo.Draw();

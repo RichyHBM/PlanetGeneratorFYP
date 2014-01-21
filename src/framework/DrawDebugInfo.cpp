@@ -32,7 +32,7 @@ void DrawDebugInfo::ToggleDraw()
     mDraw = !mDraw;
 }
 
-void DrawDebugInfo::SetVertices(int v)
+void DrawDebugInfo::SetVertices( int v )
 {
     mVertices = v;
 }

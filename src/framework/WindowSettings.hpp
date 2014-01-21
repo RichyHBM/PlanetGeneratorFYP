@@ -27,7 +27,7 @@ public:
     bool GetVSynk();
     bool GetFullScreen();
     bool UseTweakBar();
-    
+
     ///
     ///Set all parameters of the settings instance
     ///

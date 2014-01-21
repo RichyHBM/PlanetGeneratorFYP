@@ -3,6 +3,6 @@
 
 #include "Includes.hpp"
 
-int TweakEventSFML(const sf::Event& event);
+int TweakEventSFML( const sf::Event &event );
 
 #endif //TWEAKSFML_HPP

@@ -97,20 +97,20 @@ void WindowSFML::DoEvents()
     sf::Event event;
 
     while ( mWindow.pollEvent( event ) ) {
-
-        if(WindowSettings::Running.UseTweakBar())
-        {
-            if( TweakEventSFML(event) != 0 )
+        if( WindowSettings::Running.UseTweakBar() ) {
+            if( TweakEventSFML( event ) != 0 ) {
                 continue;
+            }
         }
-        
+
         if ( event.type == sf::Event::Closed ) {
             mNeedsClose = true;
 
         } else if ( event.type == sf::Event::Resized ) {
             // adjust the viewport when the window is resized
             glViewport( 0, 0, event.size.width, event.size.height );
-            WindowSettings::Running.SetResolution(event.size.width, event.size.height);
+            WindowSettings::Running.SetResolution( event.size.width, event.size.height );
+
         } else if( event.type == sf::Event::GainedFocus ) {
             mIsFocused = true;
 
@@ -122,6 +122,7 @@ void WindowSFML::DoEvents()
 
         } else if( event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape ) {
             mNeedsClose = true;
+
         } else if( event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::M ) {
             RuntimeSettings::Settings.LockMouse = !RuntimeSettings::Settings.LockMouse;
             sf::Mouse::setPosition( sf::Vector2i( WindowSettings::Running.GetWidth()/2.0f, WindowSettings::Running.GetHeight()/2.0f ) );
@@ -146,11 +147,9 @@ void WindowSFML::SetCursor( CursorState pState )
         case Hidden:
             mWindow.setMouseCursorVisible( false );
             break;
-
         case Shown:
             mWindow.setMouseCursorVisible( true );
             break;
-
         case Locked:
             break;
     }

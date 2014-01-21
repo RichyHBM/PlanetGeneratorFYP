@@ -13,7 +13,7 @@ public:
     void SetDraw( bool draw );
     void Draw();
     void ToggleDraw();
-    void SetVertices(int v);
+    void SetVertices( int v );
 
 protected:
     float mKBDivisor;

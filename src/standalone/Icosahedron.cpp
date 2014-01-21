@@ -9,8 +9,7 @@
 
 Icosahedron::Icosahedron()
 {
-float PlanetRadius = RuntimeSettings::Settings.PlanetRadius;
-
+    float PlanetRadius = RuntimeSettings::Settings.PlanetRadius;
     mPolMan.AddQuad( Quad(
                          glm::vec3( -PlanetRadius,  PlanetRadius, PlanetRadius ),
                          glm::vec3( -PlanetRadius, -PlanetRadius, PlanetRadius ),
@@ -49,7 +48,6 @@ float PlanetRadius = RuntimeSettings::Settings.PlanetRadius;
     mPolMan.Spherify();
 
     for( int i = 0; i < RuntimeSettings::Settings.Distortions; i++ ) {
-
         float a = ( ( std::rand() % 2001 ) - 1000 ) / 1000.0f ,
               b = ( ( std::rand() % 2001 ) - 1000 ) / 1000.0f,
               c = ( ( std::rand() % 2001 ) - 1000 ) / 1000.0f;

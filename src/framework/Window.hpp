@@ -35,37 +35,35 @@ public:
     virtual void ResetDelta()=0;
     virtual void Close()=0;
 
-    void SaveGLStates()
-    {
-        glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
+    void SaveGLStates() {
+        glPushClientAttrib( GL_CLIENT_ALL_ATTRIB_BITS );
         Util::PrintGLErrors();
-        glPushAttrib(GL_ALL_ATTRIB_BITS);
-        Util::PrintGLErrors();    
-        glMatrixMode(GL_MODELVIEW);
+        glPushAttrib( GL_ALL_ATTRIB_BITS );
         Util::PrintGLErrors();
-        glPushMatrix();
-        Util::PrintGLErrors();
-        glMatrixMode(GL_PROJECTION);
+        glMatrixMode( GL_MODELVIEW );
         Util::PrintGLErrors();
         glPushMatrix();
         Util::PrintGLErrors();
-        glMatrixMode(GL_TEXTURE);
+        glMatrixMode( GL_PROJECTION );
+        Util::PrintGLErrors();
+        glPushMatrix();
+        Util::PrintGLErrors();
+        glMatrixMode( GL_TEXTURE );
         Util::PrintGLErrors();
         glPushMatrix();
         Util::PrintGLErrors();
     }
 
-    void RestoreGLStates()
-    {
-        glMatrixMode(GL_PROJECTION);
+    void RestoreGLStates() {
+        glMatrixMode( GL_PROJECTION );
         Util::PrintGLErrors();
         glPopMatrix();
         Util::PrintGLErrors();
-        glMatrixMode(GL_MODELVIEW);
+        glMatrixMode( GL_MODELVIEW );
         Util::PrintGLErrors();
         glPopMatrix();
         Util::PrintGLErrors();
-        glMatrixMode(GL_TEXTURE);
+        glMatrixMode( GL_TEXTURE );
         Util::PrintGLErrors();
         glPopMatrix();
         Util::PrintGLErrors();

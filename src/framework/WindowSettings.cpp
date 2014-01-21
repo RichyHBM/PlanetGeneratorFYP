@@ -41,6 +41,7 @@ void WindowSettings::ParseArguments( const std::string &arg, const std::string &
 
     } else if( arg == "-fps" ) {
         Initial.mFPS = Util::StrTo<short>( arg2 );
+
     } else if( arg == "-notweakbar" ) {
         Initial.mUseTweakBar = false;
     }

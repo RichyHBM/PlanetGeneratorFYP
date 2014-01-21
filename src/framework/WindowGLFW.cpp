@@ -161,15 +161,12 @@ void WindowGLFW::SetCursor( CursorState pState )
         case Hidden:
             glfwSetInputMode( mWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN  );
             break;
-
         case Shown:
             glfwSetInputMode( mWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL  );
             break;
-
         case Locked:
             glfwSetInputMode( mWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED  );
             break;
-
         default:
             break;
     }

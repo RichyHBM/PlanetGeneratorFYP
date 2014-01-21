@@ -9,8 +9,7 @@ public:
     //Startup settings
     static RuntimeSettings Settings;
 
-    RuntimeSettings()
-    {
+    RuntimeSettings() {
         DrawLines = false;
         Subdivisions = 5;
         Distortions = 200;
