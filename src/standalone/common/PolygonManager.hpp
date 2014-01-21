@@ -14,20 +14,22 @@ public:
     ~PolygonManager();
     void Subdivide();
     //void Undivide();
-    void Normalize();
-    void Draw(const glm::mat4 &MVP);
+    void Draw( const glm::mat4 &MVP );
     void Update();
-    void AddQuad(const Quad& q);
-    void GiveHeight(glm::vec3 &v, float pHeight);
+    void AddQuad( const Quad &q );
+    void GiveHeight( glm::vec3 &v, float pHeight );
     void BindData();
     void Distort( const glm::vec3 &origin, const glm::vec3 &direction );
+    void Spherify();
 protected:
     void NormalizeVert( glm::vec3 &v );
 
     std::vector<Quad> mQuads;
     std::vector<glm::vec3> mPositionsList;
+    std::vector<glm::vec3> mNormalsList;
 
     VBO mPositionBuffer;
+    VBO mNormalBuffer;
     Shader *mShader;
 private:
 };

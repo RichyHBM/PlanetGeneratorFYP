@@ -13,8 +13,8 @@ public:
     void Update();
     void Draw();
 protected:
-	PolygonManager mPolMan;
-	glm::vec2 UV(glm::vec3 pos);
+    PolygonManager mPolMan;
+    glm::vec2 UV( glm::vec3 pos );
 
     glm::mat4 mMVP;
 };

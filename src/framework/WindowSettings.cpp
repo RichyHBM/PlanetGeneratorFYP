@@ -1,10 +1,10 @@
-#include "Settings.hpp"
+#include "WindowSettings.hpp"
 #include "Utilities.hpp"
 
-Settings Settings::Initial;
-Settings Settings::Running;
+WindowSettings WindowSettings::Initial;
+WindowSettings WindowSettings::Running;
 
-void Settings::ParseArguments( const std::string &arg, const std::string &arg2 )
+void WindowSettings::ParseArguments( const std::string &arg, const std::string &arg2 )
 {
     if( arg == "-depth" ) {
         Initial.mDepthBits = Util::StrTo<short>( arg2 );
@@ -44,15 +44,15 @@ void Settings::ParseArguments( const std::string &arg, const std::string &arg2 )
     }
 }
 
-Settings::Settings()
+WindowSettings::WindowSettings()
 {
 }
 
-Settings::~Settings()
+WindowSettings::~WindowSettings()
 {
 }
 
-void Settings::SetSettings(
+void WindowSettings::SetSettings(
     unsigned short pDepthBits,
     unsigned short pStencilBits,
     unsigned short pAntiAliasing,
@@ -77,7 +77,7 @@ void Settings::SetSettings(
     mAspectRatio = pWidth/( float )pHeight;
 }
 
-void Settings::SetResolution(
+void WindowSettings::SetResolution(
     unsigned short pWidth,
     unsigned short pHeight )
 {
@@ -87,57 +87,57 @@ void Settings::SetResolution(
     mAspectRatio = pWidth/( float )pHeight;
 }
 
-unsigned short Settings::GetDepthBits()
+unsigned short WindowSettings::GetDepthBits()
 {
     return mDepthBits;
 }
 
-unsigned short Settings::GetStencilBits()
+unsigned short WindowSettings::GetStencilBits()
 {
     return mStencilBits;
 }
 
-unsigned short Settings::GetAntiAliasing()
+unsigned short WindowSettings::GetAntiAliasing()
 {
     return mAntiAliasing;
 }
 
-unsigned short Settings::GetMajorOGL()
+unsigned short WindowSettings::GetMajorOGL()
 {
     return mMajorOGL;
 }
 
-unsigned short Settings::GetMinorOGL()
+unsigned short WindowSettings::GetMinorOGL()
 {
     return mMinorOGL;
 }
 
-unsigned short Settings::GetWidth()
+unsigned short WindowSettings::GetWidth()
 {
     return mWidth;
 }
 
-unsigned short Settings::GetHeight()
+unsigned short WindowSettings::GetHeight()
 {
     return mHeight;
 }
 
-float Settings::GetAspectRatio()
+float WindowSettings::GetAspectRatio()
 {
     return mAspectRatio;
 }
 
-unsigned short Settings::GetFPS()
+unsigned short WindowSettings::GetFPS()
 {
     return mFPS;
 }
 
-bool Settings::GetVSynk()
+bool WindowSettings::GetVSynk()
 {
     return mVSynk;
 }
 
-bool Settings::GetFullScreen()
+bool WindowSettings::GetFullScreen()
 {
     return mFullScreen;
 }

@@ -15,9 +15,9 @@ PolygonManager::~PolygonManager()
     mShader = NULL;
 }
 
-void PolygonManager::AddQuad(const Quad& q)
+void PolygonManager::AddQuad( const Quad &q )
 {
-    mQuads.push_back(q);
+    mQuads.push_back( q );
 }
 
 /*void PolygonManager::Undivide()
@@ -35,7 +35,7 @@ void PolygonManager::AddQuad(const Quad& q)
 }
 */
 
-void PolygonManager::NormalizeVert(glm::vec3 &v)
+void PolygonManager::NormalizeVert( glm::vec3 &v )
 {
     float length = PLANETRADIUS * 2;
     float dist = glm::length( v );
@@ -44,23 +44,7 @@ void PolygonManager::NormalizeVert(glm::vec3 &v)
     v.z = v.z * length / dist;
 }
 
-void PolygonManager::Normalize()
-{
-    for(int i = 0; i < mQuads.size(); i++)
-    {
-        glm::vec3 &A = mQuads[i].GetVerticeA(), 
-            &B = mQuads[i].GetVerticeB(), 
-            &C = mQuads[i].GetVerticeC(),
-            &D = mQuads[i].GetVerticeD();
-
-        NormalizeVert(A);
-        NormalizeVert(B);
-        NormalizeVert(C);
-        NormalizeVert(D);
-    }
-}
-
-void PolygonManager::GiveHeight(glm::vec3 &v, float pHeight)
+void PolygonManager::GiveHeight( glm::vec3 &v, float pHeight )
 {
     float len = glm::length( v );
     glm::vec3 tmp = ( len + pHeight ) * glm::normalize( v );
@@ -70,76 +54,78 @@ void PolygonManager::GiveHeight(glm::vec3 &v, float pHeight)
 void PolygonManager::Subdivide()
 {
     std::vector<Quad> tempQuads;
-    for(int i = 0; i < mQuads.size(); i++)
-    {
-        glm::vec3 A = mQuads[i].GetVerticeA(), 
-            B = mQuads[i].GetVerticeB(), 
-            C = mQuads[i].GetVerticeC(),
-            D = mQuads[i].GetVerticeD();
 
-        glm::vec3 AB = (A + B) / glm::vec3(2.0);
-        glm::vec3 BC = (B + C) / glm::vec3(2.0);
-        glm::vec3 CD = (C + D) / glm::vec3(2.0);
-        glm::vec3 DA = (D + A) / glm::vec3(2.0);
-        glm::vec3 Middle = (A + C) / glm::vec3(2.0);
-
-
-        tempQuads.push_back(Quad(A, AB, Middle, DA));
-        tempQuads.push_back(Quad(AB, B, BC, Middle));
-        tempQuads.push_back(Quad(Middle, BC, C, CD));
-        tempQuads.push_back(Quad(DA, Middle, CD, D));
+    for( int i = 0; i < mQuads.size(); i++ ) {
+        glm::vec3 A = mQuads[i].GetVerticeA(),
+                  B = mQuads[i].GetVerticeB(),
+                  C = mQuads[i].GetVerticeC(),
+                  D = mQuads[i].GetVerticeD();
+        glm::vec3 AB = ( A + B ) / glm::vec3( 2.0 );
+        glm::vec3 BC = ( B + C ) / glm::vec3( 2.0 );
+        glm::vec3 CD = ( C + D ) / glm::vec3( 2.0 );
+        glm::vec3 DA = ( D + A ) / glm::vec3( 2.0 );
+        glm::vec3 Middle = ( A + C ) / glm::vec3( 2.0 );
+        tempQuads.push_back( Quad( A, AB, Middle, DA ) );
+        tempQuads.push_back( Quad( AB, B, BC, Middle ) );
+        tempQuads.push_back( Quad( Middle, BC, C, CD ) );
+        tempQuads.push_back( Quad( DA, Middle, CD, D ) );
     }
-    mQuads = tempQuads;
 
-    Normalize();
+    mQuads = tempQuads;
 }
 
-void PolygonManager::Distort(const glm::vec3& origin, const glm::vec3& direction)
+void PolygonManager::Distort( const glm::vec3 &origin, const glm::vec3 &direction )
 {
     glm::vec3 n = direction - origin;
     float diff = 0.001f;
     glm::mat4 min = glm::scale( glm::mat4( 1.0f ), glm::vec3( 1.0f - diff ) );
     glm::mat4 max = glm::scale( glm::mat4( 1.0f ),glm::vec3( 1.0f + diff ) );
 
-    for( int i = 0; i < mPositionsList.size(); i++ ) {
-        glm::vec3 toOrigin = mPositionsList[i] - origin;
-        float d = glm::dot( n, toOrigin );
+    for( int i = 0; i < mQuads.size(); i++ ) {
+        for( int j = 0; j < 4; j++ ) {
+            glm::vec3 &pos = mQuads[i].GetVertice( j );
+            glm::vec3 toOrigin = pos - origin;
+            float d = glm::dot( n, toOrigin );
 
-        if( d > 0.0f ) {
-            mPositionsList[i] = glm::vec3(
-                                    min *
-                                    glm::vec4( mPositionsList[i].x, mPositionsList[i].y, mPositionsList[i].z, 1.0f )
-                                );
+            if( d > 0.0f ) {
+                pos = glm::vec3( min * glm::vec4( pos.x, pos.y, pos.z, 0 ) );
 
-        } else {
-            mPositionsList[i] = glm::vec3(
-                                    max *
-                                    glm::vec4( mPositionsList[i].x, mPositionsList[i].y, mPositionsList[i].z, 1.0f )
-                                );
+            } else {
+                pos = glm::vec3( max * glm::vec4( pos.x, pos.y, pos.z, 0 ) );
+            }
         }
     }
+}
 
-    mPositionBuffer.AddVectorData( mPositionsList, sizeof( glm::vec3 ) );
-    mPositionBuffer.SetAttributeIndex( mShader->GetAttribute( "Position" ) );
+void PolygonManager::Spherify()
+{
+    for( int i = 0; i < mQuads.size(); i++ ) {
+        glm::vec3 &A = mQuads[i].GetVerticeA(),
+                   &B = mQuads[i].GetVerticeB(),
+                    &C = mQuads[i].GetVerticeC(),
+                     &D = mQuads[i].GetVerticeD();
+        NormalizeVert( A );
+        NormalizeVert( B );
+        NormalizeVert( C );
+        NormalizeVert( D );
+    }
 }
 
 void PolygonManager::BindData()
 {
     mPositionsList.clear();
-    for(int i = 0; i < mQuads.size(); i++)
-    {
-        glm::vec3 A = mQuads[i].GetVerticeA(), 
-            B = mQuads[i].GetVerticeB(), 
-            C = mQuads[i].GetVerticeC(),
-            D = mQuads[i].GetVerticeD();
 
-        mPositionsList.push_back(A);
-        mPositionsList.push_back(B);
-        mPositionsList.push_back(D);
-
-        mPositionsList.push_back(D);
-        mPositionsList.push_back(B);
-        mPositionsList.push_back(C);
+    for( int i = 0; i < mQuads.size(); i++ ) {
+        glm::vec3 A = mQuads[i].GetVerticeA(),
+                  B = mQuads[i].GetVerticeB(),
+                  C = mQuads[i].GetVerticeC(),
+                  D = mQuads[i].GetVerticeD();
+        mPositionsList.push_back( A );
+        mPositionsList.push_back( B );
+        mPositionsList.push_back( D );
+        mPositionsList.push_back( D );
+        mPositionsList.push_back( B );
+        mPositionsList.push_back( C );
     }
 
     mPositionBuffer.AddVectorData( mPositionsList, sizeof( glm::vec3 ) );
@@ -148,10 +134,9 @@ void PolygonManager::BindData()
 
 void PolygonManager::Update()
 {
-
 }
 
-void PolygonManager::Draw(const glm::mat4 &MVP)
+void PolygonManager::Draw( const glm::mat4 &MVP )
 {
     mShader->Bind();
     glUniformMatrix4fv( mShader->GetUniform( "MVP" ), 1, GL_FALSE, &MVP[0][0] );

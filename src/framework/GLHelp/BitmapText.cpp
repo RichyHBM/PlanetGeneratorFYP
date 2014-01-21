@@ -2,7 +2,7 @@
 #include "BitmapText.hpp"
 #include <glm/gtx/transform2.hpp>
 #include <glm/glm.hpp>
-#include "../Settings.hpp"
+#include "../WindowSettings.hpp"
 
 BitmapText::BitmapText()
 {
@@ -33,7 +33,7 @@ BitmapText::BitmapText()
     mShader.LoadShaderCode( vertexShader ,fragmentShader );
     mPosition = glm::vec3( 0.0f );
     mMVP = glm::mat4( 1.0f );
-    mOrtho = glm::ortho( 0.f, ( float )Settings::Running.GetWidth(), ( float )Settings::Running.GetHeight(), 0.f, -5.f, 5.f );
+    mOrtho = glm::ortho( 0.f, ( float )WindowSettings::Running.GetWidth(), ( float )WindowSettings::Running.GetHeight(), 0.f, -5.f, 5.f );
     mColor = glm::vec4( 1.0f );
     mText = "text";
     mVertexBuffer.SetAttributeIndex( mShader.GetAttribute( "Position" ) );

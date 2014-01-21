@@ -1,6 +1,6 @@
 #include "Quad.hpp"
 
-Quad::Quad(const glm::vec3 &pA, const glm::vec3 &pB, const glm::vec3 &pC, const glm::vec3 &pD)
+Quad::Quad( const glm::vec3 &pA, const glm::vec3 &pB, const glm::vec3 &pC, const glm::vec3 &pD )
 {
     mA = pA;
     mB = pB;
@@ -31,4 +31,18 @@ glm::vec3 &Quad::GetVerticeC()
 glm::vec3 &Quad::GetVerticeD()
 {
     return mD;
+}
+
+glm::vec3 &Quad::GetVertice( int i )
+{
+    switch( i ) {
+        case 0:
+            return mA;
+        case 1:
+            return mB;
+        case 2:
+            return mC;
+        case 3:
+            return mD;
+    }
 }

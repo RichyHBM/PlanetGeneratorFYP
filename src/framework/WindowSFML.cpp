@@ -3,7 +3,7 @@
 #include "Includes.hpp"
 #include "WindowSFML.hpp"
 #include <GL/glew.h>
-#include "./Settings.hpp"
+#include "./WindowSettings.hpp"
 #include <iostream>
 #include "GLHelp/Texture.hpp"
 #include "Utilities.hpp"
@@ -13,15 +13,15 @@ WindowSFML::WindowSFML()
     //Initialize local variables using setings
     std::string title = "PlanetGenFYP";
     sf::ContextSettings contextSettings;
-    contextSettings.depthBits = Settings::Initial.GetDepthBits();
-    contextSettings.stencilBits = Settings::Initial.GetStencilBits();
-    contextSettings.antialiasingLevel = Settings::Initial.GetAntiAliasing();
-    contextSettings.majorVersion = Settings::Initial.GetMajorOGL();
-    contextSettings.minorVersion = Settings::Initial.GetMinorOGL();
-    int fps = Settings::Initial.GetFPS();
-    int width = Settings::Initial.GetWidth(),
-        height = Settings::Initial.GetHeight();
-    bool vSynk = Settings::Initial.GetVSynk(), fullScreen = Settings::Initial.GetFullScreen();
+    contextSettings.depthBits = WindowSettings::Initial.GetDepthBits();
+    contextSettings.stencilBits = WindowSettings::Initial.GetStencilBits();
+    contextSettings.antialiasingLevel = WindowSettings::Initial.GetAntiAliasing();
+    contextSettings.majorVersion = WindowSettings::Initial.GetMajorOGL();
+    contextSettings.minorVersion = WindowSettings::Initial.GetMinorOGL();
+    int fps = WindowSettings::Initial.GetFPS();
+    int width = WindowSettings::Initial.GetWidth(),
+        height = WindowSettings::Initial.GetHeight();
+    bool vSynk = WindowSettings::Initial.GetVSynk(), fullScreen = WindowSettings::Initial.GetFullScreen();
     //Create the window using given parameters
     int bitsPerPixel = contextSettings.depthBits + contextSettings.stencilBits;
 
@@ -81,7 +81,7 @@ WindowSFML::WindowSFML()
     width = mWindow.getSize().x;
     height = mWindow.getSize().y;
     //Set the running settings
-    Settings::Running.SetSettings( depthBits, stencilBits, antiAliasing, majorOGL, minorOGL, width, height, fps, vSynk, fullScreen );
+    WindowSettings::Running.SetSettings( depthBits, stencilBits, antiAliasing, majorOGL, minorOGL, width, height, fps, vSynk, fullScreen );
     mIsFocused = true;
     mNeedsClose = false;
 }
@@ -109,7 +109,7 @@ void WindowSFML::DoEvents()
             mIsFocused = false;
 
         } else if( event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::F4 ) {
-            Texture::Screenshot( "Screenshot.bmp", 0, 0, Settings::Running.GetWidth(), Settings::Running.GetHeight() );
+            Texture::Screenshot( "Screenshot.bmp", 0, 0, WindowSettings::Running.GetWidth(), WindowSettings::Running.GetHeight() );
 
         } else if( event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape ) {
             mNeedsClose = true;

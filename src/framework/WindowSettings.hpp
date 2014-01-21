@@ -1,20 +1,20 @@
-#ifndef SETTINGS_HPP
-#define SETTINGS_HPP
+#ifndef WINDOWSETTINGS_HPP
+#define WINDOWSETTINGS_HPP
 
 #include <string>
 
-class Settings
+class WindowSettings
 {
 public:
     //Startup settings
-    static Settings Initial;
+    static WindowSettings Initial;
     //Real run time settings
-    static Settings Running;
+    static WindowSettings Running;
 
     static void ParseArguments( const std::string &arg, const std::string &arg2 );
 
-    Settings();
-    ~Settings();
+    WindowSettings();
+    ~WindowSettings();
     unsigned short GetDepthBits();
     unsigned short GetStencilBits();
     unsigned short GetAntiAliasing();
@@ -64,4 +64,4 @@ private:
     bool mFullScreen;
 };
 
-#endif // SETTINGS_HPP
+#endif // WINDOWSETTINGS_HPP

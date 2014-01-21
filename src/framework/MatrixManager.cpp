@@ -1,5 +1,5 @@
 #include "./MatrixManager.hpp"
-#include "./Settings.hpp"
+#include "./WindowSettings.hpp"
 
 MatrixManager MatrixControl;
 
@@ -14,7 +14,7 @@ MatrixManager::~MatrixManager()
 
 void MatrixManager::Init()
 {
-    mWidth = Settings::Initial.GetWidth(), mHeight = Settings::Initial.GetHeight();
+    mWidth = WindowSettings::Initial.GetWidth(), mHeight = WindowSettings::Initial.GetHeight();
     mNearPlane = 0.1f, mFarPlane = 1000.0f;
     fieldOfView = 75.0f;
     //Use negative displacement to simulate left eye

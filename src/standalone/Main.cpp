@@ -1,6 +1,6 @@
 #include "framework/Includes.hpp"
 
-#include "framework/Settings.hpp"
+#include "framework/WindowSettings.hpp"
 #include "framework/Utilities.hpp"
 #include "./Program.hpp"
 #include "framework/Window.hpp"
@@ -29,7 +29,7 @@ int main( int argc, const char *argv[] )
         if( argc > i+1 ) {
             ProcessArgument( argv[i], argv[i+1] );
             NoisePP.ParseArguments( argv[i], argv[i+1] );
-            Settings::ParseArguments( argv[i], argv[i+1] );
+            WindowSettings::ParseArguments( argv[i], argv[i+1] );
         }
     }
 
@@ -68,7 +68,7 @@ void SetSettings()
     height = 600,
     fps = 60;
     bool vSynk = false, fullScreen = false;
-    Settings::Initial.SetSettings( depthBits, stencilBits, antiAliasing, majorOGL, minorOGL, width, height, fps, vSynk, fullScreen );
+    WindowSettings::Initial.SetSettings( depthBits, stencilBits, antiAliasing, majorOGL, minorOGL, width, height, fps, vSynk, fullScreen );
 }
 
 void ProcessArgument( const std::string &arg, const std::string &arg2 )
@@ -90,7 +90,7 @@ void ProcessArgument( const std::string &arg, const std::string &arg2 )
         }
 
     } else if( arg == "-asServer" ) {
-        Settings::Initial.SetSettings( 24, 8, 8, 2, 1, 4096, 2400, 60, false, true );
+        WindowSettings::Initial.SetSettings( 24, 8, 8, 2, 1, 4096, 2400, 60, false, true );
     }
 }
 

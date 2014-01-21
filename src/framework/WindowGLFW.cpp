@@ -2,7 +2,7 @@
 
 #include "WindowGLFW.hpp"
 #include <GL/wglew.h>
-#include "./Settings.hpp"
+#include "./WindowSettings.hpp"
 #include <iostream>
 
 int WindowGLFW::mWindowCount = 0;
@@ -24,15 +24,15 @@ WindowGLFW::WindowGLFW()
     //Initialize local variables using settings
     std::string title = "PlanetGenFYP";
     unsigned short
-    depthBits = Settings::Initial.GetDepthBits(),
-    stencilBits = Settings::Initial.GetStencilBits(),
-    antiAliasing = Settings::Initial.GetAntiAliasing(),
-    majorOGL = Settings::Initial.GetMajorOGL(),
-    minorOGL = Settings::Initial.GetMinorOGL(),
-    fps = Settings::Initial.GetFPS();
-    int width = Settings::Initial.GetWidth(),
-        height = Settings::Initial.GetHeight();
-    bool vSynk = Settings::Initial.GetVSynk(), fullScreen = Settings::Initial.GetFullScreen();
+    depthBits = WindowSettings::Initial.GetDepthBits(),
+    stencilBits = WindowSettings::Initial.GetStencilBits(),
+    antiAliasing = WindowSettings::Initial.GetAntiAliasing(),
+    majorOGL = WindowSettings::Initial.GetMajorOGL(),
+    minorOGL = WindowSettings::Initial.GetMinorOGL(),
+    fps = WindowSettings::Initial.GetFPS();
+    int width = WindowSettings::Initial.GetWidth(),
+        height = WindowSettings::Initial.GetHeight();
+    bool vSynk = WindowSettings::Initial.GetVSynk(), fullScreen = WindowSettings::Initial.GetFullScreen();
     //Set window parameters
     glfwWindowHint( GLFW_SAMPLES, antiAliasing ); // Request 2 levels of antialiasing
     glfwWindowHint( GLFW_CONTEXT_VERSION_MAJOR, majorOGL );
@@ -104,7 +104,7 @@ WindowGLFW::WindowGLFW()
     minorOGL = glfwGetWindowAttrib( mWindow, GLFW_CONTEXT_VERSION_MINOR );
     glfwGetWindowSize( mWindow, &width, &height );
     //Set the running settings
-    Settings::Running.SetSettings( depthBits, stencilBits, antiAliasing, majorOGL, minorOGL, width, height, fps, vSynk, fullScreen );
+    WindowSettings::Running.SetSettings( depthBits, stencilBits, antiAliasing, majorOGL, minorOGL, width, height, fps, vSynk, fullScreen );
     //glfwSetKeyCallback(KeyBoard::SetCallBack);
     WindowGLFW::mWindowCount++;
     mNeedsClose = false;
