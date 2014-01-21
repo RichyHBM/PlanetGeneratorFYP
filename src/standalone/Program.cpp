@@ -69,7 +69,10 @@ void Program::Run()
 
 void Program::Update()
 {
-    Input::Manager.Update();
+    if( RuntimeSettings::Settings.LockMouse ) {
+        Input::Manager.Update();
+    }
+
     mIcosphere.Update();
 
     if( !RuntimeSettings::Settings.LockMouse ) {
