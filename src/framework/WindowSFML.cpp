@@ -121,9 +121,6 @@ void WindowSFML::DoEvents()
             Texture::Screenshot( "Screenshot.bmp", 0, 0, WindowSettings::Running.GetWidth(), WindowSettings::Running.GetHeight() );
 
         } else if( event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape ) {
-            mNeedsClose = true;
-
-        } else if( event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::M ) {
             RuntimeSettings::Settings.LockMouse = !RuntimeSettings::Settings.LockMouse;
             sf::Mouse::setPosition( sf::Vector2i( WindowSettings::Running.GetWidth()/2.0f, WindowSettings::Running.GetHeight()/2.0f ) );
             mWindow.setMouseCursorVisible( RuntimeSettings::Settings.LockMouse );

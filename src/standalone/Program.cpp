@@ -70,24 +70,11 @@ void Program::Run()
 void Program::Update()
 {
     Input::Manager.Update();
-
-    if( sf::Keyboard::isKeyPressed( sf::Keyboard::F10 ) ) {
-        mDebugInfo.SetDraw( true );
-    }
-
-    if( sf::Keyboard::isKeyPressed( sf::Keyboard::F11 ) ) {
-        mDebugInfo.SetDraw( false );
-    }
-
-    if( sf::Keyboard::isKeyPressed( sf::Keyboard::F5 ) ) {
-        RuntimeSettings::Settings.DrawLines = true;
-
-    } else {
-        RuntimeSettings::Settings.DrawLines = false;
-    }
-
     mIcosphere.Update();
-    mDebugInfo.SetVertices( mIcosphere.GetVertexCount() );
+
+    if( !RuntimeSettings::Settings.LockMouse ) {
+        mDebugInfo.SetVertices( mIcosphere.GetVertexCount() );
+    }
 }
 
 void Program::Draw()
@@ -103,10 +90,13 @@ void Program::Draw()
 
     mIcosphere.Draw();
     glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
-    mDebugInfo.Draw();
-    mWindow->SaveGLStates();
-    TwDraw();
-    mWindow->RestoreGLStates();
+
+    if( !RuntimeSettings::Settings.LockMouse ) {
+        mDebugInfo.Draw();
+        mWindow->SaveGLStates();
+        TwDraw();
+        mWindow->RestoreGLStates();
+    }
 }
 
 const double Program::GetDelta()
