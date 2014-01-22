@@ -9,7 +9,8 @@
 
 Icosahedron::Icosahedron()
 {
-    float PlanetRadius = RuntimeSettings::Settings.PlanetRadius;
+    //Set it to a static number, change size with a scale matrix
+    float PlanetRadius = PLANETSIZE;
     mPolMan.AddQuad( Quad(
                          glm::vec3( -PlanetRadius,  PlanetRadius, PlanetRadius ),
                          glm::vec3( -PlanetRadius, -PlanetRadius, PlanetRadius ),
@@ -69,7 +70,8 @@ int Icosahedron::GetVertexCount()
 
 void Icosahedron::Update()
 {
-    mMVP = MatrixControl.PerspectiveView() * glm::mat4( 1.0f );
+
+    mMVP = MatrixControl.PerspectiveView() * glm::scale( glm::mat4( 1.0f ), glm::vec3( RuntimeSettings::Settings.PlanetRadius * 0.01 ) );
     mPolMan.Update();
 }
 

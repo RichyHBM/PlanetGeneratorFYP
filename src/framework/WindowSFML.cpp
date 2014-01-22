@@ -174,7 +174,7 @@ void WindowSFML::ResetDelta()
 
 void WindowSFML::Close()
 {
-    mWindow.close();
+    mNeedsClose = true;
 }
 
 #endif //SFML

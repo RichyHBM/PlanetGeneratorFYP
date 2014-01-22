@@ -7,12 +7,23 @@
 #include "framework/MatrixManager.hpp"
 
 #include "framework/Input/Mouse.hpp"
+
 #include <AntTweakBar.h>
+
+void TW_CALL QuitButton(void * clientData)
+{ 
+    ((Window *)clientData)->Close();
+}
+
+
+
+
+
 
 Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
 {
     mWindow = pWindow;
-    MatrixControl.SetPosition( glm::vec3( 1, 1, 50 ) );
+    MatrixControl.SetPosition( glm::vec3( 1, 1, 120 ) );
     TwInit( TW_OPENGL, NULL );
     TwWindowSize( WindowSettings::Running.GetWidth(), WindowSettings::Running.GetHeight() );
     TwBar *myBar;
@@ -22,7 +33,10 @@ Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
     TwAddVarRW( myBar, "Subdivisions", TW_TYPE_UINT32, &RuntimeSettings::Settings.Subdivisions, NULL );
     TwAddVarRW( myBar, "Distortions", TW_TYPE_UINT32, &RuntimeSettings::Settings.Distortions, NULL );
     TwAddVarRW( myBar, "Planet Radius", TW_TYPE_UINT32, &RuntimeSettings::Settings.PlanetRadius, NULL );
+    TwAddButton(myBar, "Quit", QuitButton, mWindow, NULL);
 }
+
+
 
 Program::~Program()
 {

@@ -6,6 +6,8 @@
 #include "../../GLHelp/GLHelp.hpp"
 #include "../../RuntimeSettings.hpp"
 
+#define PLANETSIZE 50
+
 class PolygonManager
 {
 public:

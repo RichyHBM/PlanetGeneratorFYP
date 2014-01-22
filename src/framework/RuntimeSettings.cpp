@@ -7,6 +7,6 @@ RuntimeSettings::RuntimeSettings()
     DrawLines = false;
     Subdivisions = 6;
     Distortions = 250;
-    PlanetRadius = 50;
+    PlanetRadius = 100;
     LockMouse = true;
 }
