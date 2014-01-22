@@ -1,3 +1,5 @@
+#include <cstdlib>
+
 #include "framework/Includes.hpp"
 
 #include "framework/WindowSettings.hpp"
@@ -77,7 +79,9 @@ void ProcessArgument( const std::string &arg, const std::string &arg2 )
         float displacement = Util::StrTo<float> ( arg2 );
         MatrixControl.SetDisplacement( displacement );
 
-    } else if( arg == "-controls" ) {
+    } else if( arg == "-seed"){
+            RuntimeSettings::Settings.Seed = Util::StrTo<unsigned int> ( arg2 );
+    }else if( arg == "-controls" ) {
         if( Util::StrTo<int> ( arg2 ) == 0 ) {
             Input::Manager.SetType( Input::KEYBOARD );
 

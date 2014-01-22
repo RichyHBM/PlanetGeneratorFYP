@@ -1,5 +1,7 @@
 #include "RuntimeSettings.hpp"
 
+#include <cstdlib>
+
 RuntimeSettings RuntimeSettings::Settings;
 
 RuntimeSettings::RuntimeSettings() 
@@ -9,4 +11,5 @@ RuntimeSettings::RuntimeSettings()
     Distortions = 250;
     PlanetRadius = 100;
     LockMouse = true;
+    Seed = rand() % 100000;
 }

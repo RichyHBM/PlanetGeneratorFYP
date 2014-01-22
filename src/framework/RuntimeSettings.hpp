@@ -16,6 +16,7 @@ public:
     unsigned int Distortions;
     unsigned int PlanetRadius;
     bool LockMouse;
+    unsigned int Seed;
 };
 
 #endif // RUNTIMESETTINGS_HPP

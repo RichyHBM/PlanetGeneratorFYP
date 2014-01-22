@@ -30,9 +30,11 @@ Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
     myBar = TwNewBar( "Controls" );
     TwSetParam( myBar, NULL, "position", TW_PARAM_CSTRING, 1, "20 60" );
     TwAddVarRW( myBar, "Draw Lines", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.DrawLines, NULL );
-    TwAddVarRW( myBar, "Subdivisions", TW_TYPE_UINT32, &RuntimeSettings::Settings.Subdivisions, NULL );
-    TwAddVarRW( myBar, "Distortions", TW_TYPE_UINT32, &RuntimeSettings::Settings.Distortions, NULL );
-    TwAddVarRW( myBar, "Planet Radius", TW_TYPE_UINT32, &RuntimeSettings::Settings.PlanetRadius, NULL );
+    TwAddVarRW( myBar, "Seed", TW_TYPE_UINT32, &RuntimeSettings::Settings.Seed,  " max=100000 " );
+    TwAddVarRW( myBar, "Subdivisions", TW_TYPE_UINT32, &RuntimeSettings::Settings.Subdivisions, " max=20 " );
+    TwAddVarRW( myBar, "Distortions", TW_TYPE_UINT32, &RuntimeSettings::Settings.Distortions, " max=100000 " );
+    TwAddVarRW( myBar, "Planet Radius", TW_TYPE_UINT32, &RuntimeSettings::Settings.PlanetRadius, " max=2000 " );
+    TwAddButton(myBar, "Space", NULL, NULL, " label=' ' ");
     TwAddButton(myBar, "Quit", QuitButton, mWindow, NULL);
 }
 
