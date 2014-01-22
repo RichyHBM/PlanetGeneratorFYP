@@ -1,7 +1,7 @@
 #ifndef GEOMAP_HPP
 #define GEOMAP_HPP
 
-#include "common/Plane.hpp"
+#include "./common/FlatPlane.hpp"
 #include <vector>
 
 class Geomap
@@ -13,7 +13,7 @@ public:
     void Update();
     void Draw();
 protected:
-    std::vector<Plane *> mPlanes;
+    std::vector<FlatPlane *> mPlanes;
 
     glm::mat4 mModel;
     glm::mat4 mMVP;

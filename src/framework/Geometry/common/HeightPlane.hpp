@@ -1,7 +1,7 @@
 #ifndef HEIGHT_PLANE_HPP
 #define HEIGHT_PLANE_HPP
 
-#include "framework/GLHelp/GLHelp.hpp"
+#include "../../GLHelp/GLHelp.hpp"
 
 class HeightPlane
 {

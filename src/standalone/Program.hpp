@@ -6,7 +6,7 @@
 
 #include "framework/GLHelp/GLHelp.hpp"
 
-#include "Icosahedron.hpp"
+#include "framework/Geometry/Icosahedron.hpp"
 
 class Program
 {

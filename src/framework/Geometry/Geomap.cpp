@@ -1,8 +1,8 @@
 #include "Geomap.hpp"
 
-#include "framework/Includes.hpp"
-#include "framework/Utilities.hpp"
-#include "framework/MatrixManager.hpp"
+#include "../Includes.hpp"
+#include "../Utilities.hpp"
+#include "../MatrixManager.hpp"
 
 Geomap::Geomap()
 {
@@ -28,7 +28,7 @@ Geomap::Geomap()
             }
 
             mPlanes.push_back(
-                new Plane(
+                new FlatPlane(
                     glm::vec3( ( x * size ) + hSize, 0.0f, ( y * size ) + hSize ),
                     glm::vec2( size ),
                     spacing )

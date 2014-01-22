@@ -1,7 +1,7 @@
 #ifndef ICOSAHEDRON_HPP
 #define ICOSAHEDRON_HPP
 
-#include "framework/GLHelp/GLHelp.hpp"
+#include "../GLHelp/GLHelp.hpp"
 #include "common/PolygonManager.hpp"
 
 class Icosahedron

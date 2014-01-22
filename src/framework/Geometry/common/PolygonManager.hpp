@@ -3,8 +3,8 @@
 
 #include "Quad.hpp"
 #include <vector>
-#include "framework/GLHelp/GLHelp.hpp"
-#include "framework/RuntimeSettings.hpp"
+#include "../../GLHelp/GLHelp.hpp"
+#include "../../RuntimeSettings.hpp"
 
 class PolygonManager
 {

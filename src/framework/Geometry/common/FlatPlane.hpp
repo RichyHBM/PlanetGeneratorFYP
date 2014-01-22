@@ -1,13 +1,13 @@
-#ifndef PLANE_HPP
-#define PLANE_HPP
+#ifndef FLATPLANE_HPP
+#define FLATPLANE_HPP
 
-#include "framework/GLHelp/GLHelp.hpp"
+#include "../../GLHelp/GLHelp.hpp"
 
-class Plane
+class FlatPlane
 {
 public:
-    Plane( const glm::vec3 &center, const glm::vec2 &size, int spacing = 1 );
-    virtual ~Plane();
+    FlatPlane( const glm::vec3 &center, const glm::vec2 &size, int spacing = 1 );
+    virtual ~FlatPlane();
 
     virtual void Update();
     virtual void Draw( const glm::mat4 &MVP, const glm::mat4 &Model );
@@ -25,4 +25,4 @@ protected:
     Shader *mShader;
 };
 
-#endif //PLANE_HPP
+#endif //FLATPLANE_HPP

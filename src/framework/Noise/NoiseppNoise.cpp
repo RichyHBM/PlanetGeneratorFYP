@@ -49,7 +49,7 @@ NoiseppNoise::~NoiseppNoise()
 
 void NoiseppNoise::ParseArguments( const std::string &arg, const std::string &arg2 )
 {
-    if( arg == "-seed" ) {
+    if( arg == "-noiseseed" ) {
         SetSeed( Util::StrTo<int>( arg2 ) );
 
     } else if( arg == "-persistance" ) {

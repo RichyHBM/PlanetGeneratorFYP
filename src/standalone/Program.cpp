@@ -18,10 +18,10 @@ Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
     TwBar *myBar;
     myBar = TwNewBar( "Controls" );
     TwSetParam( myBar, NULL, "position", TW_PARAM_CSTRING, 1, "20 60" );
-    TwAddVarRW( myBar, "DrawLines", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.DrawLines, NULL );
-    TwAddVarRW( myBar, "Subdivisions", TW_TYPE_INT32, &RuntimeSettings::Settings.Subdivisions, NULL );
-    TwAddVarRW( myBar, "Distortions", TW_TYPE_INT32, &RuntimeSettings::Settings.Distortions, NULL );
-    TwAddVarRW( myBar, "PlanetRadius", TW_TYPE_FLOAT, &RuntimeSettings::Settings.PlanetRadius, NULL );
+    TwAddVarRW( myBar, "Draw Lines", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.DrawLines, NULL );
+    TwAddVarRW( myBar, "Subdivisions", TW_TYPE_UINT32, &RuntimeSettings::Settings.Subdivisions, NULL );
+    TwAddVarRW( myBar, "Distortions", TW_TYPE_UINT32, &RuntimeSettings::Settings.Distortions, NULL );
+    TwAddVarRW( myBar, "Planet Radius", TW_TYPE_UINT32, &RuntimeSettings::Settings.PlanetRadius, NULL );
 }
 
 Program::~Program()

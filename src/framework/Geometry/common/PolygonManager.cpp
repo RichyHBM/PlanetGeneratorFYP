@@ -2,7 +2,7 @@
 
 #include "PolygonManager.hpp"
 
-#include "framework/ResourceManager.hpp"
+#include "../../ResourceManager.hpp"
 
 PolygonManager::PolygonManager()
 {

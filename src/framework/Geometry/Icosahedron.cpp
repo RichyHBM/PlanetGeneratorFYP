@@ -1,10 +1,10 @@
-#include "./Icosahedron.hpp"
+#include "Icosahedron.hpp"
 
 #include <glm/gtx/compatibility.hpp>
 
-#include "framework/MatrixManager.hpp"
-#include "framework/Utilities.hpp"
-#include "framework/RuntimeSettings.hpp"
+#include "../MatrixManager.hpp"
+#include "../Utilities.hpp"
+#include "../RuntimeSettings.hpp"
 
 
 Icosahedron::Icosahedron()
