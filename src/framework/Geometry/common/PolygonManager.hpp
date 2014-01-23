@@ -14,7 +14,6 @@ public:
     PolygonManager();
     ~PolygonManager();
     void Subdivide();
-    //void Undivide();
     void Draw( const glm::mat4 &MVP );
     void Update();
     void AddQuad( const Quad &q );

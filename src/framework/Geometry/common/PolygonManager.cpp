@@ -20,21 +20,6 @@ void PolygonManager::AddQuad( const Quad &q )
     mQuads.push_back( q );
 }
 
-/*void PolygonManager::Undivide()
-{
-    std::vector<Triangle> tempTriangles;
-    for(int i = 0; i < mTriangles.size(); i+= 4)
-    {
-        glm::vec3 a = mTriangles[i].GetVerticeC();
-
-        glm::vec3 b = mTriangles[i+3].GetVerticeB();
-        glm::vec3 c = mTriangles[i+2].GetVerticeC();
-        tempTriangles.push_back(Triangle(a,b,c,mTriangles[i].GetLevel() -1));
-    }
-    mTriangles = tempTriangles;
-}
-*/
-
 void PolygonManager::NormalizeVert( glm::vec3 &v )
 {
     float length = PLANETSIZE * 2;
@@ -87,32 +72,37 @@ void PolygonManager::Distort( const glm::vec3 &origin, const glm::vec3 &directio
     glm::mat4 max = glm::scale( glm::mat4( 1.0f ),glm::vec3( 1.0f + diff ) );
 
     for( int i = 0; i < mQuads.size(); i++ ) {
+        glm::vec3 pos[4];
+
         for( int j = 0; j < 4; j++ ) {
-            glm::vec3 &pos = mQuads[i].GetVertice( j );
-            glm::vec3 toOrigin = pos - origin;
+            pos[j] = mQuads[i].GetVertice( j );
+            glm::vec3 toOrigin = pos[j] - origin;
             float d = glm::dot( n, toOrigin );
 
             if( d > 0.0f ) {
-                pos = glm::vec3( min * glm::vec4( pos.x, pos.y, pos.z, 0 ) );
+                pos[j] = glm::vec3( min * glm::vec4( pos[j].x, pos[j].y, pos[j].z, 0 ) );
 
             } else {
-                pos = glm::vec3( max * glm::vec4( pos.x, pos.y, pos.z, 0 ) );
+                pos[j] = glm::vec3( max * glm::vec4( pos[j].x, pos[j].y, pos[j].z, 0 ) );
             }
         }
+
+        mQuads[i] = Quad( pos[0], pos[1], pos[2], pos[3] );
     }
 }
 
 void PolygonManager::Spherify()
 {
     for( int i = 0; i < mQuads.size(); i++ ) {
-        glm::vec3 &A = mQuads[i].GetVerticeA(),
-                   &B = mQuads[i].GetVerticeB(),
-                    &C = mQuads[i].GetVerticeC(),
-                     &D = mQuads[i].GetVerticeD();
+        glm::vec3 A = mQuads[i].GetVerticeA(),
+                  B = mQuads[i].GetVerticeB(),
+                  C = mQuads[i].GetVerticeC(),
+                  D = mQuads[i].GetVerticeD();
         NormalizeVert( A );
         NormalizeVert( B );
         NormalizeVert( C );
         NormalizeVert( D );
+        mQuads[i] = Quad( A, B, C, D );
     }
 }
 

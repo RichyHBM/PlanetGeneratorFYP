@@ -14,7 +14,7 @@ public:
     ~Frustrum();
 
     bool InFrustrum( const glm::vec3 &point );
-    bool InFrustrumAndFacing( Quad &quad );
+    bool InFrustrumAndFacing( const Quad &quad );
 
     void Update();
     void Draw();

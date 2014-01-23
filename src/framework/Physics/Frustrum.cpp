@@ -45,7 +45,7 @@ bool Frustrum::InFrustrum( const glm::vec3 &point )
     return true;
 }
 
-bool Frustrum::InFrustrumAndFacing( Quad &quad )
+bool Frustrum::InFrustrumAndFacing( const Quad &quad )
 {
     bool inFrustrum = false;
 

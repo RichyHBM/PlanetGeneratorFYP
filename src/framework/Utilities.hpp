@@ -106,6 +106,17 @@ namespace Util
     }
 
     //Convert a given variable into a string
+    inline std::string Vec3ToString ( const glm::vec3 &t )
+    {
+        std::stringstream ss;
+        ss << t.x;
+        ss << ":";
+        ss << t.y;
+        ss << ":";
+        ss << t.z;
+        return ss.str();
+    }
+
     template <class T>
     inline std::string ToString ( const T &t )
     {

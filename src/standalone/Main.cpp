@@ -18,6 +18,7 @@
 #include "framework/WindowGLFW.hpp"
 #endif
 
+#include "framework/Geometry/common/Quad.hpp"
 //Set initial settings
 void SetSettings();
 void ProcessArgument( const std::string &arg, const std::string &arg2 );
