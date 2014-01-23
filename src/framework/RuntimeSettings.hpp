@@ -17,6 +17,7 @@ public:
     unsigned int PlanetRadius;
     bool LockMouse;
     unsigned int Seed;
+    bool FreezeFrustrum;
 };
 
 #endif // RUNTIMESETTINGS_HPP

@@ -4,12 +4,13 @@
 
 RuntimeSettings RuntimeSettings::Settings;
 
-RuntimeSettings::RuntimeSettings() 
+RuntimeSettings::RuntimeSettings()
 {
     DrawLines = false;
-    Subdivisions = 6;
-    Distortions = 250;
+    Subdivisions = 4;
+    Distortions = 200;
     PlanetRadius = 100;
     LockMouse = true;
     Seed = rand() % 100000;
+    FreezeFrustrum = false;
 }

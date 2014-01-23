@@ -7,6 +7,7 @@
 #include "framework/GLHelp/GLHelp.hpp"
 
 #include "framework/Geometry/Icosahedron.hpp"
+#include "framework/Physics/Frustrum.hpp"
 
 class Program
 {
@@ -47,6 +48,7 @@ public:
     const double GetDelta();
 
 protected:
+    Frustrum mFrustrum;
     Window *mWindow;
     DrawDebugInfo mDebugInfo;
     Icosahedron mIcosphere;

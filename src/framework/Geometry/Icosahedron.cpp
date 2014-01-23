@@ -70,7 +70,6 @@ int Icosahedron::GetVertexCount()
 
 void Icosahedron::Update()
 {
-
     mMVP = MatrixControl.PerspectiveView() * glm::scale( glm::mat4( 1.0f ), glm::vec3( RuntimeSettings::Settings.PlanetRadius * 0.01 ) );
     mPolMan.Update();
 }

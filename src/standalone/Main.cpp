@@ -75,13 +75,10 @@ void SetSettings()
 
 void ProcessArgument( const std::string &arg, const std::string &arg2 )
 {
-    if( arg == "-viewDisp" ) {
-        float displacement = Util::StrTo<float> ( arg2 );
-        MatrixControl.SetDisplacement( displacement );
+    if( arg == "-seed" ) {
+        RuntimeSettings::Settings.Seed = Util::StrTo<unsigned int> ( arg2 );
 
-    } else if( arg == "-seed"){
-            RuntimeSettings::Settings.Seed = Util::StrTo<unsigned int> ( arg2 );
-    }else if( arg == "-controls" ) {
+    } else if( arg == "-controls" ) {
         if( Util::StrTo<int> ( arg2 ) == 0 ) {
             Input::Manager.SetType( Input::KEYBOARD );
 

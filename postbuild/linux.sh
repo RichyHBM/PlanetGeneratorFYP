@@ -19,11 +19,11 @@ cp ../external/lib/linux/libAntTweakBar.so ../bin/Release/libAntTweakBar.so.1
 touch ../bin/Debug/runStandalone.sh
 echo '#!/bin/sh' > ../bin/Debug/runStandalone.sh
 echo 'export LD_LIBRARY_PATH=.' >> ../bin/Debug/runStandalone.sh
-echo './StandAlone' >> ../bin/Debug/runStandalone.sh
+echo './StandAlone $@' >> ../bin/Debug/runStandalone.sh
 
 touch ../bin/Release/runStandalone.sh
 echo '#!/bin/sh' > ../bin/Release/runStandalone.sh
 echo 'export LD_LIBRARY_PATH=.' >> ../bin/Release/runStandalone.sh
-echo './StandAlone' >> ../bin/Release/runStandalone.sh
+echo './StandAlone $@' >> ../bin/Release/runStandalone.sh
 
 

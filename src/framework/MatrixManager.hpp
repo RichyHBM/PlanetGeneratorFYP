@@ -7,8 +7,10 @@ class MatrixManager
 {
     int mWidth, mHeight;
     float mNearPlane, mFarPlane;
-    float fieldOfView;
-    float mDisplacement;
+    float mFieldOfView;
+    float mAspectRatio;
+    glm::vec2 mNearSize;
+    glm::vec2 mFarSize;
     glm::vec3 mPosition, mLookAt, mUp;
     glm::mat4 mOrthogonal;
     glm::mat4 mPerspective;
@@ -23,32 +25,54 @@ public:
 
     void SetWidthHeight( int width, int height );
     void SetPosition( const glm::vec3 &position );
-    void SetDisplacement( float displacement );
+
     void SetLookAt( const glm::vec3 &lookAt );
     void SetUp( const glm::vec3 &up );
 
-    const glm::mat4 &Orthographic() {
+    const glm::vec2 NearPlaneSize() {
+        return mNearSize;
+    }
+    const glm::vec2 FarPlaneSize() {
+        return mFarSize;
+    }
+    float NearDistance() {
+        return mNearPlane;
+    }
+    float FarDistance() {
+        return mFarPlane;
+    }
+    float FoV() {
+        return mFieldOfView;
+    }
+    float AspectRatio() {
+        return mAspectRatio;
+    }
+    const glm::mat4 Orthographic() {
         return mOrthogonal;
     }
-    const glm::mat4 &Perspective() {
+    const glm::mat4 Perspective() {
         return mPerspective;
     }
-    const glm::mat4 &View() {
+    const glm::mat4 View() {
         return mView;
     }
-    const glm::mat4 &PerspectiveView() {
+    const glm::mat4 PerspectiveView() {
         return mPerspectiveView;
     }
-    const glm::mat4 &OrthographicView() {
+    const glm::mat4 OrthographicView() {
         return mOrthographicView;
     }
 
-    const glm::vec3 &Position() {
+    const glm::vec3 Position() {
         return mPosition;
     }
 
-    const glm::vec3 &Up() {
+    const glm::vec3 Up() {
         return mUp;
+    }
+
+    const glm::vec3 LookAt() {
+        return mLookAt;
     }
 };
 

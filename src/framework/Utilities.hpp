@@ -45,6 +45,9 @@ namespace Util
 
         //One over Pi in double form
         const static double d1oPI = 1.0 / 3.14159265358979323846;
+
+        //Convert angles to radians
+        const static float angToRad = 3.14159265358979323846f/180.0f;
     }
 
     //Returns the largest of 2 values

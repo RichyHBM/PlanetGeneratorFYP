@@ -8,11 +8,12 @@
 
 #include "framework/Input/Mouse.hpp"
 
+
 #include <AntTweakBar.h>
 
-void TW_CALL QuitButton(void * clientData)
-{ 
-    ((Window *)clientData)->Close();
+void TW_CALL QuitButton( void *clientData )
+{
+    ( ( Window * )clientData )->Close();
 }
 
 
@@ -30,12 +31,13 @@ Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
     myBar = TwNewBar( "Controls" );
     TwSetParam( myBar, NULL, "position", TW_PARAM_CSTRING, 1, "20 60" );
     TwAddVarRW( myBar, "Draw Lines", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.DrawLines, NULL );
+    TwAddVarRW( myBar, "Freeze Frustrum", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.FreezeFrustrum, NULL );
     TwAddVarRW( myBar, "Seed", TW_TYPE_UINT32, &RuntimeSettings::Settings.Seed,  " max=100000 " );
     TwAddVarRW( myBar, "Subdivisions", TW_TYPE_UINT32, &RuntimeSettings::Settings.Subdivisions, " max=20 " );
     TwAddVarRW( myBar, "Distortions", TW_TYPE_UINT32, &RuntimeSettings::Settings.Distortions, " max=100000 " );
     TwAddVarRW( myBar, "Planet Radius", TW_TYPE_UINT32, &RuntimeSettings::Settings.PlanetRadius, " max=2000 " );
-    TwAddButton(myBar, "Space", NULL, NULL, " label=' ' ");
-    TwAddButton(myBar, "Quit", QuitButton, mWindow, NULL);
+    TwAddButton( myBar, "Space", NULL, NULL, " label=' ' " );
+    TwAddButton( myBar, "Quit", QuitButton, mWindow, NULL );
 }
 
 
@@ -49,7 +51,8 @@ Program::~Program()
 
 void Program::Run()
 {
-	Mouse::Set( WindowSettings::Running.GetWidth()/2.0f, WindowSettings::Running.GetHeight()/2.0f );
+    Mouse::Set( WindowSettings::Running.GetWidth()/2.0f, WindowSettings::Running.GetHeight()/2.0f );
+
     while( !mWindow->NeedsToClose() ) {
         mWindow->DoEvents();
 
@@ -95,6 +98,10 @@ void Program::Update()
     if( !RuntimeSettings::Settings.LockMouse ) {
         mDebugInfo.SetVertices( mIcosphere.GetVertexCount() );
     }
+
+    if( !RuntimeSettings::Settings.FreezeFrustrum ) {
+        mFrustrum.Update();
+    }
 }
 
 void Program::Draw()
@@ -110,6 +117,10 @@ void Program::Draw()
 
     mIcosphere.Draw();
     glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+
+    if( RuntimeSettings::Settings.FreezeFrustrum ) {
+        mFrustrum.Draw();
+    }
 
     if( !RuntimeSettings::Settings.LockMouse ) {
         mDebugInfo.Draw();

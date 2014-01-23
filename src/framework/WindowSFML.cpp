@@ -9,6 +9,7 @@
 #include "Utilities.hpp"
 #include "TweakSFML.hpp"
 #include "./RuntimeSettings.hpp"
+#include "./MatrixManager.hpp"
 
 WindowSFML::WindowSFML()
 {
@@ -110,6 +111,7 @@ void WindowSFML::DoEvents()
             // adjust the viewport when the window is resized
             glViewport( 0, 0, event.size.width, event.size.height );
             WindowSettings::Running.SetResolution( event.size.width, event.size.height );
+            MatrixControl.SetWidthHeight( event.size.width, event.size.height );
 
         } else if( event.type == sf::Event::GainedFocus ) {
             mIsFocused = true;
