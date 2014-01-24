@@ -1,29 +1,28 @@
-#ifndef POLYGONMANAGER_HPP
-#define POLYGONMANAGER_HPP
+#ifndef SIDEMANAGER_HPP
+#define SIDEMANAGER_HPP
 
 #include "Quad.hpp"
 #include <vector>
-#include "../../GLHelp/GLHelp.hpp"
-#include "../../RuntimeSettings.hpp"
+#include "../GLHelp/GLHelp.hpp"
+#include "../RuntimeSettings.hpp"
+#include "../Physics/Frustrum.hpp"
 
-#define PLANETSIZE 50
-
-class PolygonManager
+class SideManager
 {
 public:
-    PolygonManager();
-    ~PolygonManager();
-    void Subdivide();
+    SideManager(const Quad& q);
+    ~SideManager();
+    std::vector<Quad> Subdivide(const Quad& q);
     void Draw( const glm::mat4 &MVP );
-    void Update();
-    void AddQuad( const Quad &q );
-    void GiveHeight( glm::vec3 &v, float pHeight );
+    void Update(const Frustrum& frustrum);
     void BindData();
     void Distort( const glm::vec3 &origin, const glm::vec3 &direction );
     void Spherify();
     int GetVertexCount();
 protected:
     void NormalizeVert( glm::vec3 &v );
+
+    Quad mInitialQuad;
 
     std::vector<Quad> mQuads;
     std::vector<glm::vec3> mPositionsList;
@@ -35,4 +34,4 @@ protected:
 private:
 };
 
-#endif // POLYGONMANAGER_HPP
+#endif // SIDEMANAGER_HPP

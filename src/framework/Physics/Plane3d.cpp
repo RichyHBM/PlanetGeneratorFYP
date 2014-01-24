@@ -22,7 +22,7 @@ glm::vec3 Plane3d::Direction()
     return mDirection;
 }
 
-float Plane3d::GetDistance( const glm::vec3 &point )
+float Plane3d::GetDistance( const glm::vec3 &point ) const
 {
     return ( glm::dot( mDirection, point ) + mDistance );
 }

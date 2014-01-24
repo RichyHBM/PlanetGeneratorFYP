@@ -3,7 +3,7 @@
 
 #include "../Includes.hpp"
 #include "Plane3d.hpp"
-#include "../Geometry/common/Quad.hpp"
+#include "../Geometry/Quad.hpp"
 #include <vector>
 #include "../GLHelp/GLHelp.hpp"
 
@@ -13,8 +13,8 @@ public:
     Frustrum();
     ~Frustrum();
 
-    bool InFrustrum( const glm::vec3 &point );
-    bool InFrustrumAndFacing( const Quad &quad );
+    bool InFrustrum( const glm::vec3 &point ) const;
+    bool InFrustrumAndFacing( const Quad &quad ) const;
 
     void Update();
     void Draw();

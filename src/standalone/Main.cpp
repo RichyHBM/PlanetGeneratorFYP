@@ -12,13 +12,8 @@
 #include "framework/MatrixManager.hpp"
 #include "framework/ResourceManager.hpp"
 
-#ifdef SFML
 #include "framework/WindowSFML.hpp"
-#elif defined GLFW
-#include "framework/WindowGLFW.hpp"
-#endif
 
-#include "framework/Geometry/common/Quad.hpp"
 //Set initial settings
 void SetSettings();
 void ProcessArgument( const std::string &arg, const std::string &arg2 );
@@ -37,11 +32,9 @@ int main( int argc, const char *argv[] )
     }
 
     NoisePP.Init();
-#ifdef SFML
+
     Window *window = new( MemoryUse::Normal ) WindowSFML();
-#elif defined GLFW
-    Window *window = new( MemoryUse::Normal ) WindowGLFW();
-#endif
+
 
     if( !window->IsWindowCreated() ) {
         Log.Error( "Failed to create window" );

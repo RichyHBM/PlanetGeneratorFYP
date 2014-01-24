@@ -7,8 +7,8 @@ RuntimeSettings RuntimeSettings::Settings;
 RuntimeSettings::RuntimeSettings()
 {
     DrawLines = false;
-    Subdivisions = 4;
-    Distortions = 200;
+    Subdivisions = 1;
+    Distortions = 0;
     PlanetRadius = 100;
     LockMouse = true;
     Seed = rand() % 100000;

@@ -9,7 +9,7 @@ public:
     Plane3d();
     Plane3d( const glm::vec3 &p1, const glm::vec3 &p2, const glm::vec3 &p3 );
     bool IntersectsWith( const Plane3d &plane );
-    float GetDistance( const glm::vec3 &point );
+    float GetDistance( const glm::vec3 &point ) const;
 
     glm::vec3 Position();
     glm::vec3 Direction();

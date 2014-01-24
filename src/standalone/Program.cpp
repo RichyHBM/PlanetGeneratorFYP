@@ -93,15 +93,17 @@ void Program::Update()
         Input::Manager.Update();
     }
 
-    mIcosphere.Update();
-
-    if( !RuntimeSettings::Settings.LockMouse ) {
-        mDebugInfo.SetVertices( mIcosphere.GetVertexCount() );
-    }
-
     if( !RuntimeSettings::Settings.FreezeFrustrum ) {
         mFrustrum.Update();
     }
+    
+    mRoundedCube.Update(mFrustrum);
+
+    if( !RuntimeSettings::Settings.LockMouse ) {
+        mDebugInfo.SetVertices( mRoundedCube.GetVertexCount() );
+    }
+
+    
 }
 
 void Program::Draw()
@@ -115,7 +117,7 @@ void Program::Draw()
         glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
     }
 
-    mIcosphere.Draw();
+    mRoundedCube.Draw();
     glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 
     if( RuntimeSettings::Settings.FreezeFrustrum ) {

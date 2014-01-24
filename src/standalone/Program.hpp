@@ -6,7 +6,7 @@
 
 #include "framework/GLHelp/GLHelp.hpp"
 
-#include "framework/Geometry/Icosahedron.hpp"
+#include "framework/Geometry/RoundedCube.hpp"
 #include "framework/Physics/Frustrum.hpp"
 
 class Program
@@ -51,7 +51,7 @@ protected:
     Frustrum mFrustrum;
     Window *mWindow;
     DrawDebugInfo mDebugInfo;
-    Icosahedron mIcosphere;
+    RoundedCube mRoundedCube;
 private:
 };
 

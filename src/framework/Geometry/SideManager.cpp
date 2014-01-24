@@ -1,70 +1,59 @@
 #include <glm/gtx/transform2.hpp>
 
-#include "PolygonManager.hpp"
+#include "SideManager.hpp"
 
-#include "../../ResourceManager.hpp"
+#include "../ResourceManager.hpp"
 
-PolygonManager::PolygonManager()
+SideManager::SideManager(const Quad& q): mInitialQuad(q)
 {
     mShader = ResourceManager::GetShader( "Icosphere", "./Resources/Icosphere.vert" ,"./Resources/Icosphere.frag" );
     mPositionBuffer.SetAttributeIndex( mShader->GetAttribute( "Position" ) );
+    mQuads.push_back(mInitialQuad);
 }
 
-PolygonManager::~PolygonManager()
+SideManager::~SideManager()
 {
     mShader = NULL;
 }
 
-void PolygonManager::AddQuad( const Quad &q )
+void SideManager::NormalizeVert( glm::vec3 &v )
 {
-    mQuads.push_back( q );
-}
-
-void PolygonManager::NormalizeVert( glm::vec3 &v )
-{
-    float length = PLANETSIZE * 2;
+    float length = RuntimeSettings::Settings.PlanetRadius * 2;
     float dist = glm::length( v );
     v.x = v.x * length / dist;
     v.y = v.y * length / dist;
     v.z = v.z * length / dist;
 }
 
-int PolygonManager::GetVertexCount()
+int SideManager::GetVertexCount()
 {
     return mQuads.size() * 2;
 }
 
-void PolygonManager::GiveHeight( glm::vec3 &v, float pHeight )
+std::vector<Quad> SideManager::Subdivide(const Quad& q)
 {
-    float len = glm::length( v );
-    glm::vec3 tmp = ( len + pHeight ) * glm::normalize( v );
-    v = tmp;
+    std::vector<Quad> quads;
+
+    glm::vec3 A = q.GetVerticeA(),
+            B = q.GetVerticeB(),
+            C = q.GetVerticeC(),
+            D = q.GetVerticeD();
+
+    glm::vec3 AB = ( A + B ) / glm::vec3( 2.0 );
+    glm::vec3 BC = ( B + C ) / glm::vec3( 2.0 );
+    glm::vec3 CD = ( C + D ) / glm::vec3( 2.0 );
+    glm::vec3 DA = ( D + A ) / glm::vec3( 2.0 );
+    glm::vec3 Middle = ( A + C ) / glm::vec3( 2.0 );
+
+    quads.push_back( Quad( A, AB, Middle, DA ));
+    quads.push_back( Quad( AB, B, BC, Middle ));
+    quads.push_back( Quad( Middle, BC, C, CD ));
+    quads.push_back( Quad( DA, Middle, CD, D ));
+
+    return quads;
 }
 
-void PolygonManager::Subdivide()
-{
-    std::vector<Quad> tempQuads;
-
-    for( int i = 0; i < mQuads.size(); i++ ) {
-        glm::vec3 A = mQuads[i].GetVerticeA(),
-                  B = mQuads[i].GetVerticeB(),
-                  C = mQuads[i].GetVerticeC(),
-                  D = mQuads[i].GetVerticeD();
-        glm::vec3 AB = ( A + B ) / glm::vec3( 2.0 );
-        glm::vec3 BC = ( B + C ) / glm::vec3( 2.0 );
-        glm::vec3 CD = ( C + D ) / glm::vec3( 2.0 );
-        glm::vec3 DA = ( D + A ) / glm::vec3( 2.0 );
-        glm::vec3 Middle = ( A + C ) / glm::vec3( 2.0 );
-        tempQuads.push_back( Quad( A, AB, Middle, DA ) );
-        tempQuads.push_back( Quad( AB, B, BC, Middle ) );
-        tempQuads.push_back( Quad( Middle, BC, C, CD ) );
-        tempQuads.push_back( Quad( DA, Middle, CD, D ) );
-    }
-
-    mQuads = tempQuads;
-}
-
-void PolygonManager::Distort( const glm::vec3 &origin, const glm::vec3 &direction )
+void SideManager::Distort( const glm::vec3 &origin, const glm::vec3 &direction )
 {
     glm::vec3 n = direction - origin;
     float diff = 0.001f;
@@ -91,7 +80,7 @@ void PolygonManager::Distort( const glm::vec3 &origin, const glm::vec3 &directio
     }
 }
 
-void PolygonManager::Spherify()
+void SideManager::Spherify()
 {
     for( int i = 0; i < mQuads.size(); i++ ) {
         glm::vec3 A = mQuads[i].GetVerticeA(),
@@ -106,7 +95,7 @@ void PolygonManager::Spherify()
     }
 }
 
-void PolygonManager::BindData()
+void SideManager::BindData()
 {
     mPositionsList.clear();
 
@@ -127,11 +116,38 @@ void PolygonManager::BindData()
     mPositionBuffer.SetAttributeIndex( mShader->GetAttribute( "Position" ) );
 }
 
-void PolygonManager::Update()
+void SideManager::Update(const Frustrum& frustrum)
 {
+    mQuads.clear();
+    mInitialQuad.SetSize(RuntimeSettings::Settings.PlanetRadius);
+    mQuads.push_back(mInitialQuad);
+
+    for(int subd = 0; subd < RuntimeSettings::Settings.Subdivisions; subd++)
+    {
+        std::vector<Quad> mTempQuads;
+        for(int i = 0; i < mQuads.size(); i++)
+        {
+            if(frustrum.InFrustrumAndFacing(mQuads[i]))
+            {
+                std::vector<Quad> subQuads = Subdivide(mQuads[i]);
+                mTempQuads.push_back(subQuads[0]);
+                mTempQuads.push_back(subQuads[1]);
+                mTempQuads.push_back(subQuads[2]);
+                mTempQuads.push_back(subQuads[3]);
+            }
+            else{
+                mTempQuads.push_back(mQuads[i]);
+            }
+        }
+        mQuads = mTempQuads;
+    }
+
+    Spherify();
+
+    BindData();
 }
 
-void PolygonManager::Draw( const glm::mat4 &MVP )
+void SideManager::Draw( const glm::mat4 &MVP )
 {
     mShader->Bind();
     glUniformMatrix4fv( mShader->GetUniform( "MVP" ), 1, GL_FALSE, &MVP[0][0] );

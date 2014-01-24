@@ -15,9 +15,11 @@ public:
     glm::vec3 GetVertice( int i ) const;
     glm::vec3 GetNormalA() const;
     glm::vec3 GetNormalB() const;
+
+    void SetSize(int size);
 protected:
     glm::vec3 mA, mB, mC, mD;
-
+    int mSize;
     glm::vec3 mNormalA, mNormalB;
 private:
 };
