@@ -13,4 +13,6 @@ RuntimeSettings::RuntimeSettings()
     LockMouse = true;
     Seed = rand() % 100000;
     FreezeFrustrum = false;
+    DistortionSize = 1.0f;
+    RealtimeRebuild = false;
 }

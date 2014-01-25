@@ -4,11 +4,11 @@
 
 #include "../ResourceManager.hpp"
 
-SideManager::SideManager(const Quad& q): mInitialQuad(q)
+SideManager::SideManager( const Quad &q ): mInitialQuad( q )
 {
     mShader = ResourceManager::GetShader( "Icosphere", "./Resources/Icosphere.vert" ,"./Resources/Icosphere.frag" );
     mPositionBuffer.SetAttributeIndex( mShader->GetAttribute( "Position" ) );
-    mQuads.push_back(mInitialQuad);
+    mQuads.push_back( mInitialQuad );
 }
 
 SideManager::~SideManager()
@@ -30,33 +30,29 @@ int SideManager::GetVertexCount()
     return mQuads.size() * 2;
 }
 
-std::vector<Quad> SideManager::Subdivide(const Quad& q)
+std::vector<Quad> SideManager::Subdivide( const Quad &q )
 {
     std::vector<Quad> quads;
-
     glm::vec3 A = q.GetVerticeA(),
-            B = q.GetVerticeB(),
-            C = q.GetVerticeC(),
-            D = q.GetVerticeD();
-
+              B = q.GetVerticeB(),
+              C = q.GetVerticeC(),
+              D = q.GetVerticeD();
     glm::vec3 AB = ( A + B ) / glm::vec3( 2.0 );
     glm::vec3 BC = ( B + C ) / glm::vec3( 2.0 );
     glm::vec3 CD = ( C + D ) / glm::vec3( 2.0 );
     glm::vec3 DA = ( D + A ) / glm::vec3( 2.0 );
     glm::vec3 Middle = ( A + C ) / glm::vec3( 2.0 );
-
-    quads.push_back( Quad( A, AB, Middle, DA ));
-    quads.push_back( Quad( AB, B, BC, Middle ));
-    quads.push_back( Quad( Middle, BC, C, CD ));
-    quads.push_back( Quad( DA, Middle, CD, D ));
-
+    quads.push_back( Quad( A, AB, Middle, DA ) );
+    quads.push_back( Quad( AB, B, BC, Middle ) );
+    quads.push_back( Quad( Middle, BC, C, CD ) );
+    quads.push_back( Quad( DA, Middle, CD, D ) );
     return quads;
 }
 
 void SideManager::Distort( const glm::vec3 &origin, const glm::vec3 &direction )
 {
     glm::vec3 n = direction - origin;
-    float diff = 0.001f;
+    float diff = RuntimeSettings::Settings.DistortionSize * 0.001f;
     glm::mat4 min = glm::scale( glm::mat4( 1.0f ), glm::vec3( 1.0f - diff ) );
     glm::mat4 max = glm::scale( glm::mat4( 1.0f ),glm::vec3( 1.0f + diff ) );
 
@@ -116,33 +112,88 @@ void SideManager::BindData()
     mPositionBuffer.SetAttributeIndex( mShader->GetAttribute( "Position" ) );
 }
 
-void SideManager::Update(const Frustrum& frustrum)
+void SideManager::RebuildDistortions()
+{
+    mDistortionPlanes.clear();
+    std::srand( RuntimeSettings::Settings.Seed );
+
+    for( int i = 0; i < RuntimeSettings::Settings.Distortions; i++ ) {
+        DistortionPlane dist;
+        //Allow up to 4 decimal points random
+        float a = ( ( std::rand() % 2001 ) - 1000 ) / 1000.0f ,
+              b = ( ( std::rand() % 2001 ) - 1000 ) / 1000.0f,
+              c = ( ( std::rand() % 2001 ) - 1000 ) / 1000.0f;
+        dist.Direction = glm::vec3( a , b, c );
+        int pr = RuntimeSettings::Settings.PlanetRadius;
+        a = ( ( std::rand() % ( ( pr * 2 ) + 1 ) ) - pr );
+        b = ( ( std::rand() % ( ( pr * 2 ) + 1 ) ) - pr );
+        c = ( ( std::rand() % ( ( pr * 2 ) + 1 ) ) - pr );
+        dist.Origin = glm::vec3( a , b, c );
+        mDistortionPlanes.push_back( dist );
+    }
+}
+
+void SideManager::Update( const Frustrum &frustrum )
+{
+    if( RuntimeSettings::Settings.RealtimeRebuild ) {
+        mQuads.clear();
+        mInitialQuad.SetSize( RuntimeSettings::Settings.PlanetRadius );
+        mQuads.push_back( mInitialQuad );
+
+        for( int subd = 0; subd < RuntimeSettings::Settings.Subdivisions; subd++ ) {
+            std::vector<Quad> mTempQuads;
+
+            for( int i = 0; i < mQuads.size(); i++ ) {
+                if( frustrum.InFrustrumAndFacing( mQuads[i] ) ) {
+                    std::vector<Quad> subQuads = Subdivide( mQuads[i] );
+                    mTempQuads.push_back( subQuads[0] );
+                    mTempQuads.push_back( subQuads[1] );
+                    mTempQuads.push_back( subQuads[2] );
+                    mTempQuads.push_back( subQuads[3] );
+
+                } else {
+                    mTempQuads.push_back( mQuads[i] );
+                }
+            }
+
+            mQuads = mTempQuads;
+        }
+
+        Spherify();
+
+        for( int i = 0; i < mDistortionPlanes.size(); i++ ) {
+            Distort( mDistortionPlanes[i].Origin, mDistortionPlanes[i].Direction );
+        }
+
+        BindData();
+    }
+}
+
+void SideManager::RebuildSide()
 {
     mQuads.clear();
-    mInitialQuad.SetSize(RuntimeSettings::Settings.PlanetRadius);
-    mQuads.push_back(mInitialQuad);
+    mInitialQuad.SetSize( RuntimeSettings::Settings.PlanetRadius );
+    mQuads.push_back( mInitialQuad );
 
-    for(int subd = 0; subd < RuntimeSettings::Settings.Subdivisions; subd++)
-    {
+    for( int subd = 0; subd < RuntimeSettings::Settings.Subdivisions; subd++ ) {
         std::vector<Quad> mTempQuads;
-        for(int i = 0; i < mQuads.size(); i++)
-        {
-            if(frustrum.InFrustrumAndFacing(mQuads[i]))
-            {
-                std::vector<Quad> subQuads = Subdivide(mQuads[i]);
-                mTempQuads.push_back(subQuads[0]);
-                mTempQuads.push_back(subQuads[1]);
-                mTempQuads.push_back(subQuads[2]);
-                mTempQuads.push_back(subQuads[3]);
-            }
-            else{
-                mTempQuads.push_back(mQuads[i]);
-            }
+
+        for( int i = 0; i < mQuads.size(); i++ ) {
+            std::vector<Quad> subQuads = Subdivide( mQuads[i] );
+            mTempQuads.push_back( subQuads[0] );
+            mTempQuads.push_back( subQuads[1] );
+            mTempQuads.push_back( subQuads[2] );
+            mTempQuads.push_back( subQuads[3] );
         }
+
         mQuads = mTempQuads;
     }
 
     Spherify();
+
+    for( int i = 0; i < mDistortionPlanes.size(); i++ ) {
+        Distort( mDistortionPlanes[i].Origin, mDistortionPlanes[i].Direction );
+    }
 
     BindData();
 }

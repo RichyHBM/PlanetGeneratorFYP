@@ -9,6 +9,8 @@
 #include "framework/Geometry/RoundedCube.hpp"
 #include "framework/Physics/Frustrum.hpp"
 
+#include <AntTweakBar.h>
+
 class Program
 {
 public:
@@ -46,6 +48,13 @@ public:
     ///Get the delta amount in seconds, for 60fps this would be around 0.016
     ///
     const double GetDelta();
+
+    static void TW_CALL QuitButton( void *clientData );
+    static void TW_CALL RebuildButton( void *clientData );
+    static void TW_CALL GetSeed( void *value, void *clientData );
+    static void TW_CALL SetSeed( const void *value, void *clientData );
+    static void TW_CALL GetDistortions( void *value, void *clientData );
+    static void TW_CALL SetDistortions( const void *value, void *clientData );
 
 protected:
     Frustrum mFrustrum;

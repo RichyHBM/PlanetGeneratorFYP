@@ -37,6 +37,8 @@ Frustrum::~Frustrum()
 bool Frustrum::InFrustrum( const glm::vec3 &point ) const
 {
     for( int i = 0; i < 6; i++ ) {
+        float distance = mPlanes[i].GetDistance( point );
+
         if ( mPlanes[i].GetDistance( point ) < 0.0f ) {
             return false;
         }
@@ -60,8 +62,12 @@ bool Frustrum::InFrustrumAndFacing( const Quad &quad ) const
     }
 
     //Check direction of camera dot quad normal is negative
-    if(glm::dot(-Z, quad.GetNormalA()) < 0.1f || glm::dot(-Z, quad.GetNormalB()) < 0.1f)
+    float normADot = glm::dot( -Z, quad.GetNormalA() );
+    float normBDot = glm::dot( -Z, quad.GetNormalB() );
+
+    if( normADot < 0.1f || normBDot < 0.1f ) {
         return true;
+    }
 
     return false;
 }

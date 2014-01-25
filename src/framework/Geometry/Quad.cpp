@@ -18,42 +18,42 @@ Quad::~Quad()
     //dtor
 }
 
-void Quad::SetSize(int size)
+void Quad::SetSize( int size )
 {
     mSize = size;
 }
 
 glm::vec3 Quad::GetVerticeA() const
 {
-    return glm::vec3( mA.x * mSize, mA.y * mSize, mA.z * mSize);
+    return glm::vec3( mA.x * mSize, mA.y * mSize, mA.z * mSize );
 }
 
 glm::vec3 Quad::GetVerticeB() const
 {
-    return glm::vec3( mB.x * mSize, mB.y * mSize, mB.z * mSize);
+    return glm::vec3( mB.x * mSize, mB.y * mSize, mB.z * mSize );
 }
 
 glm::vec3 Quad::GetVerticeC() const
 {
-    return glm::vec3( mC.x * mSize, mC.y * mSize, mC.z * mSize);
+    return glm::vec3( mC.x * mSize, mC.y * mSize, mC.z * mSize );
 }
 
 glm::vec3 Quad::GetVerticeD() const
 {
-    return glm::vec3( mD.x * mSize, mD.y * mSize, mD.z * mSize);
+    return glm::vec3( mD.x * mSize, mD.y * mSize, mD.z * mSize );
 }
 
 glm::vec3 Quad::GetVertice( int i ) const
 {
     switch( i ) {
         case 0:
-            return glm::vec3( mA.x * mSize, mA.y * mSize, mA.z * mSize);
+            return glm::vec3( mA.x * mSize, mA.y * mSize, mA.z * mSize );
         case 1:
-            return glm::vec3( mB.x * mSize, mB.y * mSize, mB.z * mSize);
+            return glm::vec3( mB.x * mSize, mB.y * mSize, mB.z * mSize );
         case 2:
-            return glm::vec3( mC.x * mSize, mC.y * mSize, mC.z * mSize);
+            return glm::vec3( mC.x * mSize, mC.y * mSize, mC.z * mSize );
         case 3:
-            return glm::vec3( mD.x * mSize, mD.y * mSize, mD.z * mSize);
+            return glm::vec3( mD.x * mSize, mD.y * mSize, mD.z * mSize );
     }
 }
 

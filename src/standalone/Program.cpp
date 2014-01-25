@@ -9,22 +9,44 @@
 #include "framework/Input/Mouse.hpp"
 
 
-#include <AntTweakBar.h>
-
-void TW_CALL QuitButton( void *clientData )
+void TW_CALL Program::QuitButton( void *clientData )
 {
     ( ( Window * )clientData )->Close();
 }
 
+void TW_CALL Program::RebuildButton( void *clientData )
+{
+    RuntimeSettings::Settings.RealtimeRebuild = false;
+    ( ( RoundedCube * )clientData )->RebuildSides();
+}
 
+void TW_CALL Program::GetSeed( void *value, void *clientData )
+{
+    *( ( int * )value ) = RuntimeSettings::Settings.Seed;
+}
 
+void TW_CALL Program::SetSeed( const void *value, void *clientData )
+{
+    RuntimeSettings::Settings.Seed = *( ( int * )value );
+    std::srand( RuntimeSettings::Settings.Seed );
+    ( ( RoundedCube * )clientData )->RebuildPlanes();
+}
 
+void TW_CALL Program::GetDistortions( void *value, void *clientData )
+{
+    *( ( int * )value ) = RuntimeSettings::Settings.Distortions;
+}
 
+void TW_CALL Program::SetDistortions( const void *value, void *clientData )
+{
+    RuntimeSettings::Settings.Distortions = *( ( int * )value );
+    ( ( RoundedCube * )clientData )->RebuildPlanes();
+}
 
 Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
 {
     mWindow = pWindow;
-    MatrixControl.SetPosition( glm::vec3( 1, 1, 120 ) );
+    MatrixControl.SetPosition( glm::vec3( 1, 1, RuntimeSettings::Settings.PlanetRadius * 2 ) );
     TwInit( TW_OPENGL, NULL );
     TwWindowSize( WindowSettings::Running.GetWidth(), WindowSettings::Running.GetHeight() );
     TwBar *myBar;
@@ -32,12 +54,15 @@ Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
     TwSetParam( myBar, NULL, "position", TW_PARAM_CSTRING, 1, "20 60" );
     TwAddVarRW( myBar, "Draw Lines", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.DrawLines, NULL );
     TwAddVarRW( myBar, "Freeze Frustrum", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.FreezeFrustrum, NULL );
-    TwAddVarRW( myBar, "Seed", TW_TYPE_UINT32, &RuntimeSettings::Settings.Seed,  " max=100000 " );
+    TwAddVarRW( myBar, "Real-Time Rebuild", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.RealtimeRebuild, NULL );
+    TwAddVarCB( myBar, "Seed", TW_TYPE_UINT32, Program::SetSeed, Program::GetSeed ,&mRoundedCube,  " max=100000 " );
+    TwAddVarCB( myBar, "Distortions", TW_TYPE_UINT32, Program::SetDistortions, Program::GetDistortions,&mRoundedCube, " max=100000 " );
+    TwAddVarRW( myBar, "Distortion Size", TW_TYPE_FLOAT, &RuntimeSettings::Settings.DistortionSize, "" );
     TwAddVarRW( myBar, "Subdivisions", TW_TYPE_UINT32, &RuntimeSettings::Settings.Subdivisions, " max=20 " );
-    TwAddVarRW( myBar, "Distortions", TW_TYPE_UINT32, &RuntimeSettings::Settings.Distortions, " max=100000 " );
     TwAddVarRW( myBar, "Planet Radius", TW_TYPE_UINT32, &RuntimeSettings::Settings.PlanetRadius, " max=2000 " );
     TwAddButton( myBar, "Space", NULL, NULL, " label=' ' " );
-    TwAddButton( myBar, "Quit", QuitButton, mWindow, NULL );
+    TwAddButton( myBar, "Rebuild", Program::RebuildButton, &mRoundedCube, NULL );
+    TwAddButton( myBar, "Quit", Program::QuitButton, mWindow, NULL );
 }
 
 
@@ -96,14 +121,12 @@ void Program::Update()
     if( !RuntimeSettings::Settings.FreezeFrustrum ) {
         mFrustrum.Update();
     }
-    
-    mRoundedCube.Update(mFrustrum);
+
+    mRoundedCube.Update( mFrustrum );
 
     if( !RuntimeSettings::Settings.LockMouse ) {
         mDebugInfo.SetVertices( mRoundedCube.GetVertexCount() );
     }
-
-    
 }
 
 void Program::Draw()

@@ -31,10 +31,9 @@ int main( int argc, const char *argv[] )
         }
     }
 
+    std::srand( RuntimeSettings::Settings.Seed );
     NoisePP.Init();
-
     Window *window = new( MemoryUse::Normal ) WindowSFML();
-
 
     if( !window->IsWindowCreated() ) {
         Log.Error( "Failed to create window" );

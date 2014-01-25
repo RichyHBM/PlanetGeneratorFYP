@@ -18,6 +18,8 @@ public:
     bool LockMouse;
     unsigned int Seed;
     bool FreezeFrustrum;
+    float DistortionSize;
+    float RealtimeRebuild;
 };
 
 #endif // RUNTIMESETTINGS_HPP

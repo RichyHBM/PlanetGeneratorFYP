@@ -16,7 +16,7 @@ public:
     glm::vec3 GetNormalA() const;
     glm::vec3 GetNormalB() const;
 
-    void SetSize(int size);
+    void SetSize( int size );
 protected:
     glm::vec3 mA, mB, mC, mD;
     int mSize;
