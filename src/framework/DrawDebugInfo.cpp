@@ -3,6 +3,7 @@
 #include "Utilities.hpp"
 #include "DebugOperators.hpp"
 #include "ResourceManager.hpp"
+#include "WindowSettings.hpp"
 
 DrawDebugInfo::DrawDebugInfo( Window *window )
 {
@@ -14,12 +15,19 @@ DrawDebugInfo::DrawDebugInfo( Window *window )
     mMemoryTotal->SetText( "" );
     mTotalVertices = ResourceManager::GetFont( "Default", "./Resources/fontBitmap.png" , "./Resources/bitmapMapping.txt" );
     mTotalVertices->SetText( "" );
+    mRebuildingText = ResourceManager::GetFont( "Default", "./Resources/fontBitmap.png" , "./Resources/bitmapMapping.txt" );
+    mRebuildingText->SetText( "Rebuilding!" );
     mDraw = true;
     mVertices =0;
+    mRebuilding = false;
 }
 
 DrawDebugInfo::~DrawDebugInfo()
 {
+}
+
+void DrawDebugInfo::SetDrawRebuild(){
+    mRebuilding = true;
 }
 
 void DrawDebugInfo::SetDraw( bool draw )
@@ -54,4 +62,12 @@ void DrawDebugInfo::Draw()
     mTotalVertices->SetPosition( glm::vec2( startPos, startPos + displacement*2 ) );
     mTotalVertices->SetText(  "Total Vertices: " + Util::ToString( mVertices ) );
     mTotalVertices->Draw();
+
+
+    if( mRebuilding ) {
+        mRebuildingText->SetPosition( glm::vec2( WindowSettings::Running.GetWidth()/2, WindowSettings::Running.GetHeight()/2 ) );
+        mRebuildingText->SetText( "Rebuilding!" );
+        mRebuildingText->Draw();
+        mRebuilding = false;
+    }
 }

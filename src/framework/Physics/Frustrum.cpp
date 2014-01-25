@@ -21,12 +21,12 @@ Frustrum::Frustrum()
     mNTR = mNearCenter + ( mUp * MatrixControl.NearPlaneSize().y / 2.0f ) + ( X * MatrixControl.NearPlaneSize().x/2.0f );
     mNBL = mNearCenter - ( mUp * MatrixControl.NearPlaneSize().y / 2.0f ) - ( X * MatrixControl.NearPlaneSize().x/2.0f );
     mNBR = mNearCenter - ( mUp * MatrixControl.NearPlaneSize().y / 2.0f ) + ( X * MatrixControl.NearPlaneSize().x/2.0f );
-    mPlanes[TOP] = Plane3d( mNTR, mNTL, mFTL );
-    mPlanes[BOTTOM] = Plane3d( mNBL, mNBR, mFBR );
-    mPlanes[LEFT] = Plane3d( mNTL, mNBL, mFBL );
-    mPlanes[RIGHT] = Plane3d( mNBR, mNTR, mFBR );
-    mPlanes[NEAR] = Plane3d( mNTL, mNTR, mNBR );
-    mPlanes[FAR] = Plane3d( mFTR, mFTL, mFBL );
+    mPlanes[Top] = Plane3d( mNTR, mNTL, mFTL );
+    mPlanes[Bottom] = Plane3d( mNBL, mNBR, mFBR );
+    mPlanes[Left] = Plane3d( mNTL, mNBL, mFBL );
+    mPlanes[Right] = Plane3d( mNBR, mNTR, mFBR );
+    mPlanes[Near] = Plane3d( mNTL, mNTR, mNBR );
+    mPlanes[Far] = Plane3d( mFTR, mFTL, mFBL );
 }
 
 Frustrum::~Frustrum()
@@ -89,12 +89,12 @@ void Frustrum::Update()
     mNTR = mNearCenter + ( mUp * MatrixControl.NearPlaneSize().y / 2.0f ) + ( X * MatrixControl.NearPlaneSize().x/2.0f );
     mNBL = mNearCenter - ( mUp * MatrixControl.NearPlaneSize().y / 2.0f ) - ( X * MatrixControl.NearPlaneSize().x/2.0f );
     mNBR = mNearCenter - ( mUp * MatrixControl.NearPlaneSize().y / 2.0f ) + ( X * MatrixControl.NearPlaneSize().x/2.0f );
-    mPlanes[TOP] = Plane3d( mNTR, mNTL, mFTL );
-    mPlanes[BOTTOM] = Plane3d( mNBL, mNBR, mFBR );
-    mPlanes[LEFT] = Plane3d( mNTL, mNBL, mFBL );
-    mPlanes[RIGHT] = Plane3d( mNBR, mNTR, mFBR );
-    mPlanes[NEAR] = Plane3d( mNTL, mNTR, mNBR );
-    mPlanes[FAR] = Plane3d( mFTR, mFTL, mFBL );
+    mPlanes[Top] = Plane3d( mNTR, mNTL, mFTL );
+    mPlanes[Bottom] = Plane3d( mNBL, mNBR, mFBR );
+    mPlanes[Left] = Plane3d( mNTL, mNBL, mFBL );
+    mPlanes[Right] = Plane3d( mNBR, mNTR, mFBR );
+    mPlanes[Near] = Plane3d( mNTL, mNTR, mNBR );
+    mPlanes[Far] = Plane3d( mFTR, mFTL, mFBL );
 }
 
 void Frustrum::Draw()

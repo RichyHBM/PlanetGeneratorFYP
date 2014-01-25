@@ -56,6 +56,11 @@ public:
     static void TW_CALL GetDistortions( void *value, void *clientData );
     static void TW_CALL SetDistortions( const void *value, void *clientData );
 
+    DrawDebugInfo* GetDebugInfo();
+    RoundedCube* GetRoundedCube();
+    Window* GetWindow();
+
+
 protected:
     Frustrum mFrustrum;
     Window *mWindow;

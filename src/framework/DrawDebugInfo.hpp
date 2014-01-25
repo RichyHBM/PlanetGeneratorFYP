@@ -14,14 +14,16 @@ public:
     void Draw();
     void ToggleDraw();
     void SetVertices( int v );
-
+    void SetDrawRebuild();
 protected:
     float mKBDivisor;
     bool mDraw;
+    bool mRebuilding;
     Window *mWindow;
     BitmapText *mDelta;
     BitmapText *mMemoryTotal;
     BitmapText *mTotalVertices;
+    BitmapText *mRebuildingText;
     int mVertices;
 };
 

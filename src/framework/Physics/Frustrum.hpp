@@ -19,7 +19,7 @@ public:
     void Update();
     void Draw();
 
-    enum PLANESIDE { NEAR, FAR, TOP, BOTTOM, LEFT, RIGHT };
+    enum PLANESIDE { Near, Far, Top, Bottom, Left, Right };
 protected:
     Plane3d mPlanes[6];
 

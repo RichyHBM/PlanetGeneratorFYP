@@ -17,7 +17,10 @@ void TW_CALL Program::QuitButton( void *clientData )
 void TW_CALL Program::RebuildButton( void *clientData )
 {
     RuntimeSettings::Settings.RealtimeRebuild = false;
-    ( ( RoundedCube * )clientData )->RebuildSides();
+    ( ( Program * )clientData )->GetDebugInfo()->SetDrawRebuild();
+    ( ( Program * )clientData )->Draw();
+    ( ( Program * )clientData )->GetWindow()->Display();
+    ( ( Program * )clientData )->GetRoundedCube()->RebuildSides();
 }
 
 void TW_CALL Program::GetSeed( void *value, void *clientData )
@@ -61,7 +64,7 @@ Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
     TwAddVarRW( myBar, "Subdivisions", TW_TYPE_UINT32, &RuntimeSettings::Settings.Subdivisions, " max=20 " );
     TwAddVarRW( myBar, "Planet Radius", TW_TYPE_UINT32, &RuntimeSettings::Settings.PlanetRadius, " max=2000 " );
     TwAddButton( myBar, "Space", NULL, NULL, " label=' ' " );
-    TwAddButton( myBar, "Rebuild", Program::RebuildButton, &mRoundedCube, NULL );
+    TwAddButton( myBar, "Rebuild", Program::RebuildButton, this, NULL );
     TwAddButton( myBar, "Quit", Program::QuitButton, mWindow, NULL );
 }
 
@@ -72,6 +75,21 @@ Program::~Program()
     TwTerminate();
     mWindow = NULL;
     //dtor
+}
+
+DrawDebugInfo* Program::GetDebugInfo()
+{
+    return &mDebugInfo;
+}
+
+RoundedCube* Program::GetRoundedCube()
+{
+    return &mRoundedCube;
+}
+
+Window* Program::GetWindow()
+{
+    return mWindow;
 }
 
 void Program::Run()
