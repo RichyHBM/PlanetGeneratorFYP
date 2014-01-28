@@ -96,11 +96,6 @@ namespace PlanGenSettings
             settings.TargetFPS = Convert.ToInt32(FramesSpinner.Value);
         }
 
-        private void ViewDisplacementSpinner_ValueChanged(object sender, EventArgs e)
-        {
-            settings.ViewDisplacement = Convert.ToDouble(ViewDisplacementSpinner.Value);
-        }
-
         private void ControlsComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             settings.Controls = ControlsComboBox.SelectedIndex;

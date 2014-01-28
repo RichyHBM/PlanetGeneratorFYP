@@ -7,7 +7,6 @@ namespace PlanGenSettings
 {
     public class PlanetSettings
     {
-        public double ViewDisplacement = 0.0;
         public int Controls = 0;
 
         public int WindowWidth = 800;
@@ -22,7 +21,6 @@ namespace PlanGenSettings
         public String[] ToArgumentArray()
         {
             return new List<string>{
-                "-viewDisp " + ViewDisplacement,
                 "-controls " + Controls,
 
                 "-depth " + DepthBits,
