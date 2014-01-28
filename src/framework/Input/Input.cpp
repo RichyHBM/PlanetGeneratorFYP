@@ -1,5 +1,5 @@
 #include "Input.hpp"
-#include "../LogManager.hpp"
+#include "../Managers/LogManager.hpp"
 
 Input Input::Manager;
 

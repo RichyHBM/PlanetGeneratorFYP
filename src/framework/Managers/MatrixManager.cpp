@@ -1,5 +1,5 @@
 #include "./MatrixManager.hpp"
-#include "./WindowSettings.hpp"
+#include "../Window/WindowSettings.hpp"
 
 MatrixManager MatrixControl;
 

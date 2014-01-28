@@ -2,7 +2,7 @@
 #include "BitmapText.hpp"
 #include <glm/gtx/transform2.hpp>
 #include <glm/glm.hpp>
-#include "../WindowSettings.hpp"
+#include "../Window/WindowSettings.hpp"
 
 BitmapText::BitmapText()
 {

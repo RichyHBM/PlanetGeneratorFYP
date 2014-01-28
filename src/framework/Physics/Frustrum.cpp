@@ -1,7 +1,7 @@
 #include "Frustrum.hpp"
 
-#include "../MatrixManager.hpp"
-#include "../ResourceManager.hpp"
+#include "../Managers/MatrixManager.hpp"
+#include "../Managers/ResourceManager.hpp"
 #include "../Utilities.hpp"
 
 Frustrum::Frustrum()

@@ -3,7 +3,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 
-#include "../MatrixManager.hpp"
+#include "../Managers/MatrixManager.hpp"
 #include "../Utilities.hpp"
 
 NetworkInput::NetworkInput() : mHorizontalAngle( 4 ), mVerticalAngle( -Util::Maths::fPIo2 )

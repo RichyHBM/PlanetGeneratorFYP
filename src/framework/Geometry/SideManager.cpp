@@ -2,7 +2,7 @@
 
 #include "SideManager.hpp"
 
-#include "../ResourceManager.hpp"
+#include "../Managers/ResourceManager.hpp"
 
 SideManager::SideManager( const Quad &q ): mInitialQuad( q )
 {

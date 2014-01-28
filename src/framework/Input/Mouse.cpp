@@ -3,7 +3,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 
-#include "../WindowSettings.hpp"
+#include "../Window/WindowSettings.hpp"
 #include "../RuntimeSettings.hpp"
 
 void Mouse::Set( float x, float y )

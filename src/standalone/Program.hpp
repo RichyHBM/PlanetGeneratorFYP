@@ -1,8 +1,8 @@
 #ifndef PROGRAM_HPP
 #define PROGRAM_HPP
 
-#include "framework/DrawDebugInfo.hpp"
-#include "framework/Window.hpp"
+#include "framework/Debugs/DrawDebugInfo.hpp"
+#include "framework/Window/Window.hpp"
 
 #include "framework/GLHelp/GLHelp.hpp"
 
@@ -56,9 +56,9 @@ public:
     static void TW_CALL GetDistortions( void *value, void *clientData );
     static void TW_CALL SetDistortions( const void *value, void *clientData );
 
-    DrawDebugInfo* GetDebugInfo();
-    RoundedCube* GetRoundedCube();
-    Window* GetWindow();
+    DrawDebugInfo *GetDebugInfo();
+    RoundedCube *GetRoundedCube();
+    Window *GetWindow();
 
 
 protected:

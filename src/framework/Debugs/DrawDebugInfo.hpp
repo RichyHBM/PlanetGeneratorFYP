@@ -1,9 +1,9 @@
 #ifndef DRAWDEBUGINFO_HPP
 #define DRAWDEBUGINFO_HPP
 
-#include "Includes.hpp"
-#include "GLHelp/BitmapText.hpp"
-#include "Window.hpp"
+#include "../Includes.hpp"
+#include "../GLHelp/BitmapText.hpp"
+#include "../Window/Window.hpp"
 
 class DrawDebugInfo
 {

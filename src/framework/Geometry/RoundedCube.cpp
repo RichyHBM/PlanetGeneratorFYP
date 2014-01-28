@@ -2,7 +2,7 @@
 
 #include <glm/gtx/compatibility.hpp>
 
-#include "../MatrixManager.hpp"
+#include "../Managers/MatrixManager.hpp"
 #include "../Utilities.hpp"
 #include "../RuntimeSettings.hpp"
 

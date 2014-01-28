@@ -1,6 +1,6 @@
 #include "LogManager.hpp"
 
-#include "./Utilities.hpp"
+#include "../Utilities.hpp"
 #include <string>
 #include "rlutil.h"
 

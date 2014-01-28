@@ -1,7 +1,7 @@
 #ifndef MATRIX_MANAGER_HPP
 #define MATRIX_MANAGER_HPP
 
-#include "./Includes.hpp"
+#include "../Includes.hpp"
 
 class MatrixManager
 {

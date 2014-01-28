@@ -1,7 +1,7 @@
 #ifndef WINDOW_HPP
 #define WINDOW_HPP
 
-#include "Includes.hpp"
+#include "../Includes.hpp"
 
 // Window interface, any windowing library wrapper must implement these methods.
 

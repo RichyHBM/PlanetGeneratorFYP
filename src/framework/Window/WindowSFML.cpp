@@ -1,15 +1,15 @@
 #ifdef SFML
 
-#include "Includes.hpp"
+#include "../Includes.hpp"
 #include "WindowSFML.hpp"
 #include <GL/glew.h>
-#include "./WindowSettings.hpp"
+#include "WindowSettings.hpp"
 #include <iostream>
-#include "GLHelp/Texture.hpp"
-#include "Utilities.hpp"
-#include "TweakSFML.hpp"
-#include "./RuntimeSettings.hpp"
-#include "./MatrixManager.hpp"
+#include "../GLHelp/Texture.hpp"
+#include "../Utilities.hpp"
+#include "../TweakSFML.hpp"
+#include "../RuntimeSettings.hpp"
+#include "../Managers/MatrixManager.hpp"
 
 WindowSFML::WindowSFML()
 {

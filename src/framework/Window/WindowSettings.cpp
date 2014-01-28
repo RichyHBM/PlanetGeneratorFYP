@@ -1,5 +1,5 @@
 #include "WindowSettings.hpp"
-#include "Utilities.hpp"
+#include "../Utilities.hpp"
 
 WindowSettings WindowSettings::Initial;
 WindowSettings WindowSettings::Running;

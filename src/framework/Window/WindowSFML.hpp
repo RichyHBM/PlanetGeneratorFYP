@@ -2,7 +2,7 @@
 #define WINDOWSFML_HPP
 
 #ifdef SFML
-#include "Includes.hpp"
+#include "../Includes.hpp"
 #include "Window.hpp"
 
 class WindowSFML : public Window

@@ -2,17 +2,17 @@
 
 #include "framework/Includes.hpp"
 
-#include "framework/WindowSettings.hpp"
+#include "framework/Window/WindowSettings.hpp"
 #include "framework/Utilities.hpp"
 #include "./Program.hpp"
-#include "framework/Window.hpp"
+#include "framework/Window/Window.hpp"
 
-#include "framework/DebugOperators.hpp"
+#include "framework/Debugs/DebugOperators.hpp"
 #include "framework/Noise/NoiseppNoise.hpp"
-#include "framework/MatrixManager.hpp"
-#include "framework/ResourceManager.hpp"
+#include "framework/Managers/MatrixManager.hpp"
+#include "framework/Managers/ResourceManager.hpp"
 
-#include "framework/WindowSFML.hpp"
+#include "framework/Window/WindowSFML.hpp"
 
 //Set initial settings
 void SetSettings();

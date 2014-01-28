@@ -2,7 +2,7 @@
 #include <ctime>
 #include <sys/stat.h>
 
-#include "LogManager.hpp"
+#include "Managers/LogManager.hpp"
 
 time_t Util::GetModificationTime( const std::string &filename )
 {

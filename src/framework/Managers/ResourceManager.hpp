@@ -3,7 +3,7 @@
 
 #include <map>
 #include <string>
-#include "./GLHelp/GLHelp.hpp"
+#include "../GLHelp/GLHelp.hpp"
 
 class ResourceManager
 {

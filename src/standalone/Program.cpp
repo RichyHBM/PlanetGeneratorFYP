@@ -1,10 +1,10 @@
 #include "framework/Includes.hpp"
 
 #include "Program.hpp"
-#include "framework/WindowSettings.hpp"
+#include "framework/Window/WindowSettings.hpp"
 #include "framework/RuntimeSettings.hpp"
 #include "framework/Utilities.hpp"
-#include "framework/MatrixManager.hpp"
+#include "framework/Managers/MatrixManager.hpp"
 
 #include "framework/Input/Mouse.hpp"
 
@@ -61,8 +61,8 @@ Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
     TwAddVarCB( myBar, "Seed", TW_TYPE_UINT32, Program::SetSeed, Program::GetSeed ,&mRoundedCube,  " max=100000 " );
     TwAddVarCB( myBar, "Distortions", TW_TYPE_UINT32, Program::SetDistortions, Program::GetDistortions,&mRoundedCube, " max=100000 " );
     TwAddVarRW( myBar, "Distortion Size", TW_TYPE_FLOAT, &RuntimeSettings::Settings.DistortionSize, "" );
-    TwAddVarRW( myBar, "Subdivisions", TW_TYPE_UINT32, &RuntimeSettings::Settings.Subdivisions, " max=20 " );
-    TwAddVarRW( myBar, "Planet Radius", TW_TYPE_UINT32, &RuntimeSettings::Settings.PlanetRadius, " max=2000 " );
+    TwAddVarRW( myBar, "Subdivisions", TW_TYPE_UINT32, &RuntimeSettings::Settings.Subdivisions, " max=10 " );
+    TwAddVarRW( myBar, "Planet Radius", TW_TYPE_UINT32, &RuntimeSettings::Settings.PlanetRadius, " max=500 " );
     TwAddButton( myBar, "Space", NULL, NULL, " label=' ' " );
     TwAddButton( myBar, "Rebuild", Program::RebuildButton, this, NULL );
     TwAddButton( myBar, "Quit", Program::QuitButton, mWindow, NULL );
@@ -77,17 +77,17 @@ Program::~Program()
     //dtor
 }
 
-DrawDebugInfo* Program::GetDebugInfo()
+DrawDebugInfo *Program::GetDebugInfo()
 {
     return &mDebugInfo;
 }
 
-RoundedCube* Program::GetRoundedCube()
+RoundedCube *Program::GetRoundedCube()
 {
     return &mRoundedCube;
 }
 
-Window* Program::GetWindow()
+Window *Program::GetWindow()
 {
     return mWindow;
 }

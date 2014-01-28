@@ -1,7 +1,7 @@
 #ifndef INCLUDES_HPP
 #define INCLUDES_HPP
 
-#include "DebugOperators.hpp"
+#include "Debugs/DebugOperators.hpp"
 
 //Standard C++ headers
 #include <string>
@@ -26,7 +26,7 @@
 
 #include "Noise/NoiseppNoise.hpp"
 #include "Utilities.hpp"
-#include "LogManager.hpp"
-#include "./Input/Input.hpp"
+#include "Managers/LogManager.hpp"
+#include "Input/Input.hpp"
 
 #endif // INCLUDES_HPP_INCLUDED
