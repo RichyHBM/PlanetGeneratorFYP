@@ -8,6 +8,7 @@ SideManager::SideManager( const Quad &q ): mInitialQuad( q )
 {
     mShader = ResourceManager::GetShader( "Icosphere", "./Resources/Icosphere.vert" ,"./Resources/Icosphere.frag" );
     mPositionBuffer.SetAttributeIndex( mShader->GetAttribute( "Position" ) );
+    mNormalBuffer.SetAttributeIndex( mShader->GetAttribute( "Normal" ) );
     mQuads.push_back( mInitialQuad );
 }
 
@@ -93,7 +94,8 @@ void SideManager::Spherify()
 
 void SideManager::BindData()
 {
-    mPositionsList.clear();
+    std::vector<glm::vec3> mPositionsList;
+    std::vector<glm::vec3> mNormalsList;
 
     for( int i = 0; i < mQuads.size(); i++ ) {
         glm::vec3 A = mQuads[i].GetVerticeA(),
@@ -106,10 +108,22 @@ void SideManager::BindData()
         mPositionsList.push_back( D );
         mPositionsList.push_back( B );
         mPositionsList.push_back( C );
+        glm::vec3 Anorm = mQuads[i].GetVerticeA(),
+                  Bnorm = mQuads[i].GetVerticeB(),
+                  Cnorm = mQuads[i].GetVerticeC(),
+                  Dnorm = mQuads[i].GetVerticeD();
+        mNormalsList.push_back( A );
+        mNormalsList.push_back( B );
+        mNormalsList.push_back( D );
+        mNormalsList.push_back( D );
+        mNormalsList.push_back( B );
+        mNormalsList.push_back( C );
     }
 
     mPositionBuffer.AddVectorData( mPositionsList, sizeof( glm::vec3 ) );
     mPositionBuffer.SetAttributeIndex( mShader->GetAttribute( "Position" ) );
+    mNormalBuffer.AddVectorData( mNormalsList, sizeof( glm::vec3 ) );
+    mNormalBuffer.SetAttributeIndex( mShader->GetAttribute( "Normal" ) );
 }
 
 void SideManager::RebuildDistortions()
@@ -200,10 +214,15 @@ void SideManager::RebuildSide()
 
 void SideManager::Draw( const glm::mat4 &MVP )
 {
+    glm::mat4 NormalMat = glm::transpose( glm::inverse( glm::mat4( 1.0f ) ) );
     mShader->Bind();
     glUniformMatrix4fv( mShader->GetUniform( "MVP" ), 1, GL_FALSE, &MVP[0][0] );
+    glUniformMatrix4fv( mShader->GetUniform( "NormalMat" ), 1, GL_FALSE, &NormalMat[0][0] );
+    glUniform3fv( mShader->GetUniform( "LightDirection" ), 1, &RuntimeSettings::Settings.LightDirection[0] );
     mPositionBuffer.Bind( 3 );
-    glDrawArrays ( GL_TRIANGLES, 0, mPositionsList.size() );
+    mNormalBuffer.Bind( 3 );
+    glDrawArrays ( GL_TRIANGLES, 0, mQuads.size() * 6 );
+    mNormalBuffer.Unbind();
     mPositionBuffer.Unbind();
     Texture::Unbind();
     Shader::Unbind();

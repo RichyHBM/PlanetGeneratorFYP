@@ -35,6 +35,14 @@ void TW_CALL Program::SetSeed( const void *value, void *clientData )
     ( ( RoundedCube * )clientData )->RebuildPlanes();
 }
 
+void TW_CALL Program::GetLightDirection( void *value, void *clientData )
+{
+}
+
+void TW_CALL Program::SetLightDirection( const void *value, void *clientData )
+{
+}
+
 void TW_CALL Program::GetDistortions( void *value, void *clientData )
 {
     *( ( int * )value ) = RuntimeSettings::Settings.Distortions;
@@ -49,21 +57,26 @@ void TW_CALL Program::SetDistortions( const void *value, void *clientData )
 Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
 {
     mWindow = pWindow;
-    MatrixControl.SetPosition( glm::vec3( 1, 1, RuntimeSettings::Settings.PlanetRadius * 2 ) );
+    MatrixControl.SetPosition( glm::vec3( 1, 1, RuntimeSettings::Settings.PlanetRadius * 5 ) );
     TwInit( TW_OPENGL, NULL );
     TwWindowSize( WindowSettings::Running.GetWidth(), WindowSettings::Running.GetHeight() );
     TwBar *myBar;
     myBar = TwNewBar( "Controls" );
     TwSetParam( myBar, NULL, "position", TW_PARAM_CSTRING, 1, "20 60" );
+    TwDefine( " Controls size='200 500' " );
     TwAddVarRW( myBar, "Draw Lines", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.DrawLines, NULL );
     TwAddVarRW( myBar, "Freeze Frustrum", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.FreezeFrustrum, NULL );
     TwAddVarRW( myBar, "Real-Time Rebuild", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.RealtimeRebuild, NULL );
+    TwAddSeparator( myBar, NULL, NULL );
     TwAddVarCB( myBar, "Seed", TW_TYPE_UINT32, Program::SetSeed, Program::GetSeed ,&mRoundedCube,  " max=100000 " );
     TwAddVarCB( myBar, "Distortions", TW_TYPE_UINT32, Program::SetDistortions, Program::GetDistortions,&mRoundedCube, " max=100000 " );
     TwAddVarRW( myBar, "Distortion Size", TW_TYPE_FLOAT, &RuntimeSettings::Settings.DistortionSize, "" );
+    TwAddSeparator( myBar, NULL, NULL );
     TwAddVarRW( myBar, "Subdivisions", TW_TYPE_UINT32, &RuntimeSettings::Settings.Subdivisions, " max=10 " );
     TwAddVarRW( myBar, "Planet Radius", TW_TYPE_UINT32, &RuntimeSettings::Settings.PlanetRadius, " max=500 " );
-    TwAddButton( myBar, "Space", NULL, NULL, " label=' ' " );
+    TwAddSeparator( myBar, NULL, NULL );
+    TwAddVarRW( myBar, "Light Direction", TW_TYPE_DIR3F, &RuntimeSettings::Settings.LightDirection, NULL );
+    TwAddSeparator( myBar, NULL, NULL );
     TwAddButton( myBar, "Rebuild", Program::RebuildButton, this, NULL );
     TwAddButton( myBar, "Quit", Program::QuitButton, mWindow, NULL );
 }

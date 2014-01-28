@@ -33,8 +33,6 @@ protected:
     Quad mInitialQuad;
 
     std::vector<Quad> mQuads;
-    std::vector<glm::vec3> mPositionsList;
-    std::vector<glm::vec3> mNormalsList;
     std::vector<DistortionPlane> mDistortionPlanes;
 
     VBO mPositionBuffer;

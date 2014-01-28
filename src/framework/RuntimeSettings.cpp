@@ -15,4 +15,5 @@ RuntimeSettings::RuntimeSettings()
     FreezeFrustrum = false;
     DistortionSize = 1.0f;
     RealtimeRebuild = false;
+    LightDirection = glm::vec3( 0,0,-1 );
 }

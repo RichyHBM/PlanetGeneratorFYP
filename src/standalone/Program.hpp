@@ -49,12 +49,15 @@ public:
     ///
     const double GetDelta();
 
+    //Callbacks for the GUI controls
     static void TW_CALL QuitButton( void *clientData );
     static void TW_CALL RebuildButton( void *clientData );
     static void TW_CALL GetSeed( void *value, void *clientData );
     static void TW_CALL SetSeed( const void *value, void *clientData );
     static void TW_CALL GetDistortions( void *value, void *clientData );
     static void TW_CALL SetDistortions( const void *value, void *clientData );
+    static void TW_CALL GetLightDirection( void *value, void *clientData );
+    static void TW_CALL SetLightDirection( const void *value, void *clientData );
 
     DrawDebugInfo *GetDebugInfo();
     RoundedCube *GetRoundedCube();

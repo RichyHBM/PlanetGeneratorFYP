@@ -1,6 +1,7 @@
 #ifndef RUNTIMESETTINGS_HPP
 #define RUNTIMESETTINGS_HPP
 
+#include "Includes.hpp"
 #include <string>
 
 class RuntimeSettings
@@ -20,6 +21,7 @@ public:
     bool FreezeFrustrum;
     float DistortionSize;
     float RealtimeRebuild;
+    glm::vec3 LightDirection;
 };
 
 #endif // RUNTIMESETTINGS_HPP
