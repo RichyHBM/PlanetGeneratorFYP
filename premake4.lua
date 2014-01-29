@@ -14,7 +14,7 @@ solution "PlanetGeneratorFYP"
 
 	if _ACTION == "gmake" then
 		libdirs { "./external/lib/linux" }
-		postbuildcommands { "sh ../postbuild/linux.sh" }
+		postbuildcommands { "sh ../postbuild/linux.sh", "sh ../postbuild/linux64.sh" }
 	end
 
 	configuration "Debug"
@@ -41,13 +41,7 @@ solution "PlanetGeneratorFYP"
 			links {  "Framework", "pthread", "AntTweakBar", "sfml-window", "sfml-system", "GLU", "GL", "noisepp" }
 		end
 		
-	configuration "Linux64"
-		targetdir "./bin/Release64"
-		defines { "NDEBUG" }
-		flags { "OptimizeSpeed" }
-		links {  "Framework", "pthread", "AntTweakBar", "sfml-window64", "sfml-system64", "GLU", "GL", "noisepp64" }
-	
 	dofile "./premakes/standalone.lua"
 	dofile "./premakes/test.lua"
-	dofile "./premakes/sandbox.lua"
+	dofile "./premakes/server.lua"
 	dofile "./premakes/framework.lua"

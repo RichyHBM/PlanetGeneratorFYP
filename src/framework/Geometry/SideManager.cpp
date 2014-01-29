@@ -212,8 +212,13 @@ void SideManager::RebuildSide()
     BindData();
 }
 
-void SideManager::Draw( const glm::mat4 &MVP )
+void SideManager::Draw( const glm::mat4 &MVP, const Frustrum &frustrum )
 {
+    //If the initial quad isnt in the frustrum then skip the draw
+    if(!RuntimeSettings::Settings.DrawHidden)
+        if( !frustrum.InFrustrumAndFacing( mInitialQuad ) )
+            return;
+
     glm::mat4 NormalMat = glm::transpose( glm::inverse( glm::mat4( 1.0f ) ) );
     mShader->Bind();
     glUniformMatrix4fv( mShader->GetUniform( "MVP" ), 1, GL_FALSE, &MVP[0][0] );

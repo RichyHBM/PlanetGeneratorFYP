@@ -5,7 +5,7 @@
 #include "framework/Window/WindowSettings.hpp"
 #include "framework/Utilities.hpp"
 #include "framework/RuntimeSettings.hpp"
-#include "./Program.hpp"
+//#include "./Program.hpp"
 #include "framework/Window/Window.hpp"
 
 #include "framework/Debugs/DebugOperators.hpp"
@@ -31,7 +31,7 @@ int main( int argc, const char *argv[] )
             WindowSettings::ParseArguments( argv[i], argv[i+1] );
         }
     }
-
+    Input::Manager.SetType( Input::NETWORK );
     std::srand( RuntimeSettings::Settings.Seed );
     NoisePP.Init();
     Window *window = new( MemoryUse::Normal ) WindowSFML();
@@ -42,9 +42,9 @@ int main( int argc, const char *argv[] )
     }
 
     //Create and run a new program instance
-    Program *program = new( MemoryUse::Normal ) Program( window );
-    program->Run();
-    delete program;
+    //Program *program = new( MemoryUse::Normal ) Program( window );
+    //program->Run();
+    //delete program;
     ResourceManager::Destroy();
     window->Close();
     delete window;
@@ -57,13 +57,13 @@ void SetSettings()
     unsigned short
     depthBits = 24,
     stencilBits = 8,
-    antiAliasing = 2,
+    antiAliasing = 8,
     majorOGL = 2,
     minorOGL = 1,
-    width = 800,
-    height = 600,
+    width = 4096,
+    height = 2400,
     fps = 60;
-    bool vSynk = false, fullScreen = false, useTweakBar = true;
+    bool vSynk = false, fullScreen = true, useTweakBar = false;
     WindowSettings::Initial.SetSettings( depthBits, stencilBits, antiAliasing, majorOGL, minorOGL, width, height, fps, vSynk, fullScreen, useTweakBar );
 }
 
@@ -72,19 +72,5 @@ void ProcessArgument( const std::string &arg, const std::string &arg2 )
     if( arg == "-seed" ) {
         RuntimeSettings::Settings.Seed = Util::StrTo<unsigned int> ( arg2 );
 
-    } else if( arg == "-controls" ) {
-        if( Util::StrTo<int> ( arg2 ) == 0 ) {
-            Input::Manager.SetType( Input::KEYBOARD );
-
-        } else if( Util::StrTo<int> ( arg2 ) == 1 ) {
-            Input::Manager.SetType( Input::GAMEPAD );
-        }
-
-        if( Util::StrTo<int> ( arg2 ) == 2 ) {
-            Input::Manager.SetType( Input::NETWORK );
-        }
-
     }
 }
-
-

@@ -3,6 +3,7 @@
 #include <cstdlib>
 
 RuntimeSettings RuntimeSettings::Settings;
+RuntimeSettings RuntimeSettings::PreviousFrame;
 
 RuntimeSettings::RuntimeSettings()
 {
@@ -15,5 +16,6 @@ RuntimeSettings::RuntimeSettings()
     FreezeFrustrum = false;
     DistortionSize = 1.0f;
     RealtimeRebuild = false;
+    DrawHidden = true;
     LightDirection = glm::vec3( 0,0,-1 );
 }

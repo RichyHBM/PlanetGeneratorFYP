@@ -9,6 +9,7 @@ class RuntimeSettings
 public:
     //Startup settings
     static RuntimeSettings Settings;
+    static RuntimeSettings PreviousFrame;
 
     RuntimeSettings();
 
@@ -19,6 +20,7 @@ public:
     bool LockMouse;
     unsigned int Seed;
     bool FreezeFrustrum;
+    bool DrawHidden;
     float DistortionSize;
     float RealtimeRebuild;
     glm::vec3 LightDirection;

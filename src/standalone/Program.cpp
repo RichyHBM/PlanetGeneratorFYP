@@ -65,15 +65,16 @@ Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
     TwSetParam( myBar, NULL, "position", TW_PARAM_CSTRING, 1, "20 60" );
     TwDefine( " Controls size='200 500' " );
     TwAddVarRW( myBar, "Draw Lines", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.DrawLines, NULL );
+    TwAddVarRW( myBar, "Draw Hidden", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.DrawHidden, NULL );
     TwAddVarRW( myBar, "Freeze Frustrum", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.FreezeFrustrum, NULL );
     TwAddVarRW( myBar, "Real-Time Rebuild", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.RealtimeRebuild, NULL );
     TwAddSeparator( myBar, NULL, NULL );
     TwAddVarCB( myBar, "Seed", TW_TYPE_UINT32, Program::SetSeed, Program::GetSeed ,&mRoundedCube,  " max=100000 " );
-    TwAddVarCB( myBar, "Distortions", TW_TYPE_UINT32, Program::SetDistortions, Program::GetDistortions,&mRoundedCube, " max=100000 " );
+    TwAddVarCB( myBar, "Distortions", TW_TYPE_UINT32, Program::SetDistortions, Program::GetDistortions,&mRoundedCube, " max=1500 " );
     TwAddVarRW( myBar, "Distortion Size", TW_TYPE_FLOAT, &RuntimeSettings::Settings.DistortionSize, "" );
     TwAddSeparator( myBar, NULL, NULL );
-    TwAddVarRW( myBar, "Subdivisions", TW_TYPE_UINT32, &RuntimeSettings::Settings.Subdivisions, " max=10 " );
-    TwAddVarRW( myBar, "Planet Radius", TW_TYPE_UINT32, &RuntimeSettings::Settings.PlanetRadius, " max=500 " );
+    TwAddVarRW( myBar, "Subdivisions", TW_TYPE_UINT32, &RuntimeSettings::Settings.Subdivisions, " max=8 " );
+    TwAddVarRW( myBar, "Planet Radius", TW_TYPE_UINT32, &RuntimeSettings::Settings.PlanetRadius, NULL );
     TwAddSeparator( myBar, NULL, NULL );
     TwAddVarRW( myBar, "Light Direction", TW_TYPE_DIR3F, &RuntimeSettings::Settings.LightDirection, NULL );
     TwAddSeparator( myBar, NULL, NULL );
@@ -110,6 +111,8 @@ void Program::Run()
     Mouse::Set( WindowSettings::Running.GetWidth()/2.0f, WindowSettings::Running.GetHeight()/2.0f );
 
     while( !mWindow->NeedsToClose() ) {
+        RuntimeSettings::PreviousFrame = RuntimeSettings::Settings;
+
         mWindow->DoEvents();
 
         if( mWindow->IsFocused() ) {
@@ -171,7 +174,7 @@ void Program::Draw()
         glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
     }
 
-    mRoundedCube.Draw();
+    mRoundedCube.Draw(mFrustrum);
     glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 
     if( RuntimeSettings::Settings.FreezeFrustrum ) {

@@ -18,7 +18,7 @@ public:
     SideManager( const Quad &q );
     ~SideManager();
     std::vector<Quad> Subdivide( const Quad &q );
-    void Draw( const glm::mat4 &MVP );
+    void Draw( const glm::mat4 &MVP, const Frustrum &frustrum );
     void Update( const Frustrum &frustrum );
     void BindData();
     void Distort( const glm::vec3 &origin, const glm::vec3 &direction );
