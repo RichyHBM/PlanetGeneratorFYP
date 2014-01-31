@@ -57,6 +57,26 @@ glm::vec3 Quad::GetVertice( int i ) const
     }
 }
 
+glm::vec2 Quad::GetUVA() const
+{
+    return glm::vec2(0,0);
+}
+
+glm::vec2 Quad::GetUVB() const
+{
+    return glm::vec2(0,1);
+}
+
+glm::vec2 Quad::GetUVC() const
+{
+    return glm::vec2(1,1);
+}
+
+glm::vec2 Quad::GetUVD() const
+{
+    return glm::vec2(1,0);
+}
+
 glm::vec3 Quad::GetNormalA() const
 {
     return mNormalA;

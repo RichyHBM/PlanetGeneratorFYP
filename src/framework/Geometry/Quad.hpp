@@ -16,6 +16,11 @@ public:
     glm::vec3 GetNormalA() const;
     glm::vec3 GetNormalB() const;
 
+    glm::vec2 GetUVA() const;
+    glm::vec2 GetUVB() const;
+    glm::vec2 GetUVC() const;
+    glm::vec2 GetUVD() const;
+
     void SetSize( int size );
 protected:
     glm::vec3 mA, mB, mC, mD;

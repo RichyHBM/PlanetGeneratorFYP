@@ -9,6 +9,8 @@ SideManager::SideManager( const Quad &q ): mInitialQuad( q )
     mShader = ResourceManager::GetShader( "Icosphere", "./Resources/Icosphere.vert" ,"./Resources/Icosphere.frag" );
     mPositionBuffer.SetAttributeIndex( mShader->GetAttribute( "Position" ) );
     mNormalBuffer.SetAttributeIndex( mShader->GetAttribute( "Normal" ) );
+    mUVBuffer.SetAttributeIndex( mShader->GetAttribute( "UV" ) );
+    mTerrainTexture = ResourceManager::GetTexture( "TerrainTextures", "./Resources/Textures.png" );
     mQuads.push_back( mInitialQuad );
 }
 
@@ -96,6 +98,7 @@ void SideManager::BindData()
 {
     std::vector<glm::vec3> mPositionsList;
     std::vector<glm::vec3> mNormalsList;
+    std::vector<glm::vec2> mUVsList;
 
     for( int i = 0; i < mQuads.size(); i++ ) {
         glm::vec3 A = mQuads[i].GetVerticeA(),
@@ -108,22 +111,33 @@ void SideManager::BindData()
         mPositionsList.push_back( D );
         mPositionsList.push_back( B );
         mPositionsList.push_back( C );
-        glm::vec3 Anorm = mQuads[i].GetVerticeA(),
-                  Bnorm = mQuads[i].GetVerticeB(),
-                  Cnorm = mQuads[i].GetVerticeC(),
-                  Dnorm = mQuads[i].GetVerticeD();
-        mNormalsList.push_back( A );
-        mNormalsList.push_back( B );
-        mNormalsList.push_back( D );
-        mNormalsList.push_back( D );
-        mNormalsList.push_back( B );
-        mNormalsList.push_back( C );
+        glm::vec3 Anorm = mQuads[i].GetNormalA(),
+                  Bnorm = mQuads[i].GetNormalB();
+        mNormalsList.push_back( Anorm );
+        mNormalsList.push_back( Anorm );
+        mNormalsList.push_back( Anorm );
+        mNormalsList.push_back( Bnorm );
+        mNormalsList.push_back( Bnorm );
+        mNormalsList.push_back( Bnorm );
+
+        glm::vec2 Auv = mQuads[i].GetUVA(),
+                  Buv = mQuads[i].GetUVB(),
+                  Cuv = mQuads[i].GetUVC(),
+                  Duv = mQuads[i].GetUVD();
+        mUVsList.push_back( Auv );
+        mUVsList.push_back( Buv );
+        mUVsList.push_back( Duv );
+        mUVsList.push_back( Duv );
+        mUVsList.push_back( Buv );
+        mUVsList.push_back( Cuv );
     }
 
     mPositionBuffer.AddVectorData( mPositionsList, sizeof( glm::vec3 ) );
     mPositionBuffer.SetAttributeIndex( mShader->GetAttribute( "Position" ) );
     mNormalBuffer.AddVectorData( mNormalsList, sizeof( glm::vec3 ) );
     mNormalBuffer.SetAttributeIndex( mShader->GetAttribute( "Normal" ) );
+    mUVBuffer.AddVectorData( mUVsList, sizeof( glm::vec2 ) );
+    mUVBuffer.SetAttributeIndex( mShader->GetAttribute( "UV" ) );
 }
 
 void SideManager::RebuildDistortions()
@@ -224,9 +238,13 @@ void SideManager::Draw( const glm::mat4 &MVP, const Frustrum &frustrum )
     glUniformMatrix4fv( mShader->GetUniform( "MVP" ), 1, GL_FALSE, &MVP[0][0] );
     glUniformMatrix4fv( mShader->GetUniform( "NormalMat" ), 1, GL_FALSE, &NormalMat[0][0] );
     glUniform3fv( mShader->GetUniform( "LightDirection" ), 1, &RuntimeSettings::Settings.LightDirection[0] );
+    mTerrainTexture->Bind();
+    glUniform1i( mShader->GetUniform ( "Texture" ), 0 );
     mPositionBuffer.Bind( 3 );
     mNormalBuffer.Bind( 3 );
+    mUVBuffer.Bind(2);
     glDrawArrays ( GL_TRIANGLES, 0, mQuads.size() * 6 );
+    mUVBuffer.Unbind();
     mNormalBuffer.Unbind();
     mPositionBuffer.Unbind();
     Texture::Unbind();

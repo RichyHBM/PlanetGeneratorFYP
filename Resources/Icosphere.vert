@@ -5,14 +5,15 @@ uniform mat4 NormalMat;
 
 attribute vec4 Position;
 attribute vec3 Normal;
+attribute vec2 UV;
 
 varying vec3 normal;
-varying vec3 col;
+varying vec2 texCoord;
 
 
 void main()
 {
-	col = Position.xyz;
+	texCoord = UV;
 	normal = ( NormalMat * vec4(Normal, 0.0) ).xyz; 
 	gl_Position = (MVP * Position);
 }

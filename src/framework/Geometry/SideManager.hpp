@@ -37,7 +37,9 @@ protected:
 
     VBO mPositionBuffer;
     VBO mNormalBuffer;
+    VBO mUVBuffer;
     Shader *mShader;
+    Texture *mTerrainTexture;
 private:
 };
 
