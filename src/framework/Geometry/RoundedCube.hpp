@@ -4,6 +4,7 @@
 #include "../GLHelp/GLHelp.hpp"
 #include "SideManager.hpp"
 #include "../Physics/Frustrum.hpp"
+#include "../Noise/NoiseppNoise.hpp"
 
 class RoundedCube
 {
@@ -22,11 +23,12 @@ public:
     void Update( const Frustrum &frustrum );
     void Draw( const Frustrum &frustrum );
 
-    void RebuildPlanes();
     void RebuildSides();
+    void RebuildNoise();
 
     int GetVertexCount();
 protected:
+    NoiseppNoise *mNoise;
     SideManager *mSideMan[6];
     glm::mat4 mMVP;
 };

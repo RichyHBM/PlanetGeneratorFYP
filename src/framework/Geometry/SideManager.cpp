@@ -3,6 +3,7 @@
 #include "SideManager.hpp"
 
 #include "../Managers/ResourceManager.hpp"
+#include "../Noise/NoiseppNoise.hpp"
 
 SideManager::SideManager( const Quad &q ): mInitialQuad( q )
 {
@@ -17,6 +18,11 @@ SideManager::SideManager( const Quad &q ): mInitialQuad( q )
 SideManager::~SideManager()
 {
     mShader = NULL;
+}
+
+void SideManager::SetNoise( NoiseppNoise *noise )
+{
+    mNoise = noise;
 }
 
 void SideManager::NormalizeVert( glm::vec3 &v )
@@ -52,27 +58,15 @@ std::vector<Quad> SideManager::Subdivide( const Quad &q )
     return quads;
 }
 
-void SideManager::Distort( const glm::vec3 &origin, const glm::vec3 &direction )
+void SideManager::Distort(  )
 {
-    glm::vec3 n = direction - origin;
-    float diff = RuntimeSettings::Settings.DistortionSize * 0.001f;
-    glm::mat4 min = glm::scale( glm::mat4( 1.0f ), glm::vec3( 1.0f - diff ) );
-    glm::mat4 max = glm::scale( glm::mat4( 1.0f ),glm::vec3( 1.0f + diff ) );
-
     for( int i = 0; i < mQuads.size(); i++ ) {
         glm::vec3 pos[4];
 
         for( int j = 0; j < 4; j++ ) {
             pos[j] = mQuads[i].GetVertice( j );
-            glm::vec3 toOrigin = pos[j] - origin;
-            float d = glm::dot( n, toOrigin );
-
-            if( d > 0.0f ) {
-                pos[j] = glm::vec3( min * glm::vec4( pos[j].x, pos[j].y, pos[j].z, 0 ) );
-
-            } else {
-                pos[j] = glm::vec3( max * glm::vec4( pos[j].x, pos[j].y, pos[j].z, 0 ) );
-            }
+            float dist = mNoise->Generate( pos[j].x, pos[j].y, pos[j].z ) + 1;
+            pos[j] = glm::vec3( dist * glm::vec4( pos[j].x, pos[j].y, pos[j].z, 0 ) );
         }
 
         mQuads[i] = Quad( pos[0], pos[1], pos[2], pos[3] );
@@ -99,36 +93,32 @@ void SideManager::BindData()
     std::vector<glm::vec3> mPositionsList;
     std::vector<glm::vec3> mNormalsList;
     std::vector<glm::vec2> mUVsList;
+    std::vector<unsigned int> mIndices;
 
     for( int i = 0; i < mQuads.size(); i++ ) {
-        glm::vec3 A = mQuads[i].GetVerticeA(),
-                  B = mQuads[i].GetVerticeB(),
-                  C = mQuads[i].GetVerticeC(),
-                  D = mQuads[i].GetVerticeD();
-        mPositionsList.push_back( A );
-        mPositionsList.push_back( B );
-        mPositionsList.push_back( D );
-        mPositionsList.push_back( D );
-        mPositionsList.push_back( B );
-        mPositionsList.push_back( C );
-        glm::vec3 Anorm = mQuads[i].GetNormalA(),
-                  Bnorm = mQuads[i].GetNormalB();
-        mNormalsList.push_back( Anorm );
-        mNormalsList.push_back( Anorm );
-        mNormalsList.push_back( Anorm );
-        mNormalsList.push_back( Bnorm );
-        mNormalsList.push_back( Bnorm );
-        mNormalsList.push_back( Bnorm );
-        glm::vec2 Auv = mQuads[i].GetUVA(),
-                  Buv = mQuads[i].GetUVB(),
-                  Cuv = mQuads[i].GetUVC(),
-                  Duv = mQuads[i].GetUVD();
-        mUVsList.push_back( Auv );
-        mUVsList.push_back( Buv );
-        mUVsList.push_back( Duv );
-        mUVsList.push_back( Duv );
-        mUVsList.push_back( Buv );
-        mUVsList.push_back( Cuv );
+        mPositionsList.push_back( mQuads[i].GetVerticeA());
+        mPositionsList.push_back( mQuads[i].GetVerticeB());
+        mPositionsList.push_back( mQuads[i].GetVerticeC());
+        mPositionsList.push_back( mQuads[i].GetVerticeD());
+
+        mNormalsList.push_back( mQuads[i].GetNormalA());
+        mNormalsList.push_back( mQuads[i].GetNormalB());
+        mNormalsList.push_back( mQuads[i].GetNormalC());
+        mNormalsList.push_back( mQuads[i].GetNormalD());
+
+        mUVsList.push_back( mQuads[i].GetUVA());
+        mUVsList.push_back( mQuads[i].GetUVB());
+        mUVsList.push_back( mQuads[i].GetUVC());
+        mUVsList.push_back( mQuads[i].GetUVD());
+            
+        int size = mPositionsList.size();
+
+        mIndices.push_back( size - 4 );
+        mIndices.push_back( size - 3 );
+        mIndices.push_back( size - 1 );
+        mIndices.push_back( size - 1 );
+        mIndices.push_back( size - 3 );
+        mIndices.push_back( size - 2 );
     }
 
     mPositionBuffer.AddVectorData( mPositionsList, sizeof( glm::vec3 ) );
@@ -137,63 +127,13 @@ void SideManager::BindData()
     mNormalBuffer.SetAttributeIndex( mShader->GetAttribute( "Normal" ) );
     mUVBuffer.AddVectorData( mUVsList, sizeof( glm::vec2 ) );
     mUVBuffer.SetAttributeIndex( mShader->GetAttribute( "UV" ) );
+    mIndexBuffer.AddVectorData( mIndices, sizeof( unsigned int ) );
+    mIndexBuffer.SetTarget( GL_ELEMENT_ARRAY_BUFFER );
 }
 
-void SideManager::RebuildDistortions()
-{
-    mDistortionPlanes.clear();
-    std::srand( RuntimeSettings::Settings.Seed );
-
-    for( int i = 0; i < RuntimeSettings::Settings.Distortions; i++ ) {
-        DistortionPlane dist;
-        //Allow up to 4 decimal points random
-        float a = ( ( std::rand() % 2001 ) - 1000 ) / 1000.0f ,
-              b = ( ( std::rand() % 2001 ) - 1000 ) / 1000.0f,
-              c = ( ( std::rand() % 2001 ) - 1000 ) / 1000.0f;
-        dist.Direction = glm::vec3( a , b, c );
-        int pr = RuntimeSettings::Settings.PlanetRadius;
-        a = ( ( std::rand() % ( ( pr * 2 ) + 1 ) ) - pr );
-        b = ( ( std::rand() % ( ( pr * 2 ) + 1 ) ) - pr );
-        c = ( ( std::rand() % ( ( pr * 2 ) + 1 ) ) - pr );
-        dist.Origin = glm::vec3( a , b, c );
-        mDistortionPlanes.push_back( dist );
-    }
-}
 
 void SideManager::Update( const Frustrum &frustrum )
 {
-    if( RuntimeSettings::Settings.RealtimeRebuild ) {
-        mQuads.clear();
-        mInitialQuad.SetSize( RuntimeSettings::Settings.PlanetRadius );
-        mQuads.push_back( mInitialQuad );
-
-        for( int subd = 0; subd < RuntimeSettings::Settings.Subdivisions; subd++ ) {
-            std::vector<Quad> mTempQuads;
-
-            for( int i = 0; i < mQuads.size(); i++ ) {
-                if( frustrum.InFrustrumAndFacing( mQuads[i] ) ) {
-                    std::vector<Quad> subQuads = Subdivide( mQuads[i] );
-                    mTempQuads.push_back( subQuads[0] );
-                    mTempQuads.push_back( subQuads[1] );
-                    mTempQuads.push_back( subQuads[2] );
-                    mTempQuads.push_back( subQuads[3] );
-
-                } else {
-                    mTempQuads.push_back( mQuads[i] );
-                }
-            }
-
-            mQuads = mTempQuads;
-        }
-
-        Spherify();
-
-        for( int i = 0; i < mDistortionPlanes.size(); i++ ) {
-            Distort( mDistortionPlanes[i].Origin, mDistortionPlanes[i].Direction );
-        }
-
-        BindData();
-    }
 }
 
 void SideManager::RebuildSide()
@@ -217,11 +157,7 @@ void SideManager::RebuildSide()
     }
 
     Spherify();
-
-    for( int i = 0; i < mDistortionPlanes.size(); i++ ) {
-        Distort( mDistortionPlanes[i].Origin, mDistortionPlanes[i].Direction );
-    }
-
+    Distort( );
     BindData();
 }
 
@@ -243,7 +179,9 @@ void SideManager::Draw( const glm::mat4 &MVP, const Frustrum &frustrum )
     mPositionBuffer.Bind( 3 );
     mNormalBuffer.Bind( 3 );
     mUVBuffer.Bind( 2 );
-    glDrawArrays ( GL_TRIANGLES, 0, mQuads.size() * 6 );
+    mIndexBuffer.Bind();
+    glDrawElements( GL_TRIANGLES, mQuads.size() * 6, GL_UNSIGNED_INT, ( void * )0 );
+    mIndexBuffer.Unbind();
     mUVBuffer.Unbind();
     mNormalBuffer.Unbind();
     mPositionBuffer.Unbind();

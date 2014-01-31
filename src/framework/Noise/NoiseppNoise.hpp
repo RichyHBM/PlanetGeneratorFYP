@@ -24,6 +24,7 @@ protected:
     double mDistortion;
 public:
     NoiseppNoise( );
+    NoiseppNoise( int seed,int oct,double pers, double freq , int qual,double scale , double lacun,double distortion );
     ~NoiseppNoise();
     void Init();
     void SetSeed( int seed );
@@ -41,7 +42,5 @@ public:
     double Generate( double x, double y );
     double Generate( double x, double y, double z );
 };
-
-extern NoiseppNoise NoisePP;
 
 #endif

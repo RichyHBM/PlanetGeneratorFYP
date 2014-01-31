@@ -15,6 +15,8 @@ public:
     glm::vec3 GetVertice( int i ) const;
     glm::vec3 GetNormalA() const;
     glm::vec3 GetNormalB() const;
+    glm::vec3 GetNormalC() const;
+    glm::vec3 GetNormalD() const;
 
     glm::vec2 GetUVA() const;
     glm::vec2 GetUVB() const;
@@ -25,7 +27,7 @@ public:
 protected:
     glm::vec3 mA, mB, mC, mD;
     int mSize;
-    glm::vec3 mNormalA, mNormalB;
+    glm::vec3 mNormalA, mNormalB, mNormalC, mNormalD;
 private:
 };
 

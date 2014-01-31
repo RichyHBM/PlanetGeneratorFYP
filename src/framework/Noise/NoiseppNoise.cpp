@@ -4,7 +4,6 @@
 #include <noisepp/utils/NoiseUtils.h>
 #include "../Utilities.hpp"
 
-NoiseppNoise NoisePP;
 //
 // Defaults are
 // Frequency	=	1
@@ -17,6 +16,21 @@ NoiseppNoise NoisePP;
 //
 NoiseppNoise::NoiseppNoise( )
 {
+    mDistortion = 0.01;
+}
+
+NoiseppNoise::NoiseppNoise( int seed,int oct,double pers, double freq , int qual,double scale , double lacun,double distortion )
+{
+    SetSeed( seed );
+    SetPersistence( pers );
+    SetOctaveCount( oct );
+    SetFrequency( freq );
+    SetQuality( qual );
+    SetScale( scale );
+    SetLacunarity( lacun );
+    SetDistortion( distortion );
+    
+    Init();
 }
 
 void NoiseppNoise::Init()
@@ -31,7 +45,6 @@ void NoiseppNoise::Init()
     mCache1d = mPipeline1d->createCache();
     mCache2d = mPipeline2d->createCache();
     mCache3d = mPipeline3d->createCache();
-    mDistortion = 0.01;
 }
 
 NoiseppNoise::~NoiseppNoise()

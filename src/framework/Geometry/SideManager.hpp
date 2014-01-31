@@ -6,11 +6,7 @@
 #include "../GLHelp/GLHelp.hpp"
 #include "../RuntimeSettings.hpp"
 #include "../Physics/Frustrum.hpp"
-
-struct DistortionPlane {
-    glm::vec3 Origin;
-    glm::vec3 Direction;
-};
+#include "../Noise/NoiseppNoise.hpp"
 
 class SideManager
 {
@@ -21,11 +17,11 @@ public:
     void Draw( const glm::mat4 &MVP, const Frustrum &frustrum );
     void Update( const Frustrum &frustrum );
     void BindData();
-    void Distort( const glm::vec3 &origin, const glm::vec3 &direction );
+    void Distort( );
     void Spherify();
     int GetVertexCount();
-    void RebuildDistortions();
     void RebuildSide();
+    void SetNoise( NoiseppNoise *noise );
 
 protected:
     void NormalizeVert( glm::vec3 &v );
@@ -33,8 +29,10 @@ protected:
     Quad mInitialQuad;
 
     std::vector<Quad> mQuads;
-    std::vector<DistortionPlane> mDistortionPlanes;
+    
+    NoiseppNoise *mNoise;
 
+    VBO mIndexBuffer;
     VBO mPositionBuffer;
     VBO mNormalBuffer;
     VBO mUVBuffer;

@@ -7,9 +7,15 @@ Quad::Quad( const glm::vec3 &pA, const glm::vec3 &pB, const glm::vec3 &pC, const
     mC = pC;
     mD = pD;
     glm::vec3 dirA = glm::cross( pB - pA, pD - pA );
-    mNormalA = glm::normalize( dirA );
-    glm::vec3 dirB = glm::cross( pB - pD, pC - pD );
-    mNormalB = glm::normalize( dirB );
+    glm::vec3 dirB = glm::cross( pC - pB, pA - pB );
+    glm::vec3 dirC = glm::cross( pD - pC, pB - pC );
+    glm::vec3 dirD = glm::cross( pA - pD, pC - pD );
+
+    mNormalA = glm::normalize(dirA);
+    mNormalB = glm::normalize(dirB);
+    mNormalC = glm::normalize(dirC);
+    mNormalD = glm::normalize(dirD);
+
     mSize = 1;
 }
 
@@ -85,4 +91,14 @@ glm::vec3 Quad::GetNormalA() const
 glm::vec3 Quad::GetNormalB() const
 {
     return mNormalB;
+}
+
+glm::vec3 Quad::GetNormalC() const
+{
+    return mNormalC;
+}
+
+glm::vec3 Quad::GetNormalD() const
+{
+    return mNormalD;
 }

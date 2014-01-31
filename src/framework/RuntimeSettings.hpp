@@ -15,15 +15,20 @@ public:
 
     bool DrawLines;
     unsigned int Subdivisions;
-    unsigned int Distortions;
     unsigned int PlanetRadius;
     bool LockMouse;
-    unsigned int Seed;
     bool FreezeFrustrum;
     bool DrawHidden;
-    float DistortionSize;
-    float RealtimeRebuild;
     glm::vec3 LightDirection;
+
+    int Seed;
+    int Octaves;
+    double Persistence;
+    double Frequency;
+    int Quality;
+    double Scale;
+    double Lacunarity;
+    double Distortion;
 };
 
 #endif // RUNTIMESETTINGS_HPP

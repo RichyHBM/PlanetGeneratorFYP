@@ -6,7 +6,6 @@
 #include "../Utilities.hpp"
 #include "../RuntimeSettings.hpp"
 
-
 RoundedCube::RoundedCube()
 {
     //Set it to a static number, change size with a scale matrix
@@ -41,6 +40,22 @@ RoundedCube::RoundedCube()
                                             glm::vec3( -InitialSize, -InitialSize, -InitialSize ),
                                             glm::vec3(  InitialSize, -InitialSize, -InitialSize ),
                                             glm::vec3(  InitialSize, -InitialSize,  InitialSize ) ) );
+    
+    mNoise = new NoiseppNoise(
+      RuntimeSettings::Settings.Seed,
+      RuntimeSettings::Settings.Octaves,
+      RuntimeSettings::Settings.Persistence,
+      RuntimeSettings::Settings.Frequency,
+      RuntimeSettings::Settings.Quality,
+      RuntimeSettings::Settings.Scale,
+      RuntimeSettings::Settings.Lacunarity,
+      RuntimeSettings::Settings.Distortion
+      );
+
+    for( int i = 0; i < 6; i++ ) {
+        mSideMan[i]->SetNoise( mNoise );
+    }
+
     RebuildSides();
 }
 
@@ -49,6 +64,7 @@ RoundedCube::~RoundedCube()
     for( int i = 0; i < 6; i++ ) {
         delete mSideMan[i];
     }
+    delete mNoise;
 }
 
 int RoundedCube::GetVertexCount()
@@ -62,22 +78,32 @@ int RoundedCube::GetVertexCount()
     return count;
 }
 
-void RoundedCube::RebuildPlanes()
+void RoundedCube::RebuildNoise()
 {
-    //Only rebuild dynamically when realtime is wanted.
-    if( !RuntimeSettings::Settings.RealtimeRebuild ) {
-        return;
-    }
+  delete mNoise;
+  mNoise = NULL;
+
+  mNoise = new NoiseppNoise(
+      RuntimeSettings::Settings.Seed,
+      RuntimeSettings::Settings.Octaves,
+      RuntimeSettings::Settings.Persistence,
+      RuntimeSettings::Settings.Frequency,
+      RuntimeSettings::Settings.Quality,
+      RuntimeSettings::Settings.Scale,
+      RuntimeSettings::Settings.Lacunarity,
+      RuntimeSettings::Settings.Distortion
+      );
 
     for( int i = 0; i < 6; i++ ) {
-        mSideMan[i]->RebuildDistortions();
+        mSideMan[i]->SetNoise( mNoise );
     }
+
+
 }
 
 void RoundedCube::RebuildSides()
 {
     for( int i = 0; i < 6; i++ ) {
-        mSideMan[i]->RebuildDistortions();
         mSideMan[i]->RebuildSide();
     }
 }
