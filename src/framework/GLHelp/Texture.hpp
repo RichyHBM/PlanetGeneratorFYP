@@ -14,6 +14,7 @@ public:
     Texture();
     ~Texture();
     bool LoadFromFile( const std::string &pFileName );
+    bool LoadData( unsigned char *image, int Width, int Height );
     glm::vec2 GetSize();
     void Bind();
     static void Unbind();

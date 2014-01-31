@@ -83,7 +83,6 @@ void ProcessArgument( const std::string &arg, const std::string &arg2 )
         if( Util::StrTo<int> ( arg2 ) == 2 ) {
             Input::Manager.SetType( Input::NETWORK );
         }
-
     }
 }
 

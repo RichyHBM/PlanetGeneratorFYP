@@ -119,7 +119,6 @@ void SideManager::BindData()
         mNormalsList.push_back( Bnorm );
         mNormalsList.push_back( Bnorm );
         mNormalsList.push_back( Bnorm );
-
         glm::vec2 Auv = mQuads[i].GetUVA(),
                   Buv = mQuads[i].GetUVB(),
                   Cuv = mQuads[i].GetUVC(),
@@ -229,9 +228,10 @@ void SideManager::RebuildSide()
 void SideManager::Draw( const glm::mat4 &MVP, const Frustrum &frustrum )
 {
     //If the initial quad isnt in the frustrum then skip the draw
-    if(!RuntimeSettings::Settings.DrawHidden)
-        if( !frustrum.InFrustrumAndFacing( mInitialQuad ) )
+    if( !RuntimeSettings::Settings.DrawHidden )
+        if( !frustrum.InFrustrumAndFacing( mInitialQuad ) ) {
             return;
+        }
 
     glm::mat4 NormalMat = glm::transpose( glm::inverse( glm::mat4( 1.0f ) ) );
     mShader->Bind();
@@ -242,7 +242,7 @@ void SideManager::Draw( const glm::mat4 &MVP, const Frustrum &frustrum )
     glUniform1i( mShader->GetUniform ( "Texture" ), 0 );
     mPositionBuffer.Bind( 3 );
     mNormalBuffer.Bind( 3 );
-    mUVBuffer.Bind(2);
+    mUVBuffer.Bind( 2 );
     glDrawArrays ( GL_TRIANGLES, 0, mQuads.size() * 6 );
     mUVBuffer.Unbind();
     mNormalBuffer.Unbind();

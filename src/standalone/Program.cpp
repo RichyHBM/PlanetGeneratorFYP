@@ -112,7 +112,6 @@ void Program::Run()
 
     while( !mWindow->NeedsToClose() ) {
         RuntimeSettings::PreviousFrame = RuntimeSettings::Settings;
-
         mWindow->DoEvents();
 
         if( mWindow->IsFocused() ) {
@@ -174,7 +173,7 @@ void Program::Draw()
         glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
     }
 
-    mRoundedCube.Draw(mFrustrum);
+    mRoundedCube.Draw( mFrustrum );
     glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 
     if( RuntimeSettings::Settings.FreezeFrustrum ) {

@@ -59,6 +59,28 @@ bool Texture::LoadFromFile( const std::string &pFileName )
     return true;
 }
 
+bool Texture::LoadData( unsigned char *image, int Width, int Height )
+{
+    mWidth = Width;
+    mHeight = Height;
+
+    if( mTextureID != 0 ) {
+        glDeleteTextures( 1, &mTextureID );
+        Util::PrintGLErrors();
+    }
+
+    glGenTextures( 1, &mTextureID );
+    Util::PrintGLErrors();
+    glBindTexture( GL_TEXTURE_2D, mTextureID );
+    Util::PrintGLErrors();
+    //Convert the data to a texture
+    glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, mWidth, mHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image );
+    Util::PrintGLErrors();
+    Texture::GenMipmaps();
+    Texture::Unbind();
+    return true;
+}
+
 void Texture::Bind()
 {
     glBindTexture( GL_TEXTURE_2D, mTextureID );
@@ -73,21 +95,19 @@ void Texture::Unbind()
 
 bool Texture::GenMipmaps()
 {
-    bool result = false;
-
     //If the graphics card doesnt support genMipMaps then try as an extension
     if( glGenerateMipmap ) {
         glGenerateMipmap( GL_TEXTURE_2D );
         Util::PrintGLErrors();
-        result = true;
+        return true;
 
     } else if( glGenerateMipmapEXT ) {
         glGenerateMipmapEXT( GL_TEXTURE_2D );
         Util::PrintGLErrors();
-        result = true;
+        return true;
     }
 
-    return result;
+    return false;
 }
 
 glm::vec2 Texture::GetSize()

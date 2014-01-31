@@ -91,7 +91,7 @@ void RoundedCube::Update( const Frustrum &frustrum )
     }
 }
 
-void RoundedCube::Draw(const Frustrum &frustrum)
+void RoundedCube::Draw( const Frustrum &frustrum )
 {
     for( int i = 0; i < 6; i++ ) {
         mSideMan[i]->Draw( mMVP, frustrum );

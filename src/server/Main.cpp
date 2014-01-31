@@ -31,6 +31,7 @@ int main( int argc, const char *argv[] )
             WindowSettings::ParseArguments( argv[i], argv[i+1] );
         }
     }
+
     Input::Manager.SetType( Input::NETWORK );
     std::srand( RuntimeSettings::Settings.Seed );
     NoisePP.Init();
@@ -71,6 +72,5 @@ void ProcessArgument( const std::string &arg, const std::string &arg2 )
 {
     if( arg == "-seed" ) {
         RuntimeSettings::Settings.Seed = Util::StrTo<unsigned int> ( arg2 );
-
     }
 }

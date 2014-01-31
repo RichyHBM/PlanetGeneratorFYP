@@ -20,7 +20,7 @@ public:
     ~RoundedCube();
 
     void Update( const Frustrum &frustrum );
-    void Draw( const Frustrum &frustrum);
+    void Draw( const Frustrum &frustrum );
 
     void RebuildPlanes();
     void RebuildSides();
