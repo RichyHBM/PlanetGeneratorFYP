@@ -19,6 +19,10 @@ public:
     void Update();
     void Draw();
 
+    const int DistNear1, DistNear2, DistMedium3, DistFar4, DistFar5;
+
+    glm::vec3 Position() const;
+
     enum PLANESIDE { Near, Far, Top, Bottom, Left, Right };
 protected:
     Plane3d mPlanes[6];

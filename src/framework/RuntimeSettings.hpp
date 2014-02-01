@@ -19,6 +19,7 @@ public:
     bool LockMouse;
     bool FreezeFrustrum;
     bool DrawHidden;
+    bool RealtimeRebuild;
     glm::vec3 LightDirection;
 
     int Seed;

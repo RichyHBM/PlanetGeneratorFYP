@@ -4,7 +4,7 @@
 #include "../Managers/ResourceManager.hpp"
 #include "../Utilities.hpp"
 
-Frustrum::Frustrum()
+Frustrum::Frustrum() : DistNear1( 50 ), DistNear2( 75 ), DistMedium3( 120 ), DistFar4( 150 ), DistFar5( 200 )
 {
     mShaderTransparent = ResourceManager::GetShader( "SimpleTransparent", "./Resources/Simple.vert" ,"./Resources/SimpleTransparent.frag" );
     mShader = ResourceManager::GetShader( "Simple", "./Resources/Simple.vert" ,"./Resources/Simple.frag" );
@@ -32,6 +32,11 @@ Frustrum::Frustrum()
 Frustrum::~Frustrum()
 {
     mShader = NULL;
+}
+
+glm::vec3 Frustrum::Position() const
+{
+    return mPosition;
 }
 
 bool Frustrum::InFrustrum( const glm::vec3 &point ) const

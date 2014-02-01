@@ -29,7 +29,6 @@ NoiseppNoise::NoiseppNoise( int seed,int oct,double pers, double freq , int qual
     SetScale( scale );
     SetLacunarity( lacun );
     SetDistortion( distortion );
-    
     Init();
 }
 

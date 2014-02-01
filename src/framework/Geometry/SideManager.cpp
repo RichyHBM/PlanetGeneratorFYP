@@ -39,24 +39,7 @@ int SideManager::GetVertexCount()
     return mQuads.size() * 2;
 }
 
-std::vector<Quad> SideManager::Subdivide( const Quad &q )
-{
-    std::vector<Quad> quads;
-    glm::vec3 A = q.GetVerticeA(),
-              B = q.GetVerticeB(),
-              C = q.GetVerticeC(),
-              D = q.GetVerticeD();
-    glm::vec3 AB = ( A + B ) / glm::vec3( 2.0 );
-    glm::vec3 BC = ( B + C ) / glm::vec3( 2.0 );
-    glm::vec3 CD = ( C + D ) / glm::vec3( 2.0 );
-    glm::vec3 DA = ( D + A ) / glm::vec3( 2.0 );
-    glm::vec3 Middle = ( A + C ) / glm::vec3( 2.0 );
-    quads.push_back( Quad( A, AB, Middle, DA ) );
-    quads.push_back( Quad( AB, B, BC, Middle ) );
-    quads.push_back( Quad( Middle, BC, C, CD ) );
-    quads.push_back( Quad( DA, Middle, CD, D ) );
-    return quads;
-}
+
 
 void SideManager::Distort(  )
 {
@@ -96,23 +79,19 @@ void SideManager::BindData()
     std::vector<unsigned int> mIndices;
 
     for( int i = 0; i < mQuads.size(); i++ ) {
-        mPositionsList.push_back( mQuads[i].GetVerticeA());
-        mPositionsList.push_back( mQuads[i].GetVerticeB());
-        mPositionsList.push_back( mQuads[i].GetVerticeC());
-        mPositionsList.push_back( mQuads[i].GetVerticeD());
-
-        mNormalsList.push_back( mQuads[i].GetNormalA());
-        mNormalsList.push_back( mQuads[i].GetNormalB());
-        mNormalsList.push_back( mQuads[i].GetNormalC());
-        mNormalsList.push_back( mQuads[i].GetNormalD());
-
-        mUVsList.push_back( mQuads[i].GetUVA());
-        mUVsList.push_back( mQuads[i].GetUVB());
-        mUVsList.push_back( mQuads[i].GetUVC());
-        mUVsList.push_back( mQuads[i].GetUVD());
-            
+        mPositionsList.push_back( mQuads[i].GetVerticeA() );
+        mPositionsList.push_back( mQuads[i].GetVerticeB() );
+        mPositionsList.push_back( mQuads[i].GetVerticeC() );
+        mPositionsList.push_back( mQuads[i].GetVerticeD() );
+        mNormalsList.push_back( mQuads[i].GetNormalA() );
+        mNormalsList.push_back( mQuads[i].GetNormalB() );
+        mNormalsList.push_back( mQuads[i].GetNormalC() );
+        mNormalsList.push_back( mQuads[i].GetNormalD() );
+        mUVsList.push_back( mQuads[i].GetUVA() );
+        mUVsList.push_back( mQuads[i].GetUVB() );
+        mUVsList.push_back( mQuads[i].GetUVC() );
+        mUVsList.push_back( mQuads[i].GetUVD() );
         int size = mPositionsList.size();
-
         mIndices.push_back( size - 4 );
         mIndices.push_back( size - 3 );
         mIndices.push_back( size - 1 );
@@ -134,6 +113,83 @@ void SideManager::BindData()
 
 void SideManager::Update( const Frustrum &frustrum )
 {
+    if( !RuntimeSettings::Settings.RealtimeRebuild ) {
+        return;
+    }
+
+    mQuads.clear();
+    mInitialQuad.SetSize( RuntimeSettings::Settings.PlanetRadius );
+    mQuads.push_back( mInitialQuad );
+
+    //First subdivide to level 4, regardless of distance
+    for( int subd = 0; subd < 4; subd++ ) {
+        std::vector<Quad> mTempQuads;
+
+        for( int i = 0; i < mQuads.size(); i++ ) {
+            std::vector<Quad> subQuads = mQuads[i].Subdivide();
+            mTempQuads.push_back( subQuads[0] );
+            mTempQuads.push_back( subQuads[1] );
+            mTempQuads.push_back( subQuads[2] );
+            mTempQuads.push_back( subQuads[3] );
+        }
+
+        mQuads = mTempQuads;
+    }
+
+    Spherify();
+    std::vector<Quad> mTempQuads;
+
+    //Next subdivide quads that are within the distance required
+    for( int i = 0; i < mQuads.size(); i++ ) {
+        float distance = mQuads[i].ClosestDistance( frustrum.Position() );
+        int subdivisionlevel = 0;
+
+        if( distance < 0 ) {
+            std::cout << Util::Vec3ToString( frustrum.Position() ) << " " << Util::Vec3ToString( mQuads[i].GetVerticeA() ) << " " << distance << std::endl;
+        }
+
+        if( distance < frustrum.DistNear1 ) {
+            subdivisionlevel = 5;
+
+        } else if( distance < frustrum.DistNear2 ) {
+            subdivisionlevel = 4;
+
+        } else if( distance < frustrum.DistMedium3 ) {
+            subdivisionlevel = 3;
+
+        } else if( distance < frustrum.DistFar4 ) {
+            subdivisionlevel = 2;
+
+        } else if( distance < frustrum.DistFar5 ) {
+            subdivisionlevel = 1;
+        }
+
+        std::vector<Quad> tempQuads;
+        tempQuads.push_back( mQuads[i] );
+
+        for( int j = 0; j < subdivisionlevel; j++ ) {
+            std::vector<Quad> subdividedQuads;
+
+            for( int h = 0; h < tempQuads.size(); h++ ) {
+                std::vector<Quad> subQuads = tempQuads[h].Subdivide();
+                subdividedQuads.push_back( subQuads[0] );
+                subdividedQuads.push_back( subQuads[1] );
+                subdividedQuads.push_back( subQuads[2] );
+                subdividedQuads.push_back( subQuads[3] );
+            }
+
+            tempQuads = subdividedQuads;
+        }
+
+        for( int j = 0; j < tempQuads.size(); j++ ) {
+            mTempQuads.push_back( tempQuads[j] );
+        }
+    }
+
+    mQuads = mTempQuads;
+    Spherify();
+    Distort( );
+    BindData();
 }
 
 void SideManager::RebuildSide()
@@ -146,7 +202,7 @@ void SideManager::RebuildSide()
         std::vector<Quad> mTempQuads;
 
         for( int i = 0; i < mQuads.size(); i++ ) {
-            std::vector<Quad> subQuads = Subdivide( mQuads[i] );
+            std::vector<Quad> subQuads = mQuads[i].Subdivide();
             mTempQuads.push_back( subQuads[0] );
             mTempQuads.push_back( subQuads[1] );
             mTempQuads.push_back( subQuads[2] );

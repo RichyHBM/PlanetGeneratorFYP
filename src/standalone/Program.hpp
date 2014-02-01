@@ -9,7 +9,7 @@
 #include "framework/Geometry/RoundedCube.hpp"
 #include "framework/Physics/Frustrum.hpp"
 
-#include <AntTweakBar.h>
+
 
 class Program
 {
@@ -48,12 +48,6 @@ public:
     ///Get the delta amount in seconds, for 60fps this would be around 0.016
     ///
     const double GetDelta();
-
-    //Callbacks for the GUI controls
-    static void TW_CALL QuitButton( void *clientData );
-    static void TW_CALL RebuildButton( void *clientData );
-    static void TW_CALL GetLightDirection( void *value, void *clientData );
-    static void TW_CALL SetLightDirection( const void *value, void *clientData );
 
     DrawDebugInfo *GetDebugInfo();
     RoundedCube *GetRoundedCube();

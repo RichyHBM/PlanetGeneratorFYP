@@ -8,13 +8,13 @@ RuntimeSettings RuntimeSettings::PreviousFrame;
 RuntimeSettings::RuntimeSettings()
 {
     DrawLines = false;
-    Subdivisions = 1;
-    PlanetRadius = 100;
+    Subdivisions = 4;
+    PlanetRadius = 200;
     LockMouse = true;
     FreezeFrustrum = false;
     DrawHidden = true;
     LightDirection = glm::vec3( 0,0,-1 );
-
+    RealtimeRebuild = false;
     Seed = 1234;
     Octaves = 6;
     Persistence = 0.5;

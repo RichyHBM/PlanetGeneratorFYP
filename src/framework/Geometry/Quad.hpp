@@ -2,12 +2,14 @@
 #define QUAD_HPP
 
 #include <glm/glm.hpp>
+#include <vector>
 
 class Quad
 {
 public:
     Quad( const glm::vec3 &pA, const glm::vec3 &pB, const glm::vec3 &pC, const glm::vec3 &pD );
     ~Quad();
+    std::vector<Quad> Subdivide( );
     glm::vec3 GetVerticeA() const;
     glm::vec3 GetVerticeB() const;
     glm::vec3 GetVerticeC() const;
@@ -22,6 +24,8 @@ public:
     glm::vec2 GetUVB() const;
     glm::vec2 GetUVC() const;
     glm::vec2 GetUVD() const;
+
+    float ClosestDistance( const glm::vec3 &origin ) const;
 
     void SetSize( int size );
 protected:

@@ -40,17 +40,16 @@ RoundedCube::RoundedCube()
                                             glm::vec3( -InitialSize, -InitialSize, -InitialSize ),
                                             glm::vec3(  InitialSize, -InitialSize, -InitialSize ),
                                             glm::vec3(  InitialSize, -InitialSize,  InitialSize ) ) );
-    
     mNoise = new NoiseppNoise(
-      RuntimeSettings::Settings.Seed,
-      RuntimeSettings::Settings.Octaves,
-      RuntimeSettings::Settings.Persistence,
-      RuntimeSettings::Settings.Frequency,
-      RuntimeSettings::Settings.Quality,
-      RuntimeSettings::Settings.Scale,
-      RuntimeSettings::Settings.Lacunarity,
-      RuntimeSettings::Settings.Distortion
-      );
+        RuntimeSettings::Settings.Seed,
+        RuntimeSettings::Settings.Octaves,
+        RuntimeSettings::Settings.Persistence,
+        RuntimeSettings::Settings.Frequency,
+        RuntimeSettings::Settings.Quality,
+        RuntimeSettings::Settings.Scale,
+        RuntimeSettings::Settings.Lacunarity,
+        RuntimeSettings::Settings.Distortion
+    );
 
     for( int i = 0; i < 6; i++ ) {
         mSideMan[i]->SetNoise( mNoise );
@@ -64,6 +63,7 @@ RoundedCube::~RoundedCube()
     for( int i = 0; i < 6; i++ ) {
         delete mSideMan[i];
     }
+
     delete mNoise;
 }
 
@@ -80,25 +80,22 @@ int RoundedCube::GetVertexCount()
 
 void RoundedCube::RebuildNoise()
 {
-  delete mNoise;
-  mNoise = NULL;
-
-  mNoise = new NoiseppNoise(
-      RuntimeSettings::Settings.Seed,
-      RuntimeSettings::Settings.Octaves,
-      RuntimeSettings::Settings.Persistence,
-      RuntimeSettings::Settings.Frequency,
-      RuntimeSettings::Settings.Quality,
-      RuntimeSettings::Settings.Scale,
-      RuntimeSettings::Settings.Lacunarity,
-      RuntimeSettings::Settings.Distortion
-      );
+    delete mNoise;
+    mNoise = NULL;
+    mNoise = new NoiseppNoise(
+        RuntimeSettings::Settings.Seed,
+        RuntimeSettings::Settings.Octaves,
+        RuntimeSettings::Settings.Persistence,
+        RuntimeSettings::Settings.Frequency,
+        RuntimeSettings::Settings.Quality,
+        RuntimeSettings::Settings.Scale,
+        RuntimeSettings::Settings.Lacunarity,
+        RuntimeSettings::Settings.Distortion
+    );
 
     for( int i = 0; i < 6; i++ ) {
         mSideMan[i]->SetNoise( mNoise );
     }
-
-
 }
 
 void RoundedCube::RebuildSides()
