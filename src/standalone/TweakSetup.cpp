@@ -18,6 +18,39 @@ void TW_CALL RebuildButton( void *clientData )
     ( ( Program * )clientData )->GetRoundedCube()->RebuildSides();
 }
 
+void TW_CALL RebuildTextureButton( void *clientData )
+{
+    unsigned char image[256 * 256 * 4];
+    NoiseppNoise noise(
+        RuntimeSettings::Settings.ImgSeed,
+        RuntimeSettings::Settings.ImgOctaves,
+        RuntimeSettings::Settings.ImgPersistence,
+        RuntimeSettings::Settings.ImgFrequency,
+        RuntimeSettings::Settings.ImgQuality,
+        RuntimeSettings::Settings.ImgScale,
+        RuntimeSettings::Settings.ImgLacunarity,
+        RuntimeSettings::Settings.ImgDistortion
+    );
+    int i = 0;
+
+    for( int y = 0; y < 256; y++ ) {
+        for( int x = 0; x < 256; x++ ) {
+            unsigned char val = ( unsigned char )( noise.Generate( x, y ) * 100 );
+            image[0 + i * 4] = val;
+            image[1 + i * 4] = val;
+            image[2 + i * 4] = val;
+            image[3 + i * 4] = 255;
+            i++;
+        }
+    }
+
+    Texture *t = ( ( Program * )clientData )->GetRoundedCube()->GetTexture();
+    t->LoadData( image,256,256 );
+    ( ( Program * )clientData )->GetRoundedCube()->UpdateTextures();
+    ( ( Program * )clientData )->GetTextureRenderer()->SetTexture( t->GetGLUINT() );
+}
+
+
 void SetupTweakControls( Program *program )
 {
     TwBar *myBar;
@@ -45,4 +78,17 @@ void SetupTweakControls( Program *program )
     TwAddSeparator( myBar, NULL, NULL );
     TwAddButton( myBar, "Rebuild", RebuildButton, program, NULL );
     TwAddButton( myBar, "Quit", QuitButton, program->GetWindow(), NULL );
+    TwBar *myImageBar;
+    myImageBar = TwNewBar( "Texture Controls" );
+    TwSetParam( myImageBar, NULL, "position", TW_PARAM_CSTRING, 1, "540 250" );
+    TwAddVarRW( myImageBar, "Texture Seed", TW_TYPE_UINT32, &RuntimeSettings::Settings.ImgSeed, NULL );
+    TwAddVarRW( myImageBar, "Texture Octaves", TW_TYPE_UINT32, &RuntimeSettings::Settings.ImgOctaves, NULL );
+    TwAddVarRW( myImageBar, "Texture Persistence", TW_TYPE_DOUBLE, &RuntimeSettings::Settings.ImgPersistence, NULL );
+    TwAddVarRW( myImageBar, "Texture Frequency", TW_TYPE_DOUBLE, &RuntimeSettings::Settings.ImgFrequency, NULL );
+    TwAddVarRW( myImageBar, "Texture Quality", TW_TYPE_UINT32, &RuntimeSettings::Settings.ImgQuality, NULL );
+    TwAddVarRW( myImageBar, "Texture Scale", TW_TYPE_DOUBLE, &RuntimeSettings::Settings.ImgScale, NULL );
+    TwAddVarRW( myImageBar, "Texture Lacunarity", TW_TYPE_DOUBLE, &RuntimeSettings::Settings.ImgLacunarity, NULL );
+    TwAddVarRW( myImageBar, "Texture Distortion", TW_TYPE_DOUBLE, &RuntimeSettings::Settings.ImgDistortion, NULL );
+    TwAddSeparator( myImageBar, NULL, NULL );
+    TwAddButton( myImageBar, "Rebuild Texture", RebuildTextureButton, program, NULL );
 }

@@ -19,6 +19,8 @@ public:
     void Bind();
     static void Unbind();
 
+    GLuint GetGLUINT();
+
     //Generate mipmaps performing safety check
     static bool GenMipmaps();
 

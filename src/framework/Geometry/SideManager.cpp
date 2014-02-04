@@ -217,6 +217,11 @@ void SideManager::RebuildSide()
     BindData();
 }
 
+void SideManager::SetTexture( Texture *texture )
+{
+    mTerrainTexture = texture;
+}
+
 void SideManager::Draw( const glm::mat4 &MVP, const Frustrum &frustrum )
 {
     //If the initial quad isnt in the frustrum then skip the draw

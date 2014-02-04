@@ -50,6 +50,7 @@ RoundedCube::RoundedCube()
         RuntimeSettings::Settings.Lacunarity,
         RuntimeSettings::Settings.Distortion
     );
+    mTexture = new Texture();
 
     for( int i = 0; i < 6; i++ ) {
         mSideMan[i]->SetNoise( mNoise );
@@ -65,6 +66,7 @@ RoundedCube::~RoundedCube()
     }
 
     delete mNoise;
+    delete mTexture;
 }
 
 int RoundedCube::GetVertexCount()
@@ -118,5 +120,17 @@ void RoundedCube::Draw( const Frustrum &frustrum )
 {
     for( int i = 0; i < 6; i++ ) {
         mSideMan[i]->Draw( mMVP, frustrum );
+    }
+}
+
+Texture *RoundedCube::GetTexture()
+{
+    return mTexture;
+}
+
+void RoundedCube::UpdateTextures()
+{
+    for( int i = 0; i < 6; i++ ) {
+        mSideMan[i]->SetTexture( mTexture );
     }
 }

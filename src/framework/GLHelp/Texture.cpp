@@ -87,6 +87,11 @@ void Texture::Bind()
     Util::PrintGLErrors();
 }
 
+GLuint Texture::GetGLUINT()
+{
+    return mTextureID;
+}
+
 void Texture::Unbind()
 {
     glBindTexture( GL_TEXTURE_2D, 0 );

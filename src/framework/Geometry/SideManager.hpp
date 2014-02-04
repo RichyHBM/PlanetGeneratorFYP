@@ -21,6 +21,7 @@ public:
     int GetVertexCount();
     void RebuildSide();
     void SetNoise( NoiseppNoise *noise );
+    void SetTexture( Texture *texture );
 
 protected:
     void NormalizeVert( glm::vec3 &v );

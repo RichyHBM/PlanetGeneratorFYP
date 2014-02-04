@@ -27,9 +27,12 @@ public:
     void RebuildNoise();
 
     int GetVertexCount();
+    Texture *GetTexture();
+    void UpdateTextures();
 protected:
     NoiseppNoise *mNoise;
     SideManager *mSideMan[6];
     glm::mat4 mMVP;
+    Texture *mTexture;
 };
 #endif //ROUNDEDCUBE_HPP
