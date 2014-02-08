@@ -3,6 +3,7 @@
 
 #include "../GLHelp/GLHelp.hpp"
 #include "SideManager.hpp"
+#include "WaterSideManager.hpp"
 #include "../Physics/Frustrum.hpp"
 #include "../Noise/NoiseppNoise.hpp"
 
@@ -32,6 +33,7 @@ public:
 protected:
     NoiseppNoise *mNoise;
     SideManager *mSideMan[6];
+    WaterSideManager *mWaterSideMan[6];
     glm::mat4 mMVP;
     Texture *mTexture;
 };

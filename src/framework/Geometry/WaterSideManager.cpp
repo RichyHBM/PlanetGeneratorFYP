@@ -1,32 +1,26 @@
 #include <glm/gtx/transform2.hpp>
 
-#include "SideManager.hpp"
+#include "WaterSideManager.hpp"
 
 #include "../Managers/ResourceManager.hpp"
 #include "../Noise/NoiseppNoise.hpp"
 
-SideManager::SideManager( const Quad &q ): mInitialQuad( q )
+WaterSideManager::WaterSideManager( const Quad &q ): mInitialQuad( q )
 {
-    mShader = ResourceManager::GetShader( "Icosphere", "./Resources/Icosphere.vert" ,"./Resources/Icosphere.frag" );
+    mShader = ResourceManager::GetShader( "Water", "./Resources/Water.vert" ,"./Resources/Water.frag" );
     mPositionBuffer.SetAttributeIndex( mShader->GetAttribute( "Position" ) );
     mNormalBuffer.SetAttributeIndex( mShader->GetAttribute( "Normal" ) );
     mUVBuffer.SetAttributeIndex( mShader->GetAttribute( "UV" ) );
-    mSandTexture = ResourceManager::GetTexture( "SandTextures", "./Resources/Sand.png" );
-    mGrassTexture = ResourceManager::GetTexture( "GrassTextures", "./Resources/Grass.png" );
+    mTerrainTexture = ResourceManager::GetTexture( "WaterTextures", "./Resources/Water.png" );
     mQuads.push_back( mInitialQuad );
 }
 
-SideManager::~SideManager()
+WaterSideManager::~WaterSideManager()
 {
     mShader = NULL;
 }
 
-void SideManager::SetNoise( NoiseppNoise *noise )
-{
-    mNoise = noise;
-}
-
-void SideManager::NormalizeVert( glm::vec3 &v )
+void WaterSideManager::NormalizeVert( glm::vec3 &v )
 {
     float length = RuntimeSettings::Settings.PlanetRadius * 2;
     float dist = glm::length( v );
@@ -35,29 +29,12 @@ void SideManager::NormalizeVert( glm::vec3 &v )
     v.z = v.z * length / dist;
 }
 
-int SideManager::GetVertexCount()
+int WaterSideManager::GetVertexCount()
 {
     return mQuads.size() * 2;
 }
 
-
-
-void SideManager::Distort(  )
-{
-    for( int i = 0; i < mQuads.size(); i++ ) {
-        glm::vec3 pos[4];
-
-        for( int j = 0; j < 4; j++ ) {
-            pos[j] = mQuads[i].GetVertice( j );
-            float dist = mNoise->Generate( pos[j].x, pos[j].y, pos[j].z ) + 1;
-            pos[j] = glm::vec3( dist * glm::vec4( pos[j].x, pos[j].y, pos[j].z, 0 ) );
-        }
-
-        mQuads[i] = Quad( pos[0], pos[1], pos[2], pos[3] );
-    }
-}
-
-void SideManager::Spherify()
+void WaterSideManager::Spherify()
 {
     for( int i = 0; i < mQuads.size(); i++ ) {
         glm::vec3 A = mQuads[i].GetVerticeA(),
@@ -72,7 +49,7 @@ void SideManager::Spherify()
     }
 }
 
-void SideManager::BindData()
+void WaterSideManager::BindData()
 {
     std::vector<glm::vec3> mPositionsList;
     std::vector<glm::vec3> mNormalsList;
@@ -112,7 +89,7 @@ void SideManager::BindData()
 }
 
 
-void SideManager::Update( const Frustrum &frustrum )
+void WaterSideManager::Update( const Frustrum &frustrum )
 {
     if( !RuntimeSettings::Settings.RealtimeRebuild ) {
         return;
@@ -189,11 +166,10 @@ void SideManager::Update( const Frustrum &frustrum )
 
     mQuads = mTempQuads;
     Spherify();
-    Distort( );
     BindData();
 }
 
-void SideManager::RebuildSide()
+void WaterSideManager::RebuildSide()
 {
     mQuads.clear();
     mInitialQuad.SetSize( RuntimeSettings::Settings.PlanetRadius );
@@ -214,16 +190,10 @@ void SideManager::RebuildSide()
     }
 
     Spherify();
-    Distort( );
     BindData();
 }
 
-void SideManager::SetTexture( Texture *texture )
-{
-    mGrassTexture = texture;
-}
-
-void SideManager::Draw( const glm::mat4 &MVP, const Frustrum &frustrum )
+void WaterSideManager::Draw( const glm::mat4 &MVP, const Frustrum &frustrum )
 {
     //If the initial quad isnt in the frustrum then skip the draw
     if( !RuntimeSettings::Settings.DrawHidden )
@@ -236,17 +206,8 @@ void SideManager::Draw( const glm::mat4 &MVP, const Frustrum &frustrum )
     glUniformMatrix4fv( mShader->GetUniform( "MVP" ), 1, GL_FALSE, &MVP[0][0] );
     glUniformMatrix4fv( mShader->GetUniform( "NormalMat" ), 1, GL_FALSE, &NormalMat[0][0] );
     glUniform3fv( mShader->GetUniform( "LightDirection" ), 1, &RuntimeSettings::Settings.LightDirection[0] );
-    glUniform1f(mShader->GetUniform( "Height" ), RuntimeSettings::Settings.PlanetRadius);
-    
-    glActiveTexture(GL_TEXTURE0);
-    mSandTexture->Bind();
-    glUniform1i( mShader->GetUniform ( "SandTexture" ), 0 );
-
-    glActiveTexture(GL_TEXTURE1);
-    mGrassTexture->Bind();
-    glUniform1i( mShader->GetUniform ( "GrassTexture" ), 1 );
-
-
+    mTerrainTexture->Bind();
+    glUniform1i( mShader->GetUniform ( "Texture" ), 0 );
     mPositionBuffer.Bind( 3 );
     mNormalBuffer.Bind( 3 );
     mUVBuffer.Bind( 2 );

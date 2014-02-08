@@ -9,12 +9,10 @@ attribute vec2 UV;
 
 varying vec3 normal;
 varying vec2 texCoord;
-varying vec3 position;
+
 
 void main()
 {
-	position = Position.xyz;
-
 	texCoord = UV;
 	normal = ( NormalMat * vec4(Normal, 0.0) ).xyz; 
 	gl_Position = (MVP * Position);
