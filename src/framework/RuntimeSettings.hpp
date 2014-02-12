@@ -31,14 +31,9 @@ public:
     double Lacunarity;
     double Distortion;
 
-    int ImgSeed;
-    int ImgOctaves;
-    double ImgPersistence;
-    double ImgFrequency;
-    int ImgQuality;
-    double ImgScale;
-    double ImgLacunarity;
-    double ImgDistortion;
+    float GrassHeight;
+    float DirtHeight;
+    float SnowHeight;
 };
 
 #endif // RUNTIMESETTINGS_HPP

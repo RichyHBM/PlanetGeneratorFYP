@@ -17,13 +17,8 @@ Program::Program( Window *pWindow ) : mDebugInfo( pWindow )
     TwInit( TW_OPENGL, NULL );
     TwWindowSize( WindowSettings::Running.GetWidth(), WindowSettings::Running.GetHeight() );
     SetupTweakControls( this );
-    mTextureRenderer.Create( 256,256 );
-    mTextureRenderer.SetPosition( glm::vec2( WindowSettings::Running.GetWidth() - 266, 10 ) );
     glm::mat4 ortho = MatrixControl.OrthographicView();
-    mTextureRenderer.SetOrtho( ortho );
 }
-
-
 
 Program::~Program()
 {
@@ -45,11 +40,6 @@ RoundedCube *Program::GetRoundedCube()
 Window *Program::GetWindow()
 {
     return mWindow;
-}
-
-TextureRenderer *Program::GetTextureRenderer()
-{
-    return &mTextureRenderer;
 }
 
 void Program::Run()
@@ -127,7 +117,6 @@ void Program::Draw()
     }
 
     if( !RuntimeSettings::Settings.LockMouse ) {
-        mTextureRenderer.Draw();
         mDebugInfo.Draw();
         mWindow->SaveGLStates();
         TwDraw();

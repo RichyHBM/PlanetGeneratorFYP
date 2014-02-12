@@ -23,12 +23,8 @@ RuntimeSettings::RuntimeSettings()
     Scale = 0.025;
     Lacunarity = 2;
     Distortion = 0.01;
-    ImgSeed = 1234;
-    ImgOctaves = 6;
-    ImgPersistence = 0.5;
-    ImgFrequency = 2;
-    ImgQuality = 1;
-    ImgScale = 0.025;
-    ImgLacunarity = 2;
-    ImgDistortion = 0.01;
+
+    GrassHeight = (PlanetRadius*2) + 1;
+    DirtHeight = (PlanetRadius*2) + 3;
+    SnowHeight = (PlanetRadius*2) + 7;
 }

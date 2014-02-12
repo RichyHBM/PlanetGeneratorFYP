@@ -52,10 +52,8 @@ public:
     DrawDebugInfo *GetDebugInfo();
     RoundedCube *GetRoundedCube();
     Window *GetWindow();
-    TextureRenderer *GetTextureRenderer();
-
+    
 protected:
-    TextureRenderer mTextureRenderer;
     Frustrum mFrustrum;
     Window *mWindow;
     DrawDebugInfo mDebugInfo;

@@ -220,11 +220,6 @@ void SideManager::RebuildSide()
     BindData();
 }
 
-void SideManager::SetTexture( Texture *texture )
-{
-    mGrassTexture = texture;
-}
-
 void SideManager::Draw( const glm::mat4 &MVP, const Frustrum &frustrum )
 {
     //If the initial quad isnt in the frustrum then skip the draw
@@ -238,7 +233,10 @@ void SideManager::Draw( const glm::mat4 &MVP, const Frustrum &frustrum )
     glUniformMatrix4fv( mShader->GetUniform( "MVP" ), 1, GL_FALSE, &MVP[0][0] );
     glUniformMatrix4fv( mShader->GetUniform( "NormalMat" ), 1, GL_FALSE, &NormalMat[0][0] );
     glUniform3fv( mShader->GetUniform( "LightDirection" ), 1, &RuntimeSettings::Settings.LightDirection[0] );
-    glUniform1f(mShader->GetUniform( "Height" ), RuntimeSettings::Settings.PlanetRadius);
+    
+    glUniform1f(mShader->GetUniform( "GrassHeight" ), RuntimeSettings::Settings.GrassHeight);
+    glUniform1f(mShader->GetUniform( "DirtHeight" ), RuntimeSettings::Settings.DirtHeight);
+    glUniform1f(mShader->GetUniform( "SnowHeight" ), RuntimeSettings::Settings.SnowHeight);
     
     glActiveTexture(GL_TEXTURE0);
     mSandTexture->Bind();
