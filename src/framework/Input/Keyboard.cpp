@@ -37,6 +37,10 @@ void Keyboard::Update()
                       );
     glm::vec3 pos = MatrixControl.Position();
 
+    if(sf::Keyboard::isKeyPressed( sf::Keyboard::LShift ) ) {
+        keyboardSpeed *= 3;
+    }
+
     if ( sf::Keyboard::isKeyPressed( sf::Keyboard::W ) ) {
         pos += direction * delta * keyboardSpeed;
     }

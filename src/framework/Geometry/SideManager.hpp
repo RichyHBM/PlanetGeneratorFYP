@@ -39,6 +39,8 @@ protected:
     Shader *mShader;
     Texture *mSandTexture;
     Texture *mGrassTexture;
+    Texture *mDirtTexture;
+    Texture *mSnowTexture;
 private:
 };
 

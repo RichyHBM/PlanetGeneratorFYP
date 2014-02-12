@@ -6,6 +6,8 @@ varying vec3 normal;
 varying vec2 texCoord;
 uniform sampler2D SandTexture;
 uniform sampler2D GrassTexture;
+uniform sampler2D DirtTexture;
+uniform sampler2D SnowTexture;
 varying vec3 position;
 
 void main() 

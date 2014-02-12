@@ -13,6 +13,8 @@ SideManager::SideManager( const Quad &q ): mInitialQuad( q )
     mUVBuffer.SetAttributeIndex( mShader->GetAttribute( "UV" ) );
     mSandTexture = ResourceManager::GetTexture( "SandTextures", "./Resources/Sand.png" );
     mGrassTexture = ResourceManager::GetTexture( "GrassTextures", "./Resources/Grass.png" );
+    mDirtTexture = ResourceManager::GetTexture( "DirtTextures", "./Resources/Earth.png" );
+    mSnowTexture = ResourceManager::GetTexture( "SnowTextures", "./Resources/Snow.png" );
     mQuads.push_back( mInitialQuad );
 }
 
@@ -246,6 +248,13 @@ void SideManager::Draw( const glm::mat4 &MVP, const Frustrum &frustrum )
     mGrassTexture->Bind();
     glUniform1i( mShader->GetUniform ( "GrassTexture" ), 1 );
 
+    glActiveTexture(GL_TEXTURE2);
+    mDirtTexture->Bind();
+    glUniform1i( mShader->GetUniform ( "DirtTexture" ), 2 );
+
+    glActiveTexture(GL_TEXTURE3);
+    mSnowTexture->Bind();
+    glUniform1i( mShader->GetUniform ( "SnowTexture" ), 3 );
 
     mPositionBuffer.Bind( 3 );
     mNormalBuffer.Bind( 3 );
