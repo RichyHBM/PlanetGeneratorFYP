@@ -27,6 +27,7 @@ protected:
 
     std::vector<Quad> mQuads;
 
+    float mSinDisplacement;
     VBO mIndexBuffer;
     VBO mPositionBuffer;
     VBO mNormalBuffer;

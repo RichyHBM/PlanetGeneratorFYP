@@ -35,7 +35,8 @@ void SetupTweakControls( Program *program )
     TwAddVarRW( myBar, "Grass Height", TW_TYPE_FLOAT, &RuntimeSettings::Settings.GrassHeight, NULL );
     TwAddVarRW( myBar, "Dirt Height", TW_TYPE_FLOAT, &RuntimeSettings::Settings.DirtHeight, NULL );
     TwAddVarRW( myBar, "Snow Height", TW_TYPE_FLOAT, &RuntimeSettings::Settings.SnowHeight, NULL );  
-
+    TwAddVarRW( myBar, "Wave Size", TW_TYPE_FLOAT, &RuntimeSettings::Settings.WaveSize, NULL );  
+    TwAddVarRW( myBar, "Sin Amount", TW_TYPE_FLOAT, &RuntimeSettings::Settings.SinAmount, NULL ); 
     TwAddSeparator( myBar, NULL, NULL );
     TwAddVarRW( myBar, "Light Direction", TW_TYPE_DIR3F, &RuntimeSettings::Settings.LightDirection, NULL );
     TwAddSeparator( myBar, NULL, NULL );

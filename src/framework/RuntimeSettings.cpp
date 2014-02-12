@@ -27,4 +27,7 @@ RuntimeSettings::RuntimeSettings()
     GrassHeight = (PlanetRadius*2) + 1;
     DirtHeight = (PlanetRadius*2) + 3;
     SnowHeight = (PlanetRadius*2) + 7;
+
+    WaveSize = 0.002f;
+    SinAmount = 0.001f;
 }

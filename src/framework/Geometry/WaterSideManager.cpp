@@ -13,6 +13,7 @@ WaterSideManager::WaterSideManager( const Quad &q ): mInitialQuad( q )
     mUVBuffer.SetAttributeIndex( mShader->GetAttribute( "UV" ) );
     mTerrainTexture = ResourceManager::GetTexture( "WaterTextures", "./Resources/Water.png" );
     mQuads.push_back( mInitialQuad );
+    mSinDisplacement = 0;
 }
 
 WaterSideManager::~WaterSideManager()
@@ -91,6 +92,8 @@ void WaterSideManager::BindData()
 
 void WaterSideManager::Update( const Frustrum &frustrum )
 {
+    mSinDisplacement += RuntimeSettings::Settings.SinAmount;
+
     if( !RuntimeSettings::Settings.RealtimeRebuild ) {
         return;
     }
@@ -206,6 +209,9 @@ void WaterSideManager::Draw( const glm::mat4 &MVP, const Frustrum &frustrum )
     glUniformMatrix4fv( mShader->GetUniform( "MVP" ), 1, GL_FALSE, &MVP[0][0] );
     glUniformMatrix4fv( mShader->GetUniform( "NormalMat" ), 1, GL_FALSE, &NormalMat[0][0] );
     glUniform3fv( mShader->GetUniform( "LightDirection" ), 1, &RuntimeSettings::Settings.LightDirection[0] );
+    
+    glUniform1f(mShader->GetUniform( "SinNumber" ), mSinDisplacement);
+    glUniform1f(mShader->GetUniform( "WaveSize" ), RuntimeSettings::Settings.WaveSize);
     mTerrainTexture->Bind();
     glUniform1i( mShader->GetUniform ( "Texture" ), 0 );
     mPositionBuffer.Bind( 3 );

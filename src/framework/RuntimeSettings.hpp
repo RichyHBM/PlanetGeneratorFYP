@@ -34,6 +34,9 @@ public:
     float GrassHeight;
     float DirtHeight;
     float SnowHeight;
+    float WaveSize;
+
+    float SinAmount;
 };
 
 #endif // RUNTIMESETTINGS_HPP
