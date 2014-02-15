@@ -96,7 +96,7 @@ void Texture::Unbind()
 {
     glBindTexture( GL_TEXTURE_2D, 0 );
     Util::PrintGLErrors();
-    glActiveTexture(GL_TEXTURE0);
+    glActiveTexture( GL_TEXTURE0 );
     Util::PrintGLErrors();
 }
 

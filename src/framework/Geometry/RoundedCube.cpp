@@ -10,57 +10,48 @@ RoundedCube::RoundedCube()
 {
     //Set it to a static number, change size with a scale matrix
     float InitialSize = 1;
-
     Quad front(
-                                           glm::vec3( -InitialSize,  InitialSize, InitialSize ),
-                                           glm::vec3( -InitialSize, -InitialSize, InitialSize ),
-                                           glm::vec3(  InitialSize, -InitialSize, InitialSize ),
-                                           glm::vec3(  InitialSize,  InitialSize, InitialSize ) );
-
+        glm::vec3( -InitialSize,  InitialSize, InitialSize ),
+        glm::vec3( -InitialSize, -InitialSize, InitialSize ),
+        glm::vec3(  InitialSize, -InitialSize, InitialSize ),
+        glm::vec3(  InitialSize,  InitialSize, InitialSize ) );
     Quad right(
-                                           glm::vec3( InitialSize,  InitialSize, InitialSize ),
-                                           glm::vec3( InitialSize, -InitialSize, InitialSize ),
-                                           glm::vec3( InitialSize, -InitialSize,-InitialSize ),
-                                           glm::vec3( InitialSize,  InitialSize,-InitialSize ) );
-
+        glm::vec3( InitialSize,  InitialSize, InitialSize ),
+        glm::vec3( InitialSize, -InitialSize, InitialSize ),
+        glm::vec3( InitialSize, -InitialSize,-InitialSize ),
+        glm::vec3( InitialSize,  InitialSize,-InitialSize ) );
     Quad back(
-                                          glm::vec3( InitialSize,  InitialSize, -InitialSize ),
-                                          glm::vec3( InitialSize, -InitialSize, -InitialSize ),
-                                          glm::vec3( -InitialSize, -InitialSize, -InitialSize ),
-                                          glm::vec3( -InitialSize,  InitialSize, -InitialSize ) );
-
+        glm::vec3( InitialSize,  InitialSize, -InitialSize ),
+        glm::vec3( InitialSize, -InitialSize, -InitialSize ),
+        glm::vec3( -InitialSize, -InitialSize, -InitialSize ),
+        glm::vec3( -InitialSize,  InitialSize, -InitialSize ) );
     Quad left(
-                                          glm::vec3( -InitialSize,  InitialSize, -InitialSize ),
-                                          glm::vec3( -InitialSize, -InitialSize, -InitialSize ),
-                                          glm::vec3( -InitialSize, -InitialSize,  InitialSize ),
-                                          glm::vec3( -InitialSize,  InitialSize,  InitialSize ) );
-
+        glm::vec3( -InitialSize,  InitialSize, -InitialSize ),
+        glm::vec3( -InitialSize, -InitialSize, -InitialSize ),
+        glm::vec3( -InitialSize, -InitialSize,  InitialSize ),
+        glm::vec3( -InitialSize,  InitialSize,  InitialSize ) );
     Quad top(
-                                         glm::vec3( -InitialSize,  InitialSize, -InitialSize ),
-                                         glm::vec3( -InitialSize,  InitialSize,  InitialSize ),
-                                         glm::vec3(  InitialSize,  InitialSize, InitialSize ),
-                                         glm::vec3(  InitialSize,  InitialSize,  -InitialSize ) );
-
+        glm::vec3( -InitialSize,  InitialSize, -InitialSize ),
+        glm::vec3( -InitialSize,  InitialSize,  InitialSize ),
+        glm::vec3(  InitialSize,  InitialSize, InitialSize ),
+        glm::vec3(  InitialSize,  InitialSize,  -InitialSize ) );
     Quad bottom(
-                                            glm::vec3( -InitialSize, -InitialSize,  InitialSize ),
-                                            glm::vec3( -InitialSize, -InitialSize, -InitialSize ),
-                                            glm::vec3(  InitialSize, -InitialSize, -InitialSize ),
-                                            glm::vec3(  InitialSize, -InitialSize,  InitialSize ) );
-
+        glm::vec3( -InitialSize, -InitialSize,  InitialSize ),
+        glm::vec3( -InitialSize, -InitialSize, -InitialSize ),
+        glm::vec3(  InitialSize, -InitialSize, -InitialSize ),
+        glm::vec3(  InitialSize, -InitialSize,  InitialSize ) );
     mSideMan[Front] = new SideManager( front );
     mSideMan[Right] = new SideManager( right );
     mSideMan[Back] = new SideManager( back );
     mSideMan[Left] = new SideManager( left );
     mSideMan[Top] = new SideManager( top );
     mSideMan[Bottom] = new SideManager( bottom );
-
     mWaterSideMan[Front] = new WaterSideManager( front );
     mWaterSideMan[Right] = new WaterSideManager( right );
     mWaterSideMan[Back] = new WaterSideManager( back );
     mWaterSideMan[Left] = new WaterSideManager( left );
     mWaterSideMan[Top] = new WaterSideManager( top );
     mWaterSideMan[Bottom] = new WaterSideManager( bottom );
-
     mNoise = new NoiseppNoise(
         RuntimeSettings::Settings.Seed,
         RuntimeSettings::Settings.Octaves,

@@ -19,11 +19,13 @@ cp ../external/lib/linux/libAntTweakBar64.so ../bin/Release64/libAntTweakBar64.s
 touch ../bin/Debug64/runServer.sh
 echo '#!/bin/sh' > ../bin/Debug64/runServer.sh
 echo 'export LD_LIBRARY_PATH=.' >> ../bin/Debug64/runServer.sh
+echo 'export set DISPLAY=":0.0"' >> ../bin/Debug64/runServer.sh
 echo './Server $@' >> ../bin/Debug64/runServer.sh
 
 touch ../bin/Release64/runServer.sh
 echo '#!/bin/sh' > ../bin/Release64/runServer.sh
 echo 'export LD_LIBRARY_PATH=.' >> ../bin/Release64/runServer.sh
+echo 'export set DISPLAY=":0.0"' >> ../bin/Release64/runServer.sh
 echo './Server $@' >> ../bin/Release64/runServer.sh
 
 

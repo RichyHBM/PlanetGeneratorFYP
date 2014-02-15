@@ -233,27 +233,21 @@ void SideManager::Draw( const glm::mat4 &MVP, const Frustrum &frustrum )
     glUniformMatrix4fv( mShader->GetUniform( "MVP" ), 1, GL_FALSE, &MVP[0][0] );
     glUniformMatrix4fv( mShader->GetUniform( "NormalMat" ), 1, GL_FALSE, &NormalMat[0][0] );
     glUniform3fv( mShader->GetUniform( "LightDirection" ), 1, &RuntimeSettings::Settings.LightDirection[0] );
-    
-    glUniform1f(mShader->GetUniform( "GrassHeight" ), RuntimeSettings::Settings.GrassHeight);
-    glUniform1f(mShader->GetUniform( "DirtHeight" ), RuntimeSettings::Settings.DirtHeight);
-    glUniform1f(mShader->GetUniform( "SnowHeight" ), RuntimeSettings::Settings.SnowHeight);
-    
-    glActiveTexture(GL_TEXTURE0);
+    glUniform1f( mShader->GetUniform( "GrassHeight" ), RuntimeSettings::Settings.GrassHeight );
+    glUniform1f( mShader->GetUniform( "DirtHeight" ), RuntimeSettings::Settings.DirtHeight );
+    glUniform1f( mShader->GetUniform( "SnowHeight" ), RuntimeSettings::Settings.SnowHeight );
+    glActiveTexture( GL_TEXTURE0 );
     mSandTexture->Bind();
     glUniform1i( mShader->GetUniform ( "SandTexture" ), 0 );
-
-    glActiveTexture(GL_TEXTURE1);
+    glActiveTexture( GL_TEXTURE1 );
     mGrassTexture->Bind();
     glUniform1i( mShader->GetUniform ( "GrassTexture" ), 1 );
-
-    glActiveTexture(GL_TEXTURE2);
+    glActiveTexture( GL_TEXTURE2 );
     mDirtTexture->Bind();
     glUniform1i( mShader->GetUniform ( "DirtTexture" ), 2 );
-
-    glActiveTexture(GL_TEXTURE3);
+    glActiveTexture( GL_TEXTURE3 );
     mSnowTexture->Bind();
     glUniform1i( mShader->GetUniform ( "SnowTexture" ), 3 );
-
     mPositionBuffer.Bind( 3 );
     mNormalBuffer.Bind( 3 );
     mUVBuffer.Bind( 2 );

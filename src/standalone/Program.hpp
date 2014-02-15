@@ -52,7 +52,7 @@ public:
     DrawDebugInfo *GetDebugInfo();
     RoundedCube *GetRoundedCube();
     Window *GetWindow();
-    
+
 protected:
     Frustrum mFrustrum;
     Window *mWindow;

@@ -23,11 +23,9 @@ RuntimeSettings::RuntimeSettings()
     Scale = 0.025;
     Lacunarity = 2;
     Distortion = 0.01;
-
-    GrassHeight = (PlanetRadius*2) + 1;
-    DirtHeight = (PlanetRadius*2) + 3;
-    SnowHeight = (PlanetRadius*2) + 7;
-
+    GrassHeight = ( PlanetRadius*2 ) + 1;
+    DirtHeight = ( PlanetRadius*2 ) + 3;
+    SnowHeight = ( PlanetRadius*2 ) + 7;
     WaveSize = 0.002f;
     SinAmount = 0.001f;
 }

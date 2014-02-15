@@ -42,6 +42,5 @@ solution "PlanetGeneratorFYP"
 		end
 		
 	dofile "./premakes/standalone.lua"
-	dofile "./premakes/test.lua"
 	dofile "./premakes/server.lua"
 	dofile "./premakes/framework.lua"
