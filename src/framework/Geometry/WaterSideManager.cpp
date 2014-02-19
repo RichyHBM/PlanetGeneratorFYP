@@ -21,7 +21,7 @@ WaterSideManager::~WaterSideManager()
 
 void WaterSideManager::NormalizeVert( glm::vec3 &v )
 {
-    float length = RuntimeSettings::Settings.PlanetRadius * 2;
+    float length = RuntimeSettings::Settings.WaterRadius * 2;
     float dist = glm::length( v );
     v.x = v.x * length / dist;
     v.y = v.y * length / dist;
@@ -91,7 +91,7 @@ void WaterSideManager::Update( const Frustrum &frustrum )
     }
 
     mQuads.clear();
-    mInitialQuad.SetSize( RuntimeSettings::Settings.PlanetRadius );
+    mInitialQuad.SetSize( RuntimeSettings::Settings.WaterRadius );
     mQuads.push_back( mInitialQuad );
 
     //First subdivide to level 4, regardless of distance
@@ -167,7 +167,7 @@ void WaterSideManager::Update( const Frustrum &frustrum )
 void WaterSideManager::RebuildSide()
 {
     mQuads.clear();
-    mInitialQuad.SetSize( RuntimeSettings::Settings.PlanetRadius );
+    mInitialQuad.SetSize( RuntimeSettings::Settings.WaterRadius );
     mQuads.push_back( mInitialQuad );
 
     for( int subd = 0; subd < RuntimeSettings::Settings.Subdivisions; subd++ ) {

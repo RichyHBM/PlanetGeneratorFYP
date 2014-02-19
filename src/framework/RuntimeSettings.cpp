@@ -10,6 +10,7 @@ RuntimeSettings::RuntimeSettings()
     DrawLines = false;
     Subdivisions = 4;
     PlanetRadius = 200;
+    WaterRadius = 200;
     LockMouse = true;
     FreezeFrustrum = false;
     DrawHidden = true;

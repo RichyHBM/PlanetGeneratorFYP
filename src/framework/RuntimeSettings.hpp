@@ -16,6 +16,7 @@ public:
     bool DrawLines;
     unsigned int Subdivisions;
     unsigned int PlanetRadius;
+    unsigned int WaterRadius;
     bool LockMouse;
     bool FreezeFrustrum;
     bool DrawHidden;
