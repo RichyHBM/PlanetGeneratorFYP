@@ -39,6 +39,7 @@ void SetupTweakControls( Program *program )
     TwAddVarRW( myBar, "Sin Amount", TW_TYPE_FLOAT, &RuntimeSettings::Settings.SinAmount, NULL );
     TwAddSeparator( myBar, NULL, NULL );
     TwAddVarRW( myBar, "Light Direction", TW_TYPE_DIR3F, &RuntimeSettings::Settings.LightDirection, NULL );
+    TwAddVarRW( myBar, "Water Color", TW_TYPE_COLOR4F, &RuntimeSettings::Settings.WaterColor, NULL );
     TwAddSeparator( myBar, NULL, NULL );
     TwAddVarRW( myBar, "Noise Seed", TW_TYPE_UINT32, &RuntimeSettings::Settings.Seed, NULL );
     TwAddVarRW( myBar, "Noise Octaves", TW_TYPE_UINT32, &RuntimeSettings::Settings.Octaves, NULL );

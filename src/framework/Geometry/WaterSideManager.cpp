@@ -10,8 +10,6 @@ WaterSideManager::WaterSideManager( const Quad &q ): mInitialQuad( q )
     mShader = ResourceManager::GetShader( "Water", "./Resources/Water.vert" ,"./Resources/Water.frag" );
     mPositionBuffer.SetAttributeIndex( mShader->GetAttribute( "Position" ) );
     mNormalBuffer.SetAttributeIndex( mShader->GetAttribute( "Normal" ) );
-    mUVBuffer.SetAttributeIndex( mShader->GetAttribute( "UV" ) );
-    mTerrainTexture = ResourceManager::GetTexture( "WaterTextures", "./Resources/Water.png" );
     mQuads.push_back( mInitialQuad );
     mSinDisplacement = 0;
 }
@@ -66,10 +64,6 @@ void WaterSideManager::BindData()
         mNormalsList.push_back( mQuads[i].GetNormalB() );
         mNormalsList.push_back( mQuads[i].GetNormalC() );
         mNormalsList.push_back( mQuads[i].GetNormalD() );
-        mUVsList.push_back( mQuads[i].GetUVA() );
-        mUVsList.push_back( mQuads[i].GetUVB() );
-        mUVsList.push_back( mQuads[i].GetUVC() );
-        mUVsList.push_back( mQuads[i].GetUVD() );
         int size = mPositionsList.size();
         mIndices.push_back( size - 4 );
         mIndices.push_back( size - 3 );
@@ -83,8 +77,6 @@ void WaterSideManager::BindData()
     mPositionBuffer.SetAttributeIndex( mShader->GetAttribute( "Position" ) );
     mNormalBuffer.AddVectorData( mNormalsList, sizeof( glm::vec3 ) );
     mNormalBuffer.SetAttributeIndex( mShader->GetAttribute( "Normal" ) );
-    mUVBuffer.AddVectorData( mUVsList, sizeof( glm::vec2 ) );
-    mUVBuffer.SetAttributeIndex( mShader->GetAttribute( "UV" ) );
     mIndexBuffer.AddVectorData( mIndices, sizeof( unsigned int ) );
     mIndexBuffer.SetTarget( GL_ELEMENT_ARRAY_BUFFER );
 }
@@ -209,17 +201,14 @@ void WaterSideManager::Draw( const glm::mat4 &MVP, const Frustrum &frustrum )
     glUniformMatrix4fv( mShader->GetUniform( "MVP" ), 1, GL_FALSE, &MVP[0][0] );
     glUniformMatrix4fv( mShader->GetUniform( "NormalMat" ), 1, GL_FALSE, &NormalMat[0][0] );
     glUniform3fv( mShader->GetUniform( "LightDirection" ), 1, &RuntimeSettings::Settings.LightDirection[0] );
+    glUniform4fv( mShader->GetUniform( "WaterColor" ), 1, &RuntimeSettings::Settings.WaterColor[0] );
     glUniform1f( mShader->GetUniform( "SinNumber" ), mSinDisplacement );
     glUniform1f( mShader->GetUniform( "WaveSize" ), RuntimeSettings::Settings.WaveSize );
-    mTerrainTexture->Bind();
-    glUniform1i( mShader->GetUniform ( "Texture" ), 0 );
     mPositionBuffer.Bind( 3 );
     mNormalBuffer.Bind( 3 );
-    mUVBuffer.Bind( 2 );
     mIndexBuffer.Bind();
     glDrawElements( GL_TRIANGLES, mQuads.size() * 6, GL_UNSIGNED_INT, ( void * )0 );
     mIndexBuffer.Unbind();
-    mUVBuffer.Unbind();
     mNormalBuffer.Unbind();
     mPositionBuffer.Unbind();
     Texture::Unbind();

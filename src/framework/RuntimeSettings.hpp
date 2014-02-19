@@ -22,6 +22,8 @@ public:
     bool RealtimeRebuild;
     glm::vec3 LightDirection;
 
+    glm::vec4 WaterColor;
+
     int Seed;
     int Octaves;
     double Persistence;
