@@ -3,6 +3,7 @@
 #include "WaterSideManager.hpp"
 
 #include "../Managers/ResourceManager.hpp"
+#include "../Managers/MatrixManager.hpp"
 #include "../Noise/NoiseppNoise.hpp"
 
 WaterSideManager::WaterSideManager( const Quad &q ): mInitialQuad( q )
@@ -201,6 +202,10 @@ void WaterSideManager::Draw( const glm::mat4 &MVP, const Frustrum &frustrum )
     glUniformMatrix4fv( mShader->GetUniform( "MVP" ), 1, GL_FALSE, &MVP[0][0] );
     glUniformMatrix4fv( mShader->GetUniform( "NormalMat" ), 1, GL_FALSE, &NormalMat[0][0] );
     glUniform3fv( mShader->GetUniform( "LightDirection" ), 1, &RuntimeSettings::Settings.LightDirection[0] );
+
+    glm::vec3 lookDirection(MatrixControl.LookAt() - MatrixControl.Position());
+
+    glUniform3fv( mShader->GetUniform( "LookDirection" ), 1, &lookDirection[0] );
     glUniform4fv( mShader->GetUniform( "WaterColor" ), 1, &RuntimeSettings::Settings.WaterColor[0] );
     glUniform1f( mShader->GetUniform( "SinNumber" ), mSinDisplacement );
     glUniform1f( mShader->GetUniform( "WaveSize" ), RuntimeSettings::Settings.WaveSize );
