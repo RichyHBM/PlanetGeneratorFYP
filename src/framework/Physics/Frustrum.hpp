@@ -19,7 +19,7 @@ public:
     void Update();
     void Draw();
 
-    const int DistNear1, DistNear2, DistMedium3, DistFar4, DistFar5;
+    int Distances[10];
 
     glm::vec3 Position() const;
 

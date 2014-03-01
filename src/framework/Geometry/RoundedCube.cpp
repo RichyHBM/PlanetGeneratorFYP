@@ -134,6 +134,9 @@ void RoundedCube::Draw( const Frustrum &frustrum )
 {
     for( int i = 0; i < 6; i++ ) {
         mSideMan[i]->Draw( mMVP, frustrum );
+    }
+    
+    for( int i = 0; i < 6; i++ ) {
         mWaterSideMan[i]->Draw( mMVP, frustrum );
     }
 }

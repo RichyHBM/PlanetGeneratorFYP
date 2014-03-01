@@ -4,8 +4,14 @@
 #include "../Managers/ResourceManager.hpp"
 #include "../Utilities.hpp"
 
-Frustrum::Frustrum() : DistNear1( 50 ), DistNear2( 75 ), DistMedium3( 120 ), DistFar4( 150 ), DistFar5( 200 )
+Frustrum::Frustrum()
 {
+    int Dists[] = {150, 130, 110, 95, 80, 65, 50, 35, 20, 10};
+    for(int i = 0; i < 10; i++)
+    {
+        Distances[i] = Dists[i];
+    }
+
     mShaderTransparent = ResourceManager::GetShader( "SimpleTransparent", "./Resources/Simple.vert" ,"./Resources/SimpleTransparent.frag" );
     mShader = ResourceManager::GetShader( "Simple", "./Resources/Simple.vert" ,"./Resources/Simple.frag" );
     mPosition = MatrixControl.Position();

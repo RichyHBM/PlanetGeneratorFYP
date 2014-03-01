@@ -8,7 +8,7 @@ RuntimeSettings RuntimeSettings::PreviousFrame;
 RuntimeSettings::RuntimeSettings()
 {
     DrawLines = false;
-    Subdivisions = 4;
+    Subdivisions = 7;
     PlanetRadius = 200;
     WaterRadius = 200;
     LockMouse = true;
@@ -22,12 +22,12 @@ RuntimeSettings::RuntimeSettings()
     Persistence = 0.5;
     Frequency = 2;
     Quality = 1;
-    Scale = 0.025;
+    Scale = 0.05;
     Lacunarity = 2;
-    Distortion = 0.01;
+    Distortion = 0.005;
     GrassHeight = ( PlanetRadius*2 ) + 1;
     DirtHeight = ( PlanetRadius*2 ) + 3;
     SnowHeight = ( PlanetRadius*2 ) + 7;
-    WaveSize = 0.002f;
+    WaveSize = 0.00002f;
     SinAmount = 0.00001f;
 }

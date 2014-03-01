@@ -147,24 +147,11 @@ void SideManager::Update( const Frustrum &frustrum )
         float distance = mQuads[i].ClosestDistance( frustrum.Position() );
         int subdivisionlevel = 0;
 
-        if( distance < 0 ) {
-            std::cout << Util::Vec3ToString( frustrum.Position() ) << " " << Util::Vec3ToString( mQuads[i].GetVerticeA() ) << " " << distance << std::endl;
-        }
-
-        if( distance < frustrum.DistNear1 ) {
-            subdivisionlevel = 5;
-
-        } else if( distance < frustrum.DistNear2 ) {
-            subdivisionlevel = 4;
-
-        } else if( distance < frustrum.DistMedium3 ) {
-            subdivisionlevel = 3;
-
-        } else if( distance < frustrum.DistFar4 ) {
-            subdivisionlevel = 2;
-
-        } else if( distance < frustrum.DistFar5 ) {
-            subdivisionlevel = 1;
+        for(int d = 0; d < 10; d++)
+        {
+            if( distance < frustrum.Distances[d] ) {
+                subdivisionlevel = d;
+            }
         }
 
         std::vector<Quad> tempQuads;

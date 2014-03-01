@@ -28,7 +28,7 @@ void SetupTweakControls( Program *program )
     TwAddVarRW( myBar, "Draw Hidden", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.DrawHidden, NULL );
     TwAddVarRW( myBar, "Freeze Frustrum", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.FreezeFrustrum, NULL );
     TwAddSeparator( myBar, NULL, NULL );
-    TwAddVarRW( myBar, "Subdivisions", TW_TYPE_UINT32, &RuntimeSettings::Settings.Subdivisions, " max=20 " );
+    TwAddVarRW( myBar, "Subdivisions", TW_TYPE_UINT32, &RuntimeSettings::Settings.Subdivisions, " max=9 " );
     TwAddVarRW( myBar, "Planet Radius", TW_TYPE_UINT32, &RuntimeSettings::Settings.PlanetRadius, NULL );
     TwAddVarRW( myBar, "Water Radius", TW_TYPE_UINT32, &RuntimeSettings::Settings.WaterRadius, NULL );
     TwAddVarRW( myBar, "Rebuild Realtime", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.RealtimeRebuild, NULL );
