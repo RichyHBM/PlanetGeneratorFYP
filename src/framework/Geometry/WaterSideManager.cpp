@@ -198,8 +198,11 @@ void WaterSideManager::Draw( const glm::mat4 &MVP, const Frustrum &frustrum )
         }
 
     glm::mat4 NormalMat = glm::transpose( glm::inverse( glm::mat4( 1.0f ) ) );
+    glm::mat4 MV = MatrixControl.View();
+
     mShader->Bind();
     glUniformMatrix4fv( mShader->GetUniform( "MVP" ), 1, GL_FALSE, &MVP[0][0] );
+    glUniformMatrix4fv( mShader->GetUniform( "MV" ), 1, GL_FALSE, &MV[0][0] );
     glUniformMatrix4fv( mShader->GetUniform( "NormalMat" ), 1, GL_FALSE, &NormalMat[0][0] );
     glUniform3fv( mShader->GetUniform( "LightDirection" ), 1, &RuntimeSettings::Settings.LightDirection[0] );
 
