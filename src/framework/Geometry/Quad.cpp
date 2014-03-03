@@ -81,10 +81,13 @@ glm::vec3 Quad::GetVertice( int i ) const
     switch( i ) {
         case 0:
             return glm::vec3( mA.x * mSize, mA.y * mSize, mA.z * mSize );
+
         case 1:
             return glm::vec3( mB.x * mSize, mB.y * mSize, mB.z * mSize );
+
         case 2:
             return glm::vec3( mC.x * mSize, mC.y * mSize, mC.z * mSize );
+
         case 3:
             return glm::vec3( mD.x * mSize, mD.y * mSize, mD.z * mSize );
     }

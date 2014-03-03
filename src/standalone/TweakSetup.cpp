@@ -31,7 +31,7 @@ void SetupTweakControls( Program *program )
     TwAddVarRW( myBar, "Subdivisions", TW_TYPE_UINT32, &RuntimeSettings::Settings.Subdivisions, " max=9 " );
     TwAddVarRW( myBar, "Planet Radius", TW_TYPE_UINT32, &RuntimeSettings::Settings.PlanetRadius, NULL );
     TwAddVarRW( myBar, "Water Radius", TW_TYPE_UINT32, &RuntimeSettings::Settings.WaterRadius, NULL );
-    TwAddVarRW( myBar, "Rebuild Realtime", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.RealtimeRebuild, NULL );
+    //TwAddVarRW( myBar, "Rebuild Realtime", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.RealtimeRebuild, NULL );
     TwAddSeparator( myBar, NULL, NULL );
     TwAddVarRW( myBar, "Grass Height", TW_TYPE_FLOAT, &RuntimeSettings::Settings.GrassHeight, NULL );
     TwAddVarRW( myBar, "Dirt Height", TW_TYPE_FLOAT, &RuntimeSettings::Settings.DirtHeight, NULL );

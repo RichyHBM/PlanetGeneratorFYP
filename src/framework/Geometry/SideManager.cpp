@@ -147,8 +147,7 @@ void SideManager::Update( const Frustrum &frustrum )
         float distance = mQuads[i].ClosestDistance( frustrum.Position() );
         int subdivisionlevel = 0;
 
-        for(int d = 0; d < 10; d++)
-        {
+        for( int d = 0; d < 10; d++ ) {
             if( distance < frustrum.Distances[d] ) {
                 subdivisionlevel = d;
             }

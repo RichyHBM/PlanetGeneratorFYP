@@ -15,7 +15,7 @@ RuntimeSettings::RuntimeSettings()
     FreezeFrustrum = false;
     DrawHidden = true;
     LightDirection = glm::vec3( 0,0,-1 );
-    WaterColor = glm::vec4(0.211, 0.713, 1, 0.5);
+    WaterColor = glm::vec4( 0.211, 0.713, 1, 0.5 );
     RealtimeRebuild = false;
     Seed = 1234;
     Octaves = 6;

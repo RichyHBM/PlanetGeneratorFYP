@@ -7,8 +7,8 @@
 Frustrum::Frustrum()
 {
     int Dists[] = {150, 130, 110, 95, 80, 65, 50, 35, 20, 10};
-    for(int i = 0; i < 10; i++)
-    {
+
+    for( int i = 0; i < 10; i++ ) {
         Distances[i] = Dists[i];
     }
 

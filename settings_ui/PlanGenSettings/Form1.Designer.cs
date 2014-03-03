@@ -306,8 +306,7 @@
             this.ControlsComboBox.FormattingEnabled = true;
             this.ControlsComboBox.Items.AddRange(new object[] {
             "Keyboard",
-            "Gamepad",
-            "Network"});
+            "Gamepad"});
             this.ControlsComboBox.Location = new System.Drawing.Point(69, 152);
             this.ControlsComboBox.Name = "ControlsComboBox";
             this.ControlsComboBox.Size = new System.Drawing.Size(121, 21);

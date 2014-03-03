@@ -21,10 +21,8 @@ void Keyboard::Update()
     float mouseSpeed = 0.1f;
     float keyboardSpeed = 50;
     glm::vec2 mPos = Mouse::GetDisplacement();
-
     mHorizontalAngle -= mouseSpeed * delta * ( mPos.x );
     mVerticalAngle   -= mouseSpeed * delta * ( mPos.y );
-    
     double Pim1 = Util::Maths::dPIo2 * 0.99999;
     mVerticalAngle = glm::clamp( mVerticalAngle, -Pim1, Pim1 );
     glm::vec3 direction(
