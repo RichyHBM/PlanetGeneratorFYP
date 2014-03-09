@@ -7,6 +7,8 @@
 #include <vector>
 #include "../GLHelp/GLHelp.hpp"
 
+#define DISTANCES_AMOUNT 9
+
 class Frustrum
 {
 public:
@@ -19,7 +21,7 @@ public:
     void Update();
     void Draw();
 
-    int Distances[10];
+    int Distances[DISTANCES_AMOUNT];
 
     glm::vec3 Position() const;
 

@@ -124,8 +124,8 @@ void SideManager::Update( const Frustrum &frustrum )
     mInitialQuad.SetSize( RuntimeSettings::Settings.PlanetRadius );
     mQuads.push_back( mInitialQuad );
 
-    //First subdivide to level 4, regardless of distance
-    for( int subd = 0; subd < 4; subd++ ) {
+    //First subdivide to level 3, regardless of distance
+    for( int subd = 0; subd < 3; subd++ ) {
         std::vector<Quad> mTempQuads;
 
         for( int i = 0; i < mQuads.size(); i++ ) {
@@ -147,7 +147,7 @@ void SideManager::Update( const Frustrum &frustrum )
         float distance = mQuads[i].ClosestDistance( frustrum.Position() );
         int subdivisionlevel = 0;
 
-        for( int d = 0; d < 10; d++ ) {
+        for( int d = 0; d < DISTANCES_AMOUNT; d++ ) {
             if( distance < frustrum.Distances[d] ) {
                 subdivisionlevel = d;
             }
