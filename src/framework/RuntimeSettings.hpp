@@ -21,6 +21,7 @@ public:
     bool FreezeFrustrum;
     bool DrawHidden;
     bool RealtimeRebuild;
+    bool SpinPlanet;
     glm::vec3 LightDirection;
 
     glm::vec4 WaterColor;
@@ -40,6 +41,8 @@ public:
     float WaveSize;
 
     float SinAmount;
+
+    double Delta;
 };
 
 #endif // RUNTIMESETTINGS_HPP

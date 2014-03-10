@@ -33,5 +33,6 @@ protected:
     SideManager *mSideMan[6];
     WaterSideManager *mWaterSideMan[6];
     glm::mat4 mMVP;
+    glm::mat4 mModel;
 };
 #endif //ROUNDEDCUBE_HPP

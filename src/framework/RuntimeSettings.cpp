@@ -30,4 +30,6 @@ RuntimeSettings::RuntimeSettings()
     SnowHeight = ( PlanetRadius*2 ) + 7;
     WaveSize = 0.00002f;
     SinAmount = 0.00001f;
+    SpinPlanet = false;
+    Delta = 0.0f;
 }

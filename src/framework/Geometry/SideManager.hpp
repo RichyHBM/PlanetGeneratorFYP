@@ -13,7 +13,7 @@ class SideManager
 public:
     SideManager( const Quad &q );
     ~SideManager();
-    void Draw( const glm::mat4 &MVP, const Frustrum &frustrum );
+    void Draw( const glm::mat4 &MVP, const Frustrum &frustrum, const glm::mat4 &Model );
     void Update( const Frustrum &frustrum );
     void BindData();
     void Distort( );

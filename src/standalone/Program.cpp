@@ -71,6 +71,7 @@ void Program::Run()
             }
 
             mWindow->ResetDelta();
+            RuntimeSettings::Settings.Delta = mWindow->GetDelta();
             Draw();
             mWindow->Display();
             Util::PrintGLErrors();

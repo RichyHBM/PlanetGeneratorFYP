@@ -68,6 +68,7 @@ RoundedCube::RoundedCube()
     }
 
     RebuildSides();
+    mModel = glm::mat4( 1.0f );
 }
 
 RoundedCube::~RoundedCube()
@@ -122,7 +123,17 @@ void RoundedCube::RebuildSides()
 
 void RoundedCube::Update( const Frustrum &frustrum )
 {
-    mMVP = MatrixControl.PerspectiveView() * glm::mat4( 1.0f );
+    if( RuntimeSettings::Settings.SpinPlanet ) {
+        double distance = glm::length( MatrixControl.Position() );
+        distance -= RuntimeSettings::Settings.PlanetRadius * 2;
+        distance *= 0.01f;
+        std::abs( distance );
+        float amount = ( float )( distance * RuntimeSettings::Settings.Delta );
+        std::cout << amount << " : " << distance << std::endl;
+        mModel = glm::rotate( mModel, amount, glm::vec3( 0.1f, 1.0f, 0.0f ) );
+    }
+
+    mMVP = MatrixControl.PerspectiveView() * mModel;
 
     for( int i = 0; i < 6; i++ ) {
         mSideMan[i]->Update( frustrum );
@@ -133,10 +144,10 @@ void RoundedCube::Update( const Frustrum &frustrum )
 void RoundedCube::Draw( const Frustrum &frustrum )
 {
     for( int i = 0; i < 6; i++ ) {
-        mSideMan[i]->Draw( mMVP, frustrum );
+        mSideMan[i]->Draw( mMVP, frustrum, mModel );
     }
-    
+
     for( int i = 0; i < 6; i++ ) {
-        mWaterSideMan[i]->Draw( mMVP, frustrum );
+        mWaterSideMan[i]->Draw( mMVP, frustrum, mModel );
     }
 }
