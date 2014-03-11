@@ -5,6 +5,7 @@
 
 #include "../Managers/MatrixManager.hpp"
 #include "../Utilities.hpp"
+#include "../RuntimeSettings.hpp"
 
 #include "Mouse.hpp"
 
@@ -55,6 +56,10 @@ void Keyboard::Update()
 
     if ( sf::Keyboard::isKeyPressed( sf::Keyboard::A ) ) {
         pos -= right * delta * keyboardSpeed;
+    }
+
+    if( sf::Keyboard::isKeyPressed( sf::Keyboard::R ) ) {
+        RuntimeSettings::Settings.RealtimeRebuild = true;
     }
 
     MatrixControl.SetPosition( pos );

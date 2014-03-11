@@ -5,9 +5,9 @@
 
 #include "../Managers/MatrixManager.hpp"
 #include "../Utilities.hpp"
+#include "../RuntimeSettings.hpp"
 
-
-#define DEAD_ZONE 25
+#define DEAD_ZONE 50
 
 Gamepad::Gamepad() : mHorizontalAngle( 4 ), mVerticalAngle( -Util::Maths::fPIo2 )
 {
@@ -75,6 +75,11 @@ void Gamepad::Update()
 
     if ( sf::Joystick::getAxisPosition( 0, sf::Joystick::Z ) > DEAD_ZONE ) {
         pos -= up * delta * movementSpeed;
+    }
+
+    //5 is RB on xbox 360 controller
+    if( sf::Joystick::isButtonPressed( 0, 5 ) ) {
+        RuntimeSettings::Settings.RealtimeRebuild = true;
     }
 
     MatrixControl.SetPosition( pos );

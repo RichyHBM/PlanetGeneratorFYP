@@ -123,6 +123,7 @@ void SideManager::Update( const Frustrum &frustrum )
 
     mQuads.clear();
     mQuads = mRealtimeQuads;
+    Spherify();
     std::vector<Quad> mTempQuads;
 
     //Next subdivide quads that are within the distance required
@@ -198,18 +199,6 @@ void SideManager::RebuildSide()
         }
 
         mQuads = mTempQuads;
-    }
-
-    for( int i = 0; i < mRealtimeQuads.size(); i++ ) {
-        glm::vec3 A = mRealtimeQuads[i].GetVerticeA(),
-                  B = mRealtimeQuads[i].GetVerticeB(),
-                  C = mRealtimeQuads[i].GetVerticeC(),
-                  D = mRealtimeQuads[i].GetVerticeD();
-        NormalizeVert( A );
-        NormalizeVert( B );
-        NormalizeVert( C );
-        NormalizeVert( D );
-        mRealtimeQuads[i] = Quad( A, B, C, D );
     }
 
     Spherify();
