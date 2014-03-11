@@ -15,7 +15,7 @@ MatrixManager::~MatrixManager()
 void MatrixManager::Init()
 {
     mWidth = WindowSettings::Initial.GetWidth(), mHeight = WindowSettings::Initial.GetHeight();
-    mNearPlane = 0.1f, mFarPlane = 1000.0f;
+    mNearPlane = 0.1f, mFarPlane = 2500.0f;
     mFieldOfView = 75.0f;
     mPosition = glm::vec3( 1,1,2 );
     mLookAt = glm::vec3( 0,0,0 );

@@ -25,6 +25,8 @@ protected:
 
     Quad mInitialQuad;
 
+    std::vector<Quad> mRealtimeQuads;
+
     std::vector<Quad> mQuads;
 
     float mSinDisplacement;

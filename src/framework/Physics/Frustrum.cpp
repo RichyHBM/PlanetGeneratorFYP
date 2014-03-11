@@ -6,7 +6,7 @@
 
 Frustrum::Frustrum()
 {
-    int Dists[] = {300, 200, 100, 75, 50, 40, 30, 20, 10};
+    int Dists[] = {500, 275, 150, 80, 40, 15};
 
     for( int i = 0; i < DISTANCES_AMOUNT; i++ ) {
         Distances[i] = Dists[i];

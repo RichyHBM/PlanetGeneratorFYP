@@ -29,6 +29,8 @@ protected:
 
     std::vector<Quad> mQuads;
 
+    std::vector<Quad> mRealtimeQuads;
+
     NoiseppNoise *mNoise;
 
     VBO mIndexBuffer;

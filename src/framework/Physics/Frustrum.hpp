@@ -7,7 +7,7 @@
 #include <vector>
 #include "../GLHelp/GLHelp.hpp"
 
-#define DISTANCES_AMOUNT 9
+#define DISTANCES_AMOUNT 6
 
 class Frustrum
 {

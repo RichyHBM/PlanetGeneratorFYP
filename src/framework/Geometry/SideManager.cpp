@@ -16,6 +16,7 @@ SideManager::SideManager( const Quad &q ): mInitialQuad( q )
     mDirtTexture = ResourceManager::GetTexture( "DirtTextures", "./Resources/Earth.png" );
     mSnowTexture = ResourceManager::GetTexture( "SnowTextures", "./Resources/Snow.png" );
     mQuads.push_back( mInitialQuad );
+    mRealtimeQuads.push_back( mInitialQuad );
 }
 
 SideManager::~SideManager()
@@ -121,31 +122,17 @@ void SideManager::Update( const Frustrum &frustrum )
     }
 
     mQuads.clear();
-    mInitialQuad.SetSize( RuntimeSettings::Settings.PlanetRadius );
-    mQuads.push_back( mInitialQuad );
-
-    //First subdivide to level 3, regardless of distance
-    for( int subd = 0; subd < 3; subd++ ) {
-        std::vector<Quad> mTempQuads;
-
-        for( int i = 0; i < mQuads.size(); i++ ) {
-            std::vector<Quad> subQuads = mQuads[i].Subdivide();
-            mTempQuads.push_back( subQuads[0] );
-            mTempQuads.push_back( subQuads[1] );
-            mTempQuads.push_back( subQuads[2] );
-            mTempQuads.push_back( subQuads[3] );
-        }
-
-        mQuads = mTempQuads;
-    }
-
+    mQuads = mRealtimeQuads;
     Spherify();
+    
     std::vector<Quad> mTempQuads;
 
     //Next subdivide quads that are within the distance required
     for( int i = 0; i < mQuads.size(); i++ ) {
         float distance = mQuads[i].ClosestDistance( frustrum.Position() );
         int subdivisionlevel = 0;
+
+
 
         for( int d = 0; d < DISTANCES_AMOUNT; d++ ) {
             if( distance < frustrum.Distances[d] ) {
@@ -183,11 +170,27 @@ void SideManager::Update( const Frustrum &frustrum )
 
 void SideManager::RebuildSide()
 {
-    mQuads.clear();
+    mRealtimeQuads.clear();
     mInitialQuad.SetSize( RuntimeSettings::Settings.PlanetRadius );
-    mQuads.push_back( mInitialQuad );
+    mRealtimeQuads.push_back( mInitialQuad );
 
-    for( int subd = 0; subd < RuntimeSettings::Settings.Subdivisions; subd++ ) {
+    for( int subd = 0; subd < 6; subd++ ) {
+        std::vector<Quad> mTempQuads;
+
+        for( int i = 0; i < mRealtimeQuads.size(); i++ ) {
+            std::vector<Quad> subQuads = mRealtimeQuads[i].Subdivide();
+            mTempQuads.push_back( subQuads[0] );
+            mTempQuads.push_back( subQuads[1] );
+            mTempQuads.push_back( subQuads[2] );
+            mTempQuads.push_back( subQuads[3] );
+        }
+
+        mRealtimeQuads = mTempQuads;
+    }
+
+    mQuads = mRealtimeQuads;
+
+    for( int subd = 6; subd < RuntimeSettings::Settings.Subdivisions; subd++ ) {
         std::vector<Quad> mTempQuads;
 
         for( int i = 0; i < mQuads.size(); i++ ) {
