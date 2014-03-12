@@ -58,10 +58,6 @@ void Keyboard::Update()
         pos -= right * delta * keyboardSpeed;
     }
 
-    if( sf::Keyboard::isKeyPressed( sf::Keyboard::R ) ) {
-        RuntimeSettings::Settings.RealtimeRebuild = true;
-    }
-
     MatrixControl.SetPosition( pos );
     MatrixControl.SetLookAt( pos + direction );
 }

@@ -93,15 +93,22 @@ void WaterSideManager::Update( const Frustrum &frustrum )
 
     mQuads.clear();
     mQuads = mRealtimeQuads;
-    Spherify();
     std::vector<Quad> mTempQuads;
 
     //Next subdivide quads that are within the distance required
     for( int i = 0; i < mQuads.size(); i++ ) {
+        if( !frustrum.InFrustrumAndFacing( mQuads[i] ) ) {
+            if( RuntimeSettings::Settings.DrawHidden ) {
+                mTempQuads.push_back( mQuads[i] );
+            }
+
+            continue;
+        }
+
         float distance = mQuads[i].ClosestDistance( frustrum.Position() );
         int subdivisionlevel = 0;
 
-        for( int d = 0; d < DISTANCES_AMOUNT; d++ ) {
+        for( int d = 0; d < DISTANCES_AMOUNT - 3; d++ ) {
             if( distance < frustrum.Distances[d] ) {
                 subdivisionlevel = d;
             }
@@ -130,7 +137,6 @@ void WaterSideManager::Update( const Frustrum &frustrum )
     }
 
     mQuads = mTempQuads;
-    Spherify();
     BindData();
 }
 
@@ -170,18 +176,24 @@ void WaterSideManager::RebuildSide()
         mQuads = mTempQuads;
     }
 
+    for( int i = 0; i < mRealtimeQuads.size(); i++ ) {
+        glm::vec3 A = mRealtimeQuads[i].GetVerticeA(),
+                  B = mRealtimeQuads[i].GetVerticeB(),
+                  C = mRealtimeQuads[i].GetVerticeC(),
+                  D = mRealtimeQuads[i].GetVerticeD();
+        NormalizeVert( A );
+        NormalizeVert( B );
+        NormalizeVert( C );
+        NormalizeVert( D );
+        mRealtimeQuads[i] = Quad( A, B, C, D );
+    }
+
     Spherify();
     BindData();
 }
 
 void WaterSideManager::Draw( const glm::mat4 &MVP, const Frustrum &frustrum, const glm::mat4 &Model )
 {
-    //If the initial quad isnt in the frustrum then skip the draw
-    if( !RuntimeSettings::Settings.DrawHidden )
-        if( !frustrum.InFrustrumAndFacing( mInitialQuad ) ) {
-            return;
-        }
-
     glm::mat4 NormalMat = glm::transpose( glm::inverse( Model ) );
     glm::mat4 MV = MatrixControl.View();
     mShader->Bind();

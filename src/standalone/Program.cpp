@@ -97,9 +97,6 @@ void Program::Update()
     if( !RuntimeSettings::Settings.LockMouse ) {
         mDebugInfo.SetVertices( mRoundedCube.GetVertexCount() );
     }
-
-    //To act as a one time define button, reset to false
-    RuntimeSettings::Settings.RealtimeRebuild = false;
 }
 
 void Program::Draw()

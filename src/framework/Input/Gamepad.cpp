@@ -77,11 +77,6 @@ void Gamepad::Update()
         pos -= up * delta * movementSpeed;
     }
 
-    //5 is RB on xbox 360 controller
-    if( sf::Joystick::isButtonPressed( 0, 5 ) ) {
-        RuntimeSettings::Settings.RealtimeRebuild = true;
-    }
-
     MatrixControl.SetPosition( pos );
     MatrixControl.SetLookAt( pos + direction );
 }

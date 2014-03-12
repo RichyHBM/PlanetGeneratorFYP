@@ -123,11 +123,18 @@ void SideManager::Update( const Frustrum &frustrum )
 
     mQuads.clear();
     mQuads = mRealtimeQuads;
-    Spherify();
     std::vector<Quad> mTempQuads;
 
     //Next subdivide quads that are within the distance required
     for( int i = 0; i < mQuads.size(); i++ ) {
+        if( !frustrum.InFrustrumAndFacing( mQuads[i] ) ) {
+            if( RuntimeSettings::Settings.DrawHidden ) {
+                mTempQuads.push_back( mQuads[i] );
+            }
+
+            continue;
+        }
+
         float distance = mQuads[i].ClosestDistance( frustrum.Position() );
         int subdivisionlevel = 0;
 
@@ -160,7 +167,6 @@ void SideManager::Update( const Frustrum &frustrum )
     }
 
     mQuads = mTempQuads;
-    Spherify();
     Distort( );
     BindData();
 }
@@ -201,6 +207,18 @@ void SideManager::RebuildSide()
         mQuads = mTempQuads;
     }
 
+    for( int i = 0; i < mRealtimeQuads.size(); i++ ) {
+        glm::vec3 A = mRealtimeQuads[i].GetVerticeA(),
+                  B = mRealtimeQuads[i].GetVerticeB(),
+                  C = mRealtimeQuads[i].GetVerticeC(),
+                  D = mRealtimeQuads[i].GetVerticeD();
+        NormalizeVert( A );
+        NormalizeVert( B );
+        NormalizeVert( C );
+        NormalizeVert( D );
+        mRealtimeQuads[i] = Quad( A, B, C, D );
+    }
+
     Spherify();
     Distort( );
     BindData();
@@ -208,12 +226,6 @@ void SideManager::RebuildSide()
 
 void SideManager::Draw( const glm::mat4 &MVP, const Frustrum &frustrum, const glm::mat4 &Model )
 {
-    //If the initial quad isnt in the frustrum then skip the draw
-    if( !RuntimeSettings::Settings.DrawHidden )
-        if( !frustrum.InFrustrumAndFacing( mInitialQuad ) ) {
-            return;
-        }
-
     glm::mat4 NormalMat = glm::transpose( glm::inverse( Model ) );
     mShader->Bind();
     glUniformMatrix4fv( mShader->GetUniform( "MVP" ), 1, GL_FALSE, &MVP[0][0] );
