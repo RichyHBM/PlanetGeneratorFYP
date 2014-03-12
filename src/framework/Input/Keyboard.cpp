@@ -18,7 +18,7 @@ Keyboard::~Keyboard()
 
 void Keyboard::Update()
 {
-    float delta = 1.0f/60.0f ;
+    float delta = RuntimeSettings::Settings.Delta;
     float mouseSpeed = 0.1f;
     float keyboardSpeed = 50;
     glm::vec2 mPos = Mouse::GetDisplacement();

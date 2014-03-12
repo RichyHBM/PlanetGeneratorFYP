@@ -24,7 +24,7 @@ bool Gamepad::IsGamepadConnected( int i )
 void Gamepad::Update()
 {
     sf::Joystick::update();
-    float delta = 1.0f/60.0f ;
+    float delta = RuntimeSettings::Settings.Delta;
     float lookSpeed = 0.05f;
     float movementSpeed = 50;
     float xAxis = sf::Joystick::getAxisPosition( 0, sf::Joystick::U );

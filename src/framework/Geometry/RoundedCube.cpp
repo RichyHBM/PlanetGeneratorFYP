@@ -129,7 +129,6 @@ void RoundedCube::Update( const Frustrum &frustrum )
         distance *= 0.01f;
         std::abs( distance );
         float amount = ( float )( distance * RuntimeSettings::Settings.Delta );
-        std::cout << amount << " : " << distance << std::endl;
         mModel = glm::rotate( mModel, amount, glm::vec3( 0.1f, 1.0f, 0.0f ) );
     }
 
