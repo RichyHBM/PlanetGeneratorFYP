@@ -26,7 +26,7 @@ void SetupTweakControls( Program *program )
     TwDefine( " Controls size='200 500' " );
     TwAddVarRW( myBar, "Draw Lines", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.DrawLines, NULL );
     TwAddVarRW( myBar, "Draw Hidden", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.DrawHidden, NULL );
-    TwAddVarRW( myBar, "Rotate Planet", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.SpinPlanet, NULL );
+    //TwAddVarRW( myBar, "Rotate Planet", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.SpinPlanet, NULL );
     TwAddVarRW( myBar, "Freeze Frustrum", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.FreezeFrustrum, NULL );
     TwAddSeparator( myBar, NULL, NULL );
     TwAddVarRW( myBar, "Subdivisions", TW_TYPE_UINT32, &RuntimeSettings::Settings.Subdivisions, " max=9 " );
