@@ -51,7 +51,7 @@ void DrawDebugInfo::Draw()
     if( !mDraw ) {
         return;
     }
-
+    /*
     int startPos = 5;
     int displacement = 15;
     mDelta->SetPosition( glm::vec2( startPos, startPos ) );
@@ -63,7 +63,7 @@ void DrawDebugInfo::Draw()
     mTotalVertices->SetPosition( glm::vec2( startPos, startPos + displacement*2 ) );
     mTotalVertices->SetText(  "Total Vertices: " + Util::ToString( mVertices ) );
     mTotalVertices->Draw();
-
+    */
     if( mRebuilding ) {
         mRebuildingText->SetPosition( glm::vec2( WindowSettings::Running.GetWidth()/2, WindowSettings::Running.GetHeight()/2 ) );
         mRebuildingText->SetText( "Rebuilding!" );

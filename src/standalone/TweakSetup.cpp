@@ -22,7 +22,7 @@ void SetupTweakControls( Program *program )
 {
     TwBar *myBar;
     myBar = TwNewBar( "Controls" );
-    TwSetParam( myBar, NULL, "position", TW_PARAM_CSTRING, 1, "20 60" );
+    //TwSetParam( myBar, NULL, "position", TW_PARAM_CSTRING, 1, "20 60" );
     TwDefine( " Controls size='200 500' " );
     TwAddVarRW( myBar, "Draw Lines", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.DrawLines, NULL );
     TwAddVarRW( myBar, "Draw Hidden", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.DrawHidden, NULL );
