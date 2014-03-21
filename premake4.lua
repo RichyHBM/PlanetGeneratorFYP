@@ -1,7 +1,9 @@
 -- A solution contains projects, and defines the available configurations
 solution "PlanetGeneratorFYP"
 	configurations { "Debug", "Release" }
-	location "./build"
+    if _ACTION ~= nil then
+        location ( "./build/" .. _ACTION)
+    end
 	defines { "SFML", "GLEW_STATIC" }
 	language "C++"
 
