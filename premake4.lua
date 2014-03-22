@@ -1,9 +1,7 @@
 -- A solution contains projects, and defines the available configurations
 solution "PlanetGeneratorFYP"
 	configurations { "Debug", "Release" }
-    if _ACTION ~= nil then
-        location ( "./build/" .. _ACTION)
-    end
+    location "./build/"
 	defines { "SFML", "GLEW_STATIC" }
 	language "C++"
 
@@ -16,7 +14,7 @@ solution "PlanetGeneratorFYP"
 
 	if _ACTION == "gmake" then
 		libdirs { "./external/lib/linux" }
-		postbuildcommands { "sh ../postbuild/linux.sh", "sh ../postbuild/linux64.sh" }
+		postbuildcommands { "sh ../postbuild/linux.sh" }
 	end
 
 	configuration "Debug"
@@ -44,5 +42,4 @@ solution "PlanetGeneratorFYP"
 		end
 		
 	dofile "./premakes/standalone.lua"
-	dofile "./premakes/server.lua"
 	dofile "./premakes/framework.lua"

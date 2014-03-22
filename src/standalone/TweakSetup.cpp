@@ -22,11 +22,11 @@ void SetupTweakControls( Program *program )
 {
     TwBar *myBar;
     myBar = TwNewBar( "Controls" );
-    //TwSetParam( myBar, NULL, "position", TW_PARAM_CSTRING, 1, "20 60" );
+    TwSetParam( myBar, NULL, "position", TW_PARAM_CSTRING, 1, "20 20" );
     TwDefine( " Controls size='200 500' " );
     TwAddVarRW( myBar, "Draw Lines", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.DrawLines, NULL );
     TwAddVarRW( myBar, "Draw Hidden", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.DrawHidden, NULL );
-    //TwAddVarRW( myBar, "Rotate Planet", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.SpinPlanet, NULL );
+    TwAddVarRW( myBar, "Rotate Planet", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.SpinPlanet, NULL );
     TwAddVarRW( myBar, "Freeze Frustrum", TW_TYPE_BOOLCPP, &RuntimeSettings::Settings.FreezeFrustrum, NULL );
     TwAddSeparator( myBar, NULL, NULL );
     TwAddVarRW( myBar, "Subdivisions", TW_TYPE_UINT32, &RuntimeSettings::Settings.Subdivisions, " max=9 " );
@@ -49,7 +49,7 @@ void SetupTweakControls( Program *program )
     TwAddVarRW( myBar, "Noise Frequency", TW_TYPE_DOUBLE, &RuntimeSettings::Settings.Frequency, NULL );
     TwAddVarRW( myBar, "Noise Quality", TW_TYPE_UINT32, &RuntimeSettings::Settings.Quality, NULL );
     TwAddVarRW( myBar, "Noise Scale", TW_TYPE_DOUBLE, &RuntimeSettings::Settings.Scale, NULL );
-    //TwAddVarRW( myBar, "Noise Lacunarity", TW_TYPE_DOUBLE, &RuntimeSettings::Settings.Lacunarity, NULL );
+    TwAddVarRW( myBar, "Noise Lacunarity", TW_TYPE_DOUBLE, &RuntimeSettings::Settings.Lacunarity, NULL );
     TwAddVarRW( myBar, "Noise Distortion", TW_TYPE_DOUBLE, &RuntimeSettings::Settings.Distortion, NULL );
     TwAddSeparator( myBar, NULL, NULL );
     TwAddButton( myBar, "Rebuild", RebuildButton, program, NULL );

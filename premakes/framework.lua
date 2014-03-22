@@ -21,7 +21,3 @@ project "Framework"
          if _ACTION == "gmake" or _ACTION == "codeblocks" then
             links { "pthread", "AntTweakBar", "sfml-window", "sfml-system", "GLU", "GL", "noisepp" }
          end
-		
-	configuration "Linux64"
-		links { "pthread", "AntTweakBar", "sfml-window64", "sfml-system64", "GLU", "GL", "noisepp64" }
-	
