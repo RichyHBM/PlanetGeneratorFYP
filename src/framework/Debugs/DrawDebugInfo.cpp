@@ -51,13 +51,13 @@ void DrawDebugInfo::Draw()
     if( !mDraw ) {
         return;
     }
-    /*
+    
     int startPos = 5;
     int displacement = 15;
     mDelta->SetPosition( glm::vec2( startPos, startPos ) );
     mDelta->SetText( "Frame time: " + Util::ToString( mWindow->GetDelta(), 3 ) );
     mDelta->Draw();
-    mMemoryTotal->SetPosition( glm::vec2( startPos, startPos + displacement*1 ) );
+    /*mMemoryTotal->SetPosition( glm::vec2( startPos, startPos + displacement*1 ) );
     mMemoryTotal->SetText( "Total kb used: " + Util::ToString( MemoryUse::TotalBytesUsed * mKBDivisor, 2 ) );
     mMemoryTotal->Draw();
     mTotalVertices->SetPosition( glm::vec2( startPos, startPos + displacement*2 ) );
