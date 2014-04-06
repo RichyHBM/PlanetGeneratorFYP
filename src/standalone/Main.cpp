@@ -30,6 +30,7 @@ int main( int argc, const char *argv[] )
             WindowSettings::ParseArguments( argv[i], argv[i+1] );
         }
     }
+
     //Pass an enum to the new keyword to allow keeping track of memory
     Window *window = new( MemoryUse::Normal ) WindowSFML();
 
@@ -44,7 +45,6 @@ int main( int argc, const char *argv[] )
     //Delete all allocated memory
     delete program;
     ResourceManager::Destroy();
-
     window->Close();
     delete window;
     //*/

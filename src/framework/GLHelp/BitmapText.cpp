@@ -56,6 +56,7 @@ void BitmapText::LoadFile( const std::string &pImageFile, const std::string &pUV
     Texture::Unbind();
     std::ifstream myfile;
     myfile.open( pUVFile.c_str() );
+
     //Read the coordinates file
     if ( myfile.is_open() ) {
         Log.Success( "Loaded: " + pUVFile );

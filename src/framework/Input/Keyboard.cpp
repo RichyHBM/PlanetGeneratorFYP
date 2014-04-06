@@ -40,6 +40,7 @@ void Keyboard::Update()
                           cos( mHorizontalAngle - Util::Maths::fPIo2 )
                       );
     glm::vec3 pos = MatrixControl.Position();
+
     //Move depending on user keypress
     if( sf::Keyboard::isKeyPressed( sf::Keyboard::LShift ) ) {
         keyboardSpeed *= 3;
@@ -60,6 +61,7 @@ void Keyboard::Update()
     if ( sf::Keyboard::isKeyPressed( sf::Keyboard::A ) ) {
         pos -= right * delta * keyboardSpeed;
     }
+
     //Set the new position and look at
     MatrixControl.SetPosition( pos );
     MatrixControl.SetLookAt( pos + direction );

@@ -126,6 +126,7 @@ void SideManager::Update( const Frustrum &frustrum )
     if( !RuntimeSettings::Settings.RealtimeRebuild ) {
         return;
     }
+
     //Clear the current quad list and use cached version
     mQuads.clear();
     mQuads = mRealtimeQuads;
@@ -204,6 +205,7 @@ void SideManager::RebuildSide()
 
     //Make the current sphere use the cache
     mQuads = mRealtimeQuads;
+
     //Keep subdividing if neccesairy
     for( int subd = 6; subd < RuntimeSettings::Settings.Subdivisions; subd++ ) {
         std::vector<Quad> mTempQuads;

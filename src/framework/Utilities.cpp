@@ -17,30 +17,38 @@ time_t Util::GetModificationTime( const std::string &filename )
 void Util::PrintGLErrorsFromLine( const char *file, int line = 0 )
 {
     GLuint ec = glGetError ();
+
     //Get all errors in the error log
     while( ec != GL_NO_ERROR ) {
         switch( ec ) {
             case GL_INVALID_ENUM:
                 Log.Warning( "OpenGL Error: GL_INVALID_ENUM from line " + Util::ToString( line ) + " in file" + Util::ToString( file ) );
                 break;
+
             case GL_INVALID_VALUE:
                 Log.Warning( "OpenGL Error: GL_INVALID_VALUE from line " + Util::ToString( line ) + " in file" + Util::ToString( file ) );
                 break;
+
             case GL_INVALID_OPERATION:
                 Log.Warning( "OpenGL Error: GL_INVALID_OPERATION from line " + Util::ToString( line ) + " in file" + Util::ToString( file ) );
                 break;
+
             case GL_STACK_OVERFLOW:
                 Log.Warning( "OpenGL Error: GL_STACK_OVERFLOW from line " + Util::ToString( line ) + " in file" + Util::ToString( file ) );
                 break;
+
             case GL_STACK_UNDERFLOW:
                 Log.Warning( "OpenGL Error: GL_STACK_UNDERFLOW from line " + Util::ToString( line ) + " in file" + Util::ToString( file ) );
                 break;
+
             case GL_OUT_OF_MEMORY:
                 Log.Warning( "OpenGL Error: GL_OUT_OF_MEMORY from line "  + Util::ToString( line ) + " in file" + Util::ToString( file ) );
                 break;
+
             case GL_TABLE_TOO_LARGE:
                 Log.Warning( "OpenGL Error: GL_TABLE_TOO_LARGE from line " + Util::ToString( line ) + " in file" + Util::ToString( file ) );
                 break;
+
             default:
                 Log.Warning( "Unknown OpenGL error from line " + Util::ToString( line ) + " in file" + Util::ToString( file ) );
         }

@@ -11,7 +11,7 @@ namespace PlanGenSettings
     {
         String executable;
         String processName;
-        StreamWriter writer;
+        StreamWriter writer = null;
 
         public ProcessRunner(String name)
         {
@@ -21,8 +21,7 @@ namespace PlanGenSettings
             {
                 //Unix
                 executable = "./" + name;
-            }
-            else
+            } else
             {
                 //Windows
                 executable = "./" + name + ".exe";
@@ -46,23 +45,45 @@ namespace PlanGenSettings
             startInfo.RedirectStandardOutput = true;
             startInfo.UseShellExecute = false;
 
-            using (writer = new StreamWriter( string.Format("{0}-{1:yyyy-MM-dd_hh-mm-ss-tt}.txt", processName, DateTime.Now)))
+            try
             {
-                Process process = new Process();
-                process.StartInfo = startInfo;
-                process.OutputDataReceived += OutputDataReceived;
+                writer = new StreamWriter(string.Format("{0}-{1:yyyy-MM-dd_hh-mm-ss-tt}.txt", processName, DateTime.Now));
+            } catch (Exception e)
+            {
 
-                process.Start();
-                process.BeginOutputReadLine();
-                process.WaitForExit();
             }
+
+			try
+            {
+				Process process = new Process();
+				process.StartInfo = startInfo;
+				process.OutputDataReceived += OutputDataReceived;
+
+				process.Start();
+				process.BeginOutputReadLine();
+				process.WaitForExit();
+			} catch (Exception e)
+            {
+
+            }
+
+            if (writer != null)
+                writer.Close();
 
         }
 
         private void OutputDataReceived(object sender, DataReceivedEventArgs e)
         {
             Console.WriteLine(e.Data);
-            writer.WriteLine(e.Data);
+            if (writer != null){
+				try
+				{
+					writer.WriteLine(e.Data);
+				} catch (Exception e)
+				{
+
+				}
+			}
         }
     }
 }

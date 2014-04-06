@@ -91,6 +91,7 @@ void WaterSideManager::Update( const Frustrum &frustrum )
 {
     //Move waves
     mSinDisplacement += RuntimeSettings::Settings.SinAmount;
+
     //Only do this if in realtime
     if( !RuntimeSettings::Settings.RealtimeRebuild ) {
         return;

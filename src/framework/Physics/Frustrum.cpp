@@ -17,7 +17,6 @@ Frustrum::Frustrum()
     mShader = ResourceManager::GetShader( "Simple", "./Resources/Simple.vert" ,"./Resources/Simple.frag" );
     mPosition = MatrixControl.Position();
     mLookAt  = MatrixControl.LookAt();
-
     Z = glm::normalize( mPosition - mLookAt );
     X = glm::normalize( glm::cross( MatrixControl.Up(), Z ) );
     //Points of the frustrum

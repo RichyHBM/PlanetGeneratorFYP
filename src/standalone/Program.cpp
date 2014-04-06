@@ -58,7 +58,8 @@ void Program::Run()
         if( mWindow->IsFocused() ) {
             mWindow->MakeContextCurrent();
             mWindow->SetCursor( RuntimeSettings::Settings.LockMouse ? Hidden : Shown );
-        }else {
+
+        } else {
             mWindow->SetCursor( Shown );
         }
 

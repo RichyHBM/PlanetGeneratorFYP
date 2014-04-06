@@ -10,7 +10,6 @@ RoundedCube::RoundedCube()
 {
     //Set it to a static number, change size with a scale matrix
     float InitialSize = 1;
-
     //Build the 6 sides
     Quad front(
         glm::vec3( -InitialSize,  InitialSize, InitialSize ),
@@ -71,6 +70,7 @@ RoundedCube::RoundedCube()
     for( int i = 0; i < 6; i++ ) {
         mSideMan[i]->SetNoise( mNoise );
     }
+
     //Do an initial build of the planet
     RebuildSides();
     mModel = glm::mat4( 1.0f );

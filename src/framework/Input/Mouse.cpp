@@ -8,13 +8,13 @@
 
 void Mouse::Set( float x, float y )
 {
-	//Set position using SFML
+    //Set position using SFML
     sf::Mouse::setPosition( sf::Vector2i( x, y ) );
 }
 
 glm::vec2 Mouse::GetDisplacement()
 {
-	//Only return a displacement if the mouse is locked
+    //Only return a displacement if the mouse is locked
     if( !RuntimeSettings::Settings.LockMouse ) {
         return glm::vec2( 0 );
     }

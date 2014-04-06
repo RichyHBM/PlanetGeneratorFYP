@@ -31,6 +31,7 @@ void Gamepad::Update()
     float movementSpeed = 50;
     float xAxis = sf::Joystick::getAxisPosition( 0, sf::Joystick::U );
     float yAxis = sf::Joystick::getAxisPosition( 0, sf::Joystick::R );
+
     //Compute look at angles
     if( xAxis > DEAD_ZONE || xAxis < -DEAD_ZONE ) {
         mHorizontalAngle -= lookSpeed * delta * ( xAxis );
@@ -39,6 +40,7 @@ void Gamepad::Update()
     if( yAxis > DEAD_ZONE || yAxis < -DEAD_ZONE ) {
         mVerticalAngle   -= lookSpeed * delta * ( yAxis );
     }
+
     //Generate direction from angles
     double Pim1 = Util::Maths::dPIo2 * 0.99999;
     mVerticalAngle = glm::clamp( mVerticalAngle, -Pim1, Pim1 );
@@ -54,6 +56,7 @@ void Gamepad::Update()
                       );
     glm::vec3 pos = MatrixControl.Position();
     glm::vec3 up = glm::cross( right, direction );
+
     //Move player
     if ( sf::Joystick::getAxisPosition( 0, sf::Joystick::Y ) < -DEAD_ZONE ) {
         pos += direction * delta * movementSpeed;
@@ -78,6 +81,7 @@ void Gamepad::Update()
     if ( sf::Joystick::getAxisPosition( 0, sf::Joystick::Z ) > DEAD_ZONE ) {
         pos -= up * delta * movementSpeed;
     }
+
     //set position and look at
     MatrixControl.SetPosition( pos );
     MatrixControl.SetLookAt( pos + direction );

@@ -24,9 +24,11 @@ void Input::Update()
         case KEYBOARD:
             mKeyboard.Update();
             break;
+
         case GAMEPAD:
             mGamepad.Update();
             break;
+
         default:
             Log.Warning( "No Input Selected" );
     }
