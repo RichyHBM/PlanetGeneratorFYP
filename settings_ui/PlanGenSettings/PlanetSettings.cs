@@ -21,8 +21,6 @@ namespace PlanGenSettings
         public String[] ToArgumentArray()
         {
             return new List<string>{
-                "-controls " + Controls,
-
                 "-depth " + DepthBits,
                 "-stencil " + StencilBits,
                 "-antialiasing " + AntiAliasing,

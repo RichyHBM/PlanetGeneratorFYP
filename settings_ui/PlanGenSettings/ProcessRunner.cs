@@ -46,7 +46,7 @@ namespace PlanGenSettings
             startInfo.RedirectStandardOutput = true;
             startInfo.UseShellExecute = false;
 
-            using (writer = new StreamWriter(processName + ".txt"))
+            using (writer = new StreamWriter( string.Format("{0}-{1:yyyy-MM-dd_hh-mm-ss-tt}.txt", processName, DateTime.Now)))
             {
                 Process process = new Process();
                 process.StartInfo = startInfo;
