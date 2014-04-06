@@ -26,6 +26,7 @@ public:
     NoiseppNoise( );
     NoiseppNoise( int seed,int oct,double pers, double freq , int qual,double scale , double lacun,double distortion );
     ~NoiseppNoise();
+    //Initialize the noise with the given values
     void Init();
     void SetSeed( int seed );
     void SetOctaveCount( int oct );
@@ -37,7 +38,7 @@ public:
     void SetDistortion( double distortion );
 
     void ParseArguments( const std::string &arg, const std::string &arg2 );
-
+    //Generate 1, 2 or 3d noise
     double Generate( double x );
     double Generate( double x, double y );
     double Generate( double x, double y, double z );

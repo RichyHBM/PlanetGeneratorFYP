@@ -7,6 +7,7 @@ RuntimeSettings RuntimeSettings::PreviousFrame;
 
 RuntimeSettings::RuntimeSettings()
 {
+    //Set default values for all the settings
     DrawLines = false;
     Subdivisions = 7;
     PlanetRadius = 200;

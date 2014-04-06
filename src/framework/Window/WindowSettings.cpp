@@ -4,6 +4,7 @@
 WindowSettings WindowSettings::Initial;
 WindowSettings WindowSettings::Running;
 
+//Process any arguments
 void WindowSettings::ParseArguments( const std::string &arg, const std::string &arg2 )
 {
     if( arg == "-depth" ) {

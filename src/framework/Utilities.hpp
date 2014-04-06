@@ -117,6 +117,7 @@ namespace Util
         return ss.str();
     }
 
+    //Turnns a given value to a string
     template <class T>
     inline std::string ToString ( const T &t )
     {
@@ -124,6 +125,8 @@ namespace Util
         ss << t;
         return ss.str();
     }
+
+    //Turns a decimal value into a string with the given precision
     template <class T>
     inline std::string ToString ( T t, int precision )
     {

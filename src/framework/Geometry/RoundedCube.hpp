@@ -26,7 +26,7 @@ public:
 
     void RebuildSides();
     void RebuildNoise();
-
+    //Count all vertices in the spheres
     int GetVertexCount();
 protected:
     NoiseppNoise *mNoise;

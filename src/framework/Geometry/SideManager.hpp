@@ -15,8 +15,11 @@ public:
     ~SideManager();
     void Draw( const glm::mat4 &MVP, const Frustrum &frustrum, const glm::mat4 &Model );
     void Update( const Frustrum &frustrum );
+    //Binds updated data to the gpu
     void BindData();
+    //Add noise
     void Distort( );
+    //Make cube into sphere
     void Spherify();
     int GetVertexCount();
     void RebuildSide();

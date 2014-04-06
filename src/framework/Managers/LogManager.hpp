@@ -6,6 +6,7 @@
 #include <string>
 #include <iomanip>
 
+//Use template functions to allow logging anything
 class LogManager
 {
 public:
@@ -35,19 +36,20 @@ public:
     ~LogManager();
 
 protected:
-    std::ofstream mFileStream;
+    //std::ofstream mFileStream;
     void ChangeColor( int color );
     int mTagWidth;
 
     template <class T>
     void LogToBoth( const T &t, int color, const std::string &s ) {
+        //Set the custom colour, print to console and set colour back
         ChangeColor( color );
         std::cout << std::left << std::setw( mTagWidth ) << s << t << std::endl;
         ChangeColor( WHITE );
-
-        if( mFileStream.is_open() ) {
-            mFileStream << std::left << std::setw( mTagWidth ) << s << t << std::endl;
-        }
+        //If the file is open, print to file
+        //if( mFileStream.is_open() ) {
+        //    mFileStream << std::left << std::setw( mTagWidth ) << s << t << std::endl;
+        //}
     }
 
     enum Color {

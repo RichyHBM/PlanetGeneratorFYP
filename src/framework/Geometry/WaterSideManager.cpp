@@ -8,6 +8,7 @@
 
 WaterSideManager::WaterSideManager( const Quad &q ): mInitialQuad( q )
 {
+    //Load all resources
     mShader = ResourceManager::GetShader( "Water", "./Resources/Water.vert" ,"./Resources/Water.frag" );
     mPositionBuffer.SetAttributeIndex( mShader->GetAttribute( "Position" ) );
     mNormalBuffer.SetAttributeIndex( mShader->GetAttribute( "Normal" ) );
@@ -22,6 +23,7 @@ WaterSideManager::~WaterSideManager()
 
 void WaterSideManager::NormalizeVert( glm::vec3 &v )
 {
+    //Normalise the vector length to a given length
     float length = RuntimeSettings::Settings.WaterRadius * 2;
     float dist = glm::length( v );
     v.x = v.x * length / dist;
@@ -36,6 +38,7 @@ int WaterSideManager::GetVertexCount()
 
 void WaterSideManager::Spherify()
 {
+    //Pass all vertices through the normalisation function
     for( int i = 0; i < mQuads.size(); i++ ) {
         glm::vec3 A = mQuads[i].GetVerticeA(),
                   B = mQuads[i].GetVerticeB(),
@@ -51,6 +54,7 @@ void WaterSideManager::Spherify()
 
 void WaterSideManager::BindData()
 {
+    //Binds data to the vbo's
     std::vector<glm::vec3> mPositionsList;
     std::vector<glm::vec3> mNormalsList;
     std::vector<glm::vec2> mUVsList;
@@ -85,8 +89,9 @@ void WaterSideManager::BindData()
 
 void WaterSideManager::Update( const Frustrum &frustrum )
 {
+    //Move waves
     mSinDisplacement += RuntimeSettings::Settings.SinAmount;
-
+    //Only do this if in realtime
     if( !RuntimeSettings::Settings.RealtimeRebuild ) {
         return;
     }
@@ -97,6 +102,7 @@ void WaterSideManager::Update( const Frustrum &frustrum )
 
     //Next subdivide quads that are within the distance required
     for( int i = 0; i < mQuads.size(); i++ ) {
+        //Only do for quads in view
         if( !frustrum.InFrustrumAndFacing( mQuads[i] ) ) {
             if( RuntimeSettings::Settings.DrawHidden ) {
                 mTempQuads.push_back( mQuads[i] );
@@ -105,9 +111,11 @@ void WaterSideManager::Update( const Frustrum &frustrum )
             continue;
         }
 
+        //Get the distance of the current quad
         float distance = mQuads[i].ClosestDistance( frustrum.Position() );
         int subdivisionlevel = 0;
 
+        //Check to what level of subdivision to go to
         for( int d = 0; d < DISTANCES_AMOUNT - 3; d++ ) {
             if( distance < frustrum.Distances[d] ) {
                 subdivisionlevel = d;
@@ -117,6 +125,7 @@ void WaterSideManager::Update( const Frustrum &frustrum )
         std::vector<Quad> tempQuads;
         tempQuads.push_back( mQuads[i] );
 
+        //Subdivide quads to that level
         for( int j = 0; j < subdivisionlevel; j++ ) {
             std::vector<Quad> subdividedQuads;
 
@@ -146,6 +155,7 @@ void WaterSideManager::RebuildSide()
     mInitialQuad.SetSize( RuntimeSettings::Settings.WaterRadius );
     mRealtimeQuads.push_back( mInitialQuad );
 
+    //Build up the cached sphere to level 6
     for( int subd = 0; subd < 6; subd++ ) {
         std::vector<Quad> mTempQuads;
 
@@ -160,7 +170,9 @@ void WaterSideManager::RebuildSide()
         mRealtimeQuads = mTempQuads;
     }
 
+    //Make the current sphere use the cache
     mQuads = mRealtimeQuads;
+    //Keep subdividing if neccesairy
 
     for( int subd = 6; subd < RuntimeSettings::Settings.Subdivisions; subd++ ) {
         std::vector<Quad> mTempQuads;
@@ -176,6 +188,7 @@ void WaterSideManager::RebuildSide()
         mQuads = mTempQuads;
     }
 
+    //Spherify the cached quads
     for( int i = 0; i < mRealtimeQuads.size(); i++ ) {
         glm::vec3 A = mRealtimeQuads[i].GetVerticeA(),
                   B = mRealtimeQuads[i].GetVerticeB(),

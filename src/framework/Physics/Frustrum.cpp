@@ -6,6 +6,7 @@
 
 Frustrum::Frustrum()
 {
+    //Distances to check for in the LoD
     int Dists[] = {500, 275, 150, 80, 40, 15};
 
     for( int i = 0; i < DISTANCES_AMOUNT; i++ ) {
@@ -16,8 +17,10 @@ Frustrum::Frustrum()
     mShader = ResourceManager::GetShader( "Simple", "./Resources/Simple.vert" ,"./Resources/Simple.frag" );
     mPosition = MatrixControl.Position();
     mLookAt  = MatrixControl.LookAt();
+
     Z = glm::normalize( mPosition - mLookAt );
     X = glm::normalize( glm::cross( MatrixControl.Up(), Z ) );
+    //Points of the frustrum
     mUp = glm::cross( Z, X );
     mFTL = mFarCenter + ( mUp * MatrixControl.FarPlaneSize().y/2.0f ) - ( X * MatrixControl.FarPlaneSize().x/2.0f );
     mFTR = mFarCenter + ( mUp * MatrixControl.FarPlaneSize().y/2.0f ) + ( X * MatrixControl.FarPlaneSize().x/2.0f );
@@ -27,6 +30,7 @@ Frustrum::Frustrum()
     mNTR = mNearCenter + ( mUp * MatrixControl.NearPlaneSize().y / 2.0f ) + ( X * MatrixControl.NearPlaneSize().x/2.0f );
     mNBL = mNearCenter - ( mUp * MatrixControl.NearPlaneSize().y / 2.0f ) - ( X * MatrixControl.NearPlaneSize().x/2.0f );
     mNBR = mNearCenter - ( mUp * MatrixControl.NearPlaneSize().y / 2.0f ) + ( X * MatrixControl.NearPlaneSize().x/2.0f );
+    //6 planes of the frustrum
     mPlanes[Top] = Plane3d( mNTR, mNTL, mFTL );
     mPlanes[Bottom] = Plane3d( mNBL, mNBR, mFBR );
     mPlanes[Left] = Plane3d( mNTL, mNBL, mFBL );
@@ -85,6 +89,7 @@ bool Frustrum::InFrustrumAndFacing( const Quad &quad ) const
 
 void Frustrum::Update()
 {
+    //Update the frustrum to the current player position/direction
     mPosition = MatrixControl.Position();
     mLookAt  = MatrixControl.LookAt();
     Z = glm::normalize( mPosition - mLookAt );
@@ -110,6 +115,7 @@ void Frustrum::Update()
 
 void Frustrum::Draw()
 {
+    //Draw all the frustrum as lines and transparent vertices
     std::vector<glm::vec3> mPositionsList;
     mPositionsList.push_back( mNTL );
     mPositionsList.push_back( mNBL );

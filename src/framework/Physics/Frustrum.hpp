@@ -14,13 +14,14 @@ class Frustrum
 public:
     Frustrum();
     ~Frustrum();
-
+    //Checks if a point is in the frustrum
     bool InFrustrum( const glm::vec3 &point ) const;
+    //Checks if a quad is within thefrustrum and its front is towards the user
     bool InFrustrumAndFacing( const Quad &quad ) const;
 
     void Update();
     void Draw();
-
+    //Distances for the LoD
     int Distances[DISTANCES_AMOUNT];
 
     glm::vec3 Position() const;

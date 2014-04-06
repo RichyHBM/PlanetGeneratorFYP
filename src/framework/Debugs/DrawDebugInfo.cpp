@@ -57,17 +57,18 @@ void DrawDebugInfo::Draw()
     mDelta->SetPosition( glm::vec2( startPos, startPos ) );
     mDelta->SetText( "Frame time: " + Util::ToString( mWindow->GetDelta(), 3 ) );
     mDelta->Draw();
-    /*mMemoryTotal->SetPosition( glm::vec2( startPos, startPos + displacement*1 ) );
+    mMemoryTotal->SetPosition( glm::vec2( startPos, startPos + displacement*1 ) );
     mMemoryTotal->SetText( "Total kb used: " + Util::ToString( MemoryUse::TotalBytesUsed * mKBDivisor, 2 ) );
     mMemoryTotal->Draw();
     mTotalVertices->SetPosition( glm::vec2( startPos, startPos + displacement*2 ) );
     mTotalVertices->SetText(  "Total Vertices: " + Util::ToString( mVertices ) );
     mTotalVertices->Draw();
-    */
+    
     if( mRebuilding ) {
         mRebuildingText->SetPosition( glm::vec2( WindowSettings::Running.GetWidth()/2, WindowSettings::Running.GetHeight()/2 ) );
         mRebuildingText->SetText( "Rebuilding!" );
         mRebuildingText->Draw();
+        //Rebuilding is done within 1 frame
         mRebuilding = false;
     }
 }

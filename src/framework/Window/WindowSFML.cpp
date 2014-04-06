@@ -13,7 +13,7 @@
 
 WindowSFML::WindowSFML()
 {
-    //Initialize local variables using setings
+    //Initialize local variables using settings
     std::string title = "PlanetGenFYP";
     sf::ContextSettings contextSettings;
     contextSettings.depthBits = WindowSettings::Initial.GetDepthBits();
@@ -34,14 +34,14 @@ WindowSFML::WindowSFML()
     } else {
         mWindow.create( sf::VideoMode( width, height, bitsPerPixel ), title, sf::Style::Titlebar | sf::Style::Close, contextSettings );
     }
-
+    //If the sfml window fails to open, quit
     if ( !mWindow.isOpen() ) {
         return;
     }
 
     mWindow.setActive( true );
     GLenum err = glewInit();
-
+    //If no errors were found, quit
     if ( GLEW_OK != err ) {
         // Problem: glewInit failed, something is seriously wrong.
         mWindow.close();
@@ -49,6 +49,7 @@ WindowSFML::WindowSFML()
         return;
     }
 
+    //Set framerate to the requested frames
     if( vSynk ) {
         mWindow.setVerticalSyncEnabled( true );
         mWindow.setFramerateLimit( fps );
@@ -96,32 +97,34 @@ WindowSFML::~WindowSFML()
 void WindowSFML::DoEvents()
 {
     sf::Event event;
-
+    //Retreive all events since last time
     while ( mWindow.pollEvent( event ) ) {
+        //Process tweak events
         if( WindowSettings::Running.UseTweakBar() ) {
             if( TweakEventSFML( event ) != 0 ) {
                 continue;
             }
         }
-
+        //close if requested
         if ( event.type == sf::Event::Closed ) {
             mNeedsClose = true;
-
+        //If the window is resized
         } else if ( event.type == sf::Event::Resized ) {
             // adjust the viewport when the window is resized
             glViewport( 0, 0, event.size.width, event.size.height );
             WindowSettings::Running.SetResolution( event.size.width, event.size.height );
             MatrixControl.SetWidthHeight( event.size.width, event.size.height );
-
+        //If the focus changes
         } else if( event.type == sf::Event::GainedFocus ) {
             mIsFocused = true;
 
         } else if( event.type == sf::Event::LostFocus ) {
             mIsFocused = false;
-
+        //If the user wants to take a screenshot by pressing f4
+            //Sreenshots use the time as their name 
         } else if( event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::F4 ) {
-            Texture::Screenshot( "Screenshot.bmp", 0, 0, WindowSettings::Running.GetWidth(), WindowSettings::Running.GetHeight() );
-
+            Texture::Screenshot( Util::GetLocalDateTime( "PlanetGen_screenshot_%Y_%m_%d_%H_%M_%S.bmp" ), 0, 0, WindowSettings::Running.GetWidth(), WindowSettings::Running.GetHeight() );
+        //Show tweakbar if the user presses escape
         } else if( event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape ) {
             RuntimeSettings::Settings.LockMouse = !RuntimeSettings::Settings.LockMouse;
             sf::Mouse::setPosition( sf::Vector2i( WindowSettings::Running.GetWidth()/2.0f, WindowSettings::Running.GetHeight()/2.0f ) );

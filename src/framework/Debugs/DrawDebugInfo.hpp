@@ -10,10 +10,14 @@ class DrawDebugInfo
 public:
     DrawDebugInfo( Window *window );
     ~DrawDebugInfo();
+    //Change whether to draw this information or not
     void SetDraw( bool draw );
-    void Draw();
     void ToggleDraw();
+
+    void Draw();
+    //Set the vertice count
     void SetVertices( int v );
+    //Draw the "rebuilding" text
     void SetDrawRebuild();
 protected:
     float mKBDivisor;

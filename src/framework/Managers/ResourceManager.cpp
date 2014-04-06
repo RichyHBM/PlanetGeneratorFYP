@@ -6,6 +6,7 @@ std::map<std::string, Shader *> ResourceManager::mShaderMap;
 
 Texture *ResourceManager::GetTexture( const std::string &name, const std::string &textureLocation )
 {
+    //Store 1 copy of the resource and just return that
     std::map<std::string, Texture *>::iterator it = mTextureMap.find( name );
 
     if ( it != mTextureMap.end() ) {

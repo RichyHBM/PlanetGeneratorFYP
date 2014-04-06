@@ -24,6 +24,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/transform2.hpp>
 
+//Custom headers
 #include "Noise/NoiseppNoise.hpp"
 #include "Utilities.hpp"
 #include "Managers/LogManager.hpp"

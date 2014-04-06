@@ -8,7 +8,7 @@ class Keyboard
 public:
     Keyboard();
     ~Keyboard();
-
+    //Update the keyboard to check for movement
     void Update();
 };
 

@@ -4,6 +4,7 @@
 
 #include "Managers/LogManager.hpp"
 
+//Gets the last time a file was modified, it was going to be used for hotloading files
 time_t Util::GetModificationTime( const std::string &filename )
 {
     time_t elapsedSinceTimeStamp = 0;
@@ -16,7 +17,7 @@ time_t Util::GetModificationTime( const std::string &filename )
 void Util::PrintGLErrorsFromLine( const char *file, int line = 0 )
 {
     GLuint ec = glGetError ();
-
+    //Get all errors in the error log
     while( ec != GL_NO_ERROR ) {
         switch( ec ) {
             case GL_INVALID_ENUM:
@@ -48,6 +49,7 @@ void Util::PrintGLErrorsFromLine( const char *file, int line = 0 )
     }
 }
 
+//Gets the current system time in a specific format
 std::string Util::GetLocalDateTime( const std::string &format )
 {
     const int bufferSize = 80;

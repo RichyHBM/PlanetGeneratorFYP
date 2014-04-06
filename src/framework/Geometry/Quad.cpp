@@ -25,6 +25,7 @@ Quad::~Quad()
 
 std::vector<Quad> Quad::Subdivide( )
 {
+    //Split this quad into 4 quads
     std::vector<Quad> quads;
     glm::vec3 A = GetVerticeA(),
               B = GetVerticeB(),
@@ -49,6 +50,7 @@ void Quad::SetSize( int size )
 
 float Quad::ClosestDistance( const glm::vec3 &origin ) const
 {
+    //Closest corner of any of the quads corners to the origin
     float distA = glm::distance ( GetVerticeA(), origin );
     float distB = glm::distance ( GetVerticeB(), origin );
     float distC = glm::distance ( GetVerticeC(), origin );

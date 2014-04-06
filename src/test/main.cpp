@@ -17,7 +17,7 @@ int main( int argc, char *const argv[] )
 #endif
     session.useConfigData( config );
     int s = session.run();
-#ifdef	WIN32
+#ifdef WIN32
     std::cin.get();
 #endif
     return s;

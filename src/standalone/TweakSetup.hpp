@@ -3,6 +3,7 @@
 
 #include <AntTweakBar.h>
 
+//forward declaration
 class Program;
 
 //Callbacks for the GUI controls

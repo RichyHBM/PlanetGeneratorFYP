@@ -35,6 +35,7 @@ public:
     virtual void ResetDelta()=0;
     virtual void Close()=0;
 
+    //Saves the current OpenGL settings
     void SaveGLStates() {
         glPushClientAttrib( GL_CLIENT_ALL_ATTRIB_BITS );
         Util::PrintGLErrors();
@@ -54,6 +55,7 @@ public:
         Util::PrintGLErrors();
     }
 
+    //Restores teh saved OpenGL settings
     void RestoreGLStates() {
         glMatrixMode( GL_PROJECTION );
         Util::PrintGLErrors();

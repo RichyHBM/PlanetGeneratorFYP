@@ -13,8 +13,11 @@ public:
 
     bool IsFocused();
     bool IsOpen();
+    //Sets the cursor to be hidden or visible
     void SetCursor( CursorState pState );
+    //Swaps teh context buffer to show what has been drawn
     void Display();
+    //Process sfml events
     void DoEvents();
     bool IsWindowCreated();
     void MakeContextCurrent();
