@@ -3,15 +3,13 @@
 
 #include "./Keyboard.hpp"
 #include "./Gamepad.hpp"
-#include "./Network.hpp"
 
 class Input
 {
 public:
     enum Type {
         KEYBOARD,
-        GAMEPAD,
-        NETWORK
+        GAMEPAD
     };
 
     Input();
@@ -25,7 +23,6 @@ protected:
     Type mType;
     Keyboard mKeyboard;
     Gamepad mGamepad;
-    NetworkInput mNetworked;
 };
 
 #endif //INPUT_HPP

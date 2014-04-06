@@ -30,7 +30,7 @@ int main( int argc, const char *argv[] )
             WindowSettings::ParseArguments( argv[i], argv[i+1] );
         }
     }
-
+    //Pass an enum to the new keyword to allow keeping track of memory
     Window *window = new( MemoryUse::Normal ) WindowSFML();
 
     if( !window->IsWindowCreated() ) {
@@ -41,8 +41,10 @@ int main( int argc, const char *argv[] )
     //Create and run a new program instance
     Program *program = new( MemoryUse::Normal ) Program( window );
     program->Run();
+    //Delete all allocated memory
     delete program;
     ResourceManager::Destroy();
+
     window->Close();
     delete window;
     //*/
@@ -72,10 +74,6 @@ void ProcessArgument( const std::string &arg, const std::string &arg2 )
 
         } else if( Util::StrTo<int> ( arg2 ) == 1 ) {
             Input::Manager.SetType( Input::GAMEPAD );
-        }
-
-        if( Util::StrTo<int> ( arg2 ) == 2 ) {
-            Input::Manager.SetType( Input::NETWORK );
         }
     }
 }
