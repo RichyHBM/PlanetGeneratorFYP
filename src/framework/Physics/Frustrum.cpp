@@ -51,8 +51,6 @@ glm::vec3 Frustrum::Position() const
 bool Frustrum::InFrustrum( const glm::vec3 &point ) const
 {
     for( int i = 0; i < 6; i++ ) {
-        float distance = mPlanes[i].GetDistance( point );
-
         if ( mPlanes[i].GetDistance( point ) < 0.0f ) {
             return false;
         }
