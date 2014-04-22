@@ -29,7 +29,6 @@ public:
     //Count all vertices in the spheres
     int GetVertexCount();
 protected:
-    NoiseppNoise *mNoise;
     SideManager *mSideMan[6];
     WaterSideManager *mWaterSideMan[6];
     glm::mat4 mMVP;

@@ -5,7 +5,7 @@
 #include "../Managers/ResourceManager.hpp"
 #include "../Noise/NoiseppNoise.hpp"
 
-SideManager::SideManager( const Quad &q ): mInitialQuad( q )
+SideManager::SideManager( const Quad &q ): mInitialQuad( q ), mNoise(NULL)
 {
     //Load all resources
     mShader = ResourceManager::GetShader( "Icosphere", "./Resources/Icosphere.vert" ,"./Resources/Icosphere.frag" );
@@ -23,11 +23,27 @@ SideManager::SideManager( const Quad &q ): mInitialQuad( q )
 SideManager::~SideManager()
 {
     mShader = NULL;
+    delete mNoise;
 }
 
-void SideManager::SetNoise( NoiseppNoise *noise )
+void SideManager::ResetNoise( )
 {
-    mNoise = noise;
+    if(mNoise != NULL)
+    {
+        delete mNoise;
+        mNoise = NULL;
+    }
+
+    mNoise = new NoiseppNoise(
+        RuntimeSettings::Settings.Seed,
+        RuntimeSettings::Settings.Octaves,
+        RuntimeSettings::Settings.Persistence,
+        RuntimeSettings::Settings.Frequency,
+        RuntimeSettings::Settings.Quality,
+        RuntimeSettings::Settings.Scale,
+        RuntimeSettings::Settings.Lacunarity,
+        RuntimeSettings::Settings.Distortion
+    );
 }
 
 void SideManager::NormalizeVert( glm::vec3 &v )
@@ -119,8 +135,12 @@ void SideManager::BindData()
     mIndexBuffer.SetTarget( GL_ELEMENT_ARRAY_BUFFER );
 }
 
+void SideManager::SetFrustrum( const Frustrum &frustrum )
+{
+    mFrustrum = &frustrum;
+}
 
-void SideManager::Update( const Frustrum &frustrum )
+void SideManager::Update( )
 {
     //Only do this if in realtime
     if( !RuntimeSettings::Settings.RealtimeRebuild ) {
@@ -135,7 +155,7 @@ void SideManager::Update( const Frustrum &frustrum )
     //Next subdivide quads that are within the distance required
     for( int i = 0; i < mQuads.size(); i++ ) {
         //Only do for quads in view
-        if( !frustrum.InFrustrumAndFacing( mQuads[i] ) ) {
+        if( !mFrustrum->InFrustrumAndFacing( mQuads[i] ) ) {
             if( RuntimeSettings::Settings.DrawHidden ) {
                 mTempQuads.push_back( mQuads[i] );
             }
@@ -144,12 +164,12 @@ void SideManager::Update( const Frustrum &frustrum )
         }
 
         //Get the distance of the current quad
-        float distance = mQuads[i].ClosestDistance( frustrum.Position() );
+        float distance = mQuads[i].ClosestDistance( mFrustrum->Position() );
         int subdivisionlevel = 0;
 
         //Check to what level of subdivision to go to
         for( int d = 0; d < DISTANCES_AMOUNT; d++ ) {
-            if( distance < frustrum.Distances[d] ) {
+            if( distance < mFrustrum->Distances[d] ) {
                 subdivisionlevel = d;
             }
         }
@@ -179,7 +199,6 @@ void SideManager::Update( const Frustrum &frustrum )
 
     mQuads = mTempQuads;
     Distort( );
-    BindData();
 }
 
 void SideManager::RebuildSide()

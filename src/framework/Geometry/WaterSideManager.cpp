@@ -86,8 +86,12 @@ void WaterSideManager::BindData()
     mIndexBuffer.SetTarget( GL_ELEMENT_ARRAY_BUFFER );
 }
 
+void WaterSideManager::SetFrustrum( const Frustrum &frustrum )
+{
+    mFrustrum = &frustrum;
+}
 
-void WaterSideManager::Update( const Frustrum &frustrum )
+void WaterSideManager::Update( )
 {
     //Move waves
     mSinDisplacement += RuntimeSettings::Settings.SinAmount;
@@ -104,7 +108,7 @@ void WaterSideManager::Update( const Frustrum &frustrum )
     //Next subdivide quads that are within the distance required
     for( int i = 0; i < mQuads.size(); i++ ) {
         //Only do for quads in view
-        if( !frustrum.InFrustrumAndFacing( mQuads[i] ) ) {
+        if( !mFrustrum->InFrustrumAndFacing( mQuads[i] ) ) {
             if( RuntimeSettings::Settings.DrawHidden ) {
                 mTempQuads.push_back( mQuads[i] );
             }
@@ -113,12 +117,12 @@ void WaterSideManager::Update( const Frustrum &frustrum )
         }
 
         //Get the distance of the current quad
-        float distance = mQuads[i].ClosestDistance( frustrum.Position() );
+        float distance = mQuads[i].ClosestDistance( mFrustrum->Position() );
         int subdivisionlevel = 0;
 
         //Check to what level of subdivision to go to
         for( int d = 0; d < DISTANCES_AMOUNT - 3; d++ ) {
-            if( distance < frustrum.Distances[d] ) {
+            if( distance < mFrustrum->Distances[d] ) {
                 subdivisionlevel = d;
             }
         }
@@ -147,7 +151,6 @@ void WaterSideManager::Update( const Frustrum &frustrum )
     }
 
     mQuads = mTempQuads;
-    BindData();
 }
 
 void WaterSideManager::RebuildSide()

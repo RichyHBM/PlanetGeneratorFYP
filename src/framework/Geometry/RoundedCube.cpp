@@ -55,20 +55,9 @@ RoundedCube::RoundedCube()
     mWaterSideMan[Left] = new WaterSideManager( left );
     mWaterSideMan[Top] = new WaterSideManager( top );
     mWaterSideMan[Bottom] = new WaterSideManager( bottom );
-    //Construct the noise
-    mNoise = new NoiseppNoise(
-        RuntimeSettings::Settings.Seed,
-        RuntimeSettings::Settings.Octaves,
-        RuntimeSettings::Settings.Persistence,
-        RuntimeSettings::Settings.Frequency,
-        RuntimeSettings::Settings.Quality,
-        RuntimeSettings::Settings.Scale,
-        RuntimeSettings::Settings.Lacunarity,
-        RuntimeSettings::Settings.Distortion
-    );
-
+    
     for( int i = 0; i < 6; i++ ) {
-        mSideMan[i]->SetNoise( mNoise );
+        mSideMan[i]->ResetNoise( );
     }
 
     //Do an initial build of the planet
@@ -82,8 +71,6 @@ RoundedCube::~RoundedCube()
         delete mSideMan[i];
         delete mWaterSideMan[i];
     }
-
-    delete mNoise;
 }
 
 int RoundedCube::GetVertexCount()
@@ -101,21 +88,8 @@ int RoundedCube::GetVertexCount()
 
 void RoundedCube::RebuildNoise()
 {
-    delete mNoise;
-    mNoise = NULL;
-    mNoise = new NoiseppNoise(
-        RuntimeSettings::Settings.Seed,
-        RuntimeSettings::Settings.Octaves,
-        RuntimeSettings::Settings.Persistence,
-        RuntimeSettings::Settings.Frequency,
-        RuntimeSettings::Settings.Quality,
-        RuntimeSettings::Settings.Scale,
-        RuntimeSettings::Settings.Lacunarity,
-        RuntimeSettings::Settings.Distortion
-    );
-
     for( int i = 0; i < 6; i++ ) {
-        mSideMan[i]->SetNoise( mNoise );
+        mSideMan[i]->ResetNoise( );
     }
 }
 
@@ -141,9 +115,32 @@ void RoundedCube::Update( const Frustrum &frustrum )
 
     mMVP = MatrixControl.PerspectiveView() * mModel;
 
-    for( int i = 0; i < 6; i++ ) {
-        mSideMan[i]->Update( frustrum );
-        mWaterSideMan[i]->Update( frustrum );
+    if( RuntimeSettings::Settings.RealtimeRebuild ) {
+
+        sf::Thread *threads[12];
+
+        for( int i = 0; i < 6; i++ ) {
+            mSideMan[i]->SetFrustrum( frustrum );
+            mWaterSideMan[i]->SetFrustrum( frustrum );
+
+            threads[i] = new sf::Thread( &SideManager::Update, mSideMan[i] );
+            threads[i + 6] = new sf::Thread( &WaterSideManager::Update, mWaterSideMan[i] );
+        }
+
+        for( int i = 0; i < 12; i++ ) {
+            threads[i]->launch();
+        }
+
+        for( int i = 0; i < 12; i++ ) {
+            threads[i]->wait();
+            delete threads[i];
+            threads[i] = NULL;
+        }
+
+        for( int i = 0; i < 6; i++ ) {
+            mSideMan[i]->BindData();
+            mWaterSideMan[i]->BindData();
+        }
     }
 }
 

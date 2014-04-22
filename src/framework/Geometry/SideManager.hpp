@@ -14,7 +14,8 @@ public:
     SideManager( const Quad &q );
     ~SideManager();
     void Draw( const glm::mat4 &MVP, const Frustrum &frustrum, const glm::mat4 &Model );
-    void Update( const Frustrum &frustrum );
+    void Update( );
+    void SetFrustrum( const Frustrum &frustrum );
     //Binds updated data to the gpu
     void BindData();
     //Add noise
@@ -23,7 +24,7 @@ public:
     void Spherify();
     int GetVertexCount();
     void RebuildSide();
-    void SetNoise( NoiseppNoise *noise );
+    void ResetNoise( );
 
 protected:
     void NormalizeVert( glm::vec3 &v );
@@ -45,6 +46,7 @@ protected:
     Texture *mGrassTexture;
     Texture *mDirtTexture;
     Texture *mSnowTexture;
+    const Frustrum *mFrustrum;
 private:
 };
 

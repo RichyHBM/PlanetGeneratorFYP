@@ -14,7 +14,8 @@ public:
     WaterSideManager( const Quad &q );
     ~WaterSideManager();
     void Draw( const glm::mat4 &MVP, const Frustrum &frustrum, const glm::mat4 &Model );
-    void Update( const Frustrum &frustrum );
+    void Update( );
+    void SetFrustrum( const Frustrum &frustrum );
     //Binds updated data to the gpu
     void BindData();
     //Make cube into sphere
@@ -36,6 +37,7 @@ protected:
     VBO mPositionBuffer;
     VBO mNormalBuffer;
     Shader *mShader;
+    const Frustrum *mFrustrum;
 private:
 };
 
