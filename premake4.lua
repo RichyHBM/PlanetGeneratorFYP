@@ -1,7 +1,7 @@
 -- A solution contains projects, and defines the available configurations
 solution "PlanetGeneratorFYP"
 	configurations { "Debug", "Release" }
-    location "./build/"
+	location "./build/"
 	defines { "SFML", "GLEW_STATIC" }
 	language "C++"
 
@@ -12,9 +12,8 @@ solution "PlanetGeneratorFYP"
 		postbuildcommands { "call ..\\postbuild\\vs.bat" }
 	end
 
-	if _ACTION == "gmake" then
+	if _ACTION == "gmake" and os.get() ~= "macosx" then
 		libdirs { "./external/lib/linux" }
-		postbuildcommands { "sh ../postbuild/linux.sh" }
 	end
 
 	configuration "Debug"
@@ -22,24 +21,11 @@ solution "PlanetGeneratorFYP"
 		defines { "DEBUG" }
 		flags { "Symbols" }
 
-		if _ACTION == "vs2010" then
-			links { "AntTweakBar", "sfml-window-d", "sfml-system-d", "glu32", "opengl32", "noisepp-d" }
-		end 
-		if _ACTION == "gmake" or _ACTION == "codeblocks" then
-			links {  "Framework", "pthread", "AntTweakBar", "sfml-window", "sfml-system", "GLU", "GL", "noisepp-d" }
-		end
-
 	configuration "Release"
 		targetdir "./bin/Release"
 		defines { "NDEBUG" }
 		flags { "OptimizeSpeed" }
 
-		if _ACTION == "vs2010" then
-			links { "AntTweakBar", "sfml-window", "sfml-system", "glu32", "opengl32", "noisepp" }
-		end
-		if _ACTION == "gmake" or _ACTION == "codeblocks" then
-			links {  "Framework", "pthread", "AntTweakBar", "sfml-window", "sfml-system", "GLU", "GL", "noisepp" }
-		end
-		
 	dofile "./premakes/standalone.lua"
 	dofile "./premakes/framework.lua"
+	dofile "./premakes/noisepp.lua"

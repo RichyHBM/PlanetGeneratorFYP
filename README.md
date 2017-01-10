@@ -3,6 +3,10 @@ PlanetGeneratorFYP
 
 ![planet-8](https://cloud.githubusercontent.com/assets/5472275/13028300/1e75a414-d263-11e5-88a0-9ccc77c22ab9.png)
 
+On OSX you will need to install the dependencies: brew install sfml AntTweakBar
+
+Ubuntu requires: sudo apt-get install libgl1-mesa-dev libglu1-mesa-dev mesa-common-dev libsfml-dev libpthread-stubs0-dev
+Also, AntTweakBar, 64 bit libs are included
 
 This was developed as part of my final year project during the first 6 months of my final year at university. It consists of various modules, including: mesh generation, noise generation, texturing, lighting, level of detail, camera and movement systems, atmosphere simulation and, on the correct hardware, 3d/VR display.
 
